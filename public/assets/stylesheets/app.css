@@ -3,6 +3,27 @@ body {
   margin: 0;
 }
 html, body, #map {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 10pt;
   height: 100%;
   width: 100vw;
+}
+a img {
+  border: 0;
+}
+
+/* Corner Ribbons */
+.corner-ribbon{
+  height: 100px;
+  width: 100px;
+  top: 0;
+  right: 0;
+  position: absolute;
+  z-index: 999;
+}
+
+@media screen and (max-width: 600px) {
+  .corner-ribbon {
+    visibility: hidden;
+  }
 }

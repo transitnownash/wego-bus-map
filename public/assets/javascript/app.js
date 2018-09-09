@@ -62,6 +62,7 @@ var updateMap = function () {
   $.each(markers, function (i, marker) {
     if (Math.round(((Date.now() / 1000) - markers[i].data.updated) / 60) >= 10) {
       map.removeLayer(markers[i])
+      delete markers[i]
     }
   })
 
