@@ -68,11 +68,23 @@ var updateMap = function () {
       // Find existing marker
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
-        markers[loc.id].setLatLng(latlng).bindPopup(formatPopup(loc)).bindTooltip(formatTooltip(loc))
+        markers[loc.id].setLatLng(latlng).bindPopup(formatPopup(loc))
+        // Don't add tooltips for touch-enabled browsers (mobile)
+        if (!L.Browser.touch) {
+          markers[loc.id].bindTooltip(formatTooltip(loc))
+        }
       // Not found, create a new one
       } else {
-        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon}).bindPopup(formatPopup(loc)).bindTooltip(formatTooltip(loc))
+        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon}).bindPopup(formatPopup(loc))
+        // Don't add tooltips for touch-enabled browsers (mobile)
+        if (!L.Browser.touch) {
+          markers[loc.id].bindTooltip(formatTooltip(loc))
+        }
         markers[loc.id].addTo(map)
+      }
+      // Position is outdated, dim it a bit
+      if (Math.round(((Date.now() / 1000) - loc.vehicle.timestamp) / 60) > 5) {
+        markers[loc.id].setOpacity(0.3)
       }
     })
   })
