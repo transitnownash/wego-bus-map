@@ -58,9 +58,18 @@ var formatTime = function (time) {
 var markers = {}
 
 var updateMap = function () {
+  // Delete very outdated markers (likely no longer in the feed)
+  $.each(markers, function (i, marker) {
+    if (Math.round(((Date.now() / 1000) - markers[i].data.updated) / 60) >= 10) {
+      map.removeLayer(markers[i])
+    }
+  })
+
   $.get('/vehicle_locations.json', function (data) {
     if (!data || data.length === 0) {
-      throw new Error('Could not load data!')
+      window.alert('Unable to load realtime data. Refresh page to try again.')
+      clearInterval(updateTimer)
+      return
     }
 
     // Loop through feed
@@ -69,6 +78,8 @@ var updateMap = function () {
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
         markers[loc.id].setLatLng(latlng).bindPopup(formatPopup(loc))
+        markers[loc.id].setOpacity(1)
+        markers[loc.id].data.updated = loc.vehicle.timestamp
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.touch) {
           markers[loc.id].bindTooltip(formatTooltip(loc))
@@ -77,13 +88,17 @@ var updateMap = function () {
       } else {
         markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon}).bindPopup(formatPopup(loc))
         // Don't add tooltips for touch-enabled browsers (mobile)
-        if (!L.Browser.touch) {
+        if (!L.Browser.mobile) {
           markers[loc.id].bindTooltip(formatTooltip(loc))
         }
         markers[loc.id].addTo(map)
+        markers[loc.id].data = { created: loc.vehicle.timestamp, updated: loc.vehicle.timestamp }
       }
       // Position is outdated, dim it a bit
-      if (Math.round(((Date.now() / 1000) - loc.vehicle.timestamp) / 60) > 5) {
+      var locationAge = Math.round(((Date.now() / 1000) - loc.vehicle.timestamp) / 60)
+      if (locationAge >= 5) {
+        markers[loc.id].setOpacity(0.1)
+      } else if (locationAge >= 2) {
         markers[loc.id].setOpacity(0.3)
       }
     })
@@ -91,7 +106,7 @@ var updateMap = function () {
 }
 
 // Update map on a schedule
-updateMap()
-setInterval(function () {
+var updateTimer = setInterval(function () {
   updateMap()
 }, refreshRate)
+updateMap()
