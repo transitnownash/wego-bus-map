@@ -1,6 +1,7 @@
 /* globals $, L, moment */
 
 var refreshRate = 10 * 1000
+var refreshAttempts = 1
 
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.174465, -86.767960], 12)
@@ -67,10 +68,14 @@ var updateMap = function () {
   })
 
   $.get('/vehicle_locations.json', function (data) {
+    // Backoff attempts when no data present
     if (!data || data.length === 0) {
-      window.alert('Unable to load realtime data. Refresh page to try again.')
-      clearInterval(updateTimer)
+      refreshAttempts++
+      console.log('No data returned. Trying again in ' + ((refreshRate * refreshAttempts) / 1000) + ' seconds')
       return
+    // Reset it back to 1
+    } else {
+      refreshAttempts = 1
     }
 
     // Loop through feed
@@ -104,10 +109,10 @@ var updateMap = function () {
       }
     })
   })
+
+  // updateMap calls itself after a delay
+  setTimeout(updateMap, refreshRate * refreshAttempts)
 }
 
 // Update map on a schedule
-var updateTimer = setInterval(function () {
-  updateMap()
-}, refreshRate)
 updateMap()
