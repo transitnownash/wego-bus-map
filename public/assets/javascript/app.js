@@ -83,7 +83,7 @@ var updateMap = function () {
       // Find existing marker
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
-        markers[loc.id].setLatLng(latlng).bindPopup(formatPopup(loc))
+        markers[loc.id].slideTo(latlng, {duration: 1000}).bindPopup(formatPopup(loc))
         markers[loc.id].setOpacity(1)
         markers[loc.id].data.updated = loc.vehicle.timestamp
         // Don't add tooltips for touch-enabled browsers (mobile)
