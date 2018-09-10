@@ -8,3 +8,4 @@ gem 'sinatra'
 gem 'thin'
 
 gem 'gtfs-realtime-bindings'
+gem "gtfs_reader"
