@@ -49,11 +49,11 @@ a img {
 #alerts {
   display: none;
   min-height: 30%;
-  max-height: 90%;
+  max-height: 75%;
   width: 80vw;
-  padding: 2em;
+  padding: 2.5em;
   position: absolute;
-  bottom: 1em;
+  bottom: 2.5em;
   background-color: #fbfbfb;
   border: solid 1px #bababa;
   overflow-y: auto;
@@ -67,9 +67,9 @@ a img {
   padding: 0.75em;
   color: #fff;
   cursor: pointer;
-  position: absolute;
-  bottom: 2.1em;
-  left: 1em;
+  position: fixed;
+  bottom: 2.5em;
+  left: 0.5em;
   z-index: 998;
 }
 
