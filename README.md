@@ -12,3 +12,9 @@ Implementation of the General Transit Feed Specification (GTFS) Realtime feed fo
 $ bundle install
 $ bundle exec thin start
 ```
+
+## Updating GTFS data
+
+```bash
+$ bundle exec bin/updateGtfsData
+```

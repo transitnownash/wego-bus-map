@@ -3,6 +3,9 @@
 var refreshRate = 10 * 1000
 var refreshAttempts = 1
 
+var markers = {}
+var activeShape = false
+
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.174465, -86.767960], 12)
 L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -23,33 +26,33 @@ var busIcon = new MapIcon({
 })
 
 // Format popup
-var formatPopup = function (e) {  
+var formatPopup = function (e) {
   var popup = e.target.getPopup()
-  var route_id = e.target.data.loc.vehicle.trip.route_id
-  var trip_id = e.target.data.loc.vehicle.trip.trip_id
+  var routeId = e.target.data.loc.vehicle.trip.route_id
+  var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
-  $.get('/gtfs/routes/' + route_id + '.json').done(function(route_data) {
-    $.get('/gtfs/trips/' + trip_id + '.json').done(function(trip_data) {
-      addShape(trip_data.shape_id, route_data.route_color)
+  $.get('/gtfs/routes/' + routeId + '.json').done(function (routeData) {
+    $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
       var content = L.Util.template(
         '<div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div><table class="popup-data-table"><tr><th>Headsign:</th><td>{trip_headsign}</td></tr><tr><th>Vehicle:</th><td>{vehicle}</td></tr><tr><th>Trip:</th><td>{trip}</td></tr><tr><th>Heading:</th><td>{heading}</td></tr><th>Updated:</th><td>{updated}</td></tr></table>',
         {
           vehicle: loc.vehicle.vehicle.label,
-          route_short_name: route_data.route_short_name,
-          route_long_name: route_data.route_long_name,
-          trip_headsign: trip_data.trip_headsign,
-          route_color: route_data.route_color,
-          route_text_color: route_data.route_text_color,
+          route_short_name: routeData.route_short_name,
+          route_long_name: routeData.route_long_name,
+          trip_headsign: tripData.trip_headsign,
+          route_color: routeData.route_color,
+          route_text_color: routeData.route_text_color,
           trip: loc.vehicle.trip.trip_id,
           heading: formatDegreeToCompass(loc.vehicle.position.bearing),
           updated: moment.unix(loc.vehicle.timestamp).format('h:mm a')
         }
       )
-      popup.setContent(content);
+      popup.setContent(content)
+      addShape(tripData.shape_id, routeData.route_color)
       e.target.on('popupclose', function (e) {
-        removeShape(trip_data.shape_id)
+        removeShape()
       })
-      popup.update();
+      popup.update()
     })
   })
 }
@@ -73,9 +76,6 @@ var formatDegreeToCompass = function (num) {
   ]
   return arr[(val % 16)]
 }
-
-var markers = {}
-var shapes = {}
 
 var updateMap = function () {
   // Delete very outdated markers (likely no longer in the feed)
@@ -136,23 +136,23 @@ var updateMap = function () {
 }
 
 // Add a shape to the map
-var addShape = function (shape_id, color) {
-  if (shapes[shape_id]) { return }
-  $.get('/gtfs/shapes/' + shape_id + '.json').done(function(shape_data) {
-    var plotPoints = $.map(shape_data, function(point) {
+var addShape = function (shapeId, color) {
+  removeShape()
+  $.get('/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
+    var plotPoints = $.map(shapeData, function (point) {
       return L.latLng(point.shape_pt_lat, point.shape_pt_lon)
     })
     if (!color) { color = '000000' }
     color = '#' + color
-    shapes[shape_id] = L.polyline(plotPoints, {color: color, weight: 6, opacity: 0.8}).addTo(map);
+    activeShape = L.polyline(plotPoints, {color: color, weight: 6, opacity: 0.8}).addTo(map)
   })
 }
 
 // Remove a shape from the map
-var removeShape = function (shape_id) {
-  if (shapes[shape_id]) {
-    map.removeLayer(shapes[shape_id])
-    delete shapes[shape_id]
+var removeShape = function (shapeId) {
+  if (activeShape) {
+    map.removeLayer(activeShape)
+    activeShape = false
   }
 }
 

@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+require 'gtfs_reader'
+require 'json'
+
+# Set data directory
+dataRoot = File.join(__dir__, '/../data/gtfs/')
+
+# Clean out existing files
+Dir.glob(
+  [
+    File.join(dataRoot, 'routes', '*.json'),
+    File.join(dataRoot, 'shapes', '*.json'),
+    File.join(dataRoot, 'trips', '*.json')
+  ]
+).each do |file|
+  puts "Deleting #{file}"
+  File.delete(file)
+end
+
+# Configure the static parsing of GTFS feeds
+GtfsData = { agency: {}, routes: {}, trips: {}, shapes: {} }
+GtfsReader.config do
+  verbose true
+  return_hashes true
+  sources do
+    default do
+      url 'http://www.nashvillemta.org/GoogleExport/google_transit.zip'
+      before { |etag| puts "Processing GTFS source with tag #{etag}..." }
+      handlers do
+        routes { |row| GtfsData[:routes][row[:route_id]] = row }
+        shapes do |row|
+          GtfsData[:shapes][row[:shape_id]] = [] unless GtfsData[:shapes][row[:shape_id]]
+          GtfsData[:shapes][row[:shape_id]] << row
+        end
+        trips { |row| GtfsData[:trips][row[:trip_id]] = row }
+      end
+    end
+  end
+end
+
+GtfsReader.update :default
+
+GtfsData.each do |type, data|
+  data.each do |r|
+    File.open(File.join(dataRoot, type.to_s, "#{r[0]}.json"), 'w') do |f|
+      puts f.path
+      f.write r[1].to_json
+      f.close
+    end
+  end
+end
