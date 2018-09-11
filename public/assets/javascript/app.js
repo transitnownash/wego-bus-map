@@ -133,6 +133,9 @@ var updateMap = function () {
     })
   })
 
+  // Check alert bubble
+  checkForAlerts()
+
   // updateMap calls itself after a delay
   setTimeout(updateMap, refreshRate * refreshAttempts)
 }
@@ -143,9 +146,9 @@ var checkForAlerts = function () {
   $.get('/gtfs/realtime/alerts.json', function (data) {
     var alertIndicator = $('#alert_indicator')
     alertIndicator.hide()
-    // if (!data || data.length === 0) {
-    //     return
-    // }
+    if (!data || data.length === 0) {
+        return
+    }
     alertIndicator.html(L.Util.template('<strong>🔔 Service Alert{plural}:</strong> {count}', {
       count: data.length,
       plural: data.length > 1 ? 's' : ''
@@ -204,4 +207,3 @@ var removeActiveShapes = function (shapeId) {
 
 // Update map on a schedule
 updateMap()
-checkForAlerts()

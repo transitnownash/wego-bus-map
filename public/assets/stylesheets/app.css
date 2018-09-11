@@ -22,7 +22,11 @@ a img {
 }
 
 .popup-route-label {
-  padding: 0.5em; margin-bottom: 1em; font-weight: bold; 
+  padding: 0.5em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #999999;
 }
 
 .popup-route-table {
@@ -49,20 +53,21 @@ a img {
   padding: 2em;
   position: absolute;
   bottom: 1em;
-  background-color: #fff;
+  background-color: #fbfbfb;
   border: solid 1px #bababa;
   overflow-y: auto;
   z-index: 1000;
 }
 
 #alert_indicator {
+  border-radius: 10px;
   width: auto;
   background-color: purple;
   padding: 1em;
   color: #fff;
   cursor: pointer;
   position: absolute;
-  bottom: 2em;
+  bottom: 2.1em;
   left: 1em;
   z-index: 998;
 }
