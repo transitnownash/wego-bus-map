@@ -4,7 +4,7 @@ var refreshRate = 10 * 1000
 var refreshAttempts = 1
 
 var markers = {}
-var activeShape = false
+var routeShapes = {}
 
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.174465, -86.767960], 12)
@@ -28,13 +28,13 @@ var busIcon = new MapIcon({
 
 // Format popup
 var formatPopup = function (e) {
-  removeActiveShapes()
   var popup = e.target.getPopup()
   var routeId = e.target.data.loc.vehicle.trip.route_id
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
   $.get('/gtfs/routes/' + routeId + '.json').done(function (routeData) {
     $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
+      addShape(tripData.shape_id, routeData.route_color)
       var content = L.Util.template(
         '<div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div><table class="popup-data-table"><tr><th>Headsign:</th><td>{trip_headsign}</td></tr><tr><th>Vehicle:</th><td>{vehicle}</td></tr><tr><th>Trip:</th><td>{trip}</td></tr><tr><th>Heading:</th><td>{heading}</td></tr><th>Updated:</th><td>{updated}</td></tr></table>',
         {
@@ -50,10 +50,6 @@ var formatPopup = function (e) {
         }
       )
       popup.setContent(content)
-      addShape(tripData.shape_id, routeData.route_color)
-      e.target.on('popupclose', function (e) {
-        removeActiveShapes()
-      })
       popup.update()
     })
   })
@@ -142,14 +138,13 @@ var updateMap = function () {
 
 // Check for Alerts
 var checkForAlerts = function () {
-  $('#alerts').hide()
   $.get('/gtfs/realtime/alerts.json', function (data) {
     var alertIndicator = $('#alert_indicator')
     alertIndicator.hide()
     if (!data || data.length === 0) {
         return
     }
-    alertIndicator.html(L.Util.template('<strong>🔔 Service Alert{plural}:</strong> {count}', {
+    alertIndicator.html(L.Util.template('🔔 Service Alert{plural}: <strong>{count}</strong>', {
       count: data.length,
       plural: data.length > 1 ? 's' : ''
     }))
@@ -186,23 +181,19 @@ var displayAlerts = function (data) {
 
 // Add a shape to the map
 var addShape = function (shapeId, color) {
-  removeActiveShapes()
+  if (routeShapes[shapeId]) { return; }
   $.get('/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData, function (point) {
       return L.latLng(point.shape_pt_lat, point.shape_pt_lon)
     })
     if (!color) { color = '000000' }
     color = '#' + color
-    activeShape = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(map)
+    routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(map)
+    routeShapes[shapeId].on('click', function (e) {
+      map.removeLayer(e.target)
+      delete routeShapes[shapeId]
+    })
   })
-}
-
-// Remove a shape from the map
-var removeActiveShapes = function (shapeId) {
-  if (activeShape) {
-    map.removeLayer(activeShape)
-    activeShape = false
-  }
 }
 
 // Update map on a schedule

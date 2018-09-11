@@ -47,6 +47,7 @@ a img {
 }
 
 #alerts {
+  display: none;
   min-height: 30%;
   max-height: 90%;
   width: 80vw;
@@ -63,7 +64,7 @@ a img {
   border-radius: 10px;
   width: auto;
   background-color: purple;
-  padding: 1em;
+  padding: 0.75em;
   color: #fff;
   cursor: pointer;
   position: absolute;
