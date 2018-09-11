@@ -14,21 +14,26 @@ GtfsReader.config do
       url File.join(__dir__, './data/gtfs/google_transit.zip')
       before { |etag| puts "Processing GTFS source with tag #{etag}..." }
       handlers do
-        agency {|row| GtfsData[:agency][row[:agency_id]] = row }
-        routes {|row| GtfsData[:routes][row[:route_id]] = row }
+        agency { |row| GtfsData[:agency][row[:agency_id]] = row }
+        routes { |row| GtfsData[:routes][row[:route_id]] = row }
         shapes do |row|
           GtfsData[:shapes][row[:shape_id]] = [] unless GtfsData[:shapes][row[:shape_id]]
           GtfsData[:shapes][row[:shape_id]] << row
         end
-        trips {|row| GtfsData[:trips][row[:trip_id]] = row }
+        trips { |row| GtfsData[:trips][row[:trip_id]] = row }
       end
     end
   end
 end
-GtfsReader.update :default
 
+##
+# WeGo Bus Map
 class WeGoBusMap < Sinatra::Base
-  VEHICLE_POSITIONS_URL = 'http://transitdata.nashvillemta.org/TMGTFSRealTimeWebService/vehicle/vehiclepositions.pb'
+  VEHICLE_POSITIONS_URL = 'http://transitdata.nashvillemta.org/TMGTFSRealTimeWebService/vehicle/vehiclepositions.pb'.freeze
+
+  before do
+    GtfsReader.update :default if GtfsData[:routes].empty?
+  end
 
   get '/' do
     erb :index
@@ -39,7 +44,8 @@ class WeGoBusMap < Sinatra::Base
     positions = []
     data = Net::HTTP.get(URI.parse(VEHICLE_POSITIONS_URL))
     feed = Transit_realtime::FeedMessage.decode(data)
-    for entity in feed.entity do
+
+    feed.entity.each do |entity|
       positions << entity
     end
     response.headers['content-type'] = 'application/json'
@@ -80,5 +86,5 @@ class WeGoBusMap < Sinatra::Base
   end
 
   # start the server if ruby file executed directly
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end
