@@ -163,7 +163,7 @@ var displayAlerts = function (data) {
     return
   }
 
-  var hideAlertsButton = $('<div class="alerts-close"><a href="#close">Close</a></div>').on('click', function (e) { alertContainer.hide() })
+  var hideAlertsButton = $('<div class="alerts-close"><a href="javascript:void(0)">Close</a></div>').on('click', function (e) { alertContainer.hide() })
   alertContainer.empty().show()
   alertContainer.append(hideAlertsButton)
 
