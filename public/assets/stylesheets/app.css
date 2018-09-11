@@ -42,6 +42,43 @@ a img {
   -webkit-border-vertical-spacing: 0;
 }
 
+#alerts {
+  min-height: 30%;
+  max-height: 90%;
+  width: 80vw;
+  padding: 2em;
+  position: absolute;
+  bottom: 1em;
+  background-color: #fff;
+  border: solid 1px #bababa;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#alert_indicator {
+  width: auto;
+  background-color: purple;
+  padding: 1em;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  bottom: 2em;
+  left: 1em;
+  z-index: 998;
+}
+
+.alerts-close {
+  text-align: right;
+}
+
+.alert {
+  
+}
+
+.alert-body {
+  
+}
+
 @media screen and (max-width: 600px) {
   .corner-ribbon {
     visibility: hidden;
