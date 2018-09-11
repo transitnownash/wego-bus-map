@@ -22,7 +22,11 @@ a img {
 }
 
 .popup-route-label {
-  padding: 0.5em; margin-bottom: 1em; font-weight: bold; 
+  padding: 0.5em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #999999;
 }
 
 .popup-route-table {
@@ -40,6 +44,45 @@ a img {
   font-weight: inherit;
   -webkit-border-horizontal-spacing: 0;
   -webkit-border-vertical-spacing: 0;
+}
+
+#alerts {
+  display: none;
+  min-height: 30%;
+  max-height: 90%;
+  width: 80vw;
+  padding: 2em;
+  position: absolute;
+  bottom: 1em;
+  background-color: #fbfbfb;
+  border: solid 1px #bababa;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#alert_indicator {
+  border-radius: 10px;
+  width: auto;
+  background-color: purple;
+  padding: 0.75em;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  bottom: 2.1em;
+  left: 1em;
+  z-index: 998;
+}
+
+.alerts-close {
+  text-align: right;
+}
+
+.alert {
+  
+}
+
+.alert-body {
+  
 }
 
 @media screen and (max-width: 600px) {
