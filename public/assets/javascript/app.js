@@ -154,10 +154,10 @@ var updateMap = function () {
 // Check for Alerts
 var checkForAlerts = function () {
   $.get('/gtfs/realtime/alerts.json', function (data) {
-    var alertIndicator = $('#alert_indicator')
+    var alertIndicator = $('.alert-indicator')
     alertIndicator.hide()
     if (!data || data.length === 0) {
-        return
+      return
     }
     alertIndicator.html(L.Util.template(
       $('#alert_indicator_template').html(),
@@ -195,13 +195,12 @@ var displayAlerts = function (data) {
     )
     $(alertContainer).append(content)
   })
-  
   $('#serviceAlertsModal').modal('show')
 }
 
 // Add a shape to the map
 var addShape = function (shapeId, color) {
-  if (routeShapes[shapeId]) { return; }
+  if (routeShapes[shapeId]) { return }
   $.get('/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData, function (point) {
       return L.latLng(point.shape_pt_lat, point.shape_pt_lon)

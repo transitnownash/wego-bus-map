@@ -1,8 +1,8 @@
 body {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
-html, body, #map {
+html, body, .map-container {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 10pt;
   height: 100%;
@@ -14,32 +14,32 @@ a img {
 
 .corner-ribbon{
   height: 100px;
-  width: 100px;
-  top: 0;
-  right: 0;
   position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
   z-index: 999;
 }
 
 .popup-route-label {
-  padding: 0.5em;
-  margin-bottom: 1em;
-  font-weight: bold;
-  color: #ffffff;
   background-color: #999999;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 1em;
+  padding: 0.5em;
 }
 
 .popup-route-table th {
   white-space: nowrap;
 }
 
-#alert_indicator {
-  position: fixed;
+.alert-indicator {
   bottom: 2.5em;
   left: 0.5em;
+  position: fixed;
   z-index: 998;
 }
-#alert_indicator .btn {
+.alert-indicator .btn {
   background-color: purple;
   border-color: purple;
 }
