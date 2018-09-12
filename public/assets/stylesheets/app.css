@@ -1,8 +1,8 @@
 body {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
-html, body, #map {
+html, body, .map-container {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 10pt;
   height: 100%;
@@ -14,75 +14,34 @@ a img {
 
 .corner-ribbon{
   height: 100px;
-  width: 100px;
-  top: 0;
-  right: 0;
   position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
   z-index: 999;
 }
 
 .popup-route-label {
-  padding: 0.5em;
-  margin-bottom: 1em;
-  font-weight: bold;
-  color: #ffffff;
   background-color: #999999;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 1em;
+  padding: 0.5em;
 }
 
-.popup-route-table {
-  display: block;
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-collapse: inherit;
-  border-spacing: 0;
-  border-color: inherit;
-  vertical-align: inherit;
-  text-align: left;
-  font-weight: inherit;
-  -webkit-border-horizontal-spacing: 0;
-  -webkit-border-vertical-spacing: 0;
+.popup-route-table th {
+  white-space: nowrap;
 }
 
-#alerts {
-  display: none;
-  min-height: 30%;
-  max-height: 75%;
-  width: 80vw;
-  padding: 2.5em;
-  position: absolute;
-  bottom: 2.5em;
-  background-color: #fbfbfb;
-  border: solid 1px #bababa;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-#alert_indicator {
-  border-radius: 10px;
-  width: auto;
-  background-color: purple;
-  padding: 0.75em;
-  color: #fff;
-  cursor: pointer;
-  position: fixed;
+.alert-indicator {
   bottom: 2.5em;
   left: 0.5em;
+  position: fixed;
   z-index: 998;
 }
-
-.alerts-close {
-  text-align: right;
-}
-
-.alert {
-  
-}
-
-.alert-body {
-  
+.alert-indicator .btn {
+  background-color: purple;
+  border-color: purple;
 }
 
 @media screen and (max-width: 600px) {

@@ -17,7 +17,6 @@ class WeGoBusMap < Sinatra::Base
   end
 
   get '/gtfs/realtime/vehiclepositions.json' do
-    
     positions = []
     data = Net::HTTP.get(URI.parse(VEHICLE_POSITIONS_URL))
     feed = Transit_realtime::FeedMessage.decode(data)
