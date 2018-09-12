@@ -10,7 +10,7 @@ var routeShapes = {}
 var map = L.map('map').setView([36.174465, -86.767960], 12)
 L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
   maxZoom: 19,
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+  attribution: $('#attribution_template').html()
 }).addTo(map)
 
 // Adds the custom icon for a bus
@@ -36,7 +36,7 @@ var formatPopup = function (e) {
     $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
       addShape(tripData.shape_id, routeData.route_color)
       var content = L.Util.template(
-        '<div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div><table class="popup-data-table"><tr><th>Headsign:</th><td>{trip_headsign}</td></tr><tr><th>Vehicle:</th><td>{vehicle}</td></tr><tr><th>Trip:</th><td>{trip}</td></tr><tr><th>Heading:</th><td>{heading}</td></tr><th>Updated:</th><td>{updated}</td></tr></table>',
+        $('#popup_template').html(),
         {
           vehicle: loc.vehicle.vehicle.label,
           route_short_name: routeData.route_short_name,
@@ -46,6 +46,7 @@ var formatPopup = function (e) {
           route_text_color: routeData.route_text_color,
           trip: loc.vehicle.trip.trip_id,
           heading: formatDegreeToCompass(loc.vehicle.position.bearing),
+          speed: formatVehicleSpeed(loc.vehicle.position.speed),
           updated: moment.unix(loc.vehicle.timestamp).format('h:mm a')
         }
       )
@@ -57,8 +58,13 @@ var formatPopup = function (e) {
 
 // Format tooltip
 var formatTooltip = function (loc) {
-  return 'Vehicle ' + loc.vehicle.vehicle.label +
-    ' / Route ' + loc.vehicle.trip.route_id
+  return L.Util.template(
+    $('#tooltip_template').html(),
+    {
+      vehicle: loc.vehicle.vehicle.label,
+      route: loc.vehicle.trip.route_id
+    }
+  )
 }
 
 // Convert degrees to nearest ordinal direction
@@ -73,6 +79,11 @@ var formatDegreeToCompass = function (num) {
     'NW', 'NNW'
   ]
   return arr[(val % 16)]
+}
+
+// Format speed from (micro?)meters per second to miles per hour
+var formatVehicleSpeed = function (speed) {
+  return (speed) ? Math.round((speed * 2.2369) * 1000000) + ' mph' : 'N/A'
 }
 
 var updateMap = function () {
@@ -104,13 +115,17 @@ var updateMap = function () {
         markers[loc.id].setOpacity(1)
         markers[loc.id].data.loc = loc
         markers[loc.id].data.updated = loc.vehicle.timestamp
+        // Update an open popup
+        if (markers[loc.id].isPopupOpen()) {
+          formatPopup({target: markers[loc.id]})
+        }
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.touch) {
           markers[loc.id].bindTooltip(formatTooltip(loc))
         }
       // Not found, create a new one
       } else {
-        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon}).bindPopup('Loading ...')
+        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon}).bindPopup($('popup_loading_template').html())
         markers[loc.id].on('click', formatPopup)
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.mobile) {
@@ -129,7 +144,7 @@ var updateMap = function () {
     })
   })
 
-  // Check alert bubble
+  // Check for alerts
   checkForAlerts()
 
   // updateMap calls itself after a delay
@@ -144,10 +159,13 @@ var checkForAlerts = function () {
     if (!data || data.length === 0) {
         return
     }
-    alertIndicator.html(L.Util.template('🔔 Service Alert{plural}: <strong>{count}</strong>', {
-      count: data.length,
-      plural: data.length > 1 ? 's' : ''
-    }))
+    alertIndicator.html(L.Util.template(
+      $('#alert_indicator_template').html(),
+      {
+        count: data.length,
+        plural: data.length > 1 ? 's' : ''
+      }
+    ))
     alertIndicator.show()
     alertIndicator.on('click', function (e) {
       displayAlerts(data)
@@ -157,26 +175,28 @@ var checkForAlerts = function () {
 
 // Display Alerts
 var displayAlerts = function (data) {
-  var alertContainer = $('#alerts')
+  var alertContainer = $('#service_alerts')
 
   if (!data || data.length === 0) {
     return
   }
 
-  var hideAlertsButton = $('<div class="alerts-close"><a href="javascript:void(0)">Close</a></div>').on('click', function (e) { alertContainer.hide() })
-  alertContainer.empty().show()
-  alertContainer.append(hideAlertsButton)
+  alertContainer.empty()
 
   $.each(data, function (i, alert) {
     var content = L.Util.template(
-      '<div class="alert"><h2 class="alert-heading">{alert_heading}</h2><div class="alert-body">{alert_body}</div></div>',
+      $('#alert_template').html(),
       {
         alert_heading: alert.alert.header_text.translation[0].text,
-        alert_body: alert.alert.description_text.translation[0].text.replace("\n", '<br />')
+        alert_body: alert.alert.description_text.translation[0].text.replace("\n", '<br />'),
+        start_date: moment.unix(alert.alert.active_period[0].start).format('l h:mm a'),
+        end_date: moment.unix(alert.alert.active_period[0].end).format('l h:mm a')
       }
     )
     $(alertContainer).append(content)
   })
+  
+  $('#serviceAlertsModal').modal('show')
 }
 
 // Add a shape to the map

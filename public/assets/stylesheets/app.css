@@ -29,60 +29,19 @@ a img {
   background-color: #999999;
 }
 
-.popup-route-table {
-  display: block;
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-collapse: inherit;
-  border-spacing: 0;
-  border-color: inherit;
-  vertical-align: inherit;
-  text-align: left;
-  font-weight: inherit;
-  -webkit-border-horizontal-spacing: 0;
-  -webkit-border-vertical-spacing: 0;
-}
-
-#alerts {
-  display: none;
-  min-height: 30%;
-  max-height: 75%;
-  width: 80vw;
-  padding: 2.5em;
-  position: absolute;
-  bottom: 2.5em;
-  background-color: #fbfbfb;
-  border: solid 1px #bababa;
-  overflow-y: auto;
-  z-index: 1000;
+.popup-route-table th {
+  white-space: nowrap;
 }
 
 #alert_indicator {
-  border-radius: 10px;
-  width: auto;
-  background-color: purple;
-  padding: 0.75em;
-  color: #fff;
-  cursor: pointer;
   position: fixed;
   bottom: 2.5em;
   left: 0.5em;
   z-index: 998;
 }
-
-.alerts-close {
-  text-align: right;
-}
-
-.alert {
-  
-}
-
-.alert-body {
-  
+#alert_indicator .btn {
+  background-color: purple;
+  border-color: purple;
 }
 
 @media screen and (max-width: 600px) {
