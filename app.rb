@@ -9,6 +9,7 @@ require 'gtfs_reader'
 # WeGo Bus Map
 class WeGoBusMap < Sinatra::Base
   VEHICLE_POSITIONS_URL = 'http://transitdata.nashvillemta.org/TMGTFSRealTimeWebService/vehicle/vehiclepositions.pb'.freeze
+  TRIP_UPDATES_URL = 'http://transitdata.nashvillemta.org/TMGTFSRealTimeWebService/tripupdate/tripupdates.pb'.freeze
   ALERTS_URL = 'http://transitdata.nashvillemta.org/TMGTFSRealTimeWebService/alert/alerts.pb'.freeze
   DATA_DIRECTORY = File.join(__dir__, 'data', 'gtfs')
 
@@ -26,6 +27,17 @@ class WeGoBusMap < Sinatra::Base
     end
     response.headers['content-type'] = 'application/json'
     positions.to_json
+  end
+
+  get '/gtfs/realtime/tripupdates.json' do
+    updates = []
+    data = Net::HTTP.get(URI.parse(TRIP_UPDATES_URL))
+    feed = Transit_realtime::FeedMessage.decode(data)
+    feed.entity.each do |entity|
+      updates << entity
+    end
+    response.headers['content-type'] = 'application/json'
+    updates.to_json
   end
 
   get '/gtfs/realtime/alerts.json' do

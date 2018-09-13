@@ -72,6 +72,65 @@
       </div>
     </div>
 
+    <div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="tripDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tripDetailsModalLabel"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="trip_details"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template id="trip_details_template">
+      <div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+      <table class="table table-borderless table-sm">
+        <tbody>
+          <tr>
+            <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+            <td>{trip_headsign}</td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+            <td>{trip}</td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+            <td>{vehicle}</td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Started</th>
+            <td>{start_time}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <table id="trip_stop_time_updates" class="table table-borderless table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Sequence</th>
+            <th scope="col">Stop ID</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </template>
+
+    <template id="trip_stop_time_update_body">
+      <tr>
+        <td>{stop_sequence}</td>
+        <td>{stop_id}</td>
+        <td>{time}</td>
+      </tr>
+    </template>
+
     <template id="tooltip_template">
       <span><i class="fa fa-bus" aria-hidden="true"></i> Vehicle {vehicle} on Route {route}</span>
     </template>
@@ -97,7 +156,7 @@
           </tr>
           <tr>
             <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
-            <td>{trip}</td>
+            <td><a href="javascript:void(0)" class="view-trip-details-link">{trip}</a></td>
           </tr>
           <tr>
             <th scope="row"><i class="fa fa-compass fa-fw" aria-hidden="true"></i> Heading</th>
