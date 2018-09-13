@@ -25,6 +25,7 @@ class WeGoBusMap < Sinatra::Base
     feed.entity.each do |entity|
       positions << entity
     end
+    cache_control :public, max_age: 10
     response.headers['content-type'] = 'application/json'
     positions.to_json
   end
@@ -36,6 +37,7 @@ class WeGoBusMap < Sinatra::Base
     feed.entity.each do |entity|
       updates << entity
     end
+    cache_control :public, max_age: 10
     response.headers['content-type'] = 'application/json'
     updates.to_json
   end
@@ -47,21 +49,25 @@ class WeGoBusMap < Sinatra::Base
     feed.entity.each do |entity|
       alerts << entity
     end
+    cache_control :public, max_age: 10
     response.headers['content-type'] = 'application/json'
     alerts.to_json
   end
 
   get '/gtfs/routes/:route_id.json' do
+    cache_control :public, max_age: 300
     response.headers['content-type'] = 'application/json'
     File.read(File.join(DATA_DIRECTORY, 'routes', "#{params['route_id']}.json"))
   end
 
   get '/gtfs/trips/:trip_id.json' do
+    cache_control :public, max_age: 300
     response.headers['content-type'] = 'application/json'
     File.read(File.join(DATA_DIRECTORY, 'trips', "#{params['trip_id']}.json"))
   end
 
   get '/gtfs/shapes/:shape_id.json' do
+    cache_control :public, max_age: 300
     response.headers['content-type'] = 'application/json'
     File.read(File.join(DATA_DIRECTORY, 'shapes', "#{params['shape_id']}.json"))
   end
