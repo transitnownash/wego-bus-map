@@ -4,6 +4,7 @@ var refreshRate = 10 * 1000
 var refreshAttempts = 1
 
 var markers = {}
+var tripUpdates = {}
 var routeShapes = {}
 
 // Sets up a map of Nashville
@@ -52,6 +53,9 @@ var formatPopup = function (e) {
       )
       popup.setContent(content)
       popup.update()
+      $('.view-trip-details-link').on('click', function () {
+        showTripDetails(loc.vehicle.trip.trip_id)
+      })
     })
   })
 }
@@ -144,6 +148,9 @@ var updateMap = function () {
     })
   })
 
+  // Check for trip updates
+  checkForTripUpdates()
+
   // Check for alerts
   checkForAlerts()
 
@@ -211,6 +218,62 @@ var addShape = function (shapeId, color) {
     routeShapes[shapeId].on('click', function (e) {
       map.removeLayer(e.target)
       delete routeShapes[shapeId]
+    })
+  })
+}
+
+// Load Trip Updates
+var checkForTripUpdates = function () {
+  $.get('/gtfs/realtime/tripupdates.json').done(function (updateData) {
+    if (!updateData || updateData.length === 0) {
+      return
+    }
+
+    $.each(updateData, function (i, update) {
+      tripUpdates[update.trip_update.trip.trip_id] = update
+    })
+  })
+}
+
+// Show trip details in a modal
+var showTripDetails = function (tripId) {
+  var tripModal = $('#trip_details_modal')
+  tripModal.modal('show')
+  $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
+    $.get('/gtfs/routes/' + tripData.route_id + '.json').done(function (routeData) {
+      $('#trip_details').html(L.Util.template(
+        $('#trip_details_template').html(),
+        {
+          route_short_name: routeData.route_short_name,
+          route_long_name: routeData.route_long_name,
+          trip_headsign: tripData.trip_headsign,
+          route_color: routeData.route_color,
+          route_text_color: routeData.route_text_color,
+          trip: tripData.trip_id,
+          start_time: moment('2000-01-01 ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
+          vehicle: tripUpdates[tripId].trip_update.vehicle.label
+        }
+      ))
+      var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
+      $(stopTimeUpdatesTableBody).empty()
+      $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
+        var time = ''
+        if (typeof update.departure !== 'undefined') {
+          time = update.departure.time
+        }
+        if (typeof update.arrival !== 'undefined') {
+          time = update.arrival.time
+        }
+        var row = L.Util.template(
+          $('#trip_stop_time_update_body').html(),
+          {
+            stop_sequence: update.stop_sequence,
+            stop_id: update.stop_id,
+            time: moment.unix(time).format('h:mm a')
+          }
+        )
+        $(stopTimeUpdatesTableBody).append(row)
+      })
     })
   })
 }
