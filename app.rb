@@ -15,7 +15,7 @@ class WeGoBusMap < Sinatra::Base
   ALERTS_URL = 'http://transitdata.nashvillemta.org/TMGTFSRealTimeWebService/alert/alerts.pb'.freeze
   DATA_DIRECTORY = File.join(__dir__, 'data', 'gtfs')
   CACHE_DIRECTORY = File.join(__dir__, 'cache')
-  REALTIME_CACHE_TTL = 10
+  REALTIME_CACHE_TTL = 5
   GTFS_STATIC_CACHE_TTL = 300
 
   # Set up cache directory
