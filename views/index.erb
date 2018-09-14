@@ -105,8 +105,12 @@
             <td>{vehicle}</td>
           </tr>
           <tr>
-            <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Started</th>
+            <th scope="row"><i class="fa fa-hourglass-start fa-fw" aria-hidden="true"></i> Trip Started</th>
             <td>{start_time}</td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
+            <td>{updated}</td>
           </tr>
         </tbody>
       </table>
@@ -123,9 +127,29 @@
       </table>
     </template>
 
+    <template id="trip_details_unavailable_template">
+      <div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+      <table class="table table-borderless table-sm">
+        <tbody>
+          <tr>
+            <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+            <td>{trip_headsign}</td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+            <td>{trip}</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <div class="alert alert-info">
+        The realtime data feed did not include any further updates for this trip. It may be completed.
+      </div>
+    </template>
+
     <template id="trip_stop_time_update_body">
       <tr>
-        <td>{stop_sequence}</td>
+        <td><span class="badge badge-info">{stop_sequence}</span></td>
         <td>{stop_id}</td>
         <td>{time}</td>
       </tr>
@@ -198,6 +222,7 @@
     <script src="//unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
     <script src="//unpkg.com/moment@2.22.2/moment.js"></script>
     <script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
+    <script src="/assets/javascript/leaflet.rotatedMarker.js"></script>
     <script src="/assets/javascript/app.js"></script>
   </body>
 </html>
