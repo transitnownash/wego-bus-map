@@ -17,14 +17,19 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 // Adds the custom icon for a bus
 var MapIcon = L.Icon.extend({
   options: {
-    shadowUrl: 'assets/images/wego-bus-shadow.svg',
     iconSize: [32, 32],
-    shadowSize: [32, 32],
-    popupAnchor: [0, -14]
+    popupAnchor: [0, -14],
+    shadowSize: [32, 50],
+    shadowAnchor: [16, 16]
   }
 })
 var busIcon = new MapIcon({
-  iconUrl: 'assets/images/wego-bus.svg'
+  iconUrl: 'assets/images/wego-bus.svg',
+  shadowUrl: null
+})
+var busIconMoving = new MapIcon({
+  iconUrl: 'assets/images/wego-bus.svg',
+  shadowUrl: 'assets/images/wego-bus-tracks.svg'
 })
 
 // Format popup
@@ -116,6 +121,7 @@ var updateMap = function () {
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
         markers[loc.id].slideTo(latlng, {duration: 1000})
+        markers[loc.id].setRotationShadowAngle(loc.vehicle.position.bearing)
         markers[loc.id].setOpacity(1)
         markers[loc.id].data.loc = loc
         markers[loc.id].data.updated = loc.vehicle.timestamp
@@ -138,6 +144,14 @@ var updateMap = function () {
         markers[loc.id].addTo(map)
         markers[loc.id].data = { created: loc.vehicle.timestamp, updated: loc.vehicle.timestamp, loc: loc }
       }
+      // Set shadow if bus is moving
+      if (loc.vehicle.position.bearing) {
+        markers[loc.id].setIcon(busIconMoving)
+        markers[loc.id].setRotationShadowAngle(loc.vehicle.position.bearing)
+      } else {
+        markers[loc.id].setIcon(busIcon)
+      }
+
       // Position is outdated, dim it a bit
       var locationAge = Math.round(((Date.now() / 1000) - loc.vehicle.timestamp) / 60)
       if (locationAge >= 5) {
@@ -241,6 +255,21 @@ var showTripDetails = function (tripId) {
   tripModal.modal('show')
   $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
     $.get('/gtfs/routes/' + tripData.route_id + '.json').done(function (routeData) {
+      if (typeof tripUpdates[tripId] === 'undefined') {
+        $('#trip_details').html(L.Util.template(
+          $('#trip_details_unavailable_template').html(),
+          {
+            route_short_name: routeData.route_short_name,
+            route_long_name: routeData.route_long_name,
+            trip_headsign: tripData.trip_headsign,
+            route_color: routeData.route_color,
+            route_text_color: routeData.route_text_color,
+            trip: tripData.trip_id
+          }
+        ))
+        return
+      }
+
       $('#trip_details').html(L.Util.template(
         $('#trip_details_template').html(),
         {
@@ -251,11 +280,13 @@ var showTripDetails = function (tripId) {
           route_text_color: routeData.route_text_color,
           trip: tripData.trip_id,
           start_time: moment('2000-01-01 ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
+          updated: moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a'),
           vehicle: tripUpdates[tripId].trip_update.vehicle.label
         }
       ))
       var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
       $(stopTimeUpdatesTableBody).empty()
+      var rowHighlighted = false
       $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
         var time = ''
         if (typeof update.departure !== 'undefined') {
@@ -264,14 +295,19 @@ var showTripDetails = function (tripId) {
         if (typeof update.arrival !== 'undefined') {
           time = update.arrival.time
         }
-        var row = L.Util.template(
+        var row = $(L.Util.template(
           $('#trip_stop_time_update_body').html(),
           {
             stop_sequence: update.stop_sequence,
             stop_id: update.stop_id,
             time: moment.unix(time).format('h:mm a')
           }
-        )
+        ))
+        if (!rowHighlighted && time > Math.round(Date.now() / 1000)) {
+          row.addClass('table-info')
+          $('td .badge-info', row).removeClass('badge-info').addClass('badge-light')
+          rowHighlighted = true
+        }
         $(stopTimeUpdatesTableBody).append(row)
       })
     })
