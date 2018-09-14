@@ -28,6 +28,7 @@ class WeGoBusMap < Sinatra::Base
   get '/gtfs/realtime/vehiclepositions.json' do
     cacheFile = File.join(CACHE_DIRECTORY, 'vehiclepositions.json')
     if File.exist?(cacheFile) and (Time.now - File.stat(cacheFile).mtime).to_i <= REALTIME_CACHE_TTL
+      cache_control :public, max_age: REALTIME_CACHE_TTL
       response.headers['content-type'] = 'application/json'
       return File.read(cacheFile)
     end
@@ -53,6 +54,7 @@ class WeGoBusMap < Sinatra::Base
   get '/gtfs/realtime/tripupdates.json' do
     cacheFile = File.join(CACHE_DIRECTORY, 'tripupdates.json')
     if File.exist?(cacheFile) and (Time.now - File.stat(cacheFile).mtime).to_i <= REALTIME_CACHE_TTL
+      cache_control :public, max_age: REALTIME_CACHE_TTL
       response.headers['content-type'] = 'application/json'
       return File.read(cacheFile)
     end
@@ -77,6 +79,7 @@ class WeGoBusMap < Sinatra::Base
   get '/gtfs/realtime/alerts.json' do
     cacheFile = File.join(CACHE_DIRECTORY, 'alerts.json')
     if File.exist?(cacheFile) and (Time.now - File.stat(cacheFile).mtime).to_i <= REALTIME_CACHE_TTL
+      cache_control :public, max_age: REALTIME_CACHE_TTL
       response.headers['content-type'] = 'application/json'
       return File.read(cacheFile)
     end
