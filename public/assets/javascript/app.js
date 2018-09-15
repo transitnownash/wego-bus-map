@@ -1,4 +1,4 @@
-/* globals $, L, moment */
+/* globals $, L, moment, agencyData, routesData */
 
 var refreshRate = 10 * 1000
 var refreshAttempts = 1
@@ -23,14 +23,29 @@ var MapIcon = L.Icon.extend({
     shadowAnchor: [16, 16]
   }
 })
-var busIcon = new MapIcon({
-  iconUrl: 'assets/images/wego-bus.svg',
-  shadowUrl: null
-})
-var busIconMoving = new MapIcon({
-  iconUrl: 'assets/images/wego-bus.svg',
-  shadowUrl: 'assets/images/wego-bus-tracks.svg'
-})
+
+var busIcons = {
+  'Nashville MTA': {
+    stationary: new MapIcon({
+      iconUrl: 'assets/images/wego-bus.svg',
+      shadowUrl: null
+    }),
+    moving: new MapIcon({
+      iconUrl: 'assets/images/wego-bus.svg',
+      shadowUrl: 'assets/images/bus-tracks.svg'
+    })
+  },
+  'Nashville RTA': {
+    stationary: new MapIcon({
+      iconUrl: 'assets/images/rta-bus.svg',
+      shadowUrl: null
+    }),
+    moving: new MapIcon({
+      iconUrl: 'assets/images/rta-bus.svg',
+      shadowUrl: 'assets/images/bus-tracks.svg'
+    })
+  }
+}
 
 // Format popup
 var formatPopup = function (e) {
@@ -38,29 +53,29 @@ var formatPopup = function (e) {
   var routeId = e.target.data.loc.vehicle.trip.route_id
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
-  $.get('/gtfs/routes/' + routeId + '.json').done(function (routeData) {
-    $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
-      addShape(tripData.shape_id, routeData.route_color)
-      var content = L.Util.template(
-        $('#popup_template').html(),
-        {
-          vehicle: loc.vehicle.vehicle.label,
-          route_short_name: routeData.route_short_name,
-          route_long_name: routeData.route_long_name,
-          trip_headsign: tripData.trip_headsign,
-          route_color: routeData.route_color,
-          route_text_color: routeData.route_text_color,
-          trip: loc.vehicle.trip.trip_id,
-          heading: formatDegreeToCompass(loc.vehicle.position.bearing),
-          speed: formatVehicleSpeed(loc.vehicle.position.speed),
-          updated: moment.unix(loc.vehicle.timestamp).format('h:mm a')
-        }
-      )
-      popup.setContent(content)
-      popup.update()
-      $('.view-trip-details-link').on('click', function () {
-        showTripDetails(loc.vehicle.trip.trip_id)
-      })
+  $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
+    addShape(tripData.shape_id, routesData[routeId].route_color)
+    var content = L.Util.template(
+      $('#popup_template').html(),
+      {
+        vehicle: loc.vehicle.vehicle.label,
+        route_short_name: routesData[routeId].route_short_name,
+        route_long_name: routesData[routeId].route_long_name,
+        trip_headsign: tripData.trip_headsign,
+        route_color: routesData[routeId].route_color,
+        route_text_color: routesData[routeId].route_text_color,
+        trip: loc.vehicle.trip.trip_id,
+        agency: agencyData[routesData[routeId].agency_id].agency_name,
+        agency_url: agencyData[routesData[routeId].agency_id].agency_url,
+        heading: formatDegreeToCompass(loc.vehicle.position.bearing),
+        speed: formatVehicleSpeed(loc.vehicle.position.speed),
+        updated: moment.unix(loc.vehicle.timestamp).format('h:mm a')
+      }
+    )
+    popup.setContent(content)
+    popup.update()
+    $('.view-trip-details-link').on('click', function () {
+      showTripDetails(loc.vehicle.trip.trip_id)
     })
   })
 }
@@ -71,7 +86,11 @@ var formatTooltip = function (loc) {
     $('#tooltip_template').html(),
     {
       vehicle: loc.vehicle.vehicle.label,
-      route: loc.vehicle.trip.route_id
+      trip: loc.vehicle.trip.trip_id,
+      route_short_name: routesData[loc.vehicle.trip.route_id].route_short_name,
+      route_long_name: routesData[loc.vehicle.trip.route_id].route_long_name,
+      route_color: routesData[loc.vehicle.trip.route_id].route_color,
+      route_text_color: routesData[loc.vehicle.trip.route_id].route_text_color
     }
   )
 }
@@ -117,6 +136,7 @@ var updateMap = function () {
 
     // Loop through feed
     $(data).each(function (i, loc) {
+      var busIcon = busIcons[routesData[loc.vehicle.trip.route_id].agency_id]
       // Find existing marker
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
@@ -135,7 +155,7 @@ var updateMap = function () {
         }
       // Not found, create a new one
       } else {
-        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon}).bindPopup($('popup_loading_template').html())
+        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon.stationary}).bindPopup($('popup_loading_template').html())
         markers[loc.id].on('click', formatPopup)
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.mobile) {
@@ -146,10 +166,10 @@ var updateMap = function () {
       }
       // Set shadow if bus is moving
       if (loc.vehicle.position.bearing) {
-        markers[loc.id].setIcon(busIconMoving)
+        markers[loc.id].setIcon(busIcon.moving)
         markers[loc.id].setRotationShadowAngle(loc.vehicle.position.bearing)
       } else {
-        markers[loc.id].setIcon(busIcon)
+        markers[loc.id].setIcon(busIcon.stationary)
       }
 
       // Position is outdated, dim it a bit
@@ -209,7 +229,7 @@ var displayAlerts = function (data) {
       $('#alert_template').html(),
       {
         alert_heading: alert.alert.header_text.translation[0].text,
-        alert_body: alert.alert.description_text.translation[0].text.replace("\n", '<br />'),
+        alert_body: alert.alert.description_text.translation[0].text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br />'),
         start_date: moment.unix(alert.alert.active_period[0].start).format('l h:mm a'),
         end_date: moment.unix(alert.alert.active_period[0].end).format('l h:mm a')
       }
@@ -254,62 +274,69 @@ var showTripDetails = function (tripId) {
   var tripModal = $('#trip_details_modal')
   tripModal.modal('show')
   $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
-    $.get('/gtfs/routes/' + tripData.route_id + '.json').done(function (routeData) {
-      if (typeof tripUpdates[tripId] === 'undefined') {
-        $('#trip_details').html(L.Util.template(
-          $('#trip_details_unavailable_template').html(),
-          {
-            route_short_name: routeData.route_short_name,
-            route_long_name: routeData.route_long_name,
-            trip_headsign: tripData.trip_headsign,
-            route_color: routeData.route_color,
-            route_text_color: routeData.route_text_color,
-            trip: tripData.trip_id
-          }
-        ))
-        return
-      }
-
+    var routeId = tripData.route_id
+    if (typeof tripUpdates[tripId] === 'undefined') {
       $('#trip_details').html(L.Util.template(
-        $('#trip_details_template').html(),
+        $('#trip_details_unavailable_template').html(),
         {
-          route_short_name: routeData.route_short_name,
-          route_long_name: routeData.route_long_name,
+          route_short_name: routesData[routeId].route_short_name,
+          route_long_name: routesData[routeId].route_long_name,
           trip_headsign: tripData.trip_headsign,
-          route_color: routeData.route_color,
-          route_text_color: routeData.route_text_color,
-          trip: tripData.trip_id,
-          start_time: moment('2000-01-01 ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
-          updated: moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a'),
-          vehicle: tripUpdates[tripId].trip_update.vehicle.label
+          route_color: routesData[routeId].route_color,
+          route_text_color: routesData[routeId].route_text_color,
+          agency: agencyData[routesData[routeId].agency_id].agency_name,
+          agency_url: agencyData[routesData[routeId].agency_id].agency_url,
+          trip: tripData.trip_id
         }
       ))
-      var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
-      $(stopTimeUpdatesTableBody).empty()
-      var rowHighlighted = false
-      $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
-        var time = ''
-        if (typeof update.departure !== 'undefined') {
-          time = update.departure.time
+      return
+    }
+
+    $('#trip_details').html(L.Util.template(
+      $('#trip_details_template').html(),
+      {
+        route_short_name: routesData[routeId].route_short_name,
+        route_long_name: routesData[routeId].route_long_name,
+        trip_headsign: tripData.trip_headsign,
+        route_color: routesData[routeId].route_color,
+        route_text_color: routesData[routeId].route_text_color,
+        agency: agencyData[routesData[routeId].agency_id].agency_name,
+        agency_url: agencyData[routesData[routeId].agency_id].agency_url,
+        trip: tripData.trip_id,
+        start_time: moment('2000-01-01 ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
+        updated: (tripUpdates[tripId].trip_update.timestamp) ? moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a') : 'Not yet started.',
+        vehicle: tripUpdates[tripId].trip_update.vehicle.label
+      }
+    ))
+    var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
+    $(stopTimeUpdatesTableBody).empty()
+    var rowHighlighted = false
+    $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
+      var time = ''
+      if (typeof update.departure !== 'undefined') {
+        time = update.departure.time
+      }
+      if (typeof update.arrival !== 'undefined') {
+        time = update.arrival.time
+      }
+      var row = $(L.Util.template(
+        $('#trip_stop_time_update_body').html(),
+        {
+          stop_sequence: update.stop_sequence,
+          stop_id: update.stop_id,
+          time: moment.unix(time).format('h:mm a')
         }
-        if (typeof update.arrival !== 'undefined') {
-          time = update.arrival.time
-        }
-        var row = $(L.Util.template(
-          $('#trip_stop_time_update_body').html(),
-          {
-            stop_sequence: update.stop_sequence,
-            stop_id: update.stop_id,
-            time: moment.unix(time).format('h:mm a')
-          }
-        ))
-        if (!rowHighlighted && time > Math.round(Date.now() / 1000)) {
-          row.addClass('table-info')
-          $('td .badge-info', row).removeClass('badge-info').addClass('badge-light')
-          rowHighlighted = true
-        }
-        $(stopTimeUpdatesTableBody).append(row)
-      })
+      ))
+      // Trip must have started, no previous rows highlighted and the time must be in the future
+      if (time <= Math.round(Date.now() / 1000)) {
+        row.addClass('text-muted')
+      }
+      if (tripUpdates[tripId].trip_update.timestamp && !rowHighlighted && time >= Math.round(Date.now() / 1000)) {
+        row.addClass('table-info')
+        $('td .badge-info', row).removeClass('badge-info').addClass('badge-light')
+        rowHighlighted = true
+      }
+      $(stopTimeUpdatesTableBody).append(row)
     })
   })
 }

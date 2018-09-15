@@ -4,8 +4,8 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
+gem 'dotenv'
+gem 'gtfs-realtime-bindings'
+gem 'gtfs_reader'
 gem 'sinatra'
 gem 'thin'
-
-gem 'gtfs-realtime-bindings'
-gem "gtfs_reader"

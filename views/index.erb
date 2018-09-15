@@ -43,6 +43,15 @@
     <link rel="stylesheet" href="//unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
     <link rel="stylesheet" href="//unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/assets/stylesheets/app.css" />
+
+    <!-- Google Analytics -->
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', '<%= @google_analytics_id %>Y', 'auto');
+    ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
   </head>
   <body>
 
@@ -89,7 +98,7 @@
     </div>
 
     <template id="trip_details_template">
-      <div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
       <table class="table table-borderless table-sm">
         <tbody>
           <tr>
@@ -114,6 +123,7 @@
           </tr>
         </tbody>
       </table>
+      <div class="text-right text-muted"><em><a href="{agency_url}" target="_blank">{agency}</a></em></div>
       <hr />
       <table id="trip_stop_time_updates" class="table table-borderless table-sm">
         <thead>
@@ -128,7 +138,7 @@
     </template>
 
     <template id="trip_details_unavailable_template">
-      <div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
       <table class="table table-borderless table-sm">
         <tbody>
           <tr>
@@ -141,6 +151,7 @@
           </tr>
         </tbody>
       </table>
+      <div class="text-right text-muted"><em><a href="{agency_url}" target="_blank">{agency}</a></em></div>
       <hr />
       <div class="alert alert-info">
         The realtime data feed did not include any further updates for this trip. It may be completed.
@@ -156,7 +167,19 @@
     </template>
 
     <template id="tooltip_template">
-      <span><i class="fa fa-bus" aria-hidden="true"></i> Vehicle {vehicle} on Route {route}</span>
+      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div></span>
+      <table class="table table-borderless table-sm">
+        <tbody>
+          <tr>
+            <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+            <td>{vehicle}</td>
+          </tr>
+          <tr>
+            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+            <td>{trip}</td>
+          </tr>
+        </tbody>
+      </table>
     </template>
 
     <template id="popup_loading_template">
@@ -167,7 +190,7 @@
     </template>
 
     <template id="popup_template">
-      <div class="popup-route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
       <table class="table table-borderless table-sm popup-route-table">
         <tbody>
           <tr>
@@ -196,6 +219,7 @@
           </tr>
         </tbody>
       </table>
+      <div class="text-right text-muted"><em><a href="{agency_url}" target="_blank">{agency}</a></em></div>
     </template>
     
     <template id="attribution_template">
@@ -223,6 +247,10 @@
     <script src="//unpkg.com/moment@2.22.2/moment.js"></script>
     <script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
     <script src="/assets/javascript/leaflet.rotatedMarker.js"></script>
+    <script>
+      var agencyData = <%= @agencies %>;
+      var routesData = <%= @routes %>;
+    </script>
     <script src="/assets/javascript/app.js"></script>
   </body>
 </html>

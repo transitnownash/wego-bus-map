@@ -9,6 +9,7 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.0.5)
     daemons (1.2.6)
+    dotenv (2.5.0)
     eventmachine (1.2.7)
     gtfs-realtime-bindings (0.0.5)
       protobuf (>= 3.0)
@@ -51,6 +52,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   gtfs-realtime-bindings
   gtfs_reader
   sinatra
