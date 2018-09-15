@@ -12,6 +12,10 @@ a img {
   border: 0;
 }
 
+.leaflet-popup-content a {
+  color: #007bff;
+}
+
 .corner-ribbon{
   height: 100px;
   position: absolute;
@@ -21,7 +25,7 @@ a img {
   z-index: 999;
 }
 
-.popup-route-label {
+.route-label {
   background-color: #999999;
   color: #ffffff;
   font-weight: bold;

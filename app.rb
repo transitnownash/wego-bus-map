@@ -1,3 +1,4 @@
+require 'dotenv/load'
 require 'sinatra/base'
 require 'protobuf'
 require 'google/transit/gtfs-realtime.pb'
@@ -22,6 +23,9 @@ class WeGoBusMap < Sinatra::Base
   FileUtils.mkdir_p CACHE_DIRECTORY
 
   get '/' do
+    @agencies = File.read(File.join(DATA_DIRECTORY, 'agency.json'))
+    @routes = File.read(File.join(DATA_DIRECTORY, 'routes.json'))
+    @google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || ''
     erb :index
   end
 
@@ -99,12 +103,6 @@ class WeGoBusMap < Sinatra::Base
     cache_control :public, max_age: REALTIME_CACHE_TTL
     response.headers['content-type'] = 'application/json'
     alerts.to_json
-  end
-
-  get '/gtfs/routes/:route_id.json' do
-    cache_control :public, max_age: GTFS_STATIC_CACHE_TTL
-    response.headers['content-type'] = 'application/json'
-    File.read(File.join(DATA_DIRECTORY, 'routes', "#{params['route_id']}.json"))
   end
 
   get '/gtfs/trips/:trip_id.json' do
