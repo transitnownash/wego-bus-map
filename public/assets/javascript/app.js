@@ -10,9 +10,16 @@ var routeShapes = {}
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.174465, -86.767960], 12)
 L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-  maxZoom: 19,
+  minZoom: 11,
+  maxBounds: map.getBounds(),
   attribution: $('#attribution_template').html()
 }).addTo(map)
+
+// Constrain map to Middle Tennessee
+map.setMaxBounds(L.latLngBounds(
+  L.latLng(36.723875, -87.564893), // northwest
+  L.latLng(35.594362, -86.227080) // southeast
+))
 
 // Adds the custom icon for a bus
 var MapIcon = L.Icon.extend({
@@ -24,25 +31,25 @@ var MapIcon = L.Icon.extend({
   }
 })
 
-var busIcons = {
-  'Nashville MTA': {
+var getBusIcons = function (agencyId) {
+  var busPath = '/assets/images/bus.svg'
+  var shadowPath = '/assets/images/bus-tracks.svg'
+  switch (agencyId) {
+    case 'Nashville MTA':
+      busPath = 'assets/images/nashville-mta/bus.svg'
+      break
+    case 'Nashville RTA':
+      busPath = 'assets/images/nashville-rta/bus.svg'
+      break
+  }
+  return {
     stationary: new MapIcon({
-      iconUrl: 'assets/images/wego-bus.svg',
+      iconUrl: busPath,
       shadowUrl: null
     }),
     moving: new MapIcon({
-      iconUrl: 'assets/images/wego-bus.svg',
-      shadowUrl: 'assets/images/bus-tracks.svg'
-    })
-  },
-  'Nashville RTA': {
-    stationary: new MapIcon({
-      iconUrl: 'assets/images/rta-bus.svg',
-      shadowUrl: null
-    }),
-    moving: new MapIcon({
-      iconUrl: 'assets/images/rta-bus.svg',
-      shadowUrl: 'assets/images/bus-tracks.svg'
+      iconUrl: busPath,
+      shadowUrl: shadowPath
     })
   }
 }
@@ -136,7 +143,7 @@ var updateMap = function () {
 
     // Loop through feed
     $(data).each(function (i, loc) {
-      var busIcon = busIcons[routesData[loc.vehicle.trip.route_id].agency_id]
+      var busIcon = getBusIcons(routesData[loc.vehicle.trip.route_id].agency_id)
       // Find existing marker
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
