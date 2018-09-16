@@ -8,8 +8,10 @@ var tripUpdates = {}
 var routeShapes = {}
 
 // Sets up a map of Nashville
-var map = L.map('map').setView([36.174465, -86.767960], 12)
-L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+var map = L.map('map').setView([36.166512, -86.781581], 12)
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+  subdomains: 'abcd',
+  maxZoom: 19,
   minZoom: 11,
   maxBounds: map.getBounds(),
   attribution: $('#attribution_template').html()
@@ -61,7 +63,7 @@ var formatPopup = function (e) {
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
   $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
-    addShape(tripData.shape_id, routesData[routeId].route_color)
+    addShape(tripData)
     var content = L.Util.template(
       $('#popup_template').html(),
       {
@@ -247,15 +249,19 @@ var displayAlerts = function (data) {
 }
 
 // Add a shape to the map
-var addShape = function (shapeId, color) {
+var addShape = function (tripData) {
+  var shapeId = tripData.shape_id
+  var routeData = routesData[tripData.route_id]
+  console.log(routeData)
   if (routeShapes[shapeId]) { return }
   $.get('/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData, function (point) {
       return L.latLng(point.shape_pt_lat, point.shape_pt_lon)
     })
-    if (!color) { color = '000000' }
-    color = '#' + color
+    if (!routeData.route_color) { routeData.route_color = 'bababa' }
+    var color = '#' + routeData.route_color
     routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(map)
+    routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
     routeShapes[shapeId].on('click', function (e) {
       map.removeLayer(e.target)
       delete routeShapes[shapeId]

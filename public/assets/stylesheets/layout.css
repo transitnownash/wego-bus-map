@@ -1,0 +1,15 @@
+body {
+  background-color: #fafaf8;
+  background: url(/assets/images/nashville-map-bg.png);
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.navbar-dark.bg-dark {
+  background-color: purple !important;
+}
+
+.navbar-dark .navbar-text a.btn-light {
+  color: #000;
+}
