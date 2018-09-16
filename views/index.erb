@@ -1,256 +1,200 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>WeGo Bus Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-    <meta name="theme-color" content="#ffffff" />
+<% content_for :title do %>WeGo Bus Map<% end %>
+<% content_for :description do %>A realtime map for WeGo bus locations using data from the Nashville MTA and Nashville RTA.<% end%>
 
-    <meta name="description" content="A realtime map for WeGo bus locations." />
+<div class="about-icon">
+  <a href="/about" class="btn btn-light"><i class="fa fa-info-circle fa-lg"></i></a>
+</div>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@stephenyeargin" />
-    <meta name="twitter:title" content="WeGo Bus Map" />
-    <meta name="twitter:description" content="A realtime map for WeGo bus locations." />
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/stephenyeargin/wego-bus-map/master/screenshot.png" />
+<div class="alert-indicator"></div>
 
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="WeGo Public Transit Bus Map" />
-    <meta property="og:description" content="A realtime map for WeGo bus locations." />
-    <meta property="og:site_name" content="WeGo Bus Map" />
-    <meta property="og:url" content="https://wego-bus-map.herokuapp.com/" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/stephenyeargin/wego-bus-map/master/screenshot.png" />
-    <meta property="article:published_time" content="2018-09-08" />
-    <meta property="article:author" content="https://github.com/stephenyeargin/wego-bus-map" />
+<div id="map" class="map-container">
+  <noscript>Howdy! It looks like your browser does not have JavaScript enabled. Unfortunately, the mapping platform requires it. Please enable JavaScript and reload the page.</noscript>
+</div>
 
-    <link rel="stylesheet" href="//unpkg.com/bootstrap@4.1.3/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="//unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/assets/stylesheets/app.css" />
-
-    <!-- Google Analytics -->
-    <script>
-    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-    ga('create', '<%= @google_analytics_id %>Y', 'auto');
-    ga('send', 'pageview');
-    </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
-  </head>
-  <body>
-
-    <div class="corner-ribbon">
-      <a href="https://github.com/stephenyeargin/wego-bus-map" target="_blank"><img src="/assets/images/github-corner-ribbon.svg" width="100" height="100" alt="View on GitHub" /></a>
-    </div>
-    
-    <div class="alert-indicator"></div>
-
-    <div id="map" class="map-container">
-      <noscript>Howdy! It looks like your browser does not have JavaScript enabled. Unfortunately, the mapping platform requires it. Please enable JavaScript and reload the page.</noscript>
-    </div>
-
-    <div class="modal fade" id="serviceAlertsModal" tabindex="-1" role="dialog" aria-labelledby="serticeAlertsModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="serticeAlertsModalLabel"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div id="service_alerts"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="tripDetailsModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="tripDetailsModalLabel"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div id="trip_details"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <template id="trip_details_template">
-      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
-      <table class="table table-borderless table-sm">
-        <tbody>
-          <tr>
-            <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
-            <td>{trip_headsign}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
-            <td>{trip}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
-            <td>{vehicle}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-hourglass-start fa-fw" aria-hidden="true"></i> Trip Started</th>
-            <td>{start_time}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
-            <td>{updated}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
-      <hr />
-      <table id="trip_stop_time_updates" class="table table-borderless table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Sequence</th>
-            <th scope="col">Stop ID</th>
-            <th scope="col">Time</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </template>
-
-    <template id="trip_details_unavailable_template">
-      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
-      <table class="table table-borderless table-sm">
-        <tbody>
-          <tr>
-            <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
-            <td>{trip_headsign}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
-            <td>{trip}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
-      <hr />
-      <div class="alert alert-info">
-        The realtime data feed did not include any further updates for this trip. It may be completed.
-      </div>
-    </template>
-
-    <template id="trip_stop_time_update_body">
-      <tr>
-        <td><span class="badge badge-info">{stop_sequence}</span></td>
-        <td>{stop_id}</td>
-        <td>{time}</td>
-      </tr>
-    </template>
-
-    <template id="tooltip_template">
-      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div></span>
-      <table class="table table-borderless table-sm">
-        <tbody>
-          <tr>
-            <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
-            <td>{vehicle}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
-            <td>{trip}</td>
-          </tr>
-        </tbody>
-      </table>
-    </template>
-
-    <template id="popup_loading_template">
-      <div class="text-center">
-        <i class="fa fa-spinner fa-spin fa-3x fa-fw" aria-hidden="true"></i>
-        <span class="sr-only">Loading...</span>
-      </div>
-    </template>
-
-    <template id="popup_template">
-      <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
-      <table class="table table-borderless table-sm popup-route-table">
-        <tbody>
-          <tr>
-            <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
-            <td>{trip_headsign}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
-            <td>{vehicle}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
-            <td><a href="javascript:void(0)" class="view-trip-details-link">{trip}</a></td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-compass fa-fw" aria-hidden="true"></i> Heading</th>
-            <td>{heading}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Speed</th>
-            <td>{speed}</td>
-          </tr>
-          <tr>
-            <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
-            <td>{updated}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
-    </template>
-    
-    <template id="attribution_template">
-      &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>, Data by <a href="http://www.wegotransit.com" target="blank">WeGo Public Transit</a>
-    </template>
-
-    <template id="alert_indicator_template">
-      <button type="button" class="btn btn-primary btn-rounded">
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp; Service Alert{plural} &nbsp;<span class="badge badge-light">{count}</span>
+<div class="modal fade" id="serviceAlertsModal" tabindex="-1" role="dialog" aria-labelledby="serticeAlertsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serticeAlertsModalLabel"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
-    </template>
-
-    <template id="alert_template">
-      <div class="alert alert-info" role="alert">
-        <h4 class="alert-heading">{alert_heading}</h4>
-        <div class="alert-body">{alert_body}</div>
-        <hr />
-        <div><i class="fa fa-clock-o" aria-hidden="true"></i> {start_date} - {end_date}</div>
       </div>
-    </template>
+      <div class="modal-body">
+        <div id="service_alerts"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-    <script src="//unpkg.com/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="//unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
-    <script src="//unpkg.com/moment@2.22.2/moment.js"></script>
-    <script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
-    <script src="/assets/javascript/leaflet.rotatedMarker.js"></script>
-    <script>
-      var agencyData = <%= @agencies %>;
-      var routesData = <%= @routes %>;
-    </script>
-    <script src="/assets/javascript/app.js"></script>
-  </body>
-</html>
+<div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="tripDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tripDetailsModalLabel"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="trip_details"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template id="trip_details_template">
+  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+  <table class="table table-borderless table-sm">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+        <td>{trip_headsign}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <td>{trip}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+        <td>{vehicle}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-hourglass-start fa-fw" aria-hidden="true"></i> Trip Started</th>
+        <td>{start_time}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
+        <td>{updated}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
+  <hr />
+  <table id="trip_stop_time_updates" class="table table-borderless table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Sequence</th>
+        <th scope="col">Stop ID</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</template>
+
+<template id="trip_details_unavailable_template">
+  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+  <table class="table table-borderless table-sm">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+        <td>{trip_headsign}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <td>{trip}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
+  <hr />
+  <div class="alert alert-info">
+    The realtime data feed did not include any further updates for this trip. It may be completed.
+  </div>
+</template>
+
+<template id="trip_stop_time_update_body">
+  <tr>
+    <td><span class="badge badge-info">{stop_sequence}</span></td>
+    <td>{stop_id}</td>
+    <td>{time}</td>
+  </tr>
+</template>
+
+<template id="tooltip_template">
+  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div></span>
+  <table class="table table-borderless table-sm">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+        <td>{vehicle}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <td>{trip}</td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<template id="popup_loading_template">
+  <div class="text-center">
+    <i class="fa fa-spinner fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+</template>
+
+<template id="popup_template">
+  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+  <table class="table table-borderless table-sm popup-route-table">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+        <td>{trip_headsign}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+        <td>{vehicle}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <td><a href="javascript:void(0)" class="view-trip-details-link">{trip}</a></td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-compass fa-fw" aria-hidden="true"></i> Heading</th>
+        <td>{heading}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Speed</th>
+        <td>{speed}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
+        <td>{updated}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
+</template>
+
+<template id="attribution_template">
+  &copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; Data by <a href="http://www.wegotransit.com" target="blank">WeGo Public Transit</a>
+</template>
+
+<template id="alert_indicator_template">
+  <button type="button" class="btn btn-primary btn-rounded">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp; Service Alert{plural} &nbsp;<span class="badge badge-light">{count}</span>
+    </button>
+</template>
+
+<template id="alert_template">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">{alert_heading}</h4>
+    <div class="alert-body">{alert_body}</div>
+    <hr />
+    <div><i class="fa fa-clock-o" aria-hidden="true"></i> {start_date} - {end_date}</div>
+  </div>
+</template>
+
+<script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="//unpkg.com/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="//unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+<script src="//unpkg.com/moment@2.22.2/moment.js"></script>
+<script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
+<script src="/assets/javascript/leaflet.rotatedMarker.js"></script>
+<script>
+  var agencyData = <%= @agencies %>;
+  var routesData = <%= @routes %>;
+</script>
+<script src="/assets/javascript/app.js"></script>

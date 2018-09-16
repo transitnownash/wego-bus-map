@@ -16,13 +16,16 @@ a img {
   color: #007bff;
 }
 
-.corner-ribbon{
+.about-icon{
   height: 100px;
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 100px;
+  right: 0.5em;
+  top: 0.5em;
   z-index: 999;
+}
+.about-icon a.btn-light {
+  border-radius: 2px;
+  border: 2px solid rgba(0,0,0,0.2);
 }
 
 .route-label {
@@ -49,7 +52,5 @@ a img {
 }
 
 @media screen and (max-width: 600px) {
-  .corner-ribbon {
-    visibility: hidden;
-  }
+
 }

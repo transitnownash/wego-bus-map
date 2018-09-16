@@ -1,0 +1,60 @@
+<% content_for :title do %>About<% end %>
+<% content_for :description do %>About the WeGo Public Transit realtime bus map.<% end%>
+
+<div class="row">
+  <div class="col-md-10 offset-lg-1">
+
+    <div class="row">
+      <div class="col-lg-8">
+
+        <p>This project is an implementation of the <a href="https://developers.google.com/transit/gtfs-realtime/">General Transit Feed Specification (GTFS) Realtime</a> feed for Nashville, Tennessee's <a href="http://www.wegotransit.com/">WeGo Public Transit</a> bus system. It displays all vehicle locations on a map in conjunction with <a href="https://developers.google.com/transit/gtfs/">GTFS Static</a> data updated periodically when the agency announces service changes.</p>
+
+        <p>The source code <a href="https://github.com/stephenyeargin/wego-bus-map">is available on GitHub</a>.
+
+        <h2 class="h4">Why?</h2>
+
+        <p>I am a regular user of the bus system and <a href="https://transitapp.com/">Transit</a> on my phone. I'm also a software developer, so I wanted to see what I could build using the open data available from the agency.</p>
+      </div>
+      <div class="col-lg-4 text-center text-lg-right">
+        <img src="/assets/images/nashville-mta/bus.svg" alt="Bus Icon" width="320" height="320" class="img-fluid" />
+      </div>
+    </div>
+
+    <hr />
+
+    <h2 class="h4">Data Sources &amp; Technology</h2>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <a href="http://www.nashvillemta.org/Nashville-MTA-Developer-FAQs.asp">Nashville MTA</a> via <a href="https://transitfeeds.com/p/nashville-mta">TransitFeeds.com</a>
+        <ul>
+          <li><a href="https://transitfeeds.com/p/nashville-mta/220">Static GTFS</a></li>
+          <li><a href="https://transitfeeds.com/p/nashville-mta/870">Realtime Service Alerts</a></li>
+          <li><a href="https://transitfeeds.com/p/nashville-mta/871">Realtime Trip Updates</a></li>
+          <li><a href="https://transitfeeds.com//p/nashville-mta/872">Realtime Vehicle Positions</a></li>
+        </ul>
+        Backend
+        <ul>
+          <li><a href="http://sinatrarb.com/">Sinatra</a></li>
+          <li><a href="http://code.macournoyer.com/thin/">Thin</a></li>
+          <li><a href="https://www.heroku.com/">Heroku</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        User Interface
+        <ul>
+          <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
+          <li><a href="https://fontawesome.com/v4.7.0/">Font Awesome</a></li>
+          <li><a href="http://jquery.com/">jQuery</a></li>
+          <li><a href="https://momentjs.com/">Moment</a></li>
+        </ul>
+        Mapping
+        <ul>
+          <li><a href="http://leafletjs.com/">Leaflet.js</a></li>
+          <li><a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a></li>
+          <li><a href="http://cartodb.com/attributions">CartoDB</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
