@@ -33,24 +33,24 @@ var MapIcon = L.Icon.extend({
   }
 })
 
-var getBusIcons = function (agencyId) {
-  var busPath = '/assets/images/bus.svg'
-  var shadowPath = '/assets/images/bus-tracks.svg'
-  switch (agencyId) {
+var getIcons = function (routeData) {
+  var iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
+  var shadowPath = '/assets/images/' + routeData.route_type + '-shadow.svg'
+  switch (routeData.agency_id) {
     case 'Nashville MTA':
-      busPath = 'assets/images/nashville-mta/bus.svg'
+      iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
       break
     case 'Nashville RTA':
-      busPath = 'assets/images/nashville-rta/bus.svg'
+      iconPath = 'assets/images/nashville-rta/' + routeData.route_type + '.svg'
       break
   }
   return {
     stationary: new MapIcon({
-      iconUrl: busPath,
+      iconUrl: iconPath,
       shadowUrl: null
     }),
     moving: new MapIcon({
-      iconUrl: busPath,
+      iconUrl: iconPath,
       shadowUrl: shadowPath
     })
   }
@@ -120,7 +120,7 @@ var formatDegreeToCompass = function (num) {
 
 // Format speed from (micro?)meters per second to miles per hour
 var formatVehicleSpeed = function (speed) {
-  return (speed) ? Math.round((speed * 2.2369) * 1000000) + ' mph' : 'N/A'
+  return (typeof speed !== 'undefined') ? Math.round((speed * 2.2369) * 1000000) + ' mph' : 'N/A'
 }
 
 var updateMap = function () {
@@ -145,7 +145,7 @@ var updateMap = function () {
 
     // Loop through feed
     $(data).each(function (i, loc) {
-      var busIcon = getBusIcons(routesData[loc.vehicle.trip.route_id].agency_id)
+      var busIcon = getIcons(routesData[loc.vehicle.trip.route_id])
       // Find existing marker
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
@@ -238,7 +238,7 @@ var displayAlerts = function (data) {
       $('#alert_template').html(),
       {
         alert_heading: alert.alert.header_text.translation[0].text,
-        alert_body: alert.alert.description_text.translation[0].text.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '<br />'),
+        alert_body: alert.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
         start_date: moment.unix(alert.alert.active_period[0].start).format('l h:mm a'),
         end_date: moment.unix(alert.alert.active_period[0].end).format('l h:mm a')
       }
