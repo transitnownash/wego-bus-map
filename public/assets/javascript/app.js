@@ -352,7 +352,7 @@ var showTripDetails = function (tripId) {
         agency: agencyData[routesData[routeId].agency_id].agency_name,
         agency_url: agencyData[routesData[routeId].agency_id].agency_url,
         trip: tripData.trip_id,
-        start_time: moment(moment(tripUpdates[tripId].trip_update.trip.start_date, 'YYYYMMDD') + ' ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
+        start_time: moment(tripUpdates[tripId].trip_update.trip.start_time, 'hh:mm:ss').format('h:mm a'),
         updated: (tripUpdates[tripId].trip_update.timestamp) ? moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a') : 'Not yet started.',
         vehicle: tripUpdates[tripId].trip_update.vehicle.label
       }
