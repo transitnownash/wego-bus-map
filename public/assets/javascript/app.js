@@ -4,6 +4,7 @@ var refreshRate = 10 * 1000
 var refreshAttempts = 1
 
 var markers = {}
+var locationMarker = {}
 var tripUpdates = {}
 var routeShapes = {}
 
@@ -23,6 +24,32 @@ map.setMaxBounds(L.latLngBounds(
   L.latLng(35.594362, -86.227080) // southeast
 ))
 
+// Handle location detection success
+map.on('locationerror', function (e) {
+  console.error(e)
+  return window.alert('Unable to find your location.')
+})
+
+// Handle location detection error
+map.on('locationfound', function (e) {
+  var radius = e.accuracy / 2
+  if (locationMarker.marker) {
+    map.removeLayer(locationMarker.marker)
+  }
+  if (locationMarker.radius) {
+    map.removeLayer(locationMarker.radius)
+  }
+  // If marker is outside of maxBounds, show error
+  if (!map.options.maxBounds.contains(e.latlng)) {
+    return window.alert('Your location is outside of the bounds of this map.')
+  }
+  locationMarker = {
+    marker: L.marker(e.latlng).addTo(map).bindPopup('Accuracy: ' + radius + ' meters').openPopup(),
+    radius: L.circle(e.latlng, radius).addTo(map)
+  }
+  map.setView(e.latlng, 14)
+})
+
 // Adds the custom icon for a bus
 var MapIcon = L.Icon.extend({
   options: {
@@ -33,6 +60,7 @@ var MapIcon = L.Icon.extend({
   }
 })
 
+// Route types and agencies have different markers
 var getIcons = function (routeData) {
   var iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
   var shadowPath = '/assets/images/' + routeData.route_type + '-shadow.svg'
@@ -205,18 +233,16 @@ var updateMap = function () {
 var checkForAlerts = function () {
   $.get('/gtfs/realtime/alerts.json', function (data) {
     var alertIndicator = $('.alert-indicator')
-    alertIndicator.hide()
-    if (!data || data.length === 0) {
-      return
+    if (!data) {
+      data = []
     }
     alertIndicator.html(L.Util.template(
       $('#alert_indicator_template').html(),
       {
         count: data.length,
-        plural: data.length > 1 ? 's' : ''
+        plural: data.length !== 1 ? 's' : ''
       }
     ))
-    alertIndicator.show()
     alertIndicator.on('click', function (e) {
       displayAlerts(data)
     })
@@ -226,13 +252,12 @@ var checkForAlerts = function () {
 // Display Alerts
 var displayAlerts = function (data) {
   var alertContainer = $('#service_alerts')
-
-  if (!data || data.length === 0) {
-    return
-  }
-
   alertContainer.empty()
-
+  if (!data || data.length === 0) {
+    var content = L.Util.template($('#alert_empty_template').html(), {})
+    $(alertContainer).append(content)
+    $('#serviceAlertsModal').modal('show')
+  }
   $.each(data, function (i, alert) {
     var content = L.Util.template(
       $('#alert_template').html(),
@@ -248,11 +273,22 @@ var displayAlerts = function (data) {
   $('#serviceAlertsModal').modal('show')
 }
 
-// Add a shape to the map
+// Display the location button
+var displayLocationButton = function () {
+  var mapToolsContainer = $('.map-tools')
+  var locationButton = $(L.Util.template(
+    $('#location_button_template').html()
+  ))
+  $(locationButton).on('click', function (e) {
+    map.locate()
+  })
+  $(mapToolsContainer).append(locationButton)
+}
+
+// Add route shape to the map
 var addShape = function (tripData) {
   var shapeId = tripData.shape_id
   var routeData = routesData[tripData.route_id]
-  console.log(routeData)
   if (routeShapes[shapeId]) { return }
   $.get('/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData, function (point) {
@@ -269,7 +305,7 @@ var addShape = function (tripData) {
   })
 }
 
-// Load Trip Updates
+// Load trip updates
 var checkForTripUpdates = function () {
   $.get('/gtfs/realtime/tripupdates.json').done(function (updateData) {
     if (!updateData || updateData.length === 0) {
@@ -316,7 +352,7 @@ var showTripDetails = function (tripId) {
         agency: agencyData[routesData[routeId].agency_id].agency_name,
         agency_url: agencyData[routesData[routeId].agency_id].agency_url,
         trip: tripData.trip_id,
-        start_time: moment('2000-01-01 ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
+        start_time: moment(moment(tripUpdates[tripId].trip_update.trip.start_date, 'YYYYMMDD') + ' ' + tripUpdates[tripId].trip_update.trip.start_time).format('h:mm a'),
         updated: (tripUpdates[tripId].trip_update.timestamp) ? moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a') : 'Not yet started.',
         vehicle: tripUpdates[tripId].trip_update.vehicle.label
       }
@@ -325,7 +361,7 @@ var showTripDetails = function (tripId) {
     $(stopTimeUpdatesTableBody).empty()
     var rowHighlighted = false
     $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
-      var time = ''
+      var time = false
       if (typeof update.departure !== 'undefined') {
         time = update.departure.time
       }
@@ -337,13 +373,14 @@ var showTripDetails = function (tripId) {
         {
           stop_sequence: update.stop_sequence,
           stop_id: update.stop_id,
-          time: moment.unix(time).format('h:mm a')
+          time: (time) ? moment.unix(time).format('h:mm a') : 'N/A'
         }
       ))
-      // Trip must have started, no previous rows highlighted and the time must be in the future
+      // Dim rows in the past
       if (time <= Math.round(Date.now() / 1000)) {
         row.addClass('text-muted')
       }
+      // Trip must have started, no previous rows highlighted and the time must be in the future
       if (tripUpdates[tripId].trip_update.timestamp && !rowHighlighted && time >= Math.round(Date.now() / 1000)) {
         row.addClass('table-info')
         $('td .badge-info', row).removeClass('badge-info').addClass('badge-light')
@@ -352,6 +389,11 @@ var showTripDetails = function (tripId) {
       $(stopTimeUpdatesTableBody).append(row)
     })
   })
+}
+
+// Check for location services
+if (navigator.geolocation) {
+  displayLocationButton()
 }
 
 // Update map on a schedule
