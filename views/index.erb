@@ -113,7 +113,10 @@
 <template id="trip_stop_time_update_body">
   <tr>
     <td><span class="badge badge-info">{stop_sequence}</span></td>
-    <td>{stop_id}</td>
+    <td>
+      {stop_name}<br />
+      <small>({stop_id}) {stop_description}</small>
+    </td>
     <td>{time}</td>
   </tr>
 </template>
@@ -212,5 +215,6 @@
 <script>
   var agencyData = <%= @agencies %>;
   var routesData = <%= @routes %>;
+  var stopsData = <%= @stops %>;
 </script>
 <script src="/assets/javascript/app.js"></script>

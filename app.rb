@@ -40,6 +40,7 @@ class WeGoBusMap < Sinatra::Base
   get '/' do
     @agencies = File.read(File.join(DATA_DIRECTORY, 'agency.json'))
     @routes = File.read(File.join(DATA_DIRECTORY, 'routes.json'))
+    @stops = File.read(File.join(DATA_DIRECTORY, 'stops.json'))
     erb :index, layout: 'layouts/app'.to_sym
   end
 

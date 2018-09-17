@@ -7,6 +7,7 @@ var markers = {}
 var locationMarker = {}
 var tripUpdates = {}
 var routeShapes = {}
+var stopMarkers = {}
 
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.166512, -86.781581], 12)
@@ -91,7 +92,7 @@ var formatPopup = function (e) {
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
   $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
-    addShape(tripData)
+    displayShape(tripData)
     var content = L.Util.template(
       $('#popup_template').html(),
       {
@@ -287,8 +288,8 @@ var displayLocationButton = function () {
   $(mapToolsContainer).append(locationButton)
 }
 
-// Add route shape to the map
-var addShape = function (tripData) {
+// Display route shape to the map
+var displayShape = function (tripData) {
   var shapeId = tripData.shape_id
   var routeData = routesData[tripData.route_id]
   if (routeShapes[shapeId]) { return }
@@ -375,6 +376,8 @@ var showTripDetails = function (tripId) {
         {
           stop_sequence: update.stop_sequence,
           stop_id: update.stop_id,
+          stop_name: stopsData[update.stop_id].stop_name,
+          stop_description: stopsData[update.stop_id].stop_desc || '',
           time: (time) ? moment.unix(time).format('h:mm a') : 'N/A'
         }
       ))
