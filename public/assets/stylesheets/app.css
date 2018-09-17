@@ -40,6 +40,20 @@ a img {
   white-space: nowrap;
 }
 
+.no-data-overlay {
+  display: none;
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-size: 2em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  position: fixed;
+  text-align: center;
+  top: 40vh;
+  width: 100vw;
+  z-index: 997;
+}
+
 .map-tools {
   bottom: 2.5em;
   left: 0.5em;

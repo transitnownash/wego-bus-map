@@ -165,10 +165,12 @@ var updateMap = function () {
     if (!data || data.length === 0) {
       refreshAttempts++
       console.log('No data returned. Trying again in ' + ((refreshRate * refreshAttempts) / 1000) + ' seconds')
+      $('.no-data-overlay').show()
       return
     // Reset it back to 1
     } else {
       refreshAttempts = 1
+      $('.no-data-overlay').hide()
     }
 
     // Loop through feed
