@@ -25,6 +25,14 @@ class WeGoBusMap < Sinatra::Base
 
   helpers Sinatra::ContentFor
 
+  configure :development, :test do
+    set :force_ssl, (ENV['FORCE_SSL'] == '1')
+  end
+
+  configure :production do
+    set :force_ssl, true
+  end
+
   before do
     @google_analytics_id = ENV['GOOGLE_ANALYTICS_ID'] || ''
   end

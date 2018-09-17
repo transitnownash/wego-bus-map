@@ -5,7 +5,9 @@
   <a href="/about" class="btn btn-light"><i class="fa fa-info-circle fa-lg"></i></a>
 </div>
 
-<div class="alert-indicator"></div>
+<div class="map-tools">
+  <button class="btn btn-primary alert-indicator">Loading ...</button>
+</div>
 
 <div id="map" class="map-container">
   <noscript>Howdy! It looks like your browser does not have JavaScript enabled. Unfortunately, the mapping platform requires it. Please enable JavaScript and reload the page.</noscript>
@@ -173,9 +175,13 @@
 </template>
 
 <template id="alert_indicator_template">
+  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp; Service Alert{plural} &nbsp;<span class="badge badge-light">{count}</span>
+</template>
+
+<template id="location_button_template">
   <button type="button" class="btn btn-primary btn-rounded">
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp; Service Alert{plural} &nbsp;<span class="badge badge-light">{count}</span>
-    </button>
+    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+  </button>
 </template>
 
 <template id="alert_template">
@@ -184,6 +190,12 @@
     <div class="alert-body">{alert_body}</div>
     <hr />
     <div><i class="fa fa-clock-o" aria-hidden="true"></i> {start_date} - {end_date}</div>
+  </div>
+</template>
+
+<template id="alert_empty_template">
+  <div class="alert alert-info" role="alert">
+    There are no active service alerts at this time.
   </div>
 </template>
 

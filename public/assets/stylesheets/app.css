@@ -40,13 +40,14 @@ a img {
   white-space: nowrap;
 }
 
-.alert-indicator {
+.map-tools {
   bottom: 2.5em;
   left: 0.5em;
   position: fixed;
   z-index: 998;
 }
-.alert-indicator .btn {
+
+.btn-primary {
   background-color: purple;
   border-color: purple;
 }
