@@ -45,7 +45,7 @@ map.on('locationfound', function (e) {
     return window.alert('Your location is outside of the bounds of this map.')
   }
   locationMarker = {
-    marker: L.marker(e.latlng).addTo(map).bindPopup('Accuracy: ' + Math.Round(radius) + ' meters').openPopup(),
+    marker: L.marker(e.latlng).addTo(map).bindPopup('Accuracy: ' + Math.round(radius) + ' meters').openPopup(),
     radius: L.circle(e.latlng, radius).addTo(map)
   }
   map.setView(e.latlng, 14)
