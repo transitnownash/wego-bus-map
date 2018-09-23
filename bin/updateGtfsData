@@ -38,33 +38,9 @@ GtfsReader.config do
           GtfsSplitData[:shapes][row[:shape_id]] << row
         end
         trips { |row| GtfsSplitData[:trips][row[:trip_id]] = row }
-      end
-    end
-
-    # Overriding stop definition to fix a bug
-    # https://github.com/sangster/gtfs_reader/issues/6
-    stops do
-      url 'http://www.nashvillemta.org/GoogleExport/google_transit.zip'
-      before { |etag| puts "Processing GTFS source with tag #{etag}..." }
-      feed_definition do
-        file :stops, required: true do
-          col :stop_id,       required: true, unique: true
-          col :stop_code
-          col :stop_name,     required: true
-          col :stop_desc
-          col :stop_lat,      required: true
-          col :stop_lon,      required: true
-          col :stop_url
-          col :stop_timezone
-          col :zone_id
-          col :location_type, &output_map( :stop, station: ?1 )
-        end
-      end
-      handlers do
         stops { |row| GtfsConsolidatedData[:stops][row[:stop_id]] = row }
       end
     end
-
   end
 end
 
