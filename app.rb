@@ -5,7 +5,6 @@ require 'protobuf'
 require 'google/transit/gtfs-realtime.pb'
 require 'net/http'
 require 'uri'
-require 'gtfs_reader'
 require 'fileutils'
 require 'date'
 
@@ -38,9 +37,7 @@ class WeGoBusMap < Sinatra::Base
   end
 
   get '/' do
-    @agencies = File.read(File.join(DATA_DIRECTORY, 'agency.json'))
-    @routes = File.read(File.join(DATA_DIRECTORY, 'routes.json'))
-    @stops = File.read(File.join(DATA_DIRECTORY, 'stops.json'))
+    headers 'Access-Control-Allow-Origin' => 'https://gtfs.yearg.in'
     erb :index, layout: 'layouts/app'.to_sym
   end
 
@@ -122,18 +119,6 @@ class WeGoBusMap < Sinatra::Base
     cache_control :public, max_age: REALTIME_CACHE_TTL
     response.headers['content-type'] = 'application/json'
     alerts.to_json
-  end
-
-  get '/gtfs/trips/:trip_id.json' do
-    cache_control :public, max_age: GTFS_STATIC_CACHE_TTL
-    response.headers['content-type'] = 'application/json'
-    File.read(File.join(DATA_DIRECTORY, 'trips', "#{params['trip_id']}.json"))
-  end
-
-  get '/gtfs/shapes/:shape_id.json' do
-    cache_control :public, max_age: GTFS_STATIC_CACHE_TTL
-    response.headers['content-type'] = 'application/json'
-    File.read(File.join(DATA_DIRECTORY, 'shapes', "#{params['shape_id']}.json"))
   end
 
   # start the server if ruby file executed directly

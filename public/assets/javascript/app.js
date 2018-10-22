@@ -1,4 +1,6 @@
-/* globals $, L, moment, agencyData, routesData */
+/* globals $, L, moment */
+
+var GTFS_BASE_URL = 'https://gtfs.yearg.in'
 
 var refreshRate = 10 * 1000
 var refreshAttempts = 1
@@ -91,7 +93,7 @@ var formatPopup = function (e) {
   var routeId = e.target.data.loc.vehicle.trip.route_id
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
-  $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
+  $.get(GTFS_BASE_URL + '/gtfs/trips/' + tripId + '.json').done(function (tripData) {
     displayShape(tripData)
     var content = L.Util.template(
       $('#popup_template').html(),
@@ -293,7 +295,7 @@ var displayShape = function (tripData) {
   var shapeId = tripData.shape_id
   var routeData = routesData[tripData.route_id]
   if (routeShapes[shapeId]) { return }
-  $.get('/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
+  $.get(GTFS_BASE_URL + '/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData, function (point) {
       return L.latLng(point.shape_pt_lat, point.shape_pt_lon)
     })
@@ -325,7 +327,7 @@ var checkForTripUpdates = function () {
 var showTripDetails = function (tripId) {
   var tripModal = $('#trip_details_modal')
   tripModal.modal('show')
-  $.get('/gtfs/trips/' + tripId + '.json').done(function (tripData) {
+  $.get(GTFS_BASE_URL + '/gtfs/trips/' + tripId + '.json').done(function (tripData) {
     var routeId = tripData.route_id
     if (typeof tripUpdates[tripId] === 'undefined') {
       $('#trip_details').html(L.Util.template(
@@ -400,6 +402,15 @@ var showTripDetails = function (tripId) {
 if (navigator.geolocation) {
   displayLocationButton()
 }
+
+// Load agency and route data
+$.get(GTFS_BASE_URL + '/routes.json', function (result) {
+  var routesData = result['data'];
+})
+
+$.get(GTFS_BASE_URL + '/agencies.json', function (result) {
+  var agencyData = result['data'];
+})
 
 // Update map on a schedule
 updateMap()

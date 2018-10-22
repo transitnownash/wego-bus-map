@@ -7,17 +7,12 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     backports (3.11.4)
-    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     daemons (1.2.6)
     dotenv (2.5.0)
     eventmachine (1.2.7)
     gtfs-realtime-bindings (0.0.5)
       protobuf (>= 3.0)
-    gtfs_reader (3.1.0)
-      activesupport (>= 4.1, < 6.0)
-      colorize (~> 0.8)
-      rubyzip (~> 1.2)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     middleware (0.1.0)
@@ -32,7 +27,6 @@ GEM
     rack (2.0.5)
     rack-protection (2.0.4)
       rack
-    rubyzip (1.2.2)
     sinatra (2.0.4)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -62,7 +56,6 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   gtfs-realtime-bindings
-  gtfs_reader
   sinatra
   sinatra-contrib
   thin
