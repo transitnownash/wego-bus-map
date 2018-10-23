@@ -8,6 +8,8 @@ var refreshAttempts = 1
 var markers = {}
 var locationMarker = {}
 var tripUpdates = {}
+var routesData = {}
+var agenciesData = {}
 var routeShapes = {}
 var stopMarkers = {}
 
@@ -67,7 +69,7 @@ var MapIcon = L.Icon.extend({
 var getIcons = function (routeData) {
   var iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
   var shadowPath = '/assets/images/' + routeData.route_type + '-shadow.svg'
-  switch (routeData.agency_id) {
+  switch (routeData.agency_gid) {
     case 'Nashville MTA':
       iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
       break
@@ -93,7 +95,7 @@ var formatPopup = function (e) {
   var routeId = e.target.data.loc.vehicle.trip.route_id
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
-  $.get(GTFS_BASE_URL + '/gtfs/trips/' + tripId + '.json').done(function (tripData) {
+  $.get(GTFS_BASE_URL + '/trips/' + tripId + '.json').done(function (tripData) {
     displayShape(tripData)
     var content = L.Util.template(
       $('#popup_template').html(),
@@ -105,8 +107,8 @@ var formatPopup = function (e) {
         route_color: routesData[routeId].route_color,
         route_text_color: routesData[routeId].route_text_color,
         trip: loc.vehicle.trip.trip_id,
-        agency: agencyData[routesData[routeId].agency_id].agency_name,
-        agency_url: agencyData[routesData[routeId].agency_id].agency_url,
+        agency: agenciesData[routesData[routeId].agency_gid].agency_name,
+        agency_url: agenciesData[routesData[routeId].agency_gid].agency_url,
         heading: formatDegreeToCompass(loc.vehicle.position.bearing),
         speed: formatVehicleSpeed(loc.vehicle.position.speed),
         updated: moment.unix(loc.vehicle.timestamp).format('h:mm a')
@@ -295,7 +297,7 @@ var displayShape = function (tripData) {
   var shapeId = tripData.shape_id
   var routeData = routesData[tripData.route_id]
   if (routeShapes[shapeId]) { return }
-  $.get(GTFS_BASE_URL + '/gtfs/shapes/' + shapeId + '.json').done(function (shapeData) {
+  $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData, function (point) {
       return L.latLng(point.shape_pt_lat, point.shape_pt_lon)
     })
@@ -327,8 +329,8 @@ var checkForTripUpdates = function () {
 var showTripDetails = function (tripId) {
   var tripModal = $('#trip_details_modal')
   tripModal.modal('show')
-  $.get(GTFS_BASE_URL + '/gtfs/trips/' + tripId + '.json').done(function (tripData) {
-    var routeId = tripData.route_id
+  $.get(GTFS_BASE_URL + '/trips/' + tripId + '.json').done(function (tripData) {
+    var routeId = tripData.route_gid
     if (typeof tripUpdates[tripId] === 'undefined') {
       $('#trip_details').html(L.Util.template(
         $('#trip_details_unavailable_template').html(),
@@ -338,8 +340,8 @@ var showTripDetails = function (tripId) {
           trip_headsign: tripData.trip_headsign,
           route_color: routesData[routeId].route_color,
           route_text_color: routesData[routeId].route_text_color,
-          agency: agencyData[routesData[routeId].agency_id].agency_name,
-          agency_url: agencyData[routesData[routeId].agency_id].agency_url,
+          agency: agenciesData[routesData[routeId].agency_gid].agency_name,
+          agency_url: agenciesData[routesData[routeId].agency_gid].agency_url,
           trip: tripData.trip_id
         }
       ))
@@ -354,9 +356,9 @@ var showTripDetails = function (tripId) {
         trip_headsign: tripData.trip_headsign,
         route_color: routesData[routeId].route_color,
         route_text_color: routesData[routeId].route_text_color,
-        agency: agencyData[routesData[routeId].agency_id].agency_name,
-        agency_url: agencyData[routesData[routeId].agency_id].agency_url,
-        trip: tripData.trip_id,
+        agency: agenciesData[routesData[routeId].agency_gid].agency_name,
+        agency_url: agenciesData[routesData[routeId].agency_gid].agency_url,
+        trip: tripData.trip_gid,
         start_time: moment(tripUpdates[tripId].trip_update.trip.start_time, 'hh:mm:ss').format('h:mm a'),
         updated: (tripUpdates[tripId].trip_update.timestamp) ? moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a') : 'Not yet started.',
         vehicle: tripUpdates[tripId].trip_update.vehicle.label
@@ -404,13 +406,15 @@ if (navigator.geolocation) {
 }
 
 // Load agency and route data
-$.get(GTFS_BASE_URL + '/routes.json', function (result) {
-  var routesData = result['data'];
+$.get(GTFS_BASE_URL + '/routes.json', function (result1) {
+  $.each(result1['data'], function (i, row) {
+    routesData[row.route_gid] = row
+  })
+  $.get(GTFS_BASE_URL + '/agencies.json', function (result2) {
+    $.each(result2['data'], function (i, row) {
+      agenciesData[row.agency_gid] = row
+    })
+    // Update map on a schedule
+    updateMap()
+  })
 })
-
-$.get(GTFS_BASE_URL + '/agencies.json', function (result) {
-  var agencyData = result['data'];
-})
-
-// Update map on a schedule
-updateMap()
