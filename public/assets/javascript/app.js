@@ -1,6 +1,7 @@
 /* globals $, L, moment */
 
 var GTFS_BASE_URL = 'https://gtfs.yearg.in'
+GTFS_BASE_URL = 'http://localhost:3000'
 
 var refreshRate = 10 * 1000
 var refreshAttempts = 1
@@ -11,7 +12,7 @@ var tripUpdates = {}
 var routesData = {}
 var agenciesData = {}
 var routeShapes = {}
-var stopMarkers = {}
+var stopsData = {}
 
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.166512, -86.781581], 12)
@@ -332,6 +333,7 @@ var showTripDetails = function (tripId) {
   $.get(GTFS_BASE_URL + '/trips/' + tripId + '.json').done(function (tripData) {
     var routeId = tripData.route_gid
     if (typeof tripUpdates[tripId] === 'undefined') {
+      console.log('tripId', tripId)
       $('#trip_details').html(L.Util.template(
         $('#trip_details_unavailable_template').html(),
         {
@@ -342,60 +344,67 @@ var showTripDetails = function (tripId) {
           route_text_color: routesData[routeId].route_text_color,
           agency: agenciesData[routesData[routeId].agency_gid].agency_name,
           agency_url: agenciesData[routesData[routeId].agency_gid].agency_url,
-          trip: tripData.trip_id
+          trip: tripId
         }
       ))
       return
     }
 
-    $('#trip_details').html(L.Util.template(
-      $('#trip_details_template').html(),
-      {
-        route_short_name: routesData[routeId].route_short_name,
-        route_long_name: routesData[routeId].route_long_name,
-        trip_headsign: tripData.trip_headsign,
-        route_color: routesData[routeId].route_color,
-        route_text_color: routesData[routeId].route_text_color,
-        agency: agenciesData[routesData[routeId].agency_gid].agency_name,
-        agency_url: agenciesData[routesData[routeId].agency_gid].agency_url,
-        trip: tripData.trip_gid,
-        start_time: moment(tripUpdates[tripId].trip_update.trip.start_time, 'hh:mm:ss').format('h:mm a'),
-        updated: (tripUpdates[tripId].trip_update.timestamp) ? moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a') : 'Not yet started.',
-        vehicle: tripUpdates[tripId].trip_update.vehicle.label
-      }
-    ))
-    var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
-    $(stopTimeUpdatesTableBody).empty()
-    var rowHighlighted = false
-    $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
-      var time = false
-      if (typeof update.departure !== 'undefined') {
-        time = update.departure.time
-      }
-      if (typeof update.arrival !== 'undefined') {
-        time = update.arrival.time
-      }
-      var row = $(L.Util.template(
-        $('#trip_stop_time_update_body').html(),
+    $.get(GTFS_BASE_URL + '/trips/' + tripId + '/stop_times.json').done(function (stopTimesResult) {
+      stopTimes = {}
+      $.each(stopTimesResult.data, function (key, value) {
+        stopTimes[value.stop_sequence] = value
+      })
+      $('#trip_details').html(L.Util.template(
+        $('#trip_details_template').html(),
         {
-          stop_sequence: update.stop_sequence,
-          stop_id: update.stop_id,
-          stop_name: stopsData[update.stop_id].stop_name,
-          stop_description: stopsData[update.stop_id].stop_desc || '',
-          time: (time) ? moment.unix(time).format('h:mm a') : 'N/A'
+          route_short_name: routesData[routeId].route_short_name,
+          route_long_name: routesData[routeId].route_long_name,
+          trip_headsign: tripData.trip_headsign,
+          route_color: routesData[routeId].route_color,
+          route_text_color: routesData[routeId].route_text_color,
+          agency: agenciesData[routesData[routeId].agency_gid].agency_name,
+          agency_url: agenciesData[routesData[routeId].agency_gid].agency_url,
+          trip: tripData.trip_gid,
+          start_time: moment(tripUpdates[tripId].trip_update.trip.start_time, 'hh:mm:ss').format('h:mm a'),
+          updated: (tripUpdates[tripId].trip_update.timestamp) ? moment.unix(tripUpdates[tripId].trip_update.timestamp).format('h:mm a') : 'Not yet started.',
+          vehicle: tripUpdates[tripId].trip_update.vehicle.label
         }
       ))
-      // Dim rows in the past
-      if (time <= Math.round(Date.now() / 1000)) {
-        row.addClass('text-muted')
-      }
-      // Trip must have started, no previous rows highlighted and the time must be in the future
-      if (tripUpdates[tripId].trip_update.timestamp && !rowHighlighted && time >= Math.round(Date.now() / 1000)) {
-        row.addClass('table-info')
-        $('td .badge-info', row).removeClass('badge-info').addClass('badge-light')
-        rowHighlighted = true
-      }
-      $(stopTimeUpdatesTableBody).append(row)
+      var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
+      $(stopTimeUpdatesTableBody).empty()
+      var rowHighlighted = false
+      $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
+        var time = false
+        if (typeof update.departure !== 'undefined') {
+          time = update.departure.time
+        }
+        if (typeof update.arrival !== 'undefined') {
+          time = update.arrival.time
+        }
+        var row = $(L.Util.template(
+          $('#trip_stop_time_update_body').html(),
+          {
+            stop_sequence: update.stop_sequence,
+            stop_id: update.stop_id,
+            stop_name: stopsData[update.stop_id].stop_name,
+            stop_description: stopsData[update.stop_id].stop_desc || '',
+            eta: (time) ? moment.unix(time).format('h:mm a') : 'N/A',
+            scheduled: (stopTimes[update.stop_sequence].arrival_time) ? moment(stopTimes[update.stop_sequence].arrival_time).utc().format('h:mm a') : 'N/A'
+          }
+        ))
+        // Dim rows in the past
+        if (time <= Math.round(Date.now() / 1000)) {
+          row.addClass('text-muted')
+        }
+        // Trip must have started, no previous rows highlighted and the time must be in the future
+        if (tripUpdates[tripId].trip_update.timestamp && !rowHighlighted && time >= Math.round(Date.now() / 1000)) {
+          row.addClass('table-info')
+          $('td .badge-info', row).removeClass('badge-info').addClass('badge-light')
+          rowHighlighted = true
+        }
+        $(stopTimeUpdatesTableBody).append(row)
+      })
     })
   })
 }
@@ -414,7 +423,12 @@ $.get(GTFS_BASE_URL + '/routes.json', function (result1) {
     $.each(result2['data'], function (i, row) {
       agenciesData[row.agency_gid] = row
     })
-    // Update map on a schedule
-    updateMap()
+    $.get(GTFS_BASE_URL + '/stops?per_page=3000', function(result3) {
+      $.each(result3['data'], function (i, row) {
+        stopsData[row.stop_gid] = row
+      })
+      // Update map on a schedule
+      updateMap()
+    })
   })
 })

@@ -82,7 +82,10 @@
       <tr>
         <th scope="col">Sequence</th>
         <th scope="col">Stop ID</th>
-        <th scope="col">Time</th>
+        <th scope="col">
+          Estimated Time<br />
+          <small>(Scheduled)</small>
+        </th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -117,7 +120,10 @@
       {stop_name}<br />
       <small>({stop_id}) {stop_description}</small>
     </td>
-    <td>{time}</td>
+    <td>
+      {eta}<br />
+      <small>({scheduled})</small>
+    </td>
   </tr>
 </template>
 
