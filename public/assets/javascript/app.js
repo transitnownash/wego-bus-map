@@ -1,7 +1,4 @@
-/* globals $, L, moment */
-
-var GTFS_BASE_URL = 'https://gtfs.yearg.in'
-GTFS_BASE_URL = 'http://localhost:3000'
+/* globals $, L, moment, GTFS_BASE_URL */
 
 var refreshRate = 10 * 1000
 var refreshAttempts = 1
@@ -166,7 +163,7 @@ var updateMap = function () {
     }
   })
 
-  $.get('/gtfs/realtime/vehiclepositions.json', function (data) {
+  $.get(GTFS_BASE_URL + '/realtime/vehicle_positions.json', function (data) {
     // Backoff attempts when no data present
     if (!data || data.length === 0) {
       refreshAttempts++
@@ -181,6 +178,9 @@ var updateMap = function () {
 
     // Loop through feed
     $(data).each(function (i, loc) {
+      if (typeof routesData[loc.vehicle.trip.route_id] === 'undefined') {
+        return
+      }
       var busIcon = getIcons(routesData[loc.vehicle.trip.route_id])
       // Find existing marker
       if (markers[loc.id]) {
@@ -239,7 +239,7 @@ var updateMap = function () {
 
 // Check for Alerts
 var checkForAlerts = function () {
-  $.get('/gtfs/realtime/alerts.json', function (data) {
+  $.get(GTFS_BASE_URL + '/realtime/alerts.json', function (data) {
     var alertIndicator = $('.alert-indicator')
     if (!data) {
       data = []
@@ -295,12 +295,11 @@ var displayLocationButton = function () {
 
 // Display route shape to the map
 var displayShape = function (tripData) {
-  var shapeId = tripData.shape_id
-  var routeData = routesData[tripData.route_id]
-  if (routeShapes[shapeId]) { return }
+  var shapeId = tripData.shape_gid
+  var routeData = routesData[tripData.route_gid]
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
-    var plotPoints = $.map(shapeData, function (point) {
-      return L.latLng(point.shape_pt_lat, point.shape_pt_lon)
+    var plotPoints = $.map(shapeData.points, function (point) {
+      return L.latLng(point.lat, point.lon)
     })
     if (!routeData.route_color) { routeData.route_color = 'bababa' }
     var color = '#' + routeData.route_color
@@ -315,7 +314,7 @@ var displayShape = function (tripData) {
 
 // Load trip updates
 var checkForTripUpdates = function () {
-  $.get('/gtfs/realtime/tripupdates.json').done(function (updateData) {
+  $.get(GTFS_BASE_URL + '/realtime/trip_updates.json').done(function (updateData) {
     if (!updateData || updateData.length === 0) {
       return
     }
@@ -351,7 +350,7 @@ var showTripDetails = function (tripId) {
     }
 
     $.get(GTFS_BASE_URL + '/trips/' + tripId + '/stop_times.json').done(function (stopTimesResult) {
-      stopTimes = {}
+      var stopTimes = {}
       $.each(stopTimesResult.data, function (key, value) {
         stopTimes[value.stop_sequence] = value
       })
@@ -423,7 +422,7 @@ $.get(GTFS_BASE_URL + '/routes.json', function (result1) {
     $.each(result2['data'], function (i, row) {
       agenciesData[row.agency_gid] = row
     })
-    $.get(GTFS_BASE_URL + '/stops?per_page=3000', function(result3) {
+    $.get(GTFS_BASE_URL + '/stops?per_page=3000', function (result3) {
       $.each(result3['data'], function (i, row) {
         stopsData[row.stop_gid] = row
       })
