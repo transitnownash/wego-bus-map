@@ -3,5 +3,19 @@
   "description": "Realtime map of Nashville's WeGo Public Transit bus locations.",
   "repository": "https://github.com/stephenyeargin/wego-bus-map",
   "logo": "https://raw.githubusercontent.com/stephenyeargin/wego-bus-map/master/public/apple-icon.png",
-  "keywords": ["ruby", "sinatra", "nashville", "wego", "transit", "gtfs"]
+  "keywords": ["ruby", "sinatra", "nashville", "wego", "transit", "gtfs"],
+  "env": {
+    "GTFS_BASE_URL": {
+      "description": "Base URL (no trailing slash) of the GTFS API endpoint.",
+      "value": "https://gtfs.example.com"
+    },
+    "GOOGLE_ANALYTICS_ID": {
+      "description": "Tracking ID for Google Analytics.",
+      "value": "UA-XXXXXX-X"
+    },
+    "FORCE_SSL": {
+      "description": "Whether to force an SSL connection in development. (1=Yes, 0=No)",
+      "value": "1"
+    }
+  }
 }
