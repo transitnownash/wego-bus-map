@@ -17,11 +17,11 @@
   <noscript>Howdy! It looks like your browser does not have JavaScript enabled. Unfortunately, the mapping platform requires it. Please enable JavaScript and reload the page.</noscript>
 </div>
 
-<div class="modal fade" id="serviceAlertsModal" tabindex="-1" role="dialog" aria-labelledby="serticeAlertsModalLabel" aria-hidden="true">
+<div class="modal fade" id="service_alerts_modal" tabindex="-1" role="dialog" aria-labelledby="service_alerts_modal_label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="serticeAlertsModalLabel"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
+        <h5 class="modal-title" id="service_alerts_modal_label"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -33,11 +33,11 @@
   </div>
 </div>
 
-<div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="tripDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="trip_details_modal_label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tripDetailsModalLabel"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
+        <h5 class="modal-title" id="trip_details_modal_label"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -199,6 +199,8 @@
 
 <template id="alert_template">
   <div class="alert alert-info" role="alert">
+    <div><i class="fa fa-info-circle" aria-hidden="true"></i> {alert_effect}</div>
+    <hr />
     <h4 class="alert-heading">{alert_heading}</h4>
     <div class="alert-body">{alert_body}</div>
     <hr />

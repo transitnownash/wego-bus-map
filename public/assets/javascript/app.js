@@ -13,6 +13,10 @@ var stopsData = {}
 
 // Sets up a map of Nashville
 var map = L.map('map').setView([36.166512, -86.781581], 12)
+
+// Disabling double-click to zoom
+map.doubleClickZoom.disable()
+
 L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd',
   maxZoom: 19,
@@ -264,21 +268,22 @@ var displayAlerts = function (data) {
   if (!data || data.length === 0) {
     var content = L.Util.template($('#alert_empty_template').html(), {})
     $(alertContainer).append(content)
-    $('#serviceAlertsModal').modal('show')
+    $('#service_alerts_modal').modal('show')
   }
-  $.each(data, function (i, alert) {
+  $.each(data, function (i, message) {
     var content = L.Util.template(
       $('#alert_template').html(),
       {
-        alert_heading: alert.alert.header_text.translation[0].text,
-        alert_body: alert.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
-        start_date: moment.unix(alert.alert.active_period[0].start).format('l h:mm a'),
-        end_date: moment.unix(alert.alert.active_period[0].end).format('l h:mm a')
+        alert_effect: message.alert.effect || 'Notice',
+        alert_heading: message.alert.header_text.translation[0].text,
+        alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
+        start_date: moment.unix(message.alert.active_period[0].start).format('l h:mm a'),
+        end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a')
       }
     )
     $(alertContainer).append(content)
   })
-  $('#serviceAlertsModal').modal('show')
+  $('#service_alerts_modal').modal('show')
 }
 
 // Display the location button
@@ -296,6 +301,9 @@ var displayLocationButton = function () {
 // Display route shape to the map
 var displayShape = function (tripData) {
   var shapeId = tripData.shape_gid
+  if (routeShapes[shapeId]) {
+    return
+  }
   var routeData = routesData[tripData.route_gid]
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
     var plotPoints = $.map(shapeData.points, function (point) {
