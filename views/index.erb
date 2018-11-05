@@ -17,11 +17,11 @@
   <noscript>Howdy! It looks like your browser does not have JavaScript enabled. Unfortunately, the mapping platform requires it. Please enable JavaScript and reload the page.</noscript>
 </div>
 
-<div class="modal fade" id="serviceAlertsModal" tabindex="-1" role="dialog" aria-labelledby="serticeAlertsModalLabel" aria-hidden="true">
+<div class="modal fade" id="service_alerts_modal" tabindex="-1" role="dialog" aria-labelledby="service_alerts_modal_label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="serticeAlertsModalLabel"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
+        <h5 class="modal-title" id="service_alerts_modal_label"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -33,11 +33,11 @@
   </div>
 </div>
 
-<div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="tripDetailsModalLabel" aria-hidden="true">
+<div class="modal fade" id="trip_details_modal" tabindex="-1" role="dialog" aria-labelledby="trip_details_modal_label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tripDetailsModalLabel"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
+        <h5 class="modal-title" id="trip_details_modal_label"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -82,7 +82,10 @@
       <tr>
         <th scope="col">Sequence</th>
         <th scope="col">Stop ID</th>
-        <th scope="col">Time</th>
+        <th scope="col">
+          Estimated Time<br />
+          <small>(Scheduled)</small>
+        </th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -117,7 +120,10 @@
       {stop_name}<br />
       <small>({stop_id}) {stop_description}</small>
     </td>
-    <td>{time}</td>
+    <td>
+      {eta}<br />
+      <small>({scheduled})</small>
+    </td>
   </tr>
 </template>
 
@@ -193,6 +199,8 @@
 
 <template id="alert_template">
   <div class="alert alert-info" role="alert">
+    <div><i class="fa fa-info-circle" aria-hidden="true"></i> {alert_effect}</div>
+    <hr />
     <h4 class="alert-heading">{alert_heading}</h4>
     <div class="alert-body">{alert_body}</div>
     <hr />
@@ -206,15 +214,14 @@
   </div>
 </template>
 
+<script>
+  var GTFS_BASE_URL = '<%= ENV['GTFS_BASE_URL'] %>'
+</script>
+
 <script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="//unpkg.com/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="//unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
 <script src="//unpkg.com/moment@2.22.2/moment.js"></script>
 <script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
 <script src="/assets/javascript/leaflet.rotatedMarker.js"></script>
-<script>
-  var agencyData = <%= @agencies %>;
-  var routesData = <%= @routes %>;
-  var stopsData = <%= @stops %>;
-</script>
 <script src="/assets/javascript/app.js"></script>
