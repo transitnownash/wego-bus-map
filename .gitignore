@@ -1,4 +1,5 @@
 .bundle/
-vendor/
-cache/
 .env
+cache/
+tmp/
+vendor/
