@@ -25,13 +25,14 @@ var map = L.map('map', {
 // Disabling double-click to zoom
 map.doubleClickZoom.disable()
 
-L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+var baseMap = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd',
   maxZoom: 19,
   minZoom: 11,
-  maxBounds: map.getBounds(),
   attribution: $('#attribution_template').html(),
 }).addTo(map)
+
+L.control.layers({"Base Map": baseMap}).addTo(map)
 
 // Handle location detection success
 map.on('locationerror', function (e) {
