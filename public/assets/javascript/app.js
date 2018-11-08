@@ -12,7 +12,15 @@ var routeShapes = {}
 var stopsData = {}
 
 // Sets up a map of Nashville
-var map = L.map('map').setView([36.166512, -86.781581], 12)
+var map = L.map('map', {
+  doubleClickZoom: false,
+  center: L.latLng(36.166512, -86.781581),
+  maxBounds: L.latLngBounds(
+    L.latLng(36.723875, -87.564893), // northwest
+    L.latLng(35.594362, -86.227080) // southeast
+  ),
+  zoom: 12
+})
 
 // Disabling double-click to zoom
 map.doubleClickZoom.disable()
@@ -22,14 +30,8 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
   maxZoom: 19,
   minZoom: 11,
   maxBounds: map.getBounds(),
-  attribution: $('#attribution_template').html()
+  attribution: $('#attribution_template').html(),
 }).addTo(map)
-
-// Constrain map to Middle Tennessee
-map.setMaxBounds(L.latLngBounds(
-  L.latLng(36.723875, -87.564893), // northwest
-  L.latLng(35.594362, -86.227080) // southeast
-))
 
 // Handle location detection success
 map.on('locationerror', function (e) {
