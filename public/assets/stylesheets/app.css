@@ -17,18 +17,24 @@ a img {
 }
 
 .about-icon{
-  height: 100px;
   position: absolute;
-  right: 0.5em;
-  top: 0.5em;
+  right: 0;
+  top: 4em;
   z-index: 999;
 }
 .about-icon a.btn-light {
-  border-radius: 2px;
+  display: block;
+  width: 48px;
+  height: 48px;
+  line-height: 3em;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
   border: 2px solid rgba(0,0,0,0.2);
 }
 
-.route-label {
+.route-label, .stop-label {
   background-color: #999999;
   color: #ffffff;
   font-weight: bold;
@@ -36,8 +42,10 @@ a img {
   padding: 0.5em;
 }
 
-.popup-route-table th {
-  white-space: nowrap;
+.popup-table, .tooltip-table {
+  th {
+    white-space: nowrap;
+  }
 }
 
 .no-data-overlay {
