@@ -34,7 +34,7 @@ a img {
   border: 2px solid rgba(0,0,0,0.2);
 }
 
-.route-label {
+.route-label, .stop-label {
   background-color: #999999;
   color: #ffffff;
   font-weight: bold;
@@ -42,8 +42,10 @@ a img {
   padding: 0.5em;
 }
 
-.popup-route-table th {
-  white-space: nowrap;
+.popup-table, .tooltip-table {
+  th {
+    white-space: nowrap;
+  }
 }
 
 .no-data-overlay {

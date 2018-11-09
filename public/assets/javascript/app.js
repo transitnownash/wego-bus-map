@@ -22,17 +22,23 @@ var map = L.map('map', {
   zoom: 12
 })
 
-// Disabling double-click to zoom
-map.doubleClickZoom.disable()
-
-var baseMap = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
   subdomains: 'abcd',
   maxZoom: 19,
   minZoom: 11,
   attribution: $('#attribution_template').html(),
 }).addTo(map)
 
-L.control.layers({"Base Map": baseMap}).addTo(map)
+var vehiclesLayer = L.layerGroup().addTo(map)
+var routesLayer = L.layerGroup().addTo(map)
+
+L.control.layers(
+  null,
+  {
+    'Vehicles': vehiclesLayer,
+    'Routes': routesLayer
+  }
+).addTo(map)
 
 // Handle location detection success
 map.on('locationerror', function (e) {
@@ -60,13 +66,22 @@ map.on('locationfound', function (e) {
   map.setView(e.latlng, 14)
 })
 
-// Adds the custom icon for a bus
-var MapIcon = L.Icon.extend({
+// Adds the custom icon for a vehicle
+var VehicleIcon = L.Icon.extend({
   options: {
     iconSize: [32, 32],
     popupAnchor: [0, -14],
     shadowSize: [32, 50],
     shadowAnchor: [16, 16]
+  }
+})
+
+// Adds the custom icon for a transit stop
+var StopIcon = L.Icon.extend({
+  options: {
+    iconUrl: 'assets/images/stop.svg',
+    iconSize: [16, 16],
+    shadowUrl: null,
   }
 })
 
@@ -83,11 +98,11 @@ var getIcons = function (routeData) {
       break
   }
   return {
-    stationary: new MapIcon({
+    stationary: new VehicleIcon({
       iconUrl: iconPath,
       shadowUrl: null
     }),
-    moving: new MapIcon({
+    moving: new VehicleIcon({
       iconUrl: iconPath,
       shadowUrl: shadowPath
     })
@@ -101,9 +116,9 @@ var formatPopup = function (e) {
   var tripId = e.target.data.loc.vehicle.trip.trip_id
   var loc = e.target.data.loc
   $.get(GTFS_BASE_URL + '/trips/' + tripId + '.json').done(function (tripData) {
-    displayShape(tripData)
+    displayRoute(tripData)
     var content = L.Util.template(
-      $('#popup_template').html(),
+      $('#vehicle_popup_template').html(),
       {
         vehicle: loc.vehicle.vehicle.label,
         route_short_name: routesData[routeId].route_short_name,
@@ -127,10 +142,26 @@ var formatPopup = function (e) {
   })
 }
 
-// Format tooltip
-var formatTooltip = function (loc) {
+// Format stop popup
+var formatStopPopup = function (stop, route) {
   return L.Util.template(
-    $('#tooltip_template').html(),
+    $('#stop_popup_template').html(),
+    {
+      stop_gid: stop.stop_gid,
+      stop_sequence: stop.stop_sequence,
+      route_color: route.route_color,
+      route_text_color: route.route_text_color,
+      stop_name: stopsData[stop.stop_gid].stop_name,
+      stop_description: stopsData[stop.stop_gid].stop_desc || '',
+      scheduled: (stop.arrival_time) ? moment(stop.arrival_time).utc().format('h:mm a') : 'N/A'
+    }
+  )
+}
+
+// Format vehicle tooltip
+var formatVehicleTooltip = function (loc) {
+  return L.Util.template(
+    $('#vehicle_tooltip_template').html(),
     {
       vehicle: loc.vehicle.vehicle.label,
       trip: loc.vehicle.trip.trip_id,
@@ -138,6 +169,22 @@ var formatTooltip = function (loc) {
       route_long_name: routesData[loc.vehicle.trip.route_id].route_long_name,
       route_color: routesData[loc.vehicle.trip.route_id].route_color,
       route_text_color: routesData[loc.vehicle.trip.route_id].route_text_color
+    }
+  )
+}
+
+// Format stop tooltip
+var formatStopTooltip = function (stop, route) {
+  return L.Util.template(
+    $('#stop_tooltip_template').html(),
+    {
+      stop_gid: stop.stop_gid,
+      stop_sequence: stop.stop_sequence,
+      route_color: route.route_color,
+      route_text_color: route.route_text_color,
+      stop_name: stopsData[stop.stop_gid].stop_name,
+      stop_description: stopsData[stop.stop_gid].stop_desc || '',
+      scheduled: (stop.arrival_time) ? moment(stop.arrival_time).utc().format('h:mm a') : 'N/A'
     }
   )
 }
@@ -203,7 +250,7 @@ var updateMap = function () {
         }
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.touch) {
-          markers[loc.id].bindTooltip(formatTooltip(loc))
+          markers[loc.id].bindTooltip(formatVehicleTooltip(loc))
         }
       // Not found, create a new one
       } else {
@@ -211,9 +258,9 @@ var updateMap = function () {
         markers[loc.id].on('click', formatPopup)
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.mobile) {
-          markers[loc.id].bindTooltip(formatTooltip(loc))
+          markers[loc.id].bindTooltip(formatVehicleTooltip(loc))
         }
-        markers[loc.id].addTo(map)
+        markers[loc.id].addTo(vehiclesLayer)
         markers[loc.id].data = { created: loc.vehicle.timestamp, updated: loc.vehicle.timestamp, loc: loc }
       }
       // Set shadow if bus is moving
@@ -274,10 +321,19 @@ var displayAlerts = function (data) {
     $('#service_alerts_modal').modal('show')
   }
   $.each(data, function (i, message) {
+    var alert_class = 'info'
+    if (message.alert.effect == 'Detour' || message.alert.effect == 'Significant Delays') {
+      alert_class = 'warning'
+    }
+    if (message.alert.effect == 'Reduced Service' || message.alert.effect == 'No Service') {
+      alert_class = 'danger'
+    }
     var content = L.Util.template(
       $('#alert_template').html(),
       {
+        alert_class: alert_class,
         alert_effect: message.alert.effect || 'Notice',
+        alert_cause: message.alert.cause ? ' (' + message.alert.cause +')' : '',
         alert_heading: message.alert.header_text.translation[0].text,
         alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
         start_date: moment.unix(message.alert.active_period[0].start).format('l h:mm a'),
@@ -301,23 +357,29 @@ var displayLocationButton = function () {
   $(mapToolsContainer).append(locationButton)
 }
 
-// Display route shape to the map
-var displayShape = function (tripData) {
+// Display route shape and stops on the map
+var displayRoute = function (tripData) {
   var shapeId = tripData.shape_gid
   if (routeShapes[shapeId]) {
     return
   }
+  var routeLayer = L.layerGroup().addTo(routesLayer)
   var routeData = routesData[tripData.route_gid]
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
+    $.get(GTFS_BASE_URL + '/trips/' + tripData.trip_gid + '/stop_times').done(function (stopTimesData) {
+      $.each(stopTimesData.data, function (i, row) {
+        L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], {icon: new StopIcon}).bindTooltip(formatStopTooltip(row, routeData)).bindPopup(formatStopPopup(row, routeData)).addTo(routeLayer)
+      })
+    })
     var plotPoints = $.map(shapeData.points, function (point) {
       return L.latLng(point.lat, point.lon)
     })
     if (!routeData.route_color) { routeData.route_color = 'bababa' }
     var color = '#' + routeData.route_color
-    routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(map)
+    routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routeLayer)
     routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
     routeShapes[shapeId].on('click', function (e) {
-      map.removeLayer(e.target)
+      map.removeLayer(routeLayer)
       delete routeShapes[shapeId]
     })
   })
@@ -433,7 +495,7 @@ $.get(GTFS_BASE_URL + '/routes.json', function (result1) {
     $.each(result2['data'], function (i, row) {
       agenciesData[row.agency_gid] = row
     })
-    $.get(GTFS_BASE_URL + '/stops?per_page=3000', function (result3) {
+    $.get(GTFS_BASE_URL + '/stops?per_page=10000', function (result3) {
       $.each(result3['data'], function (i, row) {
         stopsData[row.stop_gid] = row
       })

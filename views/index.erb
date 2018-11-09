@@ -127,7 +127,7 @@
   </tr>
 </template>
 
-<template id="tooltip_template">
+<template id="vehicle_tooltip_template">
   <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div></span>
   <table class="table table-borderless table-sm">
     <tbody>
@@ -143,6 +143,18 @@
   </table>
 </template>
 
+<template id="stop_tooltip_template">
+  <div class="stop-label" style="background-color: #{route_color}; color: #{route_text_color};">{stop_name}</div>
+  <table class="table table-borderless table-sm popup-table">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Scheduled</th>
+        <td>{scheduled}</td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
 <template id="popup_loading_template">
   <div class="text-center">
     <i class="fa fa-spinner fa-spin fa-3x fa-fw" aria-hidden="true"></i>
@@ -150,9 +162,9 @@
   </div>
 </template>
 
-<template id="popup_template">
+<template id="vehicle_popup_template">
   <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
-  <table class="table table-borderless table-sm popup-route-table">
+  <table class="table table-borderless table-sm popup-table">
     <tbody>
       <tr>
         <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
@@ -183,6 +195,23 @@
   <div class="text-right"><em><a href="{agency_url}" target="_blank" class="text-muted">{agency}</a></em></div>
 </template>
 
+<template id="stop_popup_template">
+  <div class="stop-label" style="background-color: #{route_color}; color: #{route_text_color};">{stop_name}</div>
+  <div class="text-center mb-3"><small>{stop_description}</small></div>
+  <table class="table table-borderless table-sm popup-table">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Stop ID</th>
+        <td>{stop_gid} ({stop_sequence})</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Scheduled</th>
+        <td>{scheduled}</td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
 <template id="attribution_template">
   &copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; Data by <a href="http://www.wegotransit.com" target="blank">WeGo Public Transit</a>
 </template>
@@ -198,8 +227,8 @@
 </template>
 
 <template id="alert_template">
-  <div class="alert alert-info" role="alert">
-    <div><i class="fa fa-info-circle" aria-hidden="true"></i> {alert_effect}</div>
+  <div class="alert alert-{alert_class}" role="alert">
+    <div><i class="fa fa-info-circle" aria-hidden="true"></i> {alert_effect} {alert_cause}</div>
     <hr />
     <h4 class="alert-heading">{alert_heading}</h4>
     <div class="alert-body">{alert_body}</div>
