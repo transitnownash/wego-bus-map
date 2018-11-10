@@ -144,7 +144,7 @@
 </template>
 
 <template id="stop_tooltip_template">
-  <div class="stop-label" style="background-color: #{route_color}; color: #{route_text_color};">{stop_name}</div>
+  <div class="stop-label" style="background-color: #{route_color}; color: #{route_text_color};"><span class="badge badge-light">{stop_sequence}</span>&nbsp;&nbsp;{stop_name}</div>
   <table class="table table-borderless table-sm popup-table">
     <tbody>
       <tr>
@@ -196,13 +196,13 @@
 </template>
 
 <template id="stop_popup_template">
-  <div class="stop-label" style="background-color: #{route_color}; color: #{route_text_color};">{stop_name}</div>
+  <div class="stop-label" style="background-color: #{route_color}; color: #{route_text_color};"><span class="badge badge-light">{stop_sequence}</span>&nbsp;&nbsp;{stop_name}</div>
   <div class="text-center mb-3"><small>{stop_description}</small></div>
   <table class="table table-borderless table-sm popup-table">
     <tbody>
       <tr>
         <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Stop ID</th>
-        <td>{stop_gid} ({stop_sequence})</td>
+        <td>{stop_gid}</td>
       </tr>
       <tr>
         <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Scheduled</th>

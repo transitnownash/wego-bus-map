@@ -249,7 +249,7 @@ var updateMap = function () {
           formatPopup({target: markers[loc.id]})
         }
         // Don't add tooltips for touch-enabled browsers (mobile)
-        if (!L.Browser.touch) {
+        if (!L.Browser.mobile) {
           markers[loc.id].bindTooltip(formatVehicleTooltip(loc))
         }
       // Not found, create a new one
@@ -368,7 +368,11 @@ var displayRoute = function (tripData) {
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
     $.get(GTFS_BASE_URL + '/trips/' + tripData.trip_gid + '/stop_times').done(function (stopTimesData) {
       $.each(stopTimesData.data, function (i, row) {
-        L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], {icon: new StopIcon}).bindTooltip(formatStopTooltip(row, routeData)).bindPopup(formatStopPopup(row, routeData)).addTo(routeLayer)
+        var stopMarker = L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], {icon: new StopIcon()}).bindPopup(formatStopPopup(row, routeData))
+        if (!L.Browser.mobile) {
+          stopMarker.bindTooltip(formatStopTooltip(row, routeData))
+        }
+        stopMarker.addTo(routeLayer)
       })
     })
     var plotPoints = $.map(shapeData.points, function (point) {
@@ -377,7 +381,9 @@ var displayRoute = function (tripData) {
     if (!routeData.route_color) { routeData.route_color = 'bababa' }
     var color = '#' + routeData.route_color
     routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routeLayer)
-    routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
+    if (!L.Browser.mobile) {
+      routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
+    }
     routeShapes[shapeId].on('click', function (e) {
       map.removeLayer(routeLayer)
       delete routeShapes[shapeId]
