@@ -1,1 +1,1 @@
-/usr/bin/touch ../tmp/restart.txt
+/usr/bin/touch ./tmp/restart.txt
