@@ -1,5 +1,6 @@
 .bundle/
 .env
 cache/
+config/deploy.yml
 tmp/
 vendor/
