@@ -226,6 +226,30 @@
   </button>
 </template>
 
+<template id="alert_group_template">
+  <div class="accordion" id="alertGroup"></div>
+</template>
+
+<template id="alert_group_item_template">
+  <div class="">
+    <div class="mb-3" id="alert-group-heading-{type}">
+      <h4 class="mb-0">
+        <a href="javascript:void(0)" data-toggle="collapse" data-target="#alert-group-{type}" aria-expanded="true" aria-controls="alert-group-{type}">
+          <div class="float-right">
+             <div id="alert-group-count-{type}" class="badge badge-secondary">0</div>
+          </div>
+          {type}
+        </a>
+      </h4>
+    </div>
+    <div id="alert-group-{type}" class="collapse" aria-labelledby="alert-group-heading-{type}" data-parent="#alertGroup">
+      <div class="p-1">
+        <div id="alert-group-{type}-alerts"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <template id="alert_template">
   <div class="alert alert-{alert_class}" role="alert">
     <div><i class="fa fa-info-circle" aria-hidden="true"></i> {alert_effect} {alert_cause}</div>

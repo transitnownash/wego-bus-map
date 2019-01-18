@@ -320,7 +320,21 @@ var displayAlerts = function (data) {
     $(alertContainer).append(content)
     $('#service_alerts_modal').modal('show')
   }
+
+  // Add the group container
+  var alertGroup = L.Util.template(
+    $('#alert_group_template').html(),
+    {}
+  )
+  $(alertContainer).append(alertGroup);
+
+  var alertTypeCounts = {}
+
   $.each(data, function (i, message) {
+    if (!message.alert.effect) {
+      message.alert.effect = 'Notice'
+    }
+
     var alert_class = 'info'
     if (message.alert.effect == 'Detour' || message.alert.effect == 'Significant Delays') {
       alert_class = 'warning'
@@ -328,11 +342,23 @@ var displayAlerts = function (data) {
     if (message.alert.effect == 'Reduced Service' || message.alert.effect == 'No Service') {
       alert_class = 'danger'
     }
+
+    // Create the container for the alerts if not present
+    if (!$('#alert-group-' + message.alert.effect).length) {
+      alertTypeCounts[message.alert.effect] = 0
+      $('#alertGroup').append(L.Util.template(
+        $('#alert_group_item_template').html(),
+        {
+          type: message.alert.effect
+        }
+      ))
+    }
+
     var content = L.Util.template(
       $('#alert_template').html(),
       {
         alert_class: alert_class,
-        alert_effect: message.alert.effect || 'Notice',
+        alert_effect: message.alert.effect,
         alert_cause: message.alert.cause ? ' (' + message.alert.cause +')' : '',
         alert_heading: message.alert.header_text.translation[0].text,
         alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
@@ -340,7 +366,12 @@ var displayAlerts = function (data) {
         end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a')
       }
     )
-    $(alertContainer).append(content)
+    $('#alert-group-' + message.alert.effect).append(content)
+    // Increment counter
+    alertTypeCounts[message.alert.effect]++
+    $('#alert-group-count-' + message.alert.effect).html(
+      alertTypeCounts[message.alert.effect]
+    )
   })
   $('#service_alerts_modal').modal('show')
 }
