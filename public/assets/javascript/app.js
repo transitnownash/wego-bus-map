@@ -335,6 +335,8 @@ var displayAlerts = function (data) {
       message.alert.effect = 'Notice'
     }
 
+    var alertType = message.alert.effect.toLowerCase().replace(' ', '_')
+
     var alert_class = 'info'
     if (message.alert.effect == 'Detour' || message.alert.effect == 'Significant Delays') {
       alert_class = 'warning'
@@ -344,12 +346,13 @@ var displayAlerts = function (data) {
     }
 
     // Create the container for the alerts if not present
-    if (!$('#alert-group-' + message.alert.effect).length) {
-      alertTypeCounts[message.alert.effect] = 0
+    if (!$('#alert-group-' + alertType).length) {
+      alertTypeCounts[alertType] = 0
       $('#alertGroup').append(L.Util.template(
         $('#alert_group_item_template').html(),
         {
-          type: message.alert.effect
+          type: alertType,
+          displayType: message.alert.effect
         }
       ))
     }
@@ -366,11 +369,11 @@ var displayAlerts = function (data) {
         end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a')
       }
     )
-    $('#alert-group-' + message.alert.effect).append(content)
+    $('#alert-group-' + alertType).append(content)
     // Increment counter
-    alertTypeCounts[message.alert.effect]++
-    $('#alert-group-count-' + message.alert.effect).html(
-      alertTypeCounts[message.alert.effect]
+    alertTypeCounts[alertType]++
+    $('#alert-group-count-' + alertType).html(
+      alertTypeCounts[alertType]
     )
   })
   $('#service_alerts_modal').modal('show')
