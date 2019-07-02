@@ -3,7 +3,7 @@ GEM
   specs:
     backports (3.15.0)
     daemons (1.2.6)
-    dotenv (2.5.0)
+    dotenv (2.7.4)
     eventmachine (1.2.7)
     multi_json (1.13.1)
     mustermann (1.0.3)
