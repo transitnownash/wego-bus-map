@@ -232,7 +232,9 @@ var updateMap = function () {
 
     // Loop through feed
     $(data).each(function (i, loc) {
+      // A marker that doesn't have corresponding data
       if (typeof routesData[loc.vehicle.trip.route_id] === 'undefined') {
+        console.error('No matching route found:', loc)
         return
       }
       var busIcon = getIcons(routesData[loc.vehicle.trip.route_id])
