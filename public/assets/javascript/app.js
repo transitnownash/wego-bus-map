@@ -530,6 +530,8 @@ if (navigator.geolocation) {
 $.get(GTFS_BASE_URL + '/routes.json', function (result1) {
   $.each(result1['data'], function (i, row) {
     routesData[row.route_gid] = row
+    /* ID and short name may not match, and the RTFS uses the short name */
+    routesData[row.route_short_name] = row
   })
   $.get(GTFS_BASE_URL + '/agencies.json', function (result2) {
     $.each(result2['data'], function (i, row) {
