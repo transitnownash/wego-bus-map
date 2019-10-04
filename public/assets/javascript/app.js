@@ -411,7 +411,7 @@ var displayRoute = function (tripData) {
         if (!L.Browser.mobile) {
           stopMarker.bindTooltip(formatStopTooltip(row, routeData))
         }
-        stopMarker.addTo(stopsLayer)
+        stopMarker.addTo(stopLayer)
       })
     })
     var plotPoints = $.map(shapeData.points, function (point) {
@@ -425,7 +425,9 @@ var displayRoute = function (tripData) {
     }
     routeShapes[shapeId].on('click', function (e) {
       map.removeLayer(routeLayer)
-      map.removeLayer(stopsLayer)
+      map.removeLayer(stopLayer)
+      delete stopLayer
+      delete routeLayer
       delete routeShapes[shapeId]
     })
   })
