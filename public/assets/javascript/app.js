@@ -31,12 +31,14 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
 
 var vehiclesLayer = L.layerGroup().addTo(map)
 var routesLayer = L.layerGroup().addTo(map)
+var stopsLayer = L.layerGroup().addTo(map)
 
 L.control.layers(
   null,
   {
     'Vehicles': vehiclesLayer,
-    'Routes': routesLayer
+    'Routes': routesLayer,
+    'Stops': stopsLayer
   }
 ).addTo(map)
 
@@ -400,6 +402,7 @@ var displayRoute = function (tripData) {
     return
   }
   var routeLayer = L.layerGroup().addTo(routesLayer)
+  var stopLayer = L.layerGroup().addTo(stopsLayer)
   var routeData = routesData[tripData.route_gid]
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
     $.get(GTFS_BASE_URL + '/trips/' + tripData.trip_gid + '/stop_times').done(function (stopTimesData) {
@@ -408,7 +411,7 @@ var displayRoute = function (tripData) {
         if (!L.Browser.mobile) {
           stopMarker.bindTooltip(formatStopTooltip(row, routeData))
         }
-        stopMarker.addTo(routeLayer)
+        stopMarker.addTo(stopsLayer)
       })
     })
     var plotPoints = $.map(shapeData.points, function (point) {
@@ -422,6 +425,7 @@ var displayRoute = function (tripData) {
     }
     routeShapes[shapeId].on('click', function (e) {
       map.removeLayer(routeLayer)
+      map.removeLayer(stopsLayer)
       delete routeShapes[shapeId]
     })
   })
