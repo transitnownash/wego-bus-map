@@ -89,16 +89,8 @@ var StopIcon = L.Icon.extend({
 
 // Route types and agencies have different markers
 var getIcons = function (routeData) {
-  var iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
-  var shadowPath = '/assets/images/' + routeData.route_type + '-shadow.svg'
-  switch (routeData.agency_gid) {
-    case 'Nashville MTA':
-      iconPath = 'assets/images/nashville-mta/' + routeData.route_type + '.svg'
-      break
-    case 'Nashville RTA':
-      iconPath = 'assets/images/nashville-rta/' + routeData.route_type + '.svg'
-      break
-  }
+  var iconPath = 'assets/images/' + routeData.route_type + '.svg'
+  var shadowPath = 'assets/images/' + routeData.route_type + '-shadow.svg'
   return {
     stationary: new VehicleIcon({
       iconUrl: iconPath,
