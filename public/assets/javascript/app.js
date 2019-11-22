@@ -16,8 +16,8 @@ var map = L.map('map', {
   doubleClickZoom: false,
   center: L.latLng(36.166512, -86.781581),
   maxBounds: L.latLngBounds(
-    L.latLng(36.723875, -87.564893), // northwest
-    L.latLng(35.594362, -86.227080) // southeast
+    L.latLng(36.725005, -87.579122), // northwest
+    L.latLng(35.541600, -86.097066) // southeast
   ),
   zoom: 12
 })
