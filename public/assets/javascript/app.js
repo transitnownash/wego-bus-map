@@ -199,7 +199,7 @@ var formatDegreeToCompass = function (num) {
 
 // Format speed from (micro?)meters per second to miles per hour
 var formatVehicleSpeed = function (speed) {
-  return (typeof speed !== 'undefined') ? Math.round((speed * 2.2369) * 1000000) + ' mph' : 'N/A'
+  return (typeof speed !== 'undefined') ? Math.round(speed * 2.2369) + ' mph' : 'N/A'
 }
 
 var updateMap = function () {
