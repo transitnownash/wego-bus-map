@@ -31,6 +31,10 @@ class WeGoBusMap < Sinatra::Base
     erb :about
   end
 
+  get '/routes/?' do
+    erb :routes
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $PROGRAM_NAME
 end

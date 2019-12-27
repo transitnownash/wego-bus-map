@@ -1,0 +1,25 @@
+<% content_for :title do %>Routes<% end %>
+<% content_for :description do %>Details for each WeGo route.<% end%>
+
+<h1>Routes</h1>
+
+<div id="routesContainer"></div>
+
+<template id="routeBlock">
+<div class="mb-1 p-2 rounded" style="background-color:#{{ route_color }};color:#{{ route_text_color }}">
+  <img src="/assets/images/{{ route_type }}.svg" style="v-align:middle;" width="24" height="24" /> <strong>{{ route_short_name }}</strong> - {{ route_long_name }}
+</div>
+</template>
+  
+</template>
+
+<br />
+
+<script>
+  var GTFS_BASE_URL = '<%= ENV['GTFS_BASE_URL'] %>'
+</script>
+
+<script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="//unpkg.com/handlebars@4.5.3/dist/handlebars.min.js"></script>
+<script src="//unpkg.com/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+<script src="/assets/javascript/routes.js"></script>

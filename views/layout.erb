@@ -42,8 +42,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
+          <li class="nav-item <% if request.path_info.match('\/about\/?') %>active<% end %>">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item <% if request.path_info.match('\/routes\/?') %>active<% end %>">
+            <a class="nav-link" href="/routes">Routes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/stephenyeargin/wego-bus-map">View on GitHub <i class="fa fa-github"></i></a>
