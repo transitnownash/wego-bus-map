@@ -1,5 +1,7 @@
 .bundle/
 .env
+.ruby-version
+.whiskey_disk_git_changes
 cache/
 config/deploy.yml
 tmp/
