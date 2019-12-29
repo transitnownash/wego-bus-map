@@ -1,0 +1,21 @@
+<table class="table table-striped small">
+  <thead>
+    <th>Headsign</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Wheelchair?</th>
+    <th>Bicycle Rack?</th>
+  </thead>
+  <tbody>
+    <% trips.each do |trip| %>
+    <% next if trip['direction_id'] == direction %>
+    <tr class="<% if Time.now.in_time_zone('America/Chicago') > Time.parse(trip['start_time']).in_time_zone('America/Chicago') %>bg-light text-muted<% end %>">
+      <td><%= trip['trip_headsign'] %></td>
+      <td><%= Time.parse(trip['start_time']).strftime('%l:%M %P') %></td>
+      <td><%= Time.parse(trip['end_time']).strftime('%l:%M %P') %></td>
+      <td><%= (trip['wheelchair_accessible'] == "1") ? 'Yes' : 'No' %></td>
+      <td><%= (trip['bikes_allowed'] == "1") ? 'Yes' : 'No' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

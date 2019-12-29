@@ -5,6 +5,13 @@ require 'net/http'
 require 'uri'
 require 'fileutils'
 require 'date'
+require 'active_support/core_ext/time'
+
+def api_request(path)
+  uri = URI.parse("#{ENV['GTFS_BASE_URL']}#{path}")
+  response = Net::HTTP.get_response(uri)
+  JSON.parse(response.body)
+end
 
 ##
 # WeGo Bus Map
@@ -32,7 +39,16 @@ class WeGoBusMap < Sinatra::Base
   end
 
   get '/routes/?' do
-    erb :routes
+    response = api_request '/routes'
+    routes = response['data']
+    erb :routes, locals: { routes: routes }
+  end
+
+  get '/routes/:route_gid/?' do
+    route = api_request "/routes/#{params['route_gid'].to_i}"
+    response = api_request "/routes/#{params['route_gid'].to_i}/trips"
+    trips = response['data']
+    erb :route, locals: { route: route, trips: trips }
   end
 
   # start the server if ruby file executed directly

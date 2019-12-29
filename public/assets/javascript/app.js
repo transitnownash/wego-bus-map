@@ -147,7 +147,7 @@ var formatStopPopup = function (stop, route) {
       route_text_color: route.route_text_color,
       stop_name: stopsData[stop.stop_gid].stop_name,
       stop_description: stopsData[stop.stop_gid].stop_desc || '',
-      scheduled: (stop.arrival_time) ? moment(stop.arrival_time).utc().format('h:mm a') : 'N/A'
+      scheduled: (stop.arrival_time) ? moment(stop.arrival_time, moment.HTML5_FMT.TIME_SECONDS).format('h:mm a') : 'N/A'
     }
   )
 }
@@ -178,7 +178,7 @@ var formatStopTooltip = function (stop, route) {
       route_text_color: route.route_text_color,
       stop_name: stopsData[stop.stop_gid].stop_name,
       stop_description: stopsData[stop.stop_gid].stop_desc || '',
-      scheduled: (stop.arrival_time) ? moment(stop.arrival_time).utc().format('h:mm a') : 'N/A'
+      scheduled: (stop.arrival_time) ? moment(stop.arrival_time, moment.HTML5_FMT.TIME_SECONDS).format('h:mm a') : 'N/A'
     }
   )
 }
@@ -502,7 +502,7 @@ var showTripDetails = function (tripId) {
             stop_name: stopsData[update.stop_id].stop_name,
             stop_description: stopsData[update.stop_id].stop_desc || '',
             eta: (time) ? moment.unix(time).format('h:mm a') : 'N/A',
-            scheduled: (stopTimes[update.stop_sequence].arrival_time) ? moment(stopTimes[update.stop_sequence].arrival_time).utc().format('h:mm a') : 'N/A'
+            scheduled: (stopTimes[update.stop_sequence].arrival_time) ? moment(stopTimes[update.stop_sequence].arrival_time, moment.HTML5_FMT.TIME_SECONDS).format('h:mm a') : 'N/A'
           }
         ))
         // Dim rows in the past

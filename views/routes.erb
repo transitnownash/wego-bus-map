@@ -5,13 +5,11 @@
 
 <div id="routesContainer"></div>
 
-<template id="routeBlock">
-<div class="mb-1 p-2 rounded" style="background-color:#{{ route_color }};color:#{{ route_text_color }}">
-  <img src="/assets/images/{{ route_type }}.svg" style="v-align:middle;" width="24" height="24" /> <strong>{{ route_short_name }}</strong> - {{ route_long_name }}
-</div>
-</template>
-  
-</template>
+<% routes.each do |route| %>
+<a href="/routes/<%= route['route_gid'] %>" class="d-block mb-1 p-2 rounded" style="background-color:#<%= route['route_color'] %>;color:#<%= route['route_text_color'] %>">
+  <img src="/assets/images/<%= route['route_type'] %>.svg" style="v-align:middle;" width="24" height="24" /> <strong><%= route['route_short_name'] %></strong> - <%= route['route_long_name'] %>
+</a>
+<% end %>
 
 <br />
 
