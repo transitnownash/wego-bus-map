@@ -2,7 +2,7 @@
 <% content_for :description do %>A realtime map for WeGo bus locations using data from WeGo Public Transit.<% end %>
 
 <div class="about-icon">
-  <a href="/about" class="btn btn-light"><i class="fa fa-info-circle fa-2x"></i></a>
+  <a href="/about" class="btn btn-light"><i class="fas fa-info-circle fa-2x"></i></i></a>
 </div>
 
 <div class="map-tools">
@@ -21,7 +21,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="service_alerts_modal_label"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
+        <h5 class="modal-title" id="service_alerts_modal_label"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Service Alerts</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -37,7 +37,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="trip_details_modal_label"><i class="fa fa-map-o" aria-hidden="true"></i> Trip Details</h5>
+        <h5 class="modal-title" id="trip_details_modal_label"><i class="fas fa-map" aria-hidden="true"></i> Trip Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -50,27 +50,27 @@
 </div>
 
 <template id="trip_details_template">
-  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+  <a href="/routes/{route_short_name}" target="_blank" class="d-block route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</a>
   <table class="table table-borderless table-sm">
     <tbody>
       <tr>
-        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+        <th scope="row"><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
         <td>{trip_headsign}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <th scope="row"><i class="fas fa-map fa-fw" aria-hidden="true"></i> Trip</th>
         <td>{trip}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+        <th scope="row"><i class="fas fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
         <td>{vehicle}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-hourglass-start fa-fw" aria-hidden="true"></i> Trip Started</th>
+        <th scope="row"><i class="fas fa-hourglass-start fa-fw" aria-hidden="true"></i> Trip Started</th>
         <td>{start_time}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
+        <th scope="row"><i class="fas fa-clock fa-fw" aria-hidden="true"></i> Updated</th>
         <td>{updated}</td>
       </tr>
     </tbody>
@@ -93,15 +93,15 @@
 </template>
 
 <template id="trip_details_unavailable_template">
-  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+  <a href="/routes/{route_short_name}" target="_blank" class="d-block route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</a>
   <table class="table table-borderless table-sm">
     <tbody>
       <tr>
-        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+        <th scope="row"><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
         <td>{trip_headsign}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <th scope="row"><i class="fas fa-map fa-fw" aria-hidden="true"></i> Trip</th>
         <td>{trip}</td>
       </tr>
     </tbody>
@@ -128,15 +128,15 @@
 </template>
 
 <template id="vehicle_tooltip_template">
-  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div></span>
+  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
   <table class="table table-borderless table-sm">
     <tbody>
       <tr>
-        <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+        <th scope="row"><i class="fas fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
         <td>{vehicle}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <th scope="row"><i class="fas fa-map fa-fw" aria-hidden="true"></i> Trip</th>
         <td>{trip}</td>
       </tr>
     </tbody>
@@ -148,7 +148,7 @@
   <table class="table table-borderless table-sm popup-table">
     <tbody>
       <tr>
-        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Scheduled</th>
+        <th scope="row"><i class="fas fa-clock fa-fw" aria-hidden="true"></i> Scheduled</th>
         <td>{scheduled}</td>
       </tr>
     </tbody>
@@ -157,37 +157,37 @@
 
 <template id="popup_loading_template">
   <div class="text-center">
-    <i class="fa fa-spinner fa-spin fa-3x fa-fw" aria-hidden="true"></i>
+    <i class="fas fa-spinner fa-spin fa-3x fa-fw" aria-hidden="true"></i>
     <span class="sr-only">Loading...</span>
   </div>
 </template>
 
 <template id="vehicle_popup_template">
-  <div class="route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</div>
+  <a href="/routes/{route_short_name}" target="_blank" class="d-block route-label" style="background-color: #{route_color}; color: #{route_text_color};">{route_short_name} - {route_long_name}</a>
   <table class="table table-borderless table-sm popup-table">
     <tbody>
       <tr>
-        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
+        <th scope="row"><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i> Headsign</th>
         <td>{trip_headsign}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
+        <th scope="row"><i class="fas fa-bus fa-fw" aria-hidden="true"></i> Vehicle</th>
         <td>{vehicle}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-map-o fa-fw" aria-hidden="true"></i> Trip</th>
+        <th scope="row"><i class="fas fa-map fa-fw" aria-hidden="true"></i> Trip</th>
         <td><a href="javascript:void(0)" class="view-trip-details-link">{trip}</a></td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-compass fa-fw" aria-hidden="true"></i> Heading</th>
+        <th scope="row"><i class="fas fa-compass fa-fw" aria-hidden="true"></i> Heading</th>
         <td>{heading}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-tachometer fa-fw" aria-hidden="true"></i> Speed</th>
+        <th scope="row"><i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i> Speed</th>
         <td>{speed}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Updated</th>
+        <th scope="row"><i class="fas fa-clock fa-fw" aria-hidden="true"></i> Updated</th>
         <td>{updated}</td>
       </tr>
     </tbody>
@@ -201,11 +201,11 @@
   <table class="table table-borderless table-sm popup-table">
     <tbody>
       <tr>
-        <th scope="row"><i class="fa fa-map-signs fa-fw" aria-hidden="true"></i> Stop ID</th>
+        <th scope="row"><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i> Stop ID</th>
         <td>{stop_gid}</td>
       </tr>
       <tr>
-        <th scope="row"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i> Scheduled</th>
+        <th scope="row"><i class="fas fa-clockfa-fw" aria-hidden="true"></i> Scheduled</th>
         <td>{scheduled}</td>
       </tr>
     </tbody>
@@ -217,12 +217,12 @@
 </template>
 
 <template id="alert_indicator_template">
-  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp; Service Alert{plural} &nbsp;<span class="badge badge-light">{count}</span>
+  <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>&nbsp; Service Alert{plural} &nbsp;<span class="badge badge-light">{count}</span>
 </template>
 
 <template id="location_button_template">
   <button type="button" class="btn btn-primary btn-rounded">
-    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+    <i class="fas fa-location-arrow" aria-hidden="true"></i>
   </button>
 </template>
 
@@ -252,12 +252,12 @@
 
 <template id="alert_template">
   <div class="alert alert-{alert_class}" role="alert">
-    <div><i class="fa fa-info-circle" aria-hidden="true"></i> {alert_effect} {alert_cause}</div>
+    <div><i class="fas fa-info-circle" aria-hidden="true"></i> {alert_effect} {alert_cause}</div>
     <hr />
     <h4 class="alert-heading">{alert_heading}</h4>
     <div class="alert-body">{alert_body}</div>
     <hr />
-    <div><i class="fa fa-clock-o" aria-hidden="true"></i> {start_date} - {end_date}</div>
+    <div><i class="fas fa-clock" aria-hidden="true"></i> {start_date} - {end_date}</div>
   </div>
 </template>
 

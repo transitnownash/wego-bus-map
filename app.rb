@@ -5,7 +5,6 @@ require 'net/http'
 require 'uri'
 require 'fileutils'
 require 'date'
-require 'active_support/core_ext/time'
 
 def api_request(path)
   uri = URI.parse("#{ENV['GTFS_BASE_URL']}#{path}")
@@ -17,6 +16,19 @@ end
 # WeGo Bus Map
 class WeGoBusMap < Sinatra::Base
   helpers Sinatra::ContentFor
+
+  accessibility_messages = {
+    wheelchairs: [
+      'No accessibility information for the trip.',
+      'Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.',
+      'No riders in wheelchairs can be accommodated on this trip.'
+    ],
+    bikes: [
+      'No bike information for the trip.',
+      'Vehicle being used on this particular trip can accommodate at least one bicycle.',
+      'No bicycles are allowed on this trip.'
+    ]
+  }
 
   configure :development, :test do
     set :force_ssl, (ENV['FORCE_SSL'] == '1')
@@ -48,7 +60,7 @@ class WeGoBusMap < Sinatra::Base
     route = api_request "/routes/#{params['route_gid'].to_i}"
     response = api_request "/routes/#{params['route_gid'].to_i}/trips"
     trips = response['data']
-    erb :route, locals: { route: route, trips: trips }
+    erb :route, locals: { route: route, trips: trips, accessibility_messages: accessibility_messages }
   end
 
   # start the server if ruby file executed directly
