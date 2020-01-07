@@ -34,16 +34,22 @@ $('tbody tr').each(function(i, el) {
       })
       if (!routeData.route_color) { routeData.route_color = 'bababa' }
       var color = '#' + routeData.route_color
-      L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routesLayer)
+      var routeShape = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routesLayer)
+      map.panTo(routeShape.getBounds().getCenter())
     })
   }
   routeShapes[shapeId] = true
 
   // Fade rows where trip has already happened
+  var now = moment()
   var start_time = $(el).data('start_time')
   var end_time = $(el).data('end_time')
-  if (moment(start_time, moment.HTML5_FMT.TIME_SECONDS) < moment()) {
-    $(el).css({opacity: 0.25})
+  if (now.isBetween(moment(start_time, moment.HTML5_FMT.TIME_SECONDS), moment(end_time, moment.HTML5_FMT.TIME_SECONDS))) {
+    $(el).css({border: 'solid 2px #' + routeData.route_color})
+  } else {
+    if (moment(start_time, moment.HTML5_FMT.TIME_SECONDS).isBefore(now)) {
+      $(el).css({opacity: 0.25})
+    }
   }
 })
 
