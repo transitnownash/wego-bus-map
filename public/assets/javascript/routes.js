@@ -43,7 +43,7 @@ $('tbody tr').each(function(i, el) {
   var start_time = $(el).data('start_time')
   var end_time = $(el).data('end_time')
   if (moment(start_time, moment.HTML5_FMT.TIME_SECONDS) < moment()) {
-    $(el).css({opacity: 0.75})
+    $(el).css({opacity: 0.25})
   }
 })
 
