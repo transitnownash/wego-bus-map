@@ -99,6 +99,12 @@ var displayRouteAlerts = function () {
 }
 
 $(function () {
+  // Format timetable; handles times that flow into next day
+  $('.format-time').each(function (i, el) {
+    var time = $(el).html()
+    var formatted = moment().startOf('day').add(moment.duration(time)).format('h:m a')
+    $(el).html(formatted)
+  })
   $('[data-toggle="tooltip"]').tooltip()
   displayRouteAlerts()
 })

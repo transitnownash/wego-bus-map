@@ -9,8 +9,8 @@
     <% trips.each do |trip| %>
     <% next if trip['direction_id'] == direction %>
     <tr data-start_time="<%= trip['start_time'] %>" data-end_time="<%= trip['end_time'] %>" data-shape_gid="<%= trip['shape_gid'] %>">
-      <td><%= Time.parse(trip['start_time']).strftime('%l:%M %P') %></td>
-      <td><%= Time.parse(trip['end_time']).strftime('%l:%M %P') %></td>
+      <td class="format-time"><%= trip['start_time'] %></td>
+      <td class="format-time"><%= trip['end_time'] %></td>
       <td><%= trip['trip_headsign'] %></td>
       <td>
         <span class="fa-stack" data-toggle="tooltip" title="<%= accessibility_messages[:wheelchairs][trip['wheelchair_accessible'].to_i] %>">
