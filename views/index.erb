@@ -250,16 +250,7 @@
   </div>
 </template>
 
-<template id="alert_template">
-  <div class="alert alert-{alert_class}" role="alert">
-    <div><i class="fas fa-info-circle" aria-hidden="true"></i> {alert_effect} {alert_cause}</div>
-    <hr />
-    <h4 class="alert-heading">{alert_heading}</h4>
-    <div class="alert-body">{alert_body}</div>
-    <hr />
-    <div><i class="fas fa-clock" aria-hidden="true"></i> {start_date} - {end_date}</div>
-  </div>
-</template>
+<%= erb 'partials/alert'.to_sym %>
 
 <template id="alert_empty_template">
   <div class="alert alert-info" role="alert">

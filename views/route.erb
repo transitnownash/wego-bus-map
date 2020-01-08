@@ -1,7 +1,11 @@
-<% content_for :title do %>Route<% end %>
-<% content_for :description do %>Route Detail<% end%>
+<% content_for :title do %>Route <%= route['route_short_name'] %> - <%= route['route_long_name'] %><% end %>
+<% content_for :description do %>Information for <%= route['route_short_name'] %> - <%= route['route_long_name'] %> route.<% end%>
 
-<h2 id="route_header" class="p-3 rounded" style="background-color:#<%= route['route_color'] %>;color:#<%= route['route_text_color'] %>" data-route_color="<%= route['route_color'] %>"><img src="/assets/images/<%= route['route_type'] %>.svg" style="height:1.1em;vertical-align:text-bottom;" /> <strong><%= route['route_short_name'] %></strong> - <%= route['route_long_name'] %></h2>
+<h2 id="route_header" class="p-3 rounded" style="background-color:#<%= route['route_color'] %>;color:#<%= route['route_text_color'] %>" data-route_color="<%= route['route_color'] %>" data-route_gid="<%= route['route_gid'] %>"><img src="/assets/images/<%= route['route_type'] %>.svg" style="height:1.1em;vertical-align:text-bottom;" /> <strong><%= route['route_short_name'] %></strong> - <%= route['route_long_name'] %></h2>
+
+<div id="alert_container"></div>
+
+<%= erb 'partials/alert'.to_sym %>
 
 <div id="map" class="embed-responsive embed-responsive-21by9 border mb-5"></div>
 
