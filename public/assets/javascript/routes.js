@@ -55,10 +55,14 @@ $('tbody tr').each(function(i, el) {
 })
 // Display Alerts
 var displayRouteAlerts = function () {
-  var alertTypeCounts = {}
+  var renderedAlerts = {}
   $.get(GTFS_BASE_URL + '/realtime/alerts.json').done(function (alertData) {
     $(alertData).each(function(i, message) {
       $(message.alert.informed_entity).each(function(i, entity) {
+        if (renderedAlerts[message.id]) {
+          return;
+        }
+        renderedAlerts[message.id] = true
         if (entity.route_id == routeData.route_gid) {
 
           if (!message.alert.effect) {
@@ -75,18 +79,6 @@ var displayRouteAlerts = function () {
             alert_class = 'danger'
           }
 
-          // Create the container for the alerts if not present
-          if (!$('#alert-group-' + alertType).length) {
-            alertTypeCounts[alertType] = 0
-            $('#alertGroup').append(L.Util.template(
-              $('#alert_group_item_template').html(),
-              {
-                type: alertType,
-                displayType: message.alert.effect
-              }
-            ))
-          }
-
           var content = L.Util.template(
             $('#alert_template').html(),
             {
@@ -99,12 +91,7 @@ var displayRouteAlerts = function () {
               end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a')
             }
           )
-          $('#alert-group-' + alertType).append(content)
-          // Increment counter
-          alertTypeCounts[alertType]++
-          $('#alert-group-count-' + alertType).html(
-            alertTypeCounts[alertType]
-          )
+          $('#alert_container').append(content)
         }
       })
     })
