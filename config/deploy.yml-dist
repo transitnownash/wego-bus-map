@@ -3,5 +3,5 @@ production:
   deploy_to: "/path/to/wego-bus-map"
   repository: "git@github.com:/stephenyeargin/wego-bus-map.git"
   branch: "master"
-  post_deploy_script: "config/restart.sh"
+  post_deploy_script: "config/deploy/post_deploy.sh"
   
