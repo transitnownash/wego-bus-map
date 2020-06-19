@@ -228,7 +228,13 @@ var updateMap = function () {
     $(data).each(function (i, loc) {
       // A marker that doesn't have corresponding data
       if (typeof routesData[loc.vehicle.trip.route_id] === 'undefined') {
-        console.error('No matching route found:', loc)
+        console.error(
+          'No matching route found!',
+          'Route ID: ' + loc.vehicle.trip.route_id,
+          'Trip ID: ' + loc.vehicle.trip.trip_id,
+          'Vehicle: ' + loc.vehicle.vehicle.label,
+          'Payload:', loc
+        )
         return
       }
       var busIcon = getIcons(routesData[loc.vehicle.trip.route_id])
@@ -353,6 +359,14 @@ var displayAlerts = function (data) {
       ))
     }
 
+    var start_date = moment.unix(message.alert.active_period[0].start)
+    var end_date = moment.unix(message.alert.active_period[0].end)
+    var duration = 'From ' + start_date.format('LLL') + ' to ' + end_date.format('LLL')
+    var duration_raw = start_date.toString() + ' - ' + end_date.toString()
+    if (end_date.year() > 2050) {
+      duration = 'Since ' + start_date.format('LLL')
+    }
+
     var content = L.Util.template(
       $('#alert_template').html(),
       {
@@ -361,8 +375,8 @@ var displayAlerts = function (data) {
         alert_cause: message.alert.cause ? ' (' + message.alert.cause +')' : '',
         alert_heading: message.alert.header_text.translation[0].text,
         alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
-        start_date: moment.unix(message.alert.active_period[0].start).format('l h:mm a'),
-        end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a')
+        duration: duration,
+        duration_raw: duration_raw
       }
     )
     $('#alert-group-' + alertType).append(content)
