@@ -37,6 +37,7 @@ $('tbody tr').each(function(i, el) {
       var color = '#' + routeData.route_color
       var routeShape = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routesLayer)
       map.panTo(routeShape.getBounds().getCenter())
+      map.fitBounds(routeShape.getBounds(), {padding: [20, 20]});
     })
   }
   routeShapes[shapeId] = true
