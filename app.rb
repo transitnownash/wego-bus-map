@@ -52,7 +52,7 @@ class WeGoBusMap < Sinatra::Base
 
   get '/routes/?' do
     response = api_request '/routes'
-    routes = response['data']
+    routes = response['data'].sort_by! {|s| s['route_gid'][/\d+/].to_i}
     erb :routes, locals: { routes: routes }
   end
 
