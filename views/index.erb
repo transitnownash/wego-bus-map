@@ -2,7 +2,7 @@
 <% content_for :description do %>A realtime map for WeGo bus locations using data from WeGo Public Transit.<% end %>
 
 <div class="about-icon">
-  <a href="/about" class="btn btn-light"><i class="fas fa-info-circle fa-2x"></i></i></a>
+  <a href="/routes" class="btn btn-light" data-toggle="tooltip" data-placement="left" title="Routes"><i class="fas fa-route fa-2x"></i></i></a>
 </div>
 
 <div class="map-tools">
@@ -257,15 +257,3 @@
     There are no active service alerts at this time.
   </div>
 </template>
-
-<script>
-  var GTFS_BASE_URL = '<%= ENV['GTFS_BASE_URL'] %>'
-</script>
-
-<script src="//unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="//unpkg.com/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="//unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
-<script src="//unpkg.com/moment@2.22.2/moment.js"></script>
-<script src="//unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
-<script src="/assets/javascript/leaflet.rotatedMarker.js"></script>
-<script src="/assets/javascript/app.js"></script>

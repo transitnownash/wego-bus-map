@@ -1,4 +1,4 @@
-/* globals $, L, moment, handlebars, GTFS_BASE_URL */
+/* globals $, L, moment, GTFS_BASE_URL */
 
 // Sets up a map of Nashville
 var map = L.map('map', {
