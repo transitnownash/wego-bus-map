@@ -1,6 +1,6 @@
 /* globals $, L, moment, GTFS_BASE_URL */
 
-var refreshRate = 10 * 1000
+var refreshRate = 5 * 1000
 var refreshAttempts = 1
 
 var markers = {}
