@@ -426,6 +426,16 @@ var displayRoute = function (tripData) {
     if (!routeData.route_color) { routeData.route_color = 'bababa' }
     var color = '#' + routeData.route_color
     routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routeLayer)
+    routeShapes[shapeId].setText(routeData.route_short_name + ' - ' + routeData.route_long_name + '►     ', {
+      repeat: true,
+      offset: -5,
+      attributes: {
+        fill: color,
+        'font-weight': 'bold',
+        'font-size': 10,
+        opacity: 0.4
+      }
+    })
     if (!L.Browser.mobile) {
       routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
     }
