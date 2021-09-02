@@ -207,7 +207,7 @@ var updateMap = function () {
   $.each(markers, function (i, marker) {
     if (Math.round(((Date.now() / 1000) - markers[i].data.updated) / 60) >= 10) {
       map.removeLayer(markers[i])
-      delete markers[i]
+      markers[i].remove()
     }
   })
 
@@ -404,6 +404,7 @@ var displayLocationButton = function () {
 // Display route shape and stops on the map
 var displayRoute = function (tripData) {
   var shapeId = tripData.shape_gid
+  // prevents teh same shape from being drawn multiple times on click
   if (routeShapes[shapeId]) {
     return
   }
@@ -440,11 +441,10 @@ var displayRoute = function (tripData) {
       routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
     }
     routeShapes[shapeId].on('click', function (e) {
-      map.removeLayer(routeLayer)
-      map.removeLayer(stopLayer)
-      delete stopLayer
-      delete routeLayer
-      delete routeShapes[shapeId]
+      stopsLayer.removeLayer(stopLayer)
+      routesLayer.removeLayer(routeLayer)
+      // Allows the shape to be redrawn
+      routeShapes[shapeId] = false
     })
   })
 }
