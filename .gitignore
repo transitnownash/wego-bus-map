@@ -6,3 +6,5 @@ cache/
 config/deploy.yml
 tmp/
 vendor/
+node_modules/
+npm-debug.log
