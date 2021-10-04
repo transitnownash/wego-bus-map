@@ -1,18 +1,18 @@
 /* globals $, L, moment, GTFS_BASE_URL */
 
-var refreshRate = 5 * 1000
-var refreshAttempts = 1
+const refreshRate = 5 * 1000
+let refreshAttempts = 1
 
-var markers = {}
-var locationMarker = {}
-var tripUpdates = {}
-var routesData = {}
-var agenciesData = {}
-var routeShapes = {}
-var stopsData = {}
+const markers = {}
+let locationMarker = {}
+const tripUpdates = {}
+const routesData = {}
+const agenciesData = {}
+const routeShapes = {}
+const stopsData = {}
 
 // Sets up a map of Nashville
-var map = L.map('map', {
+const map = L.map('map', {
   doubleClickZoom: false,
   center: L.latLng(36.166512, -86.781581),
   maxBounds: L.latLngBounds(
@@ -29,16 +29,16 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
   attribution: $('#attribution_template').html()
 }).addTo(map)
 
-var vehiclesLayer = L.layerGroup().addTo(map)
-var routesLayer = L.layerGroup().addTo(map)
-var stopsLayer = L.layerGroup().addTo(map)
+const vehiclesLayer = L.layerGroup().addTo(map)
+const routesLayer = L.layerGroup().addTo(map)
+const stopsLayer = L.layerGroup().addTo(map)
 
 L.control.layers(
   null,
   {
-    'Vehicles': vehiclesLayer,
-    'Routes': routesLayer,
-    'Stops': stopsLayer
+    'Vehicles': vehiclesLayer, // eslint-disable-line
+    'Routes': routesLayer,     // eslint-disable-line
+    'Stops': stopsLayer        // eslint-disable-line
   }
 ).addTo(map)
 
@@ -50,7 +50,7 @@ map.on('locationerror', function (e) {
 
 // Handle location detection error
 map.on('locationfound', function (e) {
-  var radius = e.accuracy / 2
+  const radius = e.accuracy / 2
   if (locationMarker.marker) {
     map.removeLayer(locationMarker.marker)
   }
@@ -69,7 +69,7 @@ map.on('locationfound', function (e) {
 })
 
 // Adds the custom icon for a vehicle
-var VehicleIcon = L.Icon.extend({
+const VehicleIcon = L.Icon.extend({
   options: {
     iconSize: [32, 32],
     popupAnchor: [0, -14],
@@ -79,7 +79,7 @@ var VehicleIcon = L.Icon.extend({
 })
 
 // Adds the custom icon for a transit stop
-var StopIcon = L.Icon.extend({
+const StopIcon = L.Icon.extend({
   options: {
     iconUrl: 'assets/images/stop.svg',
     iconSize: [16, 16],
@@ -88,9 +88,9 @@ var StopIcon = L.Icon.extend({
 })
 
 // Route types and agencies have different markers
-var getIcons = function (routeData) {
-  var iconPath = 'assets/images/' + routeData.route_type + '.svg'
-  var shadowPath = 'assets/images/' + routeData.route_type + '-shadow.svg'
+const getIcons = function (routeData) {
+  const iconPath = 'assets/images/' + routeData.route_type + '.svg'
+  const shadowPath = 'assets/images/' + routeData.route_type + '-shadow.svg'
   return {
     stationary: new VehicleIcon({
       iconUrl: iconPath,
@@ -104,14 +104,14 @@ var getIcons = function (routeData) {
 }
 
 // Format popup
-var formatPopup = function (e) {
-  var popup = e.target.getPopup()
-  var routeId = e.target.data.loc.vehicle.trip.route_id
-  var tripId = e.target.data.loc.vehicle.trip.trip_id
-  var loc = e.target.data.loc
+const formatPopup = function (e) {
+  const popup = e.target.getPopup()
+  const routeId = e.target.data.loc.vehicle.trip.route_id
+  const tripId = e.target.data.loc.vehicle.trip.trip_id
+  const loc = e.target.data.loc
   $.get(GTFS_BASE_URL + '/trips/' + tripId + '.json').done(function (tripData) {
     displayRoute(tripData)
-    var content = L.Util.template(
+    const content = L.Util.template(
       $('#vehicle_popup_template').html(),
       {
         vehicle: loc.vehicle.vehicle.label,
@@ -137,7 +137,7 @@ var formatPopup = function (e) {
 }
 
 // Format stop popup
-var formatStopPopup = function (stop, route) {
+const formatStopPopup = function (stop, route) {
   return L.Util.template(
     $('#stop_popup_template').html(),
     {
@@ -153,7 +153,7 @@ var formatStopPopup = function (stop, route) {
 }
 
 // Format vehicle tooltip
-var formatVehicleTooltip = function (loc) {
+const formatVehicleTooltip = function (loc) {
   return L.Util.template(
     $('#vehicle_tooltip_template').html(),
     {
@@ -168,7 +168,7 @@ var formatVehicleTooltip = function (loc) {
 }
 
 // Format stop tooltip
-var formatStopTooltip = function (stop, route) {
+const formatStopTooltip = function (stop, route) {
   return L.Util.template(
     $('#stop_tooltip_template').html(),
     {
@@ -184,12 +184,12 @@ var formatStopTooltip = function (stop, route) {
 }
 
 // Convert degrees to nearest ordinal direction
-var formatDegreeToCompass = function (num) {
+const formatDegreeToCompass = function (num) {
   if (!num || typeof num === 'undefined') {
     return 'N/A'
   }
-  var val = Math.floor((num / 22.5) + 0.5)
-  var arr = [
+  const val = Math.floor((num / 22.5) + 0.5)
+  const arr = [
     'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE',
     'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW',
     'NW', 'NNW'
@@ -198,11 +198,11 @@ var formatDegreeToCompass = function (num) {
 }
 
 // Format speed from (micro?)meters per second to miles per hour
-var formatVehicleSpeed = function (speed) {
+const formatVehicleSpeed = function (speed) {
   return (typeof speed !== 'undefined') ? Math.round(speed * 2.2369) + ' mph' : 'N/A'
 }
 
-var updateMap = function () {
+const updateMap = function () {
   // Delete very outdated markers (likely no longer in the feed)
   $.each(markers, function (i, marker) {
     if (Math.round(((Date.now() / 1000) - markers[i].data.updated) / 60) >= 10) {
@@ -237,10 +237,10 @@ var updateMap = function () {
         )
         return
       }
-      var busIcon = getIcons(routesData[loc.vehicle.trip.route_id])
+      const busIcon = getIcons(routesData[loc.vehicle.trip.route_id])
       // Find existing marker
       if (markers[loc.id]) {
-        var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
+        const latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
         markers[loc.id].slideTo(latlng, { duration: 1000 })
         markers[loc.id].setRotationShadowAngle(loc.vehicle.position.bearing)
         markers[loc.id].setOpacity(1)
@@ -274,7 +274,7 @@ var updateMap = function () {
       }
 
       // Position is outdated, dim it a bit
-      var locationAge = Math.round(((Date.now() / 1000) - loc.vehicle.timestamp) / 60)
+      const locationAge = Math.round(((Date.now() / 1000) - loc.vehicle.timestamp) / 60)
       if (locationAge >= 5) {
         markers[loc.id].setOpacity(0.1)
       } else if (locationAge >= 2) {
@@ -294,9 +294,9 @@ var updateMap = function () {
 }
 
 // Check for Alerts
-var checkForAlerts = function () {
+const checkForAlerts = function () {
   $.get(GTFS_BASE_URL + '/realtime/alerts.json', function (data) {
-    var alertIndicator = $('.alert-indicator')
+    const alertIndicator = $('.alert-indicator')
     if (!data) {
       data = []
     }
@@ -314,32 +314,32 @@ var checkForAlerts = function () {
 }
 
 // Display Alerts
-var displayAlerts = function (data) {
-  var alertContainer = $('#service_alerts')
+const displayAlerts = function (data) {
+  const alertContainer = $('#service_alerts')
   alertContainer.empty()
   if (!data || data.length === 0) {
-    var content = L.Util.template($('#alert_empty_template').html(), {})
+    const content = L.Util.template($('#alert_empty_template').html(), {})
     $(alertContainer).append(content)
     $('#service_alerts_modal').modal('show')
   }
 
   // Add the group container
-  var alertGroup = L.Util.template(
+  const alertGroup = L.Util.template(
     $('#alert_group_template').html(),
     {}
   )
   $(alertContainer).append(alertGroup)
 
-  var alertTypeCounts = {}
+  const alertTypeCounts = {}
 
   $.each(data, function (i, message) {
     if (!message.alert.effect) {
       message.alert.effect = 'Notice'
     }
 
-    var alertType = message.alert.effect.toLowerCase().replace(' ', '_')
+    const alertType = message.alert.effect.toLowerCase().replace(' ', '_')
 
-    var alertClass = 'info'
+    let alertClass = 'info'
     if (message.alert.effect === 'Detour' || message.alert.effect === 'Significant Delays') {
       alertClass = 'warning'
     }
@@ -359,15 +359,15 @@ var displayAlerts = function (data) {
       ))
     }
 
-    var startDate = moment.unix(message.alert.active_period[0].start)
-    var endDate = moment.unix(message.alert.active_period[0].end)
-    var duration = 'From ' + startDate.format('LLL') + ' to ' + endDate.format('LLL')
-    var rawDuration = startDate.toString() + ' - ' + endDate.toString()
+    const startDate = moment.unix(message.alert.active_period[0].start)
+    const endDate = moment.unix(message.alert.active_period[0].end)
+    let duration = 'From ' + startDate.format('LLL') + ' to ' + endDate.format('LLL')
+    const rawDuration = startDate.toString() + ' - ' + endDate.toString()
     if (endDate.year() > 2050) {
       duration = 'Since ' + startDate.format('LLL')
     }
 
-    var content = L.Util.template(
+    const content = L.Util.template(
       $('#alert_template').html(),
       {
         alert_class: alertClass,
@@ -390,9 +390,9 @@ var displayAlerts = function (data) {
 }
 
 // Display the location button
-var displayLocationButton = function () {
-  var mapToolsContainer = $('.map-tools')
-  var locationButton = $(L.Util.template(
+const displayLocationButton = function () {
+  const mapToolsContainer = $('.map-tools')
+  const locationButton = $(L.Util.template(
     $('#location_button_template').html()
   ))
   $(locationButton).on('click', function (e) {
@@ -402,30 +402,30 @@ var displayLocationButton = function () {
 }
 
 // Display route shape and stops on the map
-var displayRoute = function (tripData) {
-  var shapeId = tripData.shape_gid
+const displayRoute = function (tripData) {
+  const shapeId = tripData.shape_gid
   // prevents teh same shape from being drawn multiple times on click
   if (routeShapes[shapeId]) {
     return
   }
-  var routeLayer = L.layerGroup().addTo(routesLayer)
-  var stopLayer = L.layerGroup().addTo(stopsLayer)
-  var routeData = routesData[tripData.route_gid]
+  const routeLayer = L.layerGroup().addTo(routesLayer)
+  const stopLayer = L.layerGroup().addTo(stopsLayer)
+  const routeData = routesData[tripData.route_gid]
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
     $.get(GTFS_BASE_URL + '/trips/' + tripData.trip_gid + '/stop_times').done(function (stopTimesData) {
       $.each(stopTimesData.data, function (i, row) {
-        var stopMarker = L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], { icon: new StopIcon() }).bindPopup(formatStopPopup(row, routeData))
+        const stopMarker = L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], { icon: new StopIcon() }).bindPopup(formatStopPopup(row, routeData))
         if (!L.Browser.mobile) {
           stopMarker.bindTooltip(formatStopTooltip(row, routeData))
         }
         stopMarker.addTo(stopLayer)
       })
     })
-    var plotPoints = $.map(shapeData.points, function (point) {
+    const plotPoints = $.map(shapeData.points, function (point) {
       return L.latLng(point.lat, point.lon)
     })
     if (!routeData.route_color) { routeData.route_color = 'bababa' }
-    var color = '#' + routeData.route_color
+    const color = '#' + routeData.route_color
     routeShapes[shapeId] = L.polyline(plotPoints, { color: color, weight: 8, opacity: 0.9 }).addTo(routeLayer)
     routeShapes[shapeId].setText(routeData.route_short_name + ' - ' + routeData.route_long_name + '►     ', {
       repeat: true,
@@ -450,7 +450,7 @@ var displayRoute = function (tripData) {
 }
 
 // Load trip updates
-var checkForTripUpdates = function () {
+const checkForTripUpdates = function () {
   $.get(GTFS_BASE_URL + '/realtime/trip_updates.json').done(function (updateData) {
     if (!updateData || updateData.length === 0) {
       return
@@ -463,11 +463,11 @@ var checkForTripUpdates = function () {
 }
 
 // Show trip details in a modal
-var showTripDetails = function (tripId) {
-  var tripModal = $('#trip_details_modal')
+const showTripDetails = function (tripId) {
+  const tripModal = $('#trip_details_modal')
   tripModal.modal('show')
   $.get(GTFS_BASE_URL + '/trips/' + tripId + '.json').done(function (tripData) {
-    var routeId = tripData.route_gid
+    const routeId = tripData.route_gid
     if (typeof tripUpdates[tripId] === 'undefined') {
       console.log('tripId', tripId)
       $('#trip_details').html(L.Util.template(
@@ -487,7 +487,7 @@ var showTripDetails = function (tripId) {
     }
 
     $.get(GTFS_BASE_URL + '/trips/' + tripId + '/stop_times.json').done(function (stopTimesResult) {
-      var stopTimes = {}
+      const stopTimes = {}
       $.each(stopTimesResult.data, function (key, value) {
         stopTimes[value.stop_sequence] = value
       })
@@ -507,18 +507,18 @@ var showTripDetails = function (tripId) {
           vehicle: tripUpdates[tripId].trip_update.vehicle.label
         }
       ))
-      var stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
+      const stopTimeUpdatesTableBody = $('#trip_stop_time_updates tbody')
       $(stopTimeUpdatesTableBody).empty()
-      var rowHighlighted = false
+      let rowHighlighted = false
       $.each(tripUpdates[tripId].trip_update.stop_time_update, function (i, update) {
-        var time = false
+        let time = false
         if (typeof update.departure !== 'undefined') {
           time = update.departure.time
         }
         if (typeof update.arrival !== 'undefined') {
           time = update.arrival.time
         }
-        var row = $(L.Util.template(
+        const row = $(L.Util.template(
           $('#trip_stop_time_update_body').html(),
           {
             stop_sequence: update.stop_sequence,
