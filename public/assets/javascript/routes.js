@@ -69,7 +69,7 @@ const displayRouteAlerts = function () {
             message.alert.effect = 'Notice'
           }
 
-          var alertClass = 'info'
+          let alertClass = 'info'
           if (message.alert.effect === 'Detour' || message.alert.effect === 'Significant Delays') {
             alertClass = 'warning'
           }
