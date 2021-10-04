@@ -4,7 +4,7 @@ const refreshRate = 5 * 1000
 let refreshAttempts = 1
 
 const markers = {}
-let locationMarker = {}
+const locationMarker = {}
 const tripUpdates = {}
 const routesData = {}
 const agenciesData = {}
@@ -61,10 +61,8 @@ map.on('locationfound', function (e) {
   if (!map.options.maxBounds.contains(e.latlng)) {
     return window.alert('Your location is outside of the bounds of this map.')
   }
-  locationMarker = {
-    marker: L.marker(e.latlng).addTo(map).bindPopup('Accuracy: ' + Math.round(radius) + ' meters').openPopup(),
-    radius: L.circle(e.latlng, radius).addTo(map)
-  }
+  locationMarker.marker = L.marker(e.latlng).addTo(map).bindPopup('Accuracy: ' + Math.round(radius) + ' meters').openPopup()
+  locationMarker.radius = L.circle(e.latlng, radius).addTo(map)
   map.setView(e.latlng, 14)
 })
 
