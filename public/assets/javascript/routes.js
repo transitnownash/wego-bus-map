@@ -69,7 +69,6 @@ var displayRouteAlerts = function () {
             message.alert.effect = 'Notice'
           }
 
-          var alertType = message.alert.effect.toLowerCase().replace(' ', '_')
           var alertClass = 'info'
           if (message.alert.effect === 'Detour' || message.alert.effect === 'Significant Delays') {
             alertClass = 'warning'
