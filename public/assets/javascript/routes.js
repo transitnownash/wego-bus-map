@@ -15,7 +15,7 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
   subdomains: 'abcd',
   maxZoom: 19,
   minZoom: 11,
-  attribution: $('#attribution_template').html(),
+  attribution: $('#attribution_template').html()
 }).addTo(map)
 
 var routesLayer = L.layerGroup().addTo(map)
@@ -23,9 +23,9 @@ var routesLayer = L.layerGroup().addTo(map)
 var routeShapes = {}
 var routeData = {
   route_gid: $('#route_header').data('route_gid'),
-  route_color: $('#route_header').data('route_color'),
+  route_color: $('#route_header').data('route_color')
 }
-$('tbody tr').each(function(i, el) {
+$('tbody tr').each(function (i, el) {
   // Get shapes, draw on map
   var shapeId = $(el).data('shape_gid')
   if (!routeShapes[shapeId]) {
@@ -35,22 +35,22 @@ $('tbody tr').each(function(i, el) {
       })
       if (!routeData.route_color) { routeData.route_color = 'bababa' }
       var color = '#' + routeData.route_color
-      var routeShape = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routesLayer)
+      var routeShape = L.polyline(plotPoints, { color: color, weight: 8, opacity: 0.9 }).addTo(routesLayer)
       map.panTo(routeShape.getBounds().getCenter())
-      map.fitBounds(routeShape.getBounds(), {padding: [20, 20]});
+      map.fitBounds(routeShape.getBounds(), { padding: [20, 20] })
     })
   }
   routeShapes[shapeId] = true
 
   // Fade rows where trip has already happened
   var now = moment()
-  var start_time = $(el).data('start_time')
-  var end_time = $(el).data('end_time')
-  if (now.isBetween(moment(start_time, moment.HTML5_FMT.TIME_SECONDS), moment(end_time, moment.HTML5_FMT.TIME_SECONDS))) {
-    $(el).css({border: 'solid 2px #' + routeData.route_color})
+  var startTime = $(el).data('start_time')
+  var endTime = $(el).data('end_time')
+  if (now.isBetween(moment(startTime, moment.HTML5_FMT.TIME_SECONDS), moment(endTime, moment.HTML5_FMT.TIME_SECONDS))) {
+    $(el).css({ border: 'solid 2px #' + routeData.route_color })
   } else {
-    if (moment(start_time, moment.HTML5_FMT.TIME_SECONDS).isBefore(now)) {
-      $(el).css({opacity: 0.25})
+    if (moment(startTime, moment.HTML5_FMT.TIME_SECONDS).isBefore(now)) {
+      $(el).css({ opacity: 0.25 })
     }
   }
 })
@@ -58,34 +58,32 @@ $('tbody tr').each(function(i, el) {
 var displayRouteAlerts = function () {
   var renderedAlerts = {}
   $.get(GTFS_BASE_URL + '/realtime/alerts.json').done(function (alertData) {
-    $(alertData).each(function(i, message) {
-      $(message.alert.informed_entity).each(function(i, entity) {
+    $(alertData).each(function (i, message) {
+      $(message.alert.informed_entity).each(function (i, entity) {
         if (renderedAlerts[message.id]) {
-          return;
+          return
         }
         renderedAlerts[message.id] = true
-        if (entity.route_id == routeData.route_gid) {
-
+        if (entity.route_id === routeData.route_gid) {
           if (!message.alert.effect) {
             message.alert.effect = 'Notice'
           }
 
           var alertType = message.alert.effect.toLowerCase().replace(' ', '_')
-
-          var alert_class = 'info'
-          if (message.alert.effect == 'Detour' || message.alert.effect == 'Significant Delays') {
-            alert_class = 'warning'
+          var alertClass = 'info'
+          if (message.alert.effect === 'Detour' || message.alert.effect === 'Significant Delays') {
+            alertClass = 'warning'
           }
-          if (message.alert.effect == 'Reduced Service' || message.alert.effect == 'No Service') {
-            alert_class = 'danger'
+          if (message.alert.effect === 'Reduced Service' || message.alert.effect === 'No Service') {
+            alertClass = 'danger'
           }
 
           var content = L.Util.template(
             $('#alert_template').html(),
             {
-              alert_class: alert_class,
+              alert_class: alertClass,
               alert_effect: message.alert.effect,
-              alert_cause: message.alert.cause ? ' (' + message.alert.cause +')' : '',
+              alert_cause: message.alert.cause ? ' (' + message.alert.cause + ')' : '',
               alert_heading: message.alert.header_text.translation[0].text,
               alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
               start_date: moment.unix(message.alert.active_period[0].start).format('l h:mm a'),

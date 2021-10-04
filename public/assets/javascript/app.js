@@ -26,7 +26,7 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
   subdomains: 'abcd',
   maxZoom: 19,
   minZoom: 11,
-  attribution: $('#attribution_template').html(),
+  attribution: $('#attribution_template').html()
 }).addTo(map)
 
 var vehiclesLayer = L.layerGroup().addTo(map)
@@ -83,7 +83,7 @@ var StopIcon = L.Icon.extend({
   options: {
     iconUrl: 'assets/images/stop.svg',
     iconSize: [16, 16],
-    shadowUrl: null,
+    shadowUrl: null
   }
 })
 
@@ -241,14 +241,14 @@ var updateMap = function () {
       // Find existing marker
       if (markers[loc.id]) {
         var latlng = L.latLng(loc.vehicle.position.latitude, loc.vehicle.position.longitude)
-        markers[loc.id].slideTo(latlng, {duration: 1000})
+        markers[loc.id].slideTo(latlng, { duration: 1000 })
         markers[loc.id].setRotationShadowAngle(loc.vehicle.position.bearing)
         markers[loc.id].setOpacity(1)
         markers[loc.id].data.loc = loc
         markers[loc.id].data.updated = loc.vehicle.timestamp
         // Update an open popup
         if (markers[loc.id].isPopupOpen()) {
-          formatPopup({target: markers[loc.id]})
+          formatPopup({ target: markers[loc.id] })
         }
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.mobile) {
@@ -256,7 +256,7 @@ var updateMap = function () {
         }
       // Not found, create a new one
       } else {
-        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], {icon: busIcon.stationary}).bindPopup($('popup_loading_template').html())
+        markers[loc.id] = L.marker([loc.vehicle.position.latitude, loc.vehicle.position.longitude], { icon: busIcon.stationary }).bindPopup($('popup_loading_template').html())
         markers[loc.id].on('click', formatPopup)
         // Don't add tooltips for touch-enabled browsers (mobile)
         if (!L.Browser.mobile) {
@@ -328,7 +328,7 @@ var displayAlerts = function (data) {
     $('#alert_group_template').html(),
     {}
   )
-  $(alertContainer).append(alertGroup);
+  $(alertContainer).append(alertGroup)
 
   var alertTypeCounts = {}
 
@@ -339,12 +339,12 @@ var displayAlerts = function (data) {
 
     var alertType = message.alert.effect.toLowerCase().replace(' ', '_')
 
-    var alert_class = 'info'
-    if (message.alert.effect == 'Detour' || message.alert.effect == 'Significant Delays') {
-      alert_class = 'warning'
+    var alertClass = 'info'
+    if (message.alert.effect === 'Detour' || message.alert.effect === 'Significant Delays') {
+      alertClass = 'warning'
     }
-    if (message.alert.effect == 'Reduced Service' || message.alert.effect == 'No Service') {
-      alert_class = 'danger'
+    if (message.alert.effect === 'Reduced Service' || message.alert.effect === 'No Service') {
+      alertClass = 'danger'
     }
 
     // Create the container for the alerts if not present
@@ -359,24 +359,24 @@ var displayAlerts = function (data) {
       ))
     }
 
-    var start_date = moment.unix(message.alert.active_period[0].start)
-    var end_date = moment.unix(message.alert.active_period[0].end)
-    var duration = 'From ' + start_date.format('LLL') + ' to ' + end_date.format('LLL')
-    var duration_raw = start_date.toString() + ' - ' + end_date.toString()
-    if (end_date.year() > 2050) {
-      duration = 'Since ' + start_date.format('LLL')
+    var startDate = moment.unix(message.alert.active_period[0].start)
+    var endDate = moment.unix(message.alert.active_period[0].end)
+    var duration = 'From ' + startDate.format('LLL') + ' to ' + endDate.format('LLL')
+    var rawDuration = startDate.toString() + ' - ' + endDate.toString()
+    if (endDate.year() > 2050) {
+      duration = 'Since ' + startDate.format('LLL')
     }
 
     var content = L.Util.template(
       $('#alert_template').html(),
       {
-        alert_class: alert_class,
+        alert_class: alertClass,
         alert_effect: message.alert.effect,
-        alert_cause: message.alert.cause ? ' (' + message.alert.cause +')' : '',
+        alert_cause: message.alert.cause ? ' (' + message.alert.cause + ')' : '',
         alert_heading: message.alert.header_text.translation[0].text,
         alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
         duration: duration,
-        duration_raw: duration_raw
+        duration_raw: rawDuration
       }
     )
     $('#alert-group-' + alertType).append(content)
@@ -414,7 +414,7 @@ var displayRoute = function (tripData) {
   $.get(GTFS_BASE_URL + '/shapes/' + shapeId + '.json').done(function (shapeData) {
     $.get(GTFS_BASE_URL + '/trips/' + tripData.trip_gid + '/stop_times').done(function (stopTimesData) {
       $.each(stopTimesData.data, function (i, row) {
-        var stopMarker = L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], {icon: new StopIcon()}).bindPopup(formatStopPopup(row, routeData))
+        var stopMarker = L.marker([stopsData[row.stop_gid].stop_lat, stopsData[row.stop_gid].stop_lon], { icon: new StopIcon() }).bindPopup(formatStopPopup(row, routeData))
         if (!L.Browser.mobile) {
           stopMarker.bindTooltip(formatStopTooltip(row, routeData))
         }
@@ -426,7 +426,7 @@ var displayRoute = function (tripData) {
     })
     if (!routeData.route_color) { routeData.route_color = 'bababa' }
     var color = '#' + routeData.route_color
-    routeShapes[shapeId] = L.polyline(plotPoints, {color: color, weight: 8, opacity: 0.9}).addTo(routeLayer)
+    routeShapes[shapeId] = L.polyline(plotPoints, { color: color, weight: 8, opacity: 0.9 }).addTo(routeLayer)
     routeShapes[shapeId].setText(routeData.route_short_name + ' - ' + routeData.route_long_name + '►     ', {
       repeat: true,
       offset: -5,
@@ -552,17 +552,17 @@ if (navigator.geolocation) {
 
 // Load agency and route data
 $.get(GTFS_BASE_URL + '/routes.json', function (result1) {
-  $.each(result1['data'], function (i, row) {
+  $.each(result1.data, function (i, row) {
     routesData[row.route_gid] = row
     /* ID and short name may not match, and the RTFS uses the short name */
     routesData[row.route_short_name] = row
   })
   $.get(GTFS_BASE_URL + '/agencies.json', function (result2) {
-    $.each(result2['data'], function (i, row) {
+    $.each(result2.data, function (i, row) {
       agenciesData[row.agency_gid] = row
     })
     $.get(GTFS_BASE_URL + '/stops?per_page=10000', function (result3) {
-      $.each(result3['data'], function (i, row) {
+      $.each(result3.data, function (i, row) {
         stopsData[row.stop_gid] = row
       })
       // Update map on a schedule
