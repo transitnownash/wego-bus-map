@@ -5,6 +5,7 @@ require 'net/http'
 require 'uri'
 require 'fileutils'
 require 'date'
+require 'sinatra/cors'
 
 def api_request(path)
   uri = URI.parse("#{ENV['GTFS_BASE_URL']}#{path}")
@@ -29,6 +30,8 @@ class WeGoBusMap < Sinatra::Base
       'No bicycles are allowed on this trip.'
     ]
   }
+
+  set :allow_origin, 'https://gtfs.transitnownash.org'
 
   configure :development, :test do
     set :force_ssl, (ENV['FORCE_SSL'] == '1')

@@ -32,13 +32,15 @@ L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x
 const vehiclesLayer = L.layerGroup().addTo(map)
 const routesLayer = L.layerGroup().addTo(map)
 const stopsLayer = L.layerGroup().addTo(map)
+const bcycleLayer = L.layerGroup().addTo(map)
 
 L.control.layers(
   null,
   {
     'Vehicles': vehiclesLayer, // eslint-disable-line
     'Routes': routesLayer,     // eslint-disable-line
-    'Stops': stopsLayer        // eslint-disable-line
+    'Stops': stopsLayer,       // eslint-disable-line
+    'BCycle': bcycleLayer      // eslint-disable-line
   }
 ).addTo(map)
 
@@ -202,7 +204,7 @@ const formatVehicleSpeed = function (speed) {
 
 const updateMap = function () {
   // Delete very outdated markers (likely no longer in the feed)
-  $.each(markers, function (i, marker) {
+  $.each(markers, function (i) {
     if (Math.round(((Date.now() / 1000) - markers[i].data.updated) / 60) >= 10) {
       map.removeLayer(markers[i])
       markers[i].remove()
@@ -305,7 +307,7 @@ const checkForAlerts = function () {
         plural: data.length !== 1 ? 's' : ''
       }
     ))
-    alertIndicator.on('click', function (e) {
+    alertIndicator.on('click', function () {
       displayAlerts(data)
     })
   })
@@ -393,7 +395,7 @@ const displayLocationButton = function () {
   const locationButton = $(L.Util.template(
     $('#location_button_template').html()
   ))
-  $(locationButton).on('click', function (e) {
+  $(locationButton).on('click', function () {
     map.locate()
   })
   $(mapToolsContainer).append(locationButton)
@@ -438,7 +440,7 @@ const displayRoute = function (tripData) {
     if (!L.Browser.mobile) {
       routeShapes[shapeId].bindTooltip('Route ' + routeData.route_short_name + ' (click to remove)')
     }
-    routeShapes[shapeId].on('click', function (e) {
+    routeShapes[shapeId].on('click', function () {
       stopsLayer.removeLayer(stopLayer)
       routesLayer.removeLayer(routeLayer)
       // Allows the shape to be redrawn
