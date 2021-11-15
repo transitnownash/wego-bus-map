@@ -250,6 +250,37 @@
   </div>
 </template>
 
+<template id="bcycle_popup_template">
+  <div style="width: 300px;">
+    <div class="stop-label">{station_name}</div>
+    <p><i class="fas fa-map-marked-alt fa-fw" aria-hidden="true"></i> <a href="https://www.google.com/maps/dir/?api=1&travelmode=transit&destination={lat}%2C{lon}" target="_blank">{station_address}</a></p>
+    <dl class="row">
+      <dt class="col-7"><i class="fas fa-exchange-alt fa-fw" aria-hidden="true"></i> Renting?</dt>
+      <dd class="col-5">{is_renting}</dd>
+      <dt class="col-7"><i class="fas fa-inbox fa-fw" aria-hidden="true"></i> Allows Returns?</dt>
+      <dd class="col-5">{is_returning}</dd>
+      <dt class="col-7"><i class="fas fa-biking fa-fw" aria-hidden="true"></i> Bikes Available</dt>
+      <dd class="col-5">{num_bikes_available}</dd>
+      <dt class="col-7"><i class="fas fa-bicycle fa-fw" aria-hidden="true"></i> Docks Available</dt>
+      <dd class="col-5">{num_docks_available}</dd>
+      <dt class="col-7"><i class="fas fa-clock fa-fw" aria-hidden="true"></i> Last Updated</dt>
+      <dd class="col-5">{last_reported}</dd>
+    </dl>
+  </div>
+</template>
+
+<template id="bcycle_tooltip_template">
+  <div style="width: 300px;">
+    <div class="stop-label">{station_name}</div>
+    <dl class="row">
+      <dt class="col-7"><i class="fas fa-biking fa-fw" aria-hidden="true"></i> Bikes Available</dt>
+      <dd class="col-5">{num_bikes_available}</dd>
+      <dt class="col-7"><i class="fas fa-bicycle fa-fw" aria-hidden="true"></i> Docks Available</dt>
+      <dd class="col-5">{num_docks_available}</dd>
+    </dl>
+  </div>
+</template>
+
 <%= erb 'partials/alert'.to_sym %>
 
 <template id="alert_empty_template">
