@@ -269,6 +269,18 @@
   </div>
 </template>
 
+<template id="bcycle_tooltip_template">
+  <div style="width: 300px;">
+    <div class="stop-label">{station_name}</div>
+    <dl class="row">
+      <dt class="col-7"><i class="fas fa-biking fa-fw" aria-hidden="true"></i> Bikes Available</dt>
+      <dd class="col-5">{num_bikes_available}</dd>
+      <dt class="col-7"><i class="fas fa-bicycle fa-fw" aria-hidden="true"></i> Docks Available</dt>
+      <dd class="col-5">{num_docks_available}</dd>
+    </dl>
+  </div>
+</template>
+
 <%= erb 'partials/alert'.to_sym %>
 
 <template id="alert_empty_template">
