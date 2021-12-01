@@ -61,9 +61,10 @@ const updateBCycleMarkers = function () {
       var status = station_status.data.stations[i]
       stationInfo[status.station_id]['status'] = status
       gbfsMarkers[status.station_id].bindPopup(formatBCyclePopup(stationInfo[status.station_id]))
-      gbfsMarkers[status.station_id].bindTooltip(formatBCycleTooltip(stationInfo[status.station_id]))
+      if (!L.Browser.mobile) {
+        gbfsMarkers[status.station_id].bindTooltip(formatBCycleTooltip(stationInfo[status.station_id]))
+      }
     })
   })
-  console.log('refresh called')
   setTimeout(updateBCycleMarkers, GBFS_REFRESH_TTL)
 }
