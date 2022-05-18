@@ -16,13 +16,13 @@ a img {
   color: #007bff;
 }
 
-.about-icon{
+.about-icons {
   position: absolute;
   right: 0;
-  top: 4em;
+  top: 4.25em;
   z-index: 999;
 }
-.about-icon a.btn-light {
+.about-icons a.btn-light {
   display: block;
   width: 48px;
   height: 48px;
@@ -33,6 +33,12 @@ a img {
   border-radius: 5px;
   border: 2px solid rgba(0,0,0,0.2);
 }
+.about-icons a.btn-light img {
+  width: 42px;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+
 
 .route-label, .stop-label {
   background-color: #999999;
