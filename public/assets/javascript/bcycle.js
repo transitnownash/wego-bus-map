@@ -35,8 +35,8 @@ const formatBCyclePopup = function (station) {
       lon: station.lon || null,
       is_renting: station.status.is_renting == '1' ? 'Yes' : 'No',
       is_returning: station.status.is_returning == '1' ? 'Yes' : 'No',
-      num_bikes_available: station.status.num_bikes_available || 'Unknown',
-      num_docks_available: station.status.num_docks_available || 'Unknown',
+      num_bikes_available: station.status.num_bikes_available,
+      num_docks_available: station.status.num_docks_available,
       last_reported: moment.unix(station.status.last_reported).format('h:mm a')
     }
   )
@@ -48,8 +48,8 @@ const formatBCycleTooltip = function (station) {
     $('#bcycle_tooltip_template').html(),
     {
       station_name: station.name || 'Not Set',
-      num_bikes_available: station.status.num_bikes_available || 'Unknown',
-      num_docks_available: station.status.num_docks_available || 'Unknown'
+      num_bikes_available: station.status.num_bikes_available,
+      num_docks_available: station.status.num_docks_available
     }
   )
 }

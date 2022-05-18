@@ -48,10 +48,8 @@ a img {
   padding: 0.5em;
 }
 
-.popup-table, .tooltip-table {
-  th {
-    white-space: nowrap;
-  }
+.popup-table, .tooltip-table th {
+  white-space: nowrap;
 }
 
 .no-data-overlay {
