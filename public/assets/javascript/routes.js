@@ -22,7 +22,7 @@ const routesLayer = L.layerGroup().addTo(map)
 
 const routeShapes = {}
 const routeData = {
-  route_gid: $('#route_header').data('route_gid'),
+  route_gid: $('#route_header').data('route_gid').toString(),
   route_color: $('#route_header').data('route_color')
 }
 $('tbody tr').each(function (i, el) {
@@ -60,11 +60,12 @@ const displayRouteAlerts = function () {
   $.get(GTFS_BASE_URL + '/realtime/alerts.json').done(function (alertData) {
     $(alertData).each(function (i, message) {
       $(message.alert.informed_entity).each(function (i, entity) {
+        console.log('entity', entity)
         if (renderedAlerts[message.id]) {
           return
         }
         renderedAlerts[message.id] = true
-        if (entity.route_id === routeData.route_gid) {
+        if (entity.route_id == routeData.route_gid) {
           if (!message.alert.effect) {
             message.alert.effect = 'Notice'
           }
@@ -77,6 +78,10 @@ const displayRouteAlerts = function () {
             alertClass = 'danger'
           }
 
+          const startDate = moment.unix(message.alert.active_period[0].start)
+          const endDate = moment.unix(message.alert.active_period[0].end)
+          let duration = 'From ' + startDate.format('LLL') + ' to ' + endDate.format('LLL')
+          const rawDuration = startDate.toString() + ' - ' + endDate.toString()
           const content = L.Util.template(
             $('#alert_template').html(),
             {
@@ -86,7 +91,9 @@ const displayRouteAlerts = function () {
               alert_heading: message.alert.header_text.translation[0].text,
               alert_body: message.alert.description_text.translation[0].text.replace(/(\n)/g, '<br />'),
               start_date: moment.unix(message.alert.active_period[0].start).format('l h:mm a'),
-              end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a')
+              end_date: moment.unix(message.alert.active_period[0].end).format('l h:mm a'),
+              duration: duration,
+              duration_raw: rawDuration
             }
           )
           $('#alert_container').append(content)
