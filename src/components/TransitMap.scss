@@ -1,0 +1,11 @@
+.leaflet-container {
+  height: 500px;
+  margin-bottom: 2rem;
+}
+
+.main {
+  .leaflet-container {
+    height: 100vh;
+    margin: 0;
+  }
+}
