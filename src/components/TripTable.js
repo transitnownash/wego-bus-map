@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import TripTableRow from './TripTableRow'
 
 function TripTable({route_trips, route}) {
@@ -53,6 +55,11 @@ function TripTable({route_trips, route}) {
       </div>
     </div>
   )
+}
+
+TripTable.propTypes = {
+  route_trips: PropTypes.array,
+  route: PropTypes.object
 }
 
 export default TripTable

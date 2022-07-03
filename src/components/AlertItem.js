@@ -1,4 +1,6 @@
-import {format_timestamp, hex_is_light} from './../util.js';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {format_timestamp, hex_is_light} from './../util.js'
 import './AlertItem.scss'
 
 function AlertItem({alert, route}) {
@@ -34,6 +36,11 @@ function AlertItem({alert, route}) {
       </div>
     </div>
   )
+}
+
+AlertItem.propTypes = {
+  alert: PropTypes.object,
+  route: PropTypes.object
 }
 
 export default AlertItem

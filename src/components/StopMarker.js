@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import L from 'leaflet';
 import { Circle, Marker, Popup, Tooltip } from "react-leaflet"
 import { format_trip_time } from "../util"
@@ -55,6 +57,11 @@ function StopMarker({stop_time, stop_alerts}) {
       }
     </>
   )
+}
+
+StopMarker.propTypes = {
+  stop_time: PropTypes.object,
+  stop_alerts: PropTypes.array
 }
 
 export default StopMarker

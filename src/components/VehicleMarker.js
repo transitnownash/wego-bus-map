@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
 import ReactLeafletDriftMarker from 'react-leaflet-drift-marker'
 import VehicleMarkerPopup from './VehicleMarkerPopup'
@@ -75,6 +77,21 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
       <VehicleMarkerTooltip route={route} metadata={metadata} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
   )
+}
+
+VehicleMarker.propTypes = {
+  id: PropTypes.string,
+  position: PropTypes.array,
+  route: PropTypes.object,
+  agency: PropTypes.object,
+  bearing: PropTypes.number,
+  speed: PropTypes.number,
+  timestamp: PropTypes.number,
+  metadata: PropTypes.object,
+  trip_id: PropTypes.string,
+  shapeSetter: PropTypes.func,
+  stopSetter: PropTypes.func,
+  alerts: PropTypes.array
 }
 
 export default VehicleMarker

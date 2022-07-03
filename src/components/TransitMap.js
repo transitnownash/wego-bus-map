@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { MapContainer, TileLayer, LayersControl, LayerGroup, Polyline } from 'react-leaflet';
 import VehicleMarker from './VehicleMarker';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -48,7 +50,7 @@ function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stop
   }
 
   const getRouteAlertsById = function (route_gid) {
-    return alerts.find(a => a.alert.informed_entity[0].route_id === route_gid)
+    return alerts.filter(a => a.alert.informed_entity[0].route_id === route_gid)
   }
 
   const getStopAlertsById = function (stop_code) {
@@ -70,7 +72,7 @@ function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stop
   ]
 
   const shapeEventHandlers = {
-    click: (e) => {
+    click: (_e) => {
       setShapes([])
       setStops([])
     }
@@ -145,6 +147,17 @@ function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stop
       <LocationMarker map={map}></LocationMarker>
     </MapContainer>
   );
+}
+
+TransitMap.propTypes = {
+  routes: PropTypes.array,
+  agencies: PropTypes.array,
+  vehicle_markers: PropTypes.array,
+  route_shapes: PropTypes.array,
+  route_stops: PropTypes.array,
+  alerts: PropTypes.array,
+  map: PropTypes.any,
+  bCycleStations: PropTypes.array
 }
 
 export default TransitMap

@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons"
 import { format_trip_time, time_is_later_than_now, time_range_includes_now } from "../util"
@@ -54,6 +56,11 @@ function TripTableRow({trip, route}) {
       </td>
     </tr>
   )
+}
+
+TripTableRow.propTypes = {
+  trip: PropTypes.object,
+  route: PropTypes.object
 }
 
 export default TripTableRow

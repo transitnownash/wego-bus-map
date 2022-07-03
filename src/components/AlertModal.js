@@ -1,7 +1,9 @@
-import { Modal, Container } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
-import AlertItem from './AlertItem';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Modal, Container } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWarning } from '@fortawesome/free-solid-svg-icons'
+import AlertItem from './AlertItem'
 
 function AlertModal({alerts, show, onHide, routes}) {
   return(
@@ -23,6 +25,13 @@ function AlertModal({alerts, show, onHide, routes}) {
       </Modal.Body>
     </Modal>
   )
+}
+
+AlertModal.propTypes = {
+  alerts: PropTypes.array,
+  show: PropTypes.bool,
+  onHide: PropTypes.func,
+  routes: PropTypes.array
 }
 
 export default AlertModal;

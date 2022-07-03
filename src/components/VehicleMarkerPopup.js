@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Popup } from 'react-leaflet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner, faWarning } from '@fortawesome/free-solid-svg-icons'
@@ -64,6 +66,18 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
       </div>
     </Popup>
   )
+}
+
+VehicleMarkerPopup.propTypes = {
+  trip: PropTypes.object,
+  route: PropTypes.object,
+  bearing: PropTypes.number,
+  speed: PropTypes.number,
+  timestamp: PropTypes.number,
+  metadata: PropTypes.object,
+  agency: PropTypes.object,
+  trip_id: PropTypes.string,
+  alerts: PropTypes.array
 }
 
 export default VehicleMarkerPopup;

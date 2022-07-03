@@ -1,3 +1,6 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+
 function AlertButton({alerts, buttonAction}) {
   if (alerts.length > 0) {
     return(
@@ -9,6 +12,11 @@ function AlertButton({alerts, buttonAction}) {
       </button>
     );
   }
+}
+
+AlertButton.propTypes = {
+  alerts: PropTypes.array,
+  buttonAction: PropTypes.func
 }
 
 export default AlertButton;

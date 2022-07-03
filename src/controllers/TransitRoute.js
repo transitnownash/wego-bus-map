@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { NoMatch } from './NoMatch'
@@ -108,7 +110,7 @@ function TransitRoute() {
     item.shape['route_color'] = route.route_color
     return item.shape
   })
-  shapes = [...new Map(shapes.map((item, key) => [item['id'], item])).values()];
+  shapes = [...new Map(shapes.map((item, _key) => [item['id'], item])).values()];
 
   return(
     <div>

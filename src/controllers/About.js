@@ -1,6 +1,7 @@
-import TitleBar from "../components/TitleBar";
+import React from 'react'
+import TitleBar from "../components/TitleBar"
 import Footer from '../components/Footer'
-import logo from "../resources/logo.svg";
+import logo from "../resources/logo.svg"
 
 export function About() {
   return (
@@ -11,7 +12,7 @@ export function About() {
           <div className="col-lg-8">
             <p className="lead">Produced in collaboration with <a href="https://transitnownash.org/">Transit Now Nashville</a>, a local grassroots organization whose mission is to raise awareness of the benefits of regional mass transit options for the people living in the Greater Nashville Area.</p>
 
-            <p>This project is an implementation of the <a href="https://developers.google.com/transit/gtfs-realtime/">General Transit Feed Specification (GTFS) Realtime</a> feed for Nashville, Tennessee's <a href="http://www.wegotransit.com/">WeGo Public Transit</a> bus system. It displays all vehicle locations on a map in conjunction with <a href="https://developers.google.com/transit/gtfs/">GTFS Static</a> data updated periodically when the agency announces service changes.</p>
+            <p>This project is an implementation of the <a href="https://developers.google.com/transit/gtfs-realtime/">General Transit Feed Specification (GTFS) Realtime</a> feed for Nashville, Tennessee&apos;s <a href="http://www.wegotransit.com/">WeGo Public Transit</a> bus system. It displays all vehicle locations on a map in conjunction with <a href="https://developers.google.com/transit/gtfs/">GTFS Static</a> data updated periodically when the agency announces service changes.</p>
 
             <p>The source code <a href="https://github.com/transitnownash/wego-bus-map">is available on <i className="fab fa-github"></i> GitHub</a>.</p>
           </div>

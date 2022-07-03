@@ -1,4 +1,6 @@
-import TitleBar from './TitleBar';
+import { React } from 'react'
+import PropTypes from 'prop-types'
+import TitleBar from './TitleBar'
 import logo from '../resources/logo.svg'
 import './LoadingScreen.scss'
 
@@ -12,6 +14,10 @@ function LoadingScreen({hideTitleBar}) {
       </div>
     </div>
   )
+}
+
+LoadingScreen.propTypes = {
+  hideTitleBar: PropTypes.bool
 }
 
 export default LoadingScreen

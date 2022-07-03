@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Tooltip } from 'react-leaflet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBus, faMap, faWarning } from '@fortawesome/free-solid-svg-icons'
@@ -41,6 +43,12 @@ function VehicleMarkerTooltip({route, metadata, alerts}) {
       </div>
     </Tooltip>
   )
+}
+
+VehicleMarkerTooltip.propTypes = {
+  route: PropTypes.object,
+  metadata: PropTypes.object,
+  alerts: PropTypes.array
 }
 
 export default VehicleMarkerTooltip;

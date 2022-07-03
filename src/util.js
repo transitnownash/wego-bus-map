@@ -1,3 +1,5 @@
+import React from 'react'
+
 // Format a timestamp to human readable
 export function format_timestamp(timestamp, format) {
   if (!timestamp || typeof timestamp === 'undefined') {

@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { faRoute, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -23,6 +25,10 @@ function TitleBar({hide}) {
       </div>
     </div>
   )
+}
+
+TitleBar.propTypes = {
+  hide: PropTypes.bool
 }
 
 export default TitleBar

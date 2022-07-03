@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { faBicycle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Marker, Popup, Tooltip } from "react-leaflet"
@@ -57,6 +59,11 @@ function BCycleMarker({icon, station}) {
       </Popup>
     </Marker>
   )
+}
+
+BCycleMarker.propTypes = {
+  icon: PropTypes.object,
+  station: PropTypes.object
 }
 
 export default BCycleMarker

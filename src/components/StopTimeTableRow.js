@@ -1,3 +1,5 @@
+import React from 'react'
+import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Tooltip, OverlayTrigger } from "react-bootstrap"
 import { faLandmark } from "@fortawesome/free-solid-svg-icons"
@@ -58,6 +60,11 @@ function StopTimeTableRow({stop_time, stop_time_update}) {
       }</td>
     </tr>
   )
+}
+
+StopTimeTableRow.propTypes = {
+  stop_time: PropTypes.object,
+  stop_time_update: PropTypes.object
 }
 
 export default StopTimeTableRow

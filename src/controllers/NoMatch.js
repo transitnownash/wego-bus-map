@@ -1,3 +1,4 @@
+import React from 'react'
 import TitleBar from "../components/TitleBar";
 import Footer from '../components/Footer'
 import { Link } from "react-router-dom";
