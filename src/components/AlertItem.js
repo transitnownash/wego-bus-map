@@ -32,7 +32,10 @@ function AlertItem({alert, route}) {
       <div className="card-footer alert-item-footer">
         {alert_cause}
         {alert_effect}
-        <strong>Posted:</strong> {format_timestamp(alert.active_period[0].start)}
+        <strong>Starts:</strong> {format_timestamp(alert.active_period[0].start)}
+        {(alert.active_period[0].end && alert.active_period[0].end < 32503701600)&&
+          <>&nbsp;-&nbsp;<strong>Ends:</strong> {format_timestamp(alert.active_period[0].end)}</>
+        }
       </div>
     </div>
   )
