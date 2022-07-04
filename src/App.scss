@@ -45,28 +45,3 @@
   color: #000;
 }
 
-.map-bottom-left-container {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  z-index: 400;
-}
-
-.map-top-right-container {
-  position: absolute;
-  top: 4rem;
-  right: 10px;
-  z-index: 400;
-  a, a:link, a:visited, a:active, a:hover {
-    text-align: center;
-    color: black;
-    padding-top: 0.5em;
-    width: 48px;
-    height: 48px;
-    overflow: hidden;
-    border: 2px solid rgba(0,0,0,0.2);
-    background-color: white;
-    border-radius: 5px;
-    margin-bottom: 5px;
-  }
-}
