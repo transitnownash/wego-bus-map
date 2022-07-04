@@ -11,6 +11,5 @@ Requires a [separate application](https://github.com/transitnownash/gtfs-rails-a
 ## Development
 
 ```bash
-$ bundle install
-$ bundle exec thin start
+$ npm run start
 ```

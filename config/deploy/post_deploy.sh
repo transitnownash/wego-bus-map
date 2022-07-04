@@ -1,3 +1,2 @@
-bundle install
-
-/usr/bin/touch ./tmp/restart.txt
+npm install
+npm build
