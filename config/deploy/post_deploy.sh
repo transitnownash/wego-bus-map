@@ -1,2 +1,5 @@
+node --version
+npm --version
+
 npm install
-npm build
+npm run build
