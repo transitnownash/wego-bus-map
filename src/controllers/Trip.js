@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { NoMatch } from './NoMatch'
 import TitleBar from '../components/TitleBar'
 import AlertItem from '../components/AlertItem'
@@ -35,9 +35,14 @@ function Trip() {
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false)
   const [isTripBlockLoaded, setTripBlockLoaded] = useState(false)
 
+  const { pathname } = useLocation();
   const params = useParams();
 
   useEffect(() => {
+    // On intra-page navigation, scroll to top and restore lading screen
+    window.scrollTo(0, 0);
+    setRouteTripLoaded(false)
+
     fetch(GTFS_BASE_URL + '/trips/' + params.trip_id + '.json')
       .then((res) => res.json())
       .then((t) => {
@@ -86,7 +91,7 @@ function Trip() {
       clearInterval(refreshPositionsInterval)
     }
 
-  }, [params.trip_id]);
+  }, [params.trip_id, pathname]);
 
   if (!isAlertLoaded || !isAgencyLoaded || !isRouteLoaded || !isRouteTripLoaded || !isVehiclePositionLoaded || !isTripUpdateLoaded) {
     return(<LoadingScreen></LoadingScreen>)
