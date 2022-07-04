@@ -11,6 +11,9 @@
 # production
 /build
 
+# whiskey disk
+config/deploy.yml
+
 # misc
 .DS_Store
 .env.local
