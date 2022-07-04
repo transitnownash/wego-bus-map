@@ -23,7 +23,7 @@ function TransitRoute() {
   const [route_trips, setRouteTripsData] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [agencies, setAgencyData] = useState([]);
-  const [vehicle_markers, setVehicleMarkers] = useState([]);
+  const [vehicleMarkers, setVehicleMarkers] = useState([]);
   const [isRouteLoaded, setRouteLoaded] = useState(false);
   const [isRouteTripsLoaded, setRouteTripsLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
@@ -123,7 +123,7 @@ function TransitRoute() {
             {route_alert_button}
           </div>
         </div>
-        <TransitMap vehicle_markers={vehicle_markers} routes={[route]} agencies={agencies} route_shapes={shapes}></TransitMap>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes}></TransitMap>
         {route_alerts.map((item, _index) => {
           return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
         })}

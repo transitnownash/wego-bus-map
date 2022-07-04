@@ -24,40 +24,41 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: markerShadow,
 });
 
-function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stops, alerts, map, bCycleStations}) {
-  vehicle_markers = (typeof vehicle_markers !== 'undefined') ? vehicle_markers : []
-  route_shapes = (typeof route_shapes !== 'undefined') ? route_shapes : []
-  route_stops = (typeof route_stops !== 'undefined') ? route_stops : []
+function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, map, bCycleStations, mapControls}) {
+  vehicleMarkers = (typeof vehicleMarkers !== 'undefined') ? vehicleMarkers : []
+  routeShapes = (typeof routeShapes !== 'undefined') ? routeShapes : []
+  routeStops = (typeof routeStops !== 'undefined') ? routeStops : []
   bCycleStations = (typeof bCycleStations !== 'undefined') ? bCycleStations : []
+  mapControls = (typeof mapControls !== 'undefined') ? mapControls : {}
   alerts = (typeof alerts !== 'undefined') ? alerts : []
 
-  const [shapes, setShapes] = useState(route_shapes);
+  const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback(val => {
     setShapes(val)
   }, [setShapes])
 
-  const [stops, setStops] = useState(route_stops);
+  const [stops, setStops] = useState(routeStops);
   const doSetStops = useCallback(val => {
     setStops(val)
   }, [setStops])
 
-  const getRouteDataById = function (route_gid) {
-    return routes.find(r => r.route_gid === route_gid)
+  const getRouteDataById = function (routeId) {
+    return routes.find(r => r.route_gid === routeId)
   }
 
-  const getAgencyDataById = function (agency_gid) {
-    return agencies.find(a => a.agency_gid === agency_gid)
+  const getAgencyDataById = function (agencyId) {
+    return agencies.find(a => a.agency_gid === agencyId)
   }
 
-  const getRouteAlertsById = function (route_gid) {
-    return alerts.filter(a => a.alert.informed_entity[0].route_id === route_gid)
+  const getRouteAlertsById = function (routeId) {
+    return alerts.filter(a => a.alert.informed_entity[0].route_id === routeId)
   }
 
-  const getStopAlertsById = function (stop_code) {
+  const getStopAlertsById = function (stopCode) {
     let stopAlerts = []
     alerts.forEach(a => {
       a.alert.informed_entity.forEach(e => {
-        if (e.stop_id === stop_code) {
+        if (e.stop_id === stopCode) {
           stopAlerts.push(a)
         }
       })
@@ -99,7 +100,7 @@ function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stop
       <LayersControl position="topright">
         <LayersControl.Overlay checked={true} name="Vehicles">
           <LayerGroup>
-            {vehicle_markers.map((item, _index) => {
+            {vehicleMarkers.map((item, _index) => {
               let route = getRouteDataById(item.metadata.trip.route_id)
               let route_alerts = getRouteAlertsById(item.metadata.trip.route_id)
               let agency = getAgencyDataById(route ? route.agency_gid : {})
@@ -143,8 +144,18 @@ function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stop
              </LayerGroup>
           </LayersControl.Overlay>
         }
+        {(typeof mapControls.topRight !== 'undefined') &&
+          (
+            <>{mapControls.topRight}</>
+          )
+        }
       </LayersControl>
       <LocationMarker map={map}></LocationMarker>
+      {(typeof mapControls.bottomLeft !== 'undefined') &&
+        (
+          <>{mapControls.bottomLeft}</>
+        )
+      }
     </MapContainer>
   );
 }
@@ -152,12 +163,13 @@ function TransitMap({routes, agencies, vehicle_markers, route_shapes, route_stop
 TransitMap.propTypes = {
   routes: PropTypes.array,
   agencies: PropTypes.array,
-  vehicle_markers: PropTypes.array,
-  route_shapes: PropTypes.array,
-  route_stops: PropTypes.array,
+  vehicleMarkers: PropTypes.array,
+  routeShapes: PropTypes.array,
+  routeStops: PropTypes.array,
   alerts: PropTypes.array,
   map: PropTypes.any,
-  bCycleStations: PropTypes.array
+  bCycleStations: PropTypes.array,
+  mapControls: PropTypes.object
 }
 
 export default TransitMap

@@ -45,25 +45,24 @@
   color: #000;
 }
 
-.map-button-container {
+.map-bottom-left-container {
   position: absolute;
   bottom: 1rem;
   left: 1rem;
-  z-index: 999;
+  z-index: 400;
 }
 
-.map-links-container {
+.map-top-right-container {
   position: absolute;
   top: 4rem;
-  right: 12px;
-  z-index: 999;
-  a {
+  right: 10px;
+  z-index: 400;
+  a, a:link, a:visited, a:active, a:hover {
     text-align: center;
     color: black;
-    padding-top: 0.2em;
-    display: block;
-    width: 45px;
-    height: 45px;
+    padding-top: 0.5em;
+    width: 48px;
+    height: 48px;
     overflow: hidden;
     border: 2px solid rgba(0,0,0,0.2);
     background-color: white;

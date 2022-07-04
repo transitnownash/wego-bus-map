@@ -25,7 +25,7 @@ function Trip() {
   const [tripBlock, setTripBlockData] = useState([])
   const [alerts, setAlerts] = useState([])
   const [agencies, setAgencyData] = useState([])
-  const [vehicle_markers, setVehicleMarkers] = useState([])
+  const [vehicleMarkers, setVehicleMarkers] = useState([])
   const [tripUpdates, setTripUpdates] = useState([])
   const [isRouteLoaded, setRouteLoaded] = useState(false)
   const [isRouteTripLoaded, setRouteTripLoaded] = useState(false)
@@ -109,7 +109,7 @@ function Trip() {
   let stops = trip.stop_times
 
   // Filter vehicle markers
-  const filtered_vehicle_markers = vehicle_markers.filter(v => v.metadata.trip.trip_id === trip.trip_gid)
+  const filtered_vehicleMarkers = vehicleMarkers.filter(v => v.metadata.trip.trip_id === trip.trip_gid)
 
   // Filter updates to this trip, key stop time updates by sequence
   const filtered_trip_updates = tripUpdates.filter((i) => i.id === trip.trip_gid)
@@ -151,8 +151,8 @@ function Trip() {
             <tr>
               <th className="text-nowrap"><FontAwesomeIcon icon={faBus} fixedWidth={true}></FontAwesomeIcon> Vehicle</th>
               <td>
-                {(filtered_vehicle_markers.length > 0 && filtered_vehicle_markers[0].metadata.vehicle)
-                  ? filtered_vehicle_markers[0].metadata.vehicle.label
+                {(filtered_vehicleMarkers.length > 0 && filtered_vehicleMarkers[0].metadata.vehicle)
+                  ? filtered_vehicleMarkers[0].metadata.vehicle.label
                   : 'None Assigned'
                 }
               </td>
@@ -171,7 +171,7 @@ function Trip() {
             </tr>
           </tbody>
         </table>
-        <TransitMap vehicle_markers={filtered_vehicle_markers} routes={[route]} agencies={agencies} route_shapes={[trip.shape]} route_stops={stops} alerts={alerts}></TransitMap>
+        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts}></TransitMap>
         {route_alerts.map((item, _index) => {
           return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
         })}

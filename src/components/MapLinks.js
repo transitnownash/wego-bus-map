@@ -7,8 +7,8 @@ import transitNowIcon from '../resources/transitnow.png'
 function MapLinks() {
   return(
     <>
-      <Link to="/about"><img src={transitNowIcon} height="35" width="35" alt="Transit Now" /></Link>
-      <Link to="/routes"><FontAwesomeIcon icon={faRoute} fixedWidth={true} size={'2x'} /></Link>
+      <Link to="/about" className="leaflet-control"><img src={transitNowIcon} height="35" width="35" alt="Transit Now" /></Link>
+      <Link to="/routes" className="leaflet-control"><FontAwesomeIcon icon={faRoute} fixedWidth={true} size={'2x'} /></Link>
     </>
   )
 }

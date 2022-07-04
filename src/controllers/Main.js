@@ -16,7 +16,7 @@ const REFRESH_GBFS_TTL = 60 * 1000
 function Main() {
   const [routes, setRouteData] = useState([])
   const [agencies, setAgencyData] = useState([])
-  const [vehicle_markers, setVehicleMarkers] = useState([])
+  const [vehicleMarkers, setVehicleMarkers] = useState([])
   const [alerts, setAlerts] = useState([])
   const [bCycleStations, setBCycleStationData] = useState([])
   const [bCycleStationsStatus, setBCycleStationStatusData] = useState([])
@@ -105,19 +105,26 @@ function Main() {
     })
   }
 
+  const mapControls = {
+    topRight: (
+      <div className="map-top-right-container">
+        <MapLinks></MapLinks>
+      </div>
+    ),
+    bottomLeft: (
+      <div className="d-flex map-bottom-left-container">
+        <AlertButton alerts={alerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
+        <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
+      </div>
+    )
+  }
+
   return(
     (!isAlertLoaded || !isAgencyLoaded || !isRoutesLoaded || !isVehiclePositionLoaded ) ? (
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (
       <div className="main">
-        <TransitMap routes={routes} agencies={agencies} vehicle_markers={vehicle_markers} shapes={[]} alerts={alerts} map={map} bCycleStations={bCycleStations}></TransitMap>
-        <div className="d-flex map-button-container">
-          <AlertButton alerts={alerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
-          <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
-        </div>
-        <div className="map-links-container">
-          <MapLinks></MapLinks>
-        </div>
+        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={alerts} map={map} bCycleStations={bCycleStations} mapControls={mapControls}></TransitMap>
         <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
       </div>
     )
