@@ -1,4 +1,4 @@
-# WeGo Bus Map
+# WeGo Transit Map
 
 ![screenshot](screenshot.png)
 

@@ -50,8 +50,8 @@ function TransitRoutes() {
               color: hex_is_light(item.route_color) ? '#000' : '#FFF'
             }
             const vehicle_icon = (item.route_type === '2') ? trainMarkerIcon : busMarkerIcon
-            const route_alerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name)
-            const route_alert_button = (route_alerts.length > 0)
+            const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name)
+            const route_alert_button = (routeAlerts.length > 0)
               ? (
                   <div className="route-alert-icon">
                     <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>

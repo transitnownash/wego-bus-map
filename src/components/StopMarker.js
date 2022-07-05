@@ -5,7 +5,7 @@ import { Circle, Marker, Popup, Tooltip } from "react-leaflet"
 import { format_trip_time } from "../util"
 import stopIconImage from '../resources/stop.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faWarning } from '@fortawesome/free-solid-svg-icons';
 
 function StopMarker({stop_time, stop_alerts}) {
 
@@ -20,8 +20,15 @@ function StopMarker({stop_time, stop_alerts}) {
 
   const content = (
     <div>
-      <div className="stop-name">
-        {stop_time.stop.stop_name}
+      <div className="stop-name d-flex">
+          <div className="flex-grow-1">{stop_time.stop.stop_name}</div>
+          {stop_alerts.length > 0 &&
+            (
+              <div className="ms-2">
+                <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
+              </div>
+            )
+          }
         </div>
       {stop_time.timepoint === "1" &&
           (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)

@@ -35,8 +35,8 @@ function Trip() {
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false)
   const [isTripBlockLoaded, setTripBlockLoaded] = useState(false)
 
-  const { pathname } = useLocation();
-  const params = useParams();
+  const { pathname } = useLocation()
+  const params = useParams()
 
   useEffect(() => {
     // On intra-page navigation, scroll to top and restore lading screen
@@ -108,7 +108,7 @@ function Trip() {
   }
 
   const vehicle_icon = (route.route_type === '2') ? trainMarkerIcon : busMarkerIcon
-  const route_alerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name)
+  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name)
 
   // Extract stops
   let stops = trip.stop_times
@@ -117,11 +117,11 @@ function Trip() {
   const filtered_vehicleMarkers = vehicleMarkers.filter(v => v.metadata.trip.trip_id === trip.trip_gid)
 
   // Filter updates to this trip, key stop time updates by sequence
-  const filtered_trip_updates = tripUpdates.filter((i) => i.id === trip.trip_gid)
-  let filtered_trip_updates_by_sequence = {}
-  if (filtered_trip_updates.length > 0 && typeof filtered_trip_updates[0].trip_update.stop_time_update !== 'undefined') {
-    filtered_trip_updates[0].trip_update.stop_time_update.forEach((item, _i) => {
-      filtered_trip_updates_by_sequence[item.stop_sequence] = item
+  const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid)
+  let filteredTripUpdates_by_sequence = {}
+  if (filteredTripUpdates.length > 0 && typeof filteredTripUpdates[0].trip_update.stop_time_update !== 'undefined') {
+    filteredTripUpdates[0].trip_update.stop_time_update.forEach((item, _i) => {
+      filteredTripUpdates_by_sequence[item.stop_sequence] = item
     })
   }
 
@@ -134,7 +134,7 @@ function Trip() {
       <div className="container routes">
         <div>
           <div className="route-name" style={routeStyle} title={route.route_desc}>
-            {route_alerts.length > 0 &&
+            {routeAlerts.length > 0 &&
               (
                 <div className="route-alert-icon">
                   <FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon>
@@ -177,7 +177,7 @@ function Trip() {
           </tbody>
         </table>
         <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts}></TransitMap>
-        {route_alerts.map((item, _index) => {
+        {routeAlerts.map((item, _index) => {
           return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
         })}
         <table className="table">
@@ -192,7 +192,7 @@ function Trip() {
           </thead>
           <tbody>
             {trip.stop_times.map((item, _index) => {
-              let stop_time_update = (typeof filtered_trip_updates_by_sequence[item.stop_sequence] !== 'undefined') ? filtered_trip_updates_by_sequence[item.stop_sequence] : {}
+              let stop_time_update = (typeof filteredTripUpdates_by_sequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdates_by_sequence[item.stop_sequence] : {}
               return(<StopTimeTableRow key={item.id + '-' + item.stop_sequence} stop_time={item} stop_time_update={stop_time_update}></StopTimeTableRow>)
             })}
           </tbody>

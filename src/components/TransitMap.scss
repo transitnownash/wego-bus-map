@@ -1,8 +1,9 @@
-html, body, .leaflet-container {
+.leaflet-container {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 10pt;
-  height: 100%;
-  width: 100vw;
+  height: 400px;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .main {

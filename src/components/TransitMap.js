@@ -102,12 +102,12 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
           <LayerGroup>
             {vehicleMarkers.map((item, _index) => {
               let route = getRouteDataById(item.metadata.trip.route_id)
-              let route_alerts = getRouteAlertsById(item.metadata.trip.route_id)
+              let routeAlerts = getRouteAlertsById(item.metadata.trip.route_id)
               let agency = getAgencyDataById(route ? route.agency_gid : {})
               let trip_id = item.metadata.trip.trip_id
 
               return(
-                <VehicleMarker key={item.id} position={item.position} speed={item.speed} bearing={item.bearing} metadata={item.metadata} route={route} agency={agency} trip_id={trip_id} timestamp={item.timestamp} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={route_alerts}></VehicleMarker>
+                <VehicleMarker key={item.id} position={item.position} speed={item.speed} bearing={item.bearing} metadata={item.metadata} route={route} agency={agency} trip_id={trip_id} timestamp={item.timestamp} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
               )
             })}
           </LayerGroup>

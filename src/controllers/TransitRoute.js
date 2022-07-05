@@ -94,8 +94,8 @@ function TransitRoute() {
   }
 
   const vehicle_icon = (route.route_type === '2') ? trainMarkerIcon : busMarkerIcon
-  const route_alerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name)
-  const route_alert_button = (route_alerts.length > 0)
+  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name)
+  const route_alert_button = (routeAlerts.length > 0)
     ? (
         <div className="route-alert-icon">
           <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
@@ -124,7 +124,7 @@ function TransitRoute() {
           </div>
         </div>
         <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes}></TransitMap>
-        {route_alerts.map((item, _index) => {
+        {routeAlerts.map((item, _index) => {
           return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
         })}
         <TripTable route={route} route_trips={route_trips}></TripTable>
