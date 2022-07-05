@@ -63,4 +63,9 @@ TripTableRow.propTypes = {
   route: PropTypes.object
 }
 
+TripTableRow.defaultProps = {
+  trip: {},
+  route: {}
+}
+
 export default TripTableRow

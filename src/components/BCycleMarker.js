@@ -7,6 +7,7 @@ import { format_timestamp } from "../util"
 import L from 'leaflet'
 
 function BCycleMarker({icon, station}) {
+  // Ignore if station does not have status loaded
   if (typeof station.status === 'undefined') {
     return
   }
@@ -62,8 +63,13 @@ function BCycleMarker({icon, station}) {
 }
 
 BCycleMarker.propTypes = {
-  icon: PropTypes.object,
+  icon: PropTypes.instanceOf(L.Icon),
   station: PropTypes.object
+}
+
+BCycleMarker.defaultProps = {
+  icon: new L.Icon(),
+  station: {}
 }
 
 export default BCycleMarker

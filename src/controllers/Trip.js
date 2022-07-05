@@ -192,15 +192,15 @@ function Trip() {
           </thead>
           <tbody>
             {trip.stop_times.map((item, _index) => {
-              let stop_time_update = (typeof filteredTripUpdates_by_sequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdates_by_sequence[item.stop_sequence] : {}
-              return(<StopTimeTableRow key={item.id + '-' + item.stop_sequence} stop_time={item} stop_time_update={stop_time_update}></StopTimeTableRow>)
+              let stopTimeUpdate = (typeof filteredTripUpdates_by_sequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdates_by_sequence[item.stop_sequence] : {}
+              return(<StopTimeTableRow key={item.id + '-' + item.stop_sequence} stopTime={item} stopTimeUpdate={stopTimeUpdate}></StopTimeTableRow>)
             })}
           </tbody>
         </table>
         {isTripBlockLoaded &&
           <>
             <h2>Related Trips</h2>
-            <TripTable route_trips={tripBlock} route={route}></TripTable>
+            <TripTable routeTrips={tripBlock} route={route}></TripTable>
           </>
         }
       </div>

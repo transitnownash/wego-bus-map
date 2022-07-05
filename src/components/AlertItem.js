@@ -46,4 +46,13 @@ AlertItem.propTypes = {
   route: PropTypes.object
 }
 
+AlertItem.defaultProps = {
+  alert: {},
+  route: {
+    route_color: '#999',
+    route_long_name: 'Route Unavailable',
+    route_short_name: '00'
+  }
+}
+
 export default AlertItem

@@ -7,8 +7,7 @@ import stopIconImage from '../resources/stop.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning } from '@fortawesome/free-solid-svg-icons';
 
-function StopMarker({stop_time, stop_alerts}) {
-
+function StopMarker({stopTime, stopAlerts}) {
   const stopMarkerIcon = L.Icon.extend({
     options: {
       iconUrl: stopIconImage,
@@ -21,8 +20,8 @@ function StopMarker({stop_time, stop_alerts}) {
   const content = (
     <div>
       <div className="stop-name d-flex">
-          <div className="flex-grow-1">{stop_time.stop.stop_name}</div>
-          {stop_alerts.length > 0 &&
+          <div className="flex-grow-1">{stopTime.stop.stop_name}</div>
+          {stopAlerts.length > 0 &&
             (
               <div className="ms-2">
                 <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
@@ -30,18 +29,18 @@ function StopMarker({stop_time, stop_alerts}) {
             )
           }
         </div>
-      {stop_time.timepoint === "1" &&
+      {stopTime.timepoint === "1" &&
           (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
       }
       <dl>
         <dt>Scheduled Time</dt>
-        <dd>{format_trip_time(stop_time.arrival_time)}</dd>
+        <dd>{format_trip_time(stopTime.arrival_time)}</dd>
         <dt>Code</dt>
-        <dd><tt>{stop_time.stop.stop_code}</tt></dd>
-        {stop_time.stop.stop_desc != null &&
+        <dd><tt>{stopTime.stop.stop_code}</tt></dd>
+        {stopTime.stop.stop_desc != null &&
         <>
           <dt>Description</dt>
-          <dd>{stop_time.stop.stop_desc ? stop_time.stop.stop_desc : 'N/A'}</dd>
+          <dd>{stopTime.stop.stop_desc ? stopTime.stop.stop_desc : 'N/A'}</dd>
         </>
         }
       </dl>
@@ -50,25 +49,30 @@ function StopMarker({stop_time, stop_alerts}) {
 
   return(
     <>
-      <Marker position={[stop_time.stop.stop_lat, stop_time.stop.stop_lon]} icon={stopIcon}>
+      <Marker position={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} icon={stopIcon}>
         {!L.Browser.mobile && (
           <Tooltip>{content}</Tooltip>
         )}
         <Popup>{content}</Popup>
       </Marker>
-      {stop_time.timepoint === "1" &&
-        (<Circle center={[stop_time.stop.stop_lat, stop_time.stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
+      {stopTime.timepoint === "1" &&
+        (<Circle center={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
       }
-      {stop_alerts.length > 0 &&
-        (<Circle center={[stop_time.stop.stop_lat, stop_time.stop.stop_lon]} radius={70} pathOptions={{ color: 'orange' }}></Circle>)
+      {stopAlerts.length > 0 &&
+        (<Circle center={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} radius={70} pathOptions={{ color: 'orange' }}></Circle>)
       }
     </>
   )
 }
 
 StopMarker.propTypes = {
-  stop_time: PropTypes.object,
-  stop_alerts: PropTypes.array
+  stopTime: PropTypes.object,
+  stopAlerts: PropTypes.array
+}
+
+StopMarker.defaultProps = {
+  stopTime: {},
+  stopAlerts: []
 }
 
 export default StopMarker

@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TripTableRow from './TripTableRow'
 
-function TripTable({route_trips, route}) {
-  if (route_trips.length === 0) {
+function TripTable({routeTrips, route}) {
+  if (routeTrips.length === 0) {
     return(<div className="alert alert-info">No trips scheduled for {route.route_long_name} today.</div>)
   }
 
@@ -22,7 +22,7 @@ function TripTable({route_trips, route}) {
             </tr>
           </thead>
           <tbody>
-            {route_trips.map((item, _index) => {
+            {routeTrips.map((item, _index) => {
               if (item.direction_id !== '1') {
                 return false
               }
@@ -44,7 +44,7 @@ function TripTable({route_trips, route}) {
             </tr>
           </thead>
           <tbody>
-            {route_trips.map((item, _index) => {
+            {routeTrips.map((item, _index) => {
               if (item.direction_id === '1') {
                 return false
               }
@@ -58,8 +58,13 @@ function TripTable({route_trips, route}) {
 }
 
 TripTable.propTypes = {
-  route_trips: PropTypes.array,
+  routeTrips: PropTypes.array,
   route: PropTypes.object
+}
+
+TripTable.defaultProps = {
+  routeTrips: [],
+  route: {}
 }
 
 export default TripTable

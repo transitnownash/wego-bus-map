@@ -127,7 +127,7 @@ function TransitRoute() {
         {routeAlerts.map((item, _index) => {
           return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
         })}
-        <TripTable route={route} route_trips={route_trips}></TripTable>
+        <TripTable route={route} routeTrips={route_trips}></TripTable>
       </div>
       <Footer></Footer>
     </div>

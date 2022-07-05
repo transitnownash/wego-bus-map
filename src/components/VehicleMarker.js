@@ -14,12 +14,12 @@ import VehicleMarkerTooltip from './VehicleMarkerTooltip'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
-function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, metadata, trip_id, shapeSetter, stopSetter, alerts}) {
+function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, metadata, tripId, shapeSetter, stopSetter, alerts}) {
   const [trip, setTripData] = useState({})
   const marker = useRef()
 
   if (!route) {
-    console.log('[Warning] No matching route found for Trip #' + trip_id);
+    console.log('[Warning] No matching route found for Trip #' + tripId);
     return(<></>)
   }
 
@@ -51,7 +51,7 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
 
   // Handle click on marker
   const showTripDetails = function() {
-    fetch(GTFS_BASE_URL + '/trips/' + trip_id + '.json')
+    fetch(GTFS_BASE_URL + '/trips/' + tripId + '.json')
       .then((res) => res.json())
       .then((trip) => {
         // Add shape to map
@@ -73,7 +73,7 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
 
   return(
     <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} key={id} position={position} icon={icon} rotationShadowAngle={bearing} opacity={opacity}>
-      <VehicleMarkerPopup speed={speed} bearing={bearing} metadata={metadata} route={route} agency={agency} trip_id={trip_id} trip={trip} timestamp={timestamp} alerts={alerts}></VehicleMarkerPopup>
+      <VehicleMarkerPopup speed={speed} bearing={bearing} metadata={metadata} route={route} agency={agency} tripId={tripId} trip={trip} timestamp={timestamp} alerts={alerts}></VehicleMarkerPopup>
       <VehicleMarkerTooltip route={route} metadata={metadata} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
   )
@@ -88,10 +88,25 @@ VehicleMarker.propTypes = {
   speed: PropTypes.number,
   timestamp: PropTypes.number,
   metadata: PropTypes.object,
-  trip_id: PropTypes.string,
+  tripId: PropTypes.string,
   shapeSetter: PropTypes.func,
   stopSetter: PropTypes.func,
   alerts: PropTypes.array
+}
+
+VehicleMarker.defaultProps = {
+  id: null,
+  position: [],
+  route: {},
+  agency: {},
+  bearing: null,
+  speed: null,
+  timestamp: null,
+  metadata: {},
+  tripId: null,
+  shapeSetter: () => { console.error('No shapeSetter function set!') },
+  stopSetter: () => { console.error('No stopSetter function set!') },
+  alerts: []
 }
 
 export default VehicleMarker

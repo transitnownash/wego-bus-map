@@ -16,4 +16,8 @@ LocateButton.propTypes = {
   buttonAction: PropTypes.func
 }
 
+LocateButton.defaultProps = {
+  buttonAction: () => { console.error('No buttonAction set!') }
+}
+
 export default LocateButton

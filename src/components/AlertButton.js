@@ -19,4 +19,9 @@ AlertButton.propTypes = {
   buttonAction: PropTypes.func
 }
 
+AlertButton.defaultProps = {
+  alerts: [],
+  buttonAction: () => { console.error('No buttonAction set!') }
+}
+
 export default AlertButton;

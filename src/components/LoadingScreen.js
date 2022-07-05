@@ -20,4 +20,8 @@ LoadingScreen.propTypes = {
   hideTitleBar: PropTypes.bool
 }
 
+LoadingScreen.defaultProps = {
+  hideTitleBar: false
+}
+
 export default LoadingScreen

@@ -34,4 +34,11 @@ AlertModal.propTypes = {
   routes: PropTypes.array
 }
 
+AlertModal.defaultProps = {
+  alerts: [],
+  show: false,
+  onHide: () => { console.error('No onHide function set!') },
+  routes: []
+}
+
 export default AlertModal;

@@ -6,7 +6,7 @@ import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner, 
 import { format_bearing, format_speed, format_timestamp } from './../util.js'
 import { Link } from 'react-router-dom'
 
-function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, agency, trip_id, alerts}) {
+function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, agency, tripId, alerts}) {
     const routeHeaderStyle = {
       'backgroundColor': '#' + route.route_color,
       'color': 'white'
@@ -46,7 +46,7 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faMap} fixedWidth/> Trip</th>
-              <td><Link to={'/trips/' + trip_id}>{trip_id}</Link></td>
+              <td><Link to={'/trips/' + tripId}>{tripId}</Link></td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
@@ -76,8 +76,20 @@ VehicleMarkerPopup.propTypes = {
   timestamp: PropTypes.number,
   metadata: PropTypes.object,
   agency: PropTypes.object,
-  trip_id: PropTypes.string,
+  tripId: PropTypes.string,
   alerts: PropTypes.array
+}
+
+VehicleMarkerPopup.defaultProps = {
+  trip: {},
+  route: {},
+  bearing: null,
+  speed: null,
+  timestamp: null,
+  metadata: {},
+  agency: {},
+  tripId: null,
+  alerts: {}
 }
 
 export default VehicleMarkerPopup;

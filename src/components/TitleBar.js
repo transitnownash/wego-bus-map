@@ -31,4 +31,8 @@ TitleBar.propTypes = {
   hide: PropTypes.bool
 }
 
+TitleBar.defaultProps = {
+  hide: false
+}
+
 export default TitleBar

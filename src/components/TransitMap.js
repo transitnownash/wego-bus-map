@@ -25,13 +25,6 @@ L.Icon.Default.mergeOptions({
 });
 
 function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, map, bCycleStations, mapControls}) {
-  vehicleMarkers = (typeof vehicleMarkers !== 'undefined') ? vehicleMarkers : []
-  routeShapes = (typeof routeShapes !== 'undefined') ? routeShapes : []
-  routeStops = (typeof routeStops !== 'undefined') ? routeStops : []
-  bCycleStations = (typeof bCycleStations !== 'undefined') ? bCycleStations : []
-  mapControls = (typeof mapControls !== 'undefined') ? mapControls : {}
-  alerts = (typeof alerts !== 'undefined') ? alerts : []
-
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback(val => {
     setShapes(val)
@@ -104,10 +97,10 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
               let route = getRouteDataById(item.metadata.trip.route_id)
               let routeAlerts = getRouteAlertsById(item.metadata.trip.route_id)
               let agency = getAgencyDataById(route ? route.agency_gid : {})
-              let trip_id = item.metadata.trip.trip_id
+              let tripId = item.metadata.trip.trip_id
 
               return(
-                <VehicleMarker key={item.id} position={item.position} speed={item.speed} bearing={item.bearing} metadata={item.metadata} route={route} agency={agency} trip_id={trip_id} timestamp={item.timestamp} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                <VehicleMarker key={item.id} position={item.position} speed={item.speed} bearing={item.bearing} metadata={item.metadata} route={route} agency={agency} tripId={tripId} timestamp={item.timestamp} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
               )
             })}
           </LayerGroup>
@@ -128,7 +121,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
             <LayerGroup>
               {stops.map((item, _index) => {
                 let stop_alerts = getStopAlertsById(item.stop.stop_code)
-                return(<StopMarker key={item.id} stop_time={item} stop_alerts={stop_alerts}></StopMarker>)
+                return(<StopMarker key={item.id} stopTime={item} stopAlerts={stop_alerts}></StopMarker>)
               })}
              </LayerGroup>
           </LayersControl.Overlay>
@@ -170,6 +163,17 @@ TransitMap.propTypes = {
   map: PropTypes.any,
   bCycleStations: PropTypes.array,
   mapControls: PropTypes.object
+}
+
+TransitMap.defaultProps = {
+  routes: [],
+  agencies: [],
+  vehicleMarkers: [],
+  routeShapes: [],
+  routeStops: [],
+  alerts: [],
+  bCycleStations: [],
+  mapControls: {}
 }
 
 export default TransitMap

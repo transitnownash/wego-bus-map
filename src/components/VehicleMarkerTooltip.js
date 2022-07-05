@@ -51,4 +51,10 @@ VehicleMarkerTooltip.propTypes = {
   alerts: PropTypes.array
 }
 
+VehicleMarkerTooltip.defaultProps = {
+  route: {},
+  metadata: {},
+  alerts: []
+}
+
 export default VehicleMarkerTooltip;
