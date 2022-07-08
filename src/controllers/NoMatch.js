@@ -3,7 +3,7 @@ import TitleBar from "../components/TitleBar";
 import Footer from '../components/Footer'
 import { Link } from "react-router-dom";
 
-export function NoMatch() {
+function NoMatch() {
   return (
     <div>
       <TitleBar></TitleBar>
@@ -18,3 +18,5 @@ export function NoMatch() {
     </div>
   );
 }
+
+export default NoMatch

@@ -6,10 +6,11 @@ import TitleBar from '../components/TitleBar'
 import LoadingScreen from '../components/LoadingScreen'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import {hex_is_light} from './../util.js';
+import {fetchWrapper, hex_is_light} from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer'
+import DataFetchError from '../components/DataFetchError'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
@@ -18,9 +19,10 @@ function TransitRoutes() {
   const [alerts, setAlerts] = useState({});
   const [isRoutesLoaded, setRoutesLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
+  const [dataFetchError, setDataFetchError] = useState(false)
 
   useEffect(() => {
-    fetch(GTFS_BASE_URL + '/routes.json')
+    fetchWrapper(GTFS_BASE_URL + '/routes.json')
       .then((res) => res.json())
       .then(function (r) {
         r.data.sort(function (a, b) {
@@ -29,13 +31,19 @@ function TransitRoutes() {
         return r;
       })
       .then((r) => setRouteData(r.data))
-      .then(() => setRoutesLoaded(true));
+      .then(() => setRoutesLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/realtime/alerts.json')
+    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((res) => res.json())
       .then((data) => setAlerts(data))
-      .then(() => setAlertLoaded(true));
+      .then(() => setAlertLoaded(true))
+      .catch((error) => setDataFetchError(error))
   }, []);
+
+  if (dataFetchError) {
+    return(<DataFetchError error={dataFetchError}></DataFetchError>)
+  }
 
   return(
     (!isAlertLoaded || !isRoutesLoaded ) ? (

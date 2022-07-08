@@ -1,5 +1,15 @@
 import React from 'react'
 
+// Wrapper for fetch
+export async function fetchWrapper(url, options={}) {
+  const { timeout = 60000 } = options;
+  const response = await fetch(url, {
+    ...options,
+    signal: AbortSignal.timeout(timeout)
+  })
+  return response;
+}
+
 // Format a timestamp to human readable
 export function format_timestamp(timestamp, format) {
   if (!timestamp || typeof timestamp === 'undefined') {

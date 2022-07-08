@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { NoMatch } from './NoMatch'
+import NoMatch from './NoMatch'
 import TitleBar from '../components/TitleBar'
 import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
@@ -10,10 +10,11 @@ import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import { format_position_data, hex_is_light } from './../util.js';
+import { fetchWrapper, format_position_data, hex_is_light } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import AlertList from '../components/AlertList'
+import DataFetchError from '../components/DataFetchError'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -29,48 +30,55 @@ function TransitRoute() {
   const [isAlertLoaded, setAlertLoaded] = useState(false);
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
+  const [dataFetchError, setDataFetchError] = useState(false)
 
   const params = useParams();
 
   useEffect(() => {
-    fetch(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
+    fetchWrapper(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
       .then((res) => res.json())
       .then((r) => setRouteData(r))
-      .then(() => setRouteLoaded(true));
+      .then(() => setRouteLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
+    fetchWrapper(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
       .then((res) => res.json())
       .then((r) => setRouteTripsData(r.data))
-      .then(() => setRouteTripsLoaded(true));
+      .then(() => setRouteTripsLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/agencies.json')
+    fetchWrapper(GTFS_BASE_URL + '/agencies.json')
       .then((res) => res.json())
       .then((a) => setAgencyData(a.data))
-      .then(() => setAgencyLoaded(true));
+      .then(() => setAgencyLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/realtime/alerts.json')
+    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((res) => res.json())
       .then((data) => setAlerts(data))
-      .then(() => setAlertLoaded(true));
+      .then(() => setAlertLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+    fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then((res) => res.json())
       .then(function (data) {
         data = data.filter(v => v.vehicle.trip.route_id === params.route_id)
         return format_position_data(data)
       })
       .then((data) => setVehicleMarkers(data))
-      .then(() => setVehiclePositionLoaded(true));
+      .then(() => setVehiclePositionLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
-      fetch(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+      fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then((res) => res.json())
         .then(function (data) {
           data = data.filter(v => v.vehicle.trip.route_id === params.route_id)
           return format_position_data(data)
         })
         .then((data) => setVehicleMarkers(data))
+        .catch((error) => setDataFetchError(error))
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
     // Run on unmount
@@ -78,6 +86,10 @@ function TransitRoute() {
       clearInterval(refreshPositionsInterval)
     }
   }, [params.route_id]);
+
+  if (dataFetchError) {
+    return(<DataFetchError error={dataFetchError}></DataFetchError>)
+  }
 
   if (!isAlertLoaded || !isAgencyLoaded || !isRouteLoaded || !isRouteTripsLoaded || !isVehiclePositionLoaded) {
     return(<LoadingScreen></LoadingScreen>)

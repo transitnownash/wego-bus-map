@@ -3,7 +3,7 @@ import TitleBar from "../components/TitleBar"
 import Footer from '../components/Footer'
 import logo from "../resources/logo.svg"
 
-export function About() {
+function About() {
   return (
     <div>
       <TitleBar></TitleBar>
@@ -59,3 +59,5 @@ export function About() {
     </div>
   )
 }
+
+export default About

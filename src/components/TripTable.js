@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TripTableRow from './TripTableRow'
+import TripTableRowEmpty from './TripTableRowEmpty'
 
 function TripTable({routeTrips, route}) {
   if (routeTrips.length === 0) {
@@ -22,12 +23,12 @@ function TripTable({routeTrips, route}) {
             </tr>
           </thead>
           <tbody>
-            {routeTrips.map((item, _index) => {
-              if (item.direction_id !== '1') {
-                return false
-              }
+            {routeTrips.filter((t) => t.direction_id === '1').map((item, _index) => {
               return(<TripTableRow key={item.id} trip={item} route={route}></TripTableRow>)
             })}
+            {routeTrips.filter((t) => t.direction_id === '1').length === 0 &&
+              (<TripTableRowEmpty></TripTableRowEmpty>)
+            }
           </tbody>
         </table>
       </div>
@@ -44,12 +45,12 @@ function TripTable({routeTrips, route}) {
             </tr>
           </thead>
           <tbody>
-            {routeTrips.map((item, _index) => {
-              if (item.direction_id === '1') {
-                return false
-              }
+            {routeTrips.filter((t) => t.direction_id !== '1').map((item, _index) => {
               return(<TripTableRow key={item.id} trip={item} route={route}></TripTableRow>)
             })}
+            {routeTrips.filter((t) => t.direction_id !== '1').length === 0 &&
+              (<TripTableRowEmpty></TripTableRowEmpty>)
+            }
           </tbody>
         </table>
       </div>

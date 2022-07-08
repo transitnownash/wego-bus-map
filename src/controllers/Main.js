@@ -5,7 +5,8 @@ import LocateButton from '../components/LocateButton';
 import LoadingScreen from '../components/LoadingScreen';
 import AlertModal from '../components/AlertModal';
 import AlertButton from '../components/AlertButton';
-import { format_position_data } from '../util';
+import { fetchWrapper, format_position_data } from '../util';
+import DataFetchError from '../components/DataFetchError';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville'
@@ -24,45 +25,51 @@ function Main() {
   const [isAlertLoaded, setAlertLoaded] = useState(false)
   const [isAgencyLoaded, setAgencyLoaded] = useState(false)
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false)
-
+  const [dataFetchError, setDataFetchError] = useState(false)
   const [alertModalShow, setAlertModalShow] = useState(false)
   const map = useRef(null)
 
   useEffect(() => {
-    fetch(GTFS_BASE_URL + '/routes.json')
+    fetchWrapper(GTFS_BASE_URL + '/routes.json')
       .then((res) => res.json())
       .then((r) => setRouteData(r.data))
-      .then(() => setRoutesLoaded(true));
+      .then(() => setRoutesLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/agencies.json')
+    fetchWrapper(GTFS_BASE_URL + '/agencies.json')
       .then((res) => res.json())
       .then((a) => setAgencyData(a.data))
-      .then(() => setAgencyLoaded(true));
+      .then(() => setAgencyLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/realtime/alerts.json')
+    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((res) => res.json())
       .then((data) => setAlerts(data))
-      .then(() => setAlertLoaded(true));
+      .then(() => setAlertLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+    fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then((res) => res.json())
       .then(function (data) {
         return format_position_data(data)
       })
       .then((data) => setVehicleMarkers(data))
-      .then(() => setVehiclePositionLoaded(true));
+      .then(() => setVehiclePositionLoaded(true))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GBFS_BASE_URL + '/station_information.json')
+    fetchWrapper(GBFS_BASE_URL + '/station_information.json')
       .then((res) => res.json())
       .then((s) => setBCycleStationData(s.data.stations))
+      .catch((error) => setDataFetchError(error))
 
-    fetch(GBFS_BASE_URL + '/station_status.json')
+    fetchWrapper(GBFS_BASE_URL + '/station_status.json')
       .then((res) => res.json())
       .then((s) => setBCycleStationStatusData(s.data.stations))
+      .catch((error) => setDataFetchError(error))
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
-      fetch(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+      fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then((res) => res.json())
         .then(function (data) {
           return format_position_data(data)
@@ -72,14 +79,14 @@ function Main() {
 
     // Refresh alerts at a set interval
     const refreshAlertsInterval = setInterval(() => {
-      fetch(GTFS_BASE_URL + '/realtime/alerts.json')
+      fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
         .then((res) => res.json())
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
     // Refresh BCycle station status at a set interval
     const refreshBCycleStatus = setInterval(() => {
-      fetch(GBFS_BASE_URL + '/station_status.json')
+      fetchWrapper(GBFS_BASE_URL + '/station_status.json')
         .then((res) => res.json())
         .then((s) => setBCycleStationStatusData(s.data.stations))
     }, REFRESH_GBFS_TTL)
@@ -91,6 +98,10 @@ function Main() {
       clearInterval(refreshBCycleStatus)
     }
   }, []);
+
+  if (dataFetchError) {
+    return(<DataFetchError error={dataFetchError}></DataFetchError>)
+  }
 
   const locateUserOnMap = function(map) {
     if (typeof map.current !== 'undefined' && map.current) {
