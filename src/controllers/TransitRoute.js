@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { NoMatch } from './NoMatch'
 import TitleBar from '../components/TitleBar'
-import AlertItem from '../components/AlertItem'
 import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
 import TripTable from '../components/TripTable'
@@ -14,6 +13,7 @@ import trainMarkerIcon from '../resources/train.svg'
 import { format_position_data, hex_is_light } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
+import AlertList from '../components/AlertList'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -124,9 +124,7 @@ function TransitRoute() {
           </div>
         </div>
         <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes}></TransitMap>
-        {routeAlerts.map((item, _index) => {
-          return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
-        })}
+        <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={route_trips}></TripTable>
       </div>
       <Footer></Footer>

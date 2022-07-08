@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Modal, Container } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWarning } from '@fortawesome/free-solid-svg-icons'
-import AlertItem from './AlertItem'
+import AlertList from './AlertList'
 
 function AlertModal({alerts, show, onHide, routes}) {
   return(
@@ -15,12 +15,7 @@ function AlertModal({alerts, show, onHide, routes}) {
       </Modal.Header>
       <Modal.Body>
         <Container>
-          {alerts.map((item, _index) => {
-            let route = routes.find(r => r.route_gid === item.alert.informed_entity[0].route_id)
-            return(
-              <AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>
-            )
-          })}
+          <AlertList alerts={alerts} routes={routes}></AlertList>
         </Container>
       </Modal.Body>
     </Modal>

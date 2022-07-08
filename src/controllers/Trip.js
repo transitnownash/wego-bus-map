@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { NoMatch } from './NoMatch'
 import TitleBar from '../components/TitleBar'
-import AlertItem from '../components/AlertItem'
 import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
 import busMarkerIcon from '../resources/bus.svg'
@@ -15,6 +14,7 @@ import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faWarning, faBus }
 import StopTimeTableRow from '../components/StopTimeTableRow'
 import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
+import AlertList from '../components/AlertList'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -177,9 +177,7 @@ function Trip() {
           </tbody>
         </table>
         <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts}></TransitMap>
-        {routeAlerts.map((item, _index) => {
-          return(<AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>)
-        })}
+        <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table">
           <thead>
             <tr>
