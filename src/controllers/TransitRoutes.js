@@ -6,7 +6,7 @@ import TitleBar from '../components/TitleBar'
 import LoadingScreen from '../components/LoadingScreen'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import {fetchWrapper, hex_is_light} from './../util.js';
+import {getJSON, hex_is_light} from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer'
@@ -22,8 +22,7 @@ function TransitRoutes() {
   const [dataFetchError, setDataFetchError] = useState(false)
 
   useEffect(() => {
-    fetchWrapper(GTFS_BASE_URL + '/routes.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/routes.json')
       .then(function (r) {
         r.data.sort(function (a, b) {
           return (parseInt(a.route_short_name, 10) > parseInt(b.route_short_name, 10)) ? 1 : -1;
@@ -34,8 +33,7 @@ function TransitRoutes() {
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error))

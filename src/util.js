@@ -1,13 +1,14 @@
 import React from 'react'
+import axios from 'axios'
 
 // Wrapper for fetch
-export async function fetchWrapper(url, options={}) {
-  const { timeout = 60000 } = options;
-  const response = await fetch(url, {
+export async function getJSON(url, options={}) {
+  const { timeout = 60000 } = options
+  const response = await axios.get(url, {
     ...options,
-    signal: AbortSignal.timeout(timeout)
+    timeout: timeout
   })
-  return response;
+  return response.data
 }
 
 // Format a timestamp to human readable

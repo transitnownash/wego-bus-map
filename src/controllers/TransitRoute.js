@@ -10,7 +10,7 @@ import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import { fetchWrapper, format_position_data, hex_is_light } from './../util.js';
+import { getJSON, format_position_data, hex_is_light } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import AlertList from '../components/AlertList'
@@ -35,32 +35,27 @@ function TransitRoute() {
   const params = useParams();
 
   useEffect(() => {
-    fetchWrapper(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
       .then((r) => setRouteData(r))
       .then(() => setRouteLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
       .then((r) => setRouteTripsData(r.data))
       .then(() => setRouteTripsLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/agencies.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/agencies.json')
       .then((a) => setAgencyData(a.data))
       .then(() => setAgencyLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
         data = data.filter(v => v.vehicle.trip.route_id === params.route_id)
         return format_position_data(data)
@@ -71,8 +66,7 @@ function TransitRoute() {
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
-      fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-        .then((res) => res.json())
+      getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then(function (data) {
           data = data.filter(v => v.vehicle.trip.route_id === params.route_id)
           return format_position_data(data)

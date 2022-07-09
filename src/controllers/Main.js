@@ -5,7 +5,7 @@ import LocateButton from '../components/LocateButton';
 import LoadingScreen from '../components/LoadingScreen';
 import AlertModal from '../components/AlertModal';
 import AlertButton from '../components/AlertButton';
-import { fetchWrapper, format_position_data } from '../util';
+import { getJSON, format_position_data } from '../util';
 import DataFetchError from '../components/DataFetchError';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
@@ -30,26 +30,22 @@ function Main() {
   const map = useRef(null)
 
   useEffect(() => {
-    fetchWrapper(GTFS_BASE_URL + '/routes.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/routes.json')
       .then((r) => setRouteData(r.data))
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/agencies.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/agencies.json')
       .then((a) => setAgencyData(a.data))
       .then(() => setAgencyLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
         return format_position_data(data)
       })
@@ -57,20 +53,17 @@ function Main() {
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GBFS_BASE_URL + '/station_information.json')
-      .then((res) => res.json())
+    getJSON(GBFS_BASE_URL + '/station_information.json')
       .then((s) => setBCycleStationData(s.data.stations))
       .catch((error) => setDataFetchError(error))
 
-    fetchWrapper(GBFS_BASE_URL + '/station_status.json')
-      .then((res) => res.json())
+    getJSON(GBFS_BASE_URL + '/station_status.json')
       .then((s) => setBCycleStationStatusData(s.data.stations))
       .catch((error) => setDataFetchError(error))
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
-      fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-        .then((res) => res.json())
+      getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then(function (data) {
           return format_position_data(data)
         })
@@ -79,15 +72,13 @@ function Main() {
 
     // Refresh alerts at a set interval
     const refreshAlertsInterval = setInterval(() => {
-      fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
-        .then((res) => res.json())
+      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
     // Refresh BCycle station status at a set interval
     const refreshBCycleStatus = setInterval(() => {
-      fetchWrapper(GBFS_BASE_URL + '/station_status.json')
-        .then((res) => res.json())
+      getJSON(GBFS_BASE_URL + '/station_status.json')
         .then((s) => setBCycleStationStatusData(s.data.stations))
     }, REFRESH_GBFS_TTL)
 

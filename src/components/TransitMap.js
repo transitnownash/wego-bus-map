@@ -84,7 +84,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
   return(
     <MapContainer ref={map} className="map-container" center={cityCenter} zoom={12} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
       <TileLayer
-        attribution='&copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; Data by <a href="http://www.wegotransit.com" target="blank">WeGo Public Transit</a>'
+        attribution='&copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; <a href="http://www.wegotransit.com" target="blank">WeGo</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
         subdomains='abcd'
         minZoom={11}

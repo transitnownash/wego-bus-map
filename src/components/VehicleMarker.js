@@ -11,7 +11,7 @@ import trainMarkerImage from '../resources/train.svg'
 import trainMarkerImageShadow from '../resources/train-shadow.svg'
 import './VehicleMarker.scss'
 import VehicleMarkerTooltip from './VehicleMarkerTooltip'
-import { fetchWrapper } from '../util'
+import { getJSON } from '../util'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
@@ -52,8 +52,7 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
 
   // Handle click on marker
   const showTripDetails = function() {
-    fetchWrapper(GTFS_BASE_URL + '/trips/' + tripId + '.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/trips/' + tripId + '.json')
       .then((trip) => {
         // Add shape to map
         trip.shape['route_color'] = route.route_color

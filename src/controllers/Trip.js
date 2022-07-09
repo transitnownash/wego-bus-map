@@ -8,7 +8,7 @@ import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import { fetchWrapper, format_position_data, format_trip_time, hex_is_light } from './../util.js';
+import { getJSON, format_position_data, format_trip_time, hex_is_light } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faWarning, faBus } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow'
@@ -44,46 +44,39 @@ function Trip() {
     window.scrollTo(0, 0);
     setRouteTripLoaded(false)
 
-    fetchWrapper(GTFS_BASE_URL + '/trips/' + params.trip_id + '.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '.json')
       .then((t) => {
         setRouteTripData(t)
-        fetchWrapper(GTFS_BASE_URL + '/routes/' + t.route_gid + '.json')
-          .then((res) => res.json())
+        getJSON(GTFS_BASE_URL + '/routes/' + t.route_gid + '.json')
+
           .then((r) => setRouteData(r))
           .then(() => setRouteLoaded(true));
       })
       .then(() => setRouteTripLoaded(true));
 
-    fetchWrapper(GTFS_BASE_URL + '/trips/' + params.trip_id + '/block.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '/block.json')
       .then((r) => setTripBlockData(r))
       .then(()=> setTripBlockLoaded(true))
 
-    fetchWrapper(GTFS_BASE_URL + '/agencies.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/agencies.json')
       .then((a) => setAgencyData(a.data))
       .then(() => setAgencyLoaded(true));
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/alerts.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true));
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then((data) => setVehicleMarkers(format_position_data(data)))
       .then(() => setVehiclePositionLoaded(true));
 
-    fetchWrapper(GTFS_BASE_URL + '/realtime/trip_updates.json')
-      .then((res) => res.json())
+    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdateLoaded(true));
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
-      fetchWrapper(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-        .then((res) => res.json())
+      getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then((data) => setVehicleMarkers(format_position_data(data)))
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
