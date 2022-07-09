@@ -8,7 +8,7 @@ import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import { getJSON, format_position_data, format_trip_time, hex_is_light } from './../util.js';
+import { getJSON, formatPositionData, formatTripTime, isHexLight } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faWarning, faBus } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow'
@@ -67,7 +67,7 @@ function Trip() {
       .then(() => setAlertLoaded(true));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-      .then((data) => setVehicleMarkers(format_position_data(data)))
+      .then((data) => setVehicleMarkers(formatPositionData(data)))
       .then(() => setVehiclePositionLoaded(true));
 
     getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
@@ -77,7 +77,7 @@ function Trip() {
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-        .then((data) => setVehicleMarkers(format_position_data(data)))
+        .then((data) => setVehicleMarkers(formatPositionData(data)))
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
     // Run on unmount
@@ -98,7 +98,7 @@ function Trip() {
 
   const routeStyle = {
     backgroundColor: '#' + route.route_color,
-    color: hex_is_light(route.route_color) ? '#000' : '#FFF'
+    color: isHexLight(route.route_color) ? '#000' : '#FFF'
   }
 
   const vehicle_icon = (route.route_type === '2') ? trainMarkerIcon : busMarkerIcon
@@ -162,11 +162,11 @@ function Trip() {
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
-              <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {format_trip_time(trip.start_time)} at {trip.stop_times[0].stop.stop_name}</td>
+              <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {formatTripTime(trip.start_time)} at {trip.stop_times[0].stop.stop_name}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
-              <td><StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]}></StopTimeSequence> {format_trip_time(trip.end_time)} at {trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</td>
+              <td><StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]}></StopTimeSequence> {formatTripTime(trip.end_time)} at {trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</td>
             </tr>
           </tbody>
         </table>

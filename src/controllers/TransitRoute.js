@@ -10,7 +10,7 @@ import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import { getJSON, format_position_data, hex_is_light } from './../util.js';
+import { getJSON, formatPositionData, isHexLight } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import AlertList from '../components/AlertList'
@@ -58,7 +58,7 @@ function TransitRoute() {
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
         data = data.filter(v => v.vehicle.trip.route_id === params.route_id)
-        return format_position_data(data)
+        return formatPositionData(data)
       })
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
@@ -69,7 +69,7 @@ function TransitRoute() {
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then(function (data) {
           data = data.filter(v => v.vehicle.trip.route_id === params.route_id)
-          return format_position_data(data)
+          return formatPositionData(data)
         })
         .then((data) => setVehicleMarkers(data))
         .catch((error) => setDataFetchError(error))
@@ -96,7 +96,7 @@ function TransitRoute() {
 
   const routeStyle = {
     backgroundColor: '#' + route.route_color,
-    color: hex_is_light(route.route_color) ? '#000' : '#FFF'
+    color: isHexLight(route.route_color) ? '#000' : '#FFF'
   }
 
   const vehicle_icon = (route.route_type === '2') ? trainMarkerIcon : busMarkerIcon

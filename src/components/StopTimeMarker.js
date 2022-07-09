@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import L from 'leaflet';
 import { Circle, Marker, Popup, Tooltip } from "react-leaflet"
-import { format_trip_time } from "../util"
+import { formatTripTime } from "../util"
 import stopIconImage from '../resources/stop.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +31,7 @@ function StopTimeMarker({stopTime, stopAlerts}) {
       }
       <dl>
         <dt>Scheduled Time</dt>
-        <dd>{format_trip_time(stopTime.arrival_time)}</dd>
+        <dd>{formatTripTime(stopTime.arrival_time)}</dd>
         <dt>Code</dt>
         <dd><tt>{stopTime.stop.stop_code}</tt></dd>
         {stopTime.stop.stop_desc != null &&

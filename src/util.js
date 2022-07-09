@@ -12,12 +12,12 @@ export async function getJSON(url, options={}) {
 }
 
 // Format a timestamp to human readable
-export function format_timestamp(timestamp, format) {
+export function formatTimestamp(timestamp, format) {
   if (!timestamp || typeof timestamp === 'undefined') {
     return(<>N/A</>)
   }
   if (!format || typeof format === 'undefined') {
-    format = {year: 'numeric', day: 'numeric', month: 'numeric', hour: 'numeric', minute:'2-digit'};
+    format = {year: '2-digit', day: 'numeric', month: 'numeric', hour: 'numeric', minute:'2-digit'};
   }
   let display_timestamp = new Date(timestamp * 1000).toLocaleString([], format);
   return(
@@ -26,7 +26,7 @@ export function format_timestamp(timestamp, format) {
 }
 
 // Convert degrees to ordinal direction
-export function format_bearing(bearing) {
+export function formatBearing(bearing) {
   if (!bearing || typeof bearing === 'undefined') {
     return(<>N/A</>)
   }
@@ -43,7 +43,7 @@ export function format_bearing(bearing) {
 }
 
 // Convert meters per second into miles per hour
-export function format_speed(speed) {
+export function formatSpeed(speed) {
   if (!speed || typeof speed === 'undefined') {
     return(<>N/A</>)
   }
@@ -54,7 +54,7 @@ export function format_speed(speed) {
 }
 
 // Determine if color is 'light'
-export function hex_is_light(color) {
+export function isHexLight(color) {
   const hex = color.replace('#', '');
   const c_r = parseInt(hex.substr(0, 2), 16);
   const c_g = parseInt(hex.substr(2, 2), 16);
@@ -64,7 +64,7 @@ export function hex_is_light(color) {
 }
 
 // Format position data for markers
-export function format_position_data(data) {
+export function formatPositionData(data) {
   let positions = [];
   data.forEach(function (pos) {
     positions.push({
@@ -80,14 +80,14 @@ export function format_position_data(data) {
 }
 
 // Format shape points for Polyline
-export function format_shape_points(points) {
+export function formatShapePoints(points) {
   return (points.map((p, _i) => {
     return [p.lat, p.lon]
   }))
 }
 
 // Format start/stop trip time
-export function format_trip_time(time) {
+export function formatTripTime(time) {
   const now = new Date()
   const [hour, minute, second] = time.split(':')
   now.setHours(hour)
@@ -97,7 +97,7 @@ export function format_trip_time(time) {
 }
 
 // Check if HH:MM:SS is after now
-export function time_is_later_than_now(time) {
+export function isTimeLaterThanNow(time) {
   const now = new Date()
   const t1 = new Date()
   const [hour, minute, second] = time.split(':')
@@ -108,7 +108,7 @@ export function time_is_later_than_now(time) {
 }
 
 // Check if a start and end time in HH:MM contains now
-export function time_range_includes_now(start_time, end_time) {
+export function isTimeRangeIncludesNow(start_time, end_time) {
   const now = new Date()
   const t1 = new Date()
   const t2 = new Date()
@@ -124,7 +124,7 @@ export function time_range_includes_now(start_time, end_time) {
 }
 
 // Convert kilometers to miles
-export function format_distance_traveled(kilometers) {
+export function formatDistanceTraveled(kilometers) {
   if (!kilometers) {
     return 'Start'
   }
@@ -132,7 +132,7 @@ export function format_distance_traveled(kilometers) {
 }
 
 // Format stop time update time
-export function format_stop_time_update(stop_update) {
+export function formatStopTimeUpdate(stop_update) {
   if (typeof stop_update.departure !== 'undefined' && typeof stop_update.departure.time === 'number') {
     return new Date(stop_update.departure.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})
   }

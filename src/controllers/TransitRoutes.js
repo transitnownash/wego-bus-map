@@ -6,7 +6,7 @@ import TitleBar from '../components/TitleBar'
 import LoadingScreen from '../components/LoadingScreen'
 import busMarkerIcon from '../resources/bus.svg'
 import trainMarkerIcon from '../resources/train.svg'
-import {getJSON, hex_is_light} from './../util.js';
+import {getJSON, isHexLight} from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer'
@@ -53,7 +53,7 @@ function TransitRoutes() {
           {routes.map((item, _index) => {
             const routeStyle = {
               backgroundColor: '#' + item.route_color,
-              color: hex_is_light(item.route_color) ? '#000' : '#FFF'
+              color: isHexLight(item.route_color) ? '#000' : '#FFF'
             }
             const vehicle_icon = (item.route_type === '2') ? trainMarkerIcon : busMarkerIcon
             const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name)

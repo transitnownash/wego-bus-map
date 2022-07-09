@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons"
-import { format_trip_time, time_is_later_than_now, time_range_includes_now } from "../util"
+import { formatTripTime, isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util"
 import { OverlayTrigger, Tooltip } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
@@ -23,17 +23,17 @@ function TripTableRow({trip, route}) {
     ? 'Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.'
     : 'No riders in wheelchairs can be accommodated on this trip.'
 
-  const rowStyle = !time_is_later_than_now(trip.end_time)
+  const rowStyle = !isTimeLaterThanNow(trip.end_time)
     ? {
       opacity: 0.3
     }
     : {}
 
   return(
-    <tr className={time_range_includes_now(trip.start_time, trip.end_time) ? 'bg-secondary text-light' : ''} style={rowStyle}>
-      <td><Link to={'/trips/' + trip.trip_gid} className={time_range_includes_now(trip.start_time, trip.end_time) ? 'text-light' : ''}>{trip.trip_gid}</Link></td>
-      <td>{format_trip_time(trip.start_time)}</td>
-      <td>{format_trip_time(trip.end_time)}</td>
+    <tr className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'bg-secondary text-light' : ''} style={rowStyle}>
+      <td><Link to={'/trips/' + trip.trip_gid} className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'text-light' : ''}>{trip.trip_gid}</Link></td>
+      <td>{formatTripTime(trip.start_time)}</td>
+      <td>{formatTripTime(trip.end_time)}</td>
       <td>
         {trip.route_gid !== route.route_gid &&
           (<OverlayTrigger placement='top' overlay={<Tooltip>Continues from Route {route.route_gid} on to Route {trip.route_gid}</Tooltip>}><span className="badge bg-secondary me-1">&raquo;</span></OverlayTrigger>)

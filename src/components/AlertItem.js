@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {format_timestamp, hex_is_light} from './../util.js'
+import {formatTimestamp, isHexLight} from './../util.js'
 import './AlertItem.scss'
 
 function AlertItem({alert, route}) {
   const alertStyle = {
     borderColor: (route.route_color) ? '#' + route.route_color : '#eee',
     backgroundColor: (route.route_color) ? '#' + route.route_color : '#eee',
-    color: hex_is_light(route.route_color) ? '#000' : '#FFF'
+    color: isHexLight(route.route_color) ? '#000' : '#FFF'
   }
 
   const alert_cause = (typeof alert.cause !== 'undefined')
@@ -32,9 +32,9 @@ function AlertItem({alert, route}) {
       <div className="card-footer alert-item-footer">
         {alert_cause}
         {alert_effect}
-        <strong>Starts:</strong> {format_timestamp(alert.active_period[0].start)}
+        <strong>Start:</strong> {formatTimestamp(alert.active_period[0].start)}
         {(alert.active_period[0].end && alert.active_period[0].end < 32503701600)&&
-          <>&nbsp;-&nbsp;<strong>Ends:</strong> {format_timestamp(alert.active_period[0].end)}</>
+          <>&nbsp;-&nbsp;<strong>End:</strong> {formatTimestamp(alert.active_period[0].end)}</>
         }
       </div>
     </div>

@@ -10,7 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import bCycleIconImage from '../resources/bcycle.svg'
 import './TransitMap.scss';
 import './StopTimeMarker'
-import { format_shape_points } from '../util';
+import { formatShapePoints } from '../util';
 import { useState, useCallback } from 'react';
 import LocationMarker from './LocationMarker';
 import BCycleMarker from './BCycleMarker';
@@ -110,7 +110,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
             <LayerGroup>
               {shapes.map((item, _index) => {
                 return(
-                  <Polyline key={item.shape_gid} opacity={0.6} weight={5} positions={format_shape_points(item.points)} color={'#' + item.route_color} eventHandlers={shapeEventHandlers}></Polyline>
+                  <Polyline key={item.shape_gid} opacity={0.6} weight={5} positions={formatShapePoints(item.points)} color={'#' + item.route_color} eventHandlers={shapeEventHandlers}></Polyline>
                 )
               })}
             </LayerGroup>

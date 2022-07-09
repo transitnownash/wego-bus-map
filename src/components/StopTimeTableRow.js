@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLandmark } from "@fortawesome/free-solid-svg-icons"
 import StopTimeSequence from './StopTimeSequence'
-import { format_trip_time, time_is_later_than_now, format_distance_traveled, format_stop_time_update } from "../util"
+import { formatTripTime, isTimeLaterThanNow, formatDistanceTraveled, formatStopTimeUpdate } from "../util"
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
   let rowStyle = {opacity: 1.0}
 
-  if (!time_is_later_than_now(stopTime.departure_time)) {
+  if (!isTimeLaterThanNow(stopTime.departure_time)) {
     rowStyle = {opacity: 0.3}
   }
 
@@ -27,7 +27,7 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
       <td className="text-center">
         <StopTimeSequence stopTime={stopTime}></StopTimeSequence>
       </td>
-      <td>{format_distance_traveled(stopTime.shape_dist_traveled)}</td>
+      <td>{formatDistanceTraveled(stopTime.shape_dist_traveled)}</td>
       <td>
         <strong>{stopTime.stop.stop_name}</strong><br />
         <small>{stopTime.stop.stop_code} {stopTime.stop.stop_desc}</small>
@@ -36,15 +36,15 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
         }
       </td>
       <td className="text-center">
-        {format_trip_time(stopTime.arrival_time)}
+        {formatTripTime(stopTime.arrival_time)}
         {stopTime.arrival_time !== stopTime.departure_time &&
-          (<> (Departs {format_trip_time(stopTime.departure_time)})</>)
+          (<> (Departs {formatTripTime(stopTime.departure_time)})</>)
 
         }
       </td>
       <td className="text-center">{stopTimeUpdate !== false
         ? (
-          <>{format_stop_time_update(stopTimeUpdate)}</>
+          <>{formatStopTimeUpdate(stopTimeUpdate)}</>
         ) : (
           <>--</>
         )

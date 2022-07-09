@@ -5,7 +5,7 @@ import LocateButton from '../components/LocateButton';
 import LoadingScreen from '../components/LoadingScreen';
 import AlertModal from '../components/AlertModal';
 import AlertButton from '../components/AlertButton';
-import { getJSON, format_position_data } from '../util';
+import { getJSON, formatPositionData } from '../util';
 import DataFetchError from '../components/DataFetchError';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
@@ -47,7 +47,7 @@ function Main() {
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
-        return format_position_data(data)
+        return formatPositionData(data)
       })
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
@@ -65,7 +65,7 @@ function Main() {
     const refreshPositionsInterval = setInterval(() => {
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then(function (data) {
-          return format_position_data(data)
+          return formatPositionData(data)
         })
         .then((data) => setVehicleMarkers(data))
     }, REFRESH_VEHICLE_POSITIONS_TTL);
