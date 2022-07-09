@@ -15,6 +15,7 @@ import StopTimeTableRow from '../components/StopTimeTableRow'
 import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
 import AlertList from '../components/AlertList'
+import StopTimeSequence from '../components/StopTimeSequence'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -168,11 +169,11 @@ function Trip() {
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
-              <td>{format_trip_time(trip.start_time)} at {trip.stop_times[0].stop.stop_name}</td>
+              <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {format_trip_time(trip.start_time)} at {trip.stop_times[0].stop.stop_name}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
-              <td>{format_trip_time(trip.end_time)} at {trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</td>
+              <td><StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]}></StopTimeSequence> {format_trip_time(trip.end_time)} at {trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</td>
             </tr>
           </tbody>
         </table>

@@ -6,8 +6,9 @@ import { format_trip_time } from "../util"
 import stopIconImage from '../resources/stop.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning } from '@fortawesome/free-solid-svg-icons';
+import StopTimeSequence from './StopTimeSequence'
 
-function StopMarker({stopTime, stopAlerts}) {
+function StopTimeMarker({stopTime, stopAlerts}) {
   const stopMarkerIcon = L.Icon.extend({
     options: {
       iconUrl: stopIconImage,
@@ -20,17 +21,13 @@ function StopMarker({stopTime, stopAlerts}) {
   const content = (
     <div>
       <div className="stop-name d-flex">
-          <div className="flex-grow-1">{stopTime.stop.stop_name}</div>
-          {stopAlerts.length > 0 &&
-            (
-              <div className="ms-2">
-                <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
-              </div>
-            )
-          }
+          <div className="flex-grow-1"><StopTimeSequence stopTime={stopTime}></StopTimeSequence> {stopTime.stop.stop_name}</div>
         </div>
       {stopTime.timepoint === "1" &&
           (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
+      }
+      {stopAlerts.length > 0 &&
+          (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
       }
       <dl>
         <dt>Scheduled Time</dt>
@@ -65,14 +62,14 @@ function StopMarker({stopTime, stopAlerts}) {
   )
 }
 
-StopMarker.propTypes = {
+StopTimeMarker.propTypes = {
   stopTime: PropTypes.object,
   stopAlerts: PropTypes.array
 }
 
-StopMarker.defaultProps = {
+StopTimeMarker.defaultProps = {
   stopTime: {},
   stopAlerts: []
 }
 
-export default StopMarker
+export default StopTimeMarker

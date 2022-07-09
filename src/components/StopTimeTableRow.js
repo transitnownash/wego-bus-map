@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Tooltip, OverlayTrigger } from "react-bootstrap"
 import { faLandmark } from "@fortawesome/free-solid-svg-icons"
+import StopTimeSequence from './StopTimeSequence'
 import { format_trip_time, time_is_later_than_now, format_distance_traveled, format_stop_time_update } from "../util"
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
@@ -22,20 +22,11 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
     }
   }
 
-  const sequenceBadge = (stopTime.timepoint === "1")
-    ?
-      (
-        <OverlayTrigger placement='top' overlay={<Tooltip>Timing Stop</Tooltip>}>
-          <span className={'badge bg-primary'}>{stopTime.stop_sequence}</span>
-        </OverlayTrigger>
-      ) :
-      (
-        <span className={'badge bg-secondary'}>{stopTime.stop_sequence}</span>
-      )
-
   return(
     <tr style={rowStyle}>
-      <td className="text-center">{sequenceBadge}</td>
+      <td className="text-center">
+        <StopTimeSequence stopTime={stopTime}></StopTimeSequence>
+      </td>
       <td>{format_distance_traveled(stopTime.shape_dist_traveled)}</td>
       <td>
         <strong>{stopTime.stop.stop_name}</strong><br />
