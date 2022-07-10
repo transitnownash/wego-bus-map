@@ -2,32 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Tooltip } from 'react-leaflet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBus, faMap, faWarning } from '@fortawesome/free-solid-svg-icons'
+import { faBus, faMap } from '@fortawesome/free-solid-svg-icons'
 import L from 'leaflet'
+import TransitRouteHeader from './TransitRouteHeader'
 
 function VehicleMarkerTooltip({route, metadata, alerts}) {
   if (L.Browser.mobile) {
     return
   }
 
-  const routeHeaderStyle = {
-    'backgroundColor': '#' + route.route_color,
-    'color': 'white'
-  }
-
   return(
     <Tooltip>
       <div className="tooltip-content">
-        <div className="route-name mb-1 d-flex" style={routeHeaderStyle}>
-          {route.route_short_name} - {route.route_long_name}
-          {(typeof alerts !== 'undefined') &&
-            (
-              <div className="ms-2">
-                <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
-              </div>
-            )
-          }
-        </div>
+        <TransitRouteHeader route={route} alerts={alerts} showRouteType={false}></TransitRouteHeader>
         <table className="table table-borderless table-sm mb-0">
           <tbody>
             <tr>

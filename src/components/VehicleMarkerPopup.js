@@ -2,38 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Popup } from 'react-leaflet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner, faWarning } from '@fortawesome/free-solid-svg-icons'
+import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { formatBearing, formatSpeed, formatTimestamp } from './../util.js'
 import { Link } from 'react-router-dom'
+import TransitRouteHeader from './TransitRouteHeader.js'
 
 function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, agency, tripId, alerts}) {
-    const routeHeaderStyle = {
-      'backgroundColor': '#' + route.route_color,
-      'color': 'white'
-    }
-
-    const trip_headsign = (trip.trip_headsign)
-      ? trip.trip_headsign
-      : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>)
-    ;
+  const trip_headsign = (trip.trip_headsign)
+    ? trip.trip_headsign
+    : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>)
+  ;
 
   return(
     <Popup>
       <div className="popup-content">
-        <div className="route-name mb-1 d-flex" style={routeHeaderStyle}>
-          <div className="flex-grow-1">
-            <Link to={'/routes/' + route.route_short_name}>
-              {route.route_short_name} - {route.route_long_name}
-            </Link>
-          </div>
-          {(typeof alerts !== 'undefined') &&
-              (
-                <div className="ms-2">
-                  <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
-                </div>
-              )
-            }
-        </div>
+        <TransitRouteHeader route={route} alerts={alerts} showRouteType={false}></TransitRouteHeader>
         <table className="table table-borderless table-sm" style={{minWidth: '250px'}}>
           <tbody>
             <tr>

@@ -1,16 +1,12 @@
 
 
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import TitleBar from '../components/TitleBar'
 import LoadingScreen from '../components/LoadingScreen'
-import busMarkerIcon from '../resources/bus.svg'
-import trainMarkerIcon from '../resources/train.svg'
-import {getJSON, isHexLight} from './../util.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
+import {getJSON} from './../util.js';
 import Footer from '../components/Footer'
 import DataFetchError from '../components/DataFetchError'
+import TransitRouteHeader from '../components/TransitRouteHeader'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
@@ -51,34 +47,8 @@ function TransitRoutes() {
         <TitleBar></TitleBar>
         <div className="container routes">
           {routes.map((item, _index) => {
-            const routeStyle = {
-              backgroundColor: '#' + item.route_color,
-              color: isHexLight(item.route_color) ? '#000' : '#FFF'
-            }
-            const vehicle_icon = (item.route_type === '2') ? trainMarkerIcon : busMarkerIcon
             const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name)
-            const route_alert_button = (routeAlerts.length > 0)
-              ? (
-                  <div className="route-alert-icon">
-                    <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
-                  </div>
-                )
-              : (
-                <></>
-                )
-
-
-            return(
-              <div key={item.route_short_name}>
-                <div className="route-name" style={routeStyle} title={item.route_desc}>
-                  <Link to={"/routes/" + item.route_short_name}>
-                    <img className="route-icon" src={vehicle_icon} alt="Icon" />
-                    {item.route_short_name} - {item.route_long_name}
-                    {route_alert_button}
-                  </Link>
-                </div>
-              </div>
-            )
+            return(<TransitRouteHeader key={item.id} route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>)
           })}
         </div>
         <Footer></Footer>

@@ -19,7 +19,7 @@ function TitleBar({hide}) {
         <nav className="my-2 my-md-0 mr-md-3">
           <Link className="p-2 text-light" to="/about"><FontAwesomeIcon icon={faInfoCircle} fixedWidth={true} /> About</Link>
           <Link className="p-2 text-light" to="/routes"><FontAwesomeIcon icon={faRoute} fixedWidth={true} /> Routes</Link>
-          <a className="p-2 text-light" href="https://github.com/transitnownash/wego-bus-map" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} fixedWidth={true} /> View on GitHub</a>
+          <a className="p-2 text-light" href="https://github.com/transitnownash/wego-bus-map" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} fixedWidth={true} /> GitHub</a>
         </nav>
         <Link className="btn btn-outline-light" to="/">Return to App</Link>
       </div>

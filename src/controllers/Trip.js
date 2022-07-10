@@ -1,21 +1,20 @@
 
 
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import NoMatch from './NoMatch'
 import TitleBar from '../components/TitleBar'
 import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
-import busMarkerIcon from '../resources/bus.svg'
-import trainMarkerIcon from '../resources/train.svg'
-import { getJSON, formatPositionData, formatTripTime, isHexLight } from './../util.js';
+import { getJSON, formatPositionData, formatTripTime } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faWarning, faBus } from '@fortawesome/free-solid-svg-icons';
+import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow'
 import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
 import AlertList from '../components/AlertList'
 import StopTimeSequence from '../components/StopTimeSequence'
+import TransitRouteHeader from '../components/TransitRouteHeader'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -96,12 +95,6 @@ function Trip() {
     return(<NoMatch></NoMatch>)
   }
 
-  const routeStyle = {
-    backgroundColor: '#' + route.route_color,
-    color: isHexLight(route.route_color) ? '#000' : '#FFF'
-  }
-
-  const vehicle_icon = (route.route_type === '2') ? trainMarkerIcon : busMarkerIcon
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name)
 
   // Extract stops
@@ -126,21 +119,7 @@ function Trip() {
     <div>
       <TitleBar></TitleBar>
       <div className="container routes">
-        <div>
-          <div className="route-name" style={routeStyle} title={route.route_desc}>
-            {routeAlerts.length > 0 &&
-              (
-                <div className="route-alert-icon">
-                  <FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon>
-                </div>
-              )
-            }
-            <Link to={'/routes/' + route.route_gid}>
-              <img className="route-icon" src={vehicle_icon} alt="Icon" />
-              {route.route_short_name} - {route.route_long_name}
-            </Link>
-          </div>
-        </div>
+        <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
         <table className="table table-vertical">
           <tbody>
             <tr>

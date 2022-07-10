@@ -10,13 +10,13 @@ class ErrorBoundary extends React.Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     // Update state so the next render will show the fallback UI.
-    this.setState('error', error)
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
+    this.setState({error: error})
     // You can also log the error to an error reporting service
     console.error(error, errorInfo);
   }
@@ -31,7 +31,7 @@ class ErrorBoundary extends React.Component {
               <div className="card-header bg-danger text-light">Site Error</div>
               <div className="card-body">An unexpected error has ocurred. Try reloading the page or wait a few moments before trying again.</div>
               {this.state.error &&
-                (<div className="card-body"><div className="bg-light p-3" style={{fontFamily: 'monospace', whiteSpace: 'pre-wrap'}}>{JSON.stringify(this.state.error)}</div></div>)
+                (<div className="card-body"><div className="bg-light p-3" style={{fontFamily: 'monospace', whiteSpace: 'pre-wrap'}}>{JSON.stringify(this.state.error.message)}</div></div>)
               }
             </div>
           </div>

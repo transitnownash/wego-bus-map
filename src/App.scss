@@ -1,27 +1,3 @@
-.route-name {
-  border-radius: 10px;
-  background-color: #999;
-  color: #fff;
-  padding: 1rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  a:any-link {
-    text-decoration: none;
-    color: white;
-  }
-  .route-icon {
-    max-height: 2em;
-    margin-right: 0.5rem;
-    padding-right: 0.5rem;
-    border-right: 1px dotted #fff;
-  }
-}
-
-.route-alert-icon {
-  float: right;
-  font-size: 1.5rem;
-}
-
 .stop-name {
   text-align: center;
   font-weight: bold;
@@ -30,13 +6,13 @@
   background-color: purple;
   color: white;
   padding: 1rem;
-  a {
+  a:any-link {
     color: white
   }
 }
 
 .navbar-dark.bg-dark {
-  a {
+  a:any-link {
     text-decoration: none;
   }
 }

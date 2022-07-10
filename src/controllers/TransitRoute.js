@@ -8,13 +8,10 @@ import LoadingScreen from '../components/LoadingScreen'
 import TransitMap from '../components/TransitMap'
 import TripTable from '../components/TripTable'
 import Footer from '../components/Footer'
-import busMarkerIcon from '../resources/bus.svg'
-import trainMarkerIcon from '../resources/train.svg'
-import { getJSON, formatPositionData, isHexLight } from './../util.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWarning } from '@fortawesome/free-solid-svg-icons';
+import { getJSON, formatPositionData } from './../util.js';
 import AlertList from '../components/AlertList'
 import DataFetchError from '../components/DataFetchError'
+import TransitRouteHeader from '../components/TransitRouteHeader'
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -94,22 +91,7 @@ function TransitRoute() {
     return(<NoMatch></NoMatch>)
   }
 
-  const routeStyle = {
-    backgroundColor: '#' + route.route_color,
-    color: isHexLight(route.route_color) ? '#000' : '#FFF'
-  }
-
-  const vehicle_icon = (route.route_type === '2') ? trainMarkerIcon : busMarkerIcon
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name)
-  const route_alert_button = (routeAlerts.length > 0)
-    ? (
-        <div className="route-alert-icon">
-          <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>
-        </div>
-      )
-    : (
-        <></>
-      )
 
   // Extract unique shapes
   let shapes = route_trips.map((item, _index) => {
@@ -122,14 +104,8 @@ function TransitRoute() {
     <div>
       <TitleBar></TitleBar>
       <div className="container routes">
-        <div key={route.route_short_name}>
-          <div className="route-name" style={routeStyle} title={route.route_desc}>
-            <img className="route-icon" src={vehicle_icon} alt="Icon" />
-            {route.route_short_name} - {route.route_long_name}
-            {route_alert_button}
-          </div>
-        </div>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes}></TransitMap>
+        <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={route_trips}></TripTable>
       </div>
