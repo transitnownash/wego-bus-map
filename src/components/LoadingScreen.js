@@ -1,8 +1,8 @@
-import { React } from 'react'
-import PropTypes from 'prop-types'
-import TitleBar from './TitleBar'
-import logo from '../resources/logo.svg'
-import './LoadingScreen.scss'
+import { React } from 'react';
+import PropTypes from 'prop-types';
+import TitleBar from './TitleBar';
+import logo from '../resources/logo.svg';
+import './LoadingScreen.scss';
 
 function LoadingScreen({hideTitleBar}) {
   return(
@@ -13,15 +13,15 @@ function LoadingScreen({hideTitleBar}) {
         <div className="h2 mb-3">Loading ...</div>
       </div>
     </div>
-  )
+  );
 }
 
 LoadingScreen.propTypes = {
   hideTitleBar: PropTypes.bool
-}
+};
 
 LoadingScreen.defaultProps = {
   hideTitleBar: false
-}
+};
 
-export default LoadingScreen
+export default LoadingScreen;

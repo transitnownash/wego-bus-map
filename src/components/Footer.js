@@ -1,7 +1,7 @@
-import React from 'react'
-import { faGithub } from "@fortawesome/free-brands-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link } from "react-router-dom"
+import React from 'react';
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return(
@@ -23,7 +23,7 @@ function Footer() {
         </li>
       </ul>
     </div>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

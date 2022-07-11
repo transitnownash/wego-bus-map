@@ -1,33 +1,33 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons"
-import { formatTripTime, isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util"
-import { OverlayTrigger, Tooltip } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons";
+import { formatTripTime, isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function TripTableRow({trip, route}) {
 
   const bikes_allowed_icon = (trip.bikes_allowed !== "1")
     ? (<span className="text-danger"><FontAwesomeIcon icon={faBan} fixedWidth={true}></FontAwesomeIcon></span>)
-    : (<></>)
+    : (<></>);
   const wheelchair_accessible_icon = (trip.wheelchair_accessible !== "1")
   ? (<span className="text-danger"><FontAwesomeIcon icon={faBan} fixedWidth={true}></FontAwesomeIcon></span>)
-  : (<></>)
+  : (<></>);
 
   const bikes_allowed_tooltip = (trip.bikes_allowed === '1')
     ? 'Vehicle being used on this particular trip can accommodate at least one bicycle.'
-    : 'No bicycles are allowed on this trip.'
+    : 'No bicycles are allowed on this trip.';
 
   const wheelchair_accessible_tooltip = (trip.wheelchair_accessible === '1')
     ? 'Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.'
-    : 'No riders in wheelchairs can be accommodated on this trip.'
+    : 'No riders in wheelchairs can be accommodated on this trip.';
 
   const rowStyle = !isTimeLaterThanNow(trip.end_time)
     ? {
       opacity: 0.3
     }
-    : {}
+    : {};
 
   return(
     <tr className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'bg-secondary text-light' : ''} style={rowStyle}>
@@ -55,17 +55,17 @@ function TripTableRow({trip, route}) {
         </OverlayTrigger>
       </td>
     </tr>
-  )
+  );
 }
 
 TripTableRow.propTypes = {
   trip: PropTypes.object,
   route: PropTypes.object
-}
+};
 
 TripTableRow.defaultProps = {
   trip: {},
   route: {}
-}
+};
 
-export default TripTableRow
+export default TripTableRow;

@@ -1,20 +1,20 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
 
 // Wrapper for fetch
 export async function getJSON(url, options={}) {
-  const { timeout = 60000 } = options
+  const { timeout = 60000 } = options;
   const response = await axios.get(url, {
     ...options,
     timeout: timeout
-  })
-  return response.data
+  });
+  return response.data;
 }
 
 // Format a timestamp to human readable
 export function formatTimestamp(timestamp, format) {
   if (!timestamp || typeof timestamp === 'undefined') {
-    return(<>N/A</>)
+    return(<>N/A</>);
   }
   if (!format || typeof format === 'undefined') {
     format = {year: '2-digit', day: 'numeric', month: 'numeric', hour: 'numeric', minute:'2-digit'};
@@ -28,14 +28,14 @@ export function formatTimestamp(timestamp, format) {
 // Convert degrees to ordinal direction
 export function formatBearing(bearing) {
   if (!bearing || typeof bearing === 'undefined') {
-    return(<>N/A</>)
+    return(<>N/A</>);
   }
-  const val = Math.floor((bearing / 22.5) + 0.5)
+  const val = Math.floor((bearing / 22.5) + 0.5);
   const arr = [
     'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE',
     'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW',
     'NW', 'NNW'
-  ]
+  ];
   let bearing_display = arr[(val % 16)];
   return(
     <span title={bearing}>{bearing_display}</span>
@@ -45,12 +45,12 @@ export function formatBearing(bearing) {
 // Convert meters per second into miles per hour
 export function formatSpeed(speed) {
   if (!speed || typeof speed === 'undefined') {
-    return(<>N/A</>)
+    return(<>N/A</>);
   }
   let display_speed = Math.round(speed * 2.2369) + ' mph';
   return(
     <span title={speed}>{display_speed}</span>
-  )
+  );
 }
 
 // Determine if color is 'light'
@@ -74,70 +74,70 @@ export function formatPositionData(data) {
       bearing: pos.vehicle.position.bearing,
       metadata: pos.vehicle,
       timestamp: pos.vehicle.timestamp
-    })
-  })
-  return positions
+    });
+  });
+  return positions;
 }
 
 // Format shape points for Polyline
 export function formatShapePoints(points) {
   return (points.map((p, _i) => {
-    return [p.lat, p.lon]
-  }))
+    return [p.lat, p.lon];
+  }));
 }
 
 // Format start/stop trip time
 export function formatTripTime(time) {
-  const now = new Date()
-  const [hour, minute, second] = time.split(':')
-  now.setHours(hour)
-  now.setMinutes(minute)
-  now.setSeconds(second)
-  return now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'})
+  const now = new Date();
+  const [hour, minute, second] = time.split(':');
+  now.setHours(hour);
+  now.setMinutes(minute);
+  now.setSeconds(second);
+  return now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
 }
 
 // Check if HH:MM:SS is after now
 export function isTimeLaterThanNow(time) {
-  const now = new Date()
-  const t1 = new Date()
-  const [hour, minute, second] = time.split(':')
-  t1.setHours(hour)
-  t1.setMinutes(minute)
-  t1.setSeconds(second)
-  return t1 > now
+  const now = new Date();
+  const t1 = new Date();
+  const [hour, minute, second] = time.split(':');
+  t1.setHours(hour);
+  t1.setMinutes(minute);
+  t1.setSeconds(second);
+  return t1 > now;
 }
 
 // Check if a start and end time in HH:MM contains now
 export function isTimeRangeIncludesNow(start_time, end_time) {
-  const now = new Date()
-  const t1 = new Date()
-  const t2 = new Date()
-  const [start_hour, start_minute, start_second] = start_time.split(':')
-  t1.setHours(start_hour)
-  t1.setMinutes(start_minute)
-  t1.setSeconds(start_second)
-  const [end_hour, end_minute, end_second] = end_time.split(':')
-  t2.setHours(end_hour)
-  t2.setMinutes(end_minute)
-  t2.setSeconds(end_second)
-  return (t1 < now && now < t2)
+  const now = new Date();
+  const t1 = new Date();
+  const t2 = new Date();
+  const [start_hour, start_minute, start_second] = start_time.split(':');
+  t1.setHours(start_hour);
+  t1.setMinutes(start_minute);
+  t1.setSeconds(start_second);
+  const [end_hour, end_minute, end_second] = end_time.split(':');
+  t2.setHours(end_hour);
+  t2.setMinutes(end_minute);
+  t2.setSeconds(end_second);
+  return (t1 < now && now < t2);
 }
 
 // Convert kilometers to miles
 export function formatDistanceTraveled(kilometers) {
   if (!kilometers) {
-    return 'Start'
+    return 'Start';
   }
-  return (kilometers * 0.62137).toFixed(2) + ' mi'
+  return (kilometers * 0.62137).toFixed(2) + ' mi';
 }
 
 // Format stop time update time
 export function formatStopTimeUpdate(stop_update) {
   if (typeof stop_update.departure !== 'undefined' && typeof stop_update.departure.time === 'number') {
-    return new Date(stop_update.departure.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})
+    return new Date(stop_update.departure.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
   }
   if (typeof stop_update.arrival !== 'undefined' && typeof stop_update.arrival.time === 'number') {
-    return new Date(stop_update.arrival.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'})
+    return new Date(stop_update.arrival.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
   }
-  return '--'
+  return '--';
 }

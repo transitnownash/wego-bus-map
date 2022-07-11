@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './controllers/Main'
+import Main from './controllers/Main';
 import About from './controllers/About';
-import TransitRoutes from './controllers/TransitRoutes'
+import TransitRoutes from './controllers/TransitRoutes';
 import TransitRoute from './controllers/TransitRoute';
 import Trip from './controllers/Trip';
 import NoMatch from './controllers/NoMatch';
-import ErrorBoundary from './components/ErrorBoundry';
-import './resources/bootstrap-with-mixins.scss'
+import ErrorBoundary from './components/ErrorBoundary';
+import './resources/bootstrap-with-mixins.scss';
 import './App.scss';
 
 function App() {

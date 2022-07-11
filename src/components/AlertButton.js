@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function AlertButton({alerts, buttonAction}) {
   if (alerts.length > 0) {
@@ -17,11 +17,11 @@ function AlertButton({alerts, buttonAction}) {
 AlertButton.propTypes = {
   alerts: PropTypes.array,
   buttonAction: PropTypes.func
-}
+};
 
 AlertButton.defaultProps = {
   alerts: [],
-  buttonAction: () => { console.error('No buttonAction set!') }
-}
+  buttonAction: () => { console.error('No buttonAction set!'); }
+};
 
 export default AlertButton;

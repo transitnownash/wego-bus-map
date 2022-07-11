@@ -1,25 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
-import busIcon from '../resources/bus.svg'
-import trainIcon from '../resources/train.svg'
-import { isHexLight } from '../util'
-import { OverlayTrigger } from 'react-bootstrap'
-import { Tooltip } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import './TransitRouteHeader.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import busIcon from '../resources/bus.svg';
+import trainIcon from '../resources/train.svg';
+import { isHexLight } from '../util';
+import { OverlayTrigger } from 'react-bootstrap';
+import { Tooltip } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './TransitRouteHeader.scss';
 
 function TransitRouteHeader({route, alerts, showRouteType}) {
 
   const routeStyle = {
     backgroundColor: '#' + route.route_color,
     color: isHexLight(route.route_color) ? '#000' : '#FFF'
-  }
+  };
 
-  let vehicleIcon = busIcon
+  let vehicleIcon = busIcon;
   if (route.route_type === "2") {
-    vehicleIcon = trainIcon
+    vehicleIcon = trainIcon;
   }
 
   return(
@@ -42,18 +42,18 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 TransitRouteHeader.propTypes = {
   route: PropTypes.object.isRequired,
   alerts: PropTypes.array,
   showRouteType: PropTypes.bool
-}
+};
 
 TransitRouteHeader.defaultProps = {
   alerts: [],
   showRouteType: false
-}
+};
 
-export default TransitRouteHeader
+export default TransitRouteHeader;

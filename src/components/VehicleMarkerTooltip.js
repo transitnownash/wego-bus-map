@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Tooltip } from 'react-leaflet'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBus, faMap } from '@fortawesome/free-solid-svg-icons'
-import L from 'leaflet'
-import TransitRouteHeader from './TransitRouteHeader'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Tooltip } from 'react-leaflet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBus, faMap } from '@fortawesome/free-solid-svg-icons';
+import L from 'leaflet';
+import TransitRouteHeader from './TransitRouteHeader';
 
 function VehicleMarkerTooltip({route, metadata, alerts}) {
   if (L.Browser.mobile) {
-    return
+    return;
   }
 
   return(
@@ -29,19 +29,19 @@ function VehicleMarkerTooltip({route, metadata, alerts}) {
         </table>
       </div>
     </Tooltip>
-  )
+  );
 }
 
 VehicleMarkerTooltip.propTypes = {
   route: PropTypes.object,
   metadata: PropTypes.object,
   alerts: PropTypes.array
-}
+};
 
 VehicleMarkerTooltip.defaultProps = {
   route: {},
   metadata: {},
   alerts: []
-}
+};
 
 export default VehicleMarkerTooltip;

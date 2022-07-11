@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import TripTableRow from './TripTableRow'
-import TripTableRowEmpty from './TripTableRowEmpty'
+import React from 'react';
+import PropTypes from 'prop-types';
+import TripTableRow from './TripTableRow';
+import TripTableRowEmpty from './TripTableRowEmpty';
 
 function TripTable({routeTrips, route}) {
   if (routeTrips.length === 0) {
-    return(<div className="alert alert-info">No trips scheduled for {route.route_long_name} today.</div>)
+    return(<div className="alert alert-info">No trips scheduled for {route.route_long_name} today.</div>);
   }
 
   return(
@@ -24,7 +24,7 @@ function TripTable({routeTrips, route}) {
           </thead>
           <tbody>
             {routeTrips.filter((t) => t.direction_id === '1').map((item, _index) => {
-              return(<TripTableRow key={item.id} trip={item} route={route}></TripTableRow>)
+              return(<TripTableRow key={item.id} trip={item} route={route}></TripTableRow>);
             })}
             {routeTrips.filter((t) => t.direction_id === '1').length === 0 &&
               (<TripTableRowEmpty></TripTableRowEmpty>)
@@ -46,7 +46,7 @@ function TripTable({routeTrips, route}) {
           </thead>
           <tbody>
             {routeTrips.filter((t) => t.direction_id !== '1').map((item, _index) => {
-              return(<TripTableRow key={item.id} trip={item} route={route}></TripTableRow>)
+              return(<TripTableRow key={item.id} trip={item} route={route}></TripTableRow>);
             })}
             {routeTrips.filter((t) => t.direction_id !== '1').length === 0 &&
               (<TripTableRowEmpty></TripTableRowEmpty>)
@@ -55,17 +55,17 @@ function TripTable({routeTrips, route}) {
         </table>
       </div>
     </div>
-  )
+  );
 }
 
 TripTable.propTypes = {
   routeTrips: PropTypes.array,
   route: PropTypes.object
-}
+};
 
 TripTable.defaultProps = {
   routeTrips: [],
   route: {}
-}
+};
 
-export default TripTable
+export default TripTable;

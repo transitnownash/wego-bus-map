@@ -1,22 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {formatTimestamp, isHexLight} from './../util.js'
-import './AlertItem.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {formatTimestamp, isHexLight} from './../util.js';
+import './AlertItem.scss';
 
 function AlertItem({alert, route}) {
   const alertStyle = {
     borderColor: (route.route_color) ? '#' + route.route_color : '#eee',
     backgroundColor: (route.route_color) ? '#' + route.route_color : '#eee',
     color: isHexLight(route.route_color) ? '#000' : '#FFF'
-  }
+  };
 
   const alert_cause = (typeof alert.cause !== 'undefined')
     ? (<>{alert.cause} - </>)
-    : (<></>)
+    : (<></>);
 
   const alert_effect = (typeof alert.effect !== 'undefined')
     ? (<>{alert.effect} - </>)
-    : (<></>)
+    : (<></>);
 
   return(
     <div className="card mb-3" style={alertStyle}>
@@ -38,13 +38,13 @@ function AlertItem({alert, route}) {
         }
       </div>
     </div>
-  )
+  );
 }
 
 AlertItem.propTypes = {
   alert: PropTypes.object,
   route: PropTypes.object
-}
+};
 
 AlertItem.defaultProps = {
   alert: {},
@@ -53,6 +53,6 @@ AlertItem.defaultProps = {
     route_long_name: 'Route Unavailable',
     route_short_name: '00'
   }
-}
+};
 
-export default AlertItem
+export default AlertItem;

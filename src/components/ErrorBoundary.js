@@ -16,7 +16,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    this.setState({error: error})
+    this.setState({error: error});
     // You can also log the error to an error reporting service
     console.error(error, errorInfo);
   }
@@ -44,6 +44,6 @@ class ErrorBoundary extends React.Component {
 
 ErrorBoundary.propTypes = {
   children: PropTypes.node.isRequired
-}
+};
 
 export default ErrorBoundary;

@@ -1,15 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { faBicycle } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Marker, Popup, Tooltip } from "react-leaflet"
-import { formatTimestamp } from "../util"
-import L from 'leaflet'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { faBicycle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Marker, Popup, Tooltip } from "react-leaflet";
+import { formatTimestamp } from "../util";
+import L from 'leaflet';
 
 function BCycleMarker({icon, station}) {
   // Ignore if station does not have status loaded
   if (typeof station.status === 'undefined') {
-    return
+    return;
   }
 
   return(
@@ -59,17 +59,17 @@ function BCycleMarker({icon, station}) {
         <div className="text-end"><a href="https://nashville.bcycle.com" className="text-muted" target="_blank" rel="noreferrer">BCycle Nashville</a></div>
       </Popup>
     </Marker>
-  )
+  );
 }
 
 BCycleMarker.propTypes = {
   icon: PropTypes.instanceOf(L.Icon),
   station: PropTypes.object
-}
+};
 
 BCycleMarker.defaultProps = {
   icon: new L.Icon(),
   station: {}
-}
+};
 
-export default BCycleMarker
+export default BCycleMarker;

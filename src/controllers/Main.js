@@ -9,102 +9,114 @@ import { getJSON, formatPositionData } from '../util';
 import DataFetchError from '../components/DataFetchError';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
-const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville'
+const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville';
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
 const REFRESH_ALERTS_TTL = 60 * 1000;
-const REFRESH_GBFS_TTL = 60 * 1000
+const REFRESH_GBFS_TTL = 60 * 1000;
 
 function Main() {
-  const [routes, setRouteData] = useState([])
-  const [agencies, setAgencyData] = useState([])
-  const [vehicleMarkers, setVehicleMarkers] = useState([])
-  const [alerts, setAlerts] = useState([])
-  const [bCycleStations, setBCycleStationData] = useState([])
-  const [bCycleStationsStatus, setBCycleStationStatusData] = useState([])
-  const [isRoutesLoaded, setRoutesLoaded] = useState(false)
-  const [isAlertLoaded, setAlertLoaded] = useState(false)
-  const [isAgencyLoaded, setAgencyLoaded] = useState(false)
-  const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false)
-  const [dataFetchError, setDataFetchError] = useState(false)
-  const [alertModalShow, setAlertModalShow] = useState(false)
-  const map = useRef(null)
+  const [routes, setRouteData] = useState([]);
+  const [agencies, setAgencyData] = useState([]);
+  const [vehicleMarkers, setVehicleMarkers] = useState([]);
+  const [alerts, setAlerts] = useState([]);
+  const [bCycleStations, setBCycleStationData] = useState([]);
+  const [bCycleStationsStatus, setBCycleStationStatusData] = useState([]);
+  const [isRoutesLoaded, setRoutesLoaded] = useState(false);
+  const [isAlertLoaded, setAlertLoaded] = useState(false);
+  const [isAgencyLoaded, setAgencyLoaded] = useState(false);
+  const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
+  const [dataFetchError, setDataFetchError] = useState(false);
+  const [alertModalShow, setAlertModalShow] = useState(false);
+  const map = useRef(null);
+
+  // Consolidated check that things are ready to go
+  const isUIReady = [isRoutesLoaded, isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
 
   useEffect(() => {
     getJSON(GTFS_BASE_URL + '/routes.json')
       .then((r) => setRouteData(r.data))
       .then(() => setRoutesLoaded(true))
-      .catch((error) => setDataFetchError(error))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/agencies.json')
       .then((a) => setAgencyData(a.data))
       .then(() => setAgencyLoaded(true))
-      .catch((error) => setDataFetchError(error))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
-      .catch((error) => setDataFetchError(error))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
-        return formatPositionData(data)
+        return formatPositionData(data);
       })
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
-      .catch((error) => setDataFetchError(error))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GBFS_BASE_URL + '/station_information.json')
       .then((s) => setBCycleStationData(s.data.stations))
-      .catch((error) => setDataFetchError(error))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GBFS_BASE_URL + '/station_status.json')
       .then((s) => setBCycleStationStatusData(s.data.stations))
-      .catch((error) => setDataFetchError(error))
+      .catch((error) => setDataFetchError(error));
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
+      if (!isUIReady) {
+        return;
+      }
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then(function (data) {
-          return formatPositionData(data)
+          return formatPositionData(data);
         })
-        .then((data) => setVehicleMarkers(data))
+        .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
     // Refresh alerts at a set interval
     const refreshAlertsInterval = setInterval(() => {
+      if (!isUIReady) {
+        return;
+      }
       getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
     // Refresh BCycle station status at a set interval
     const refreshBCycleStatus = setInterval(() => {
+      if (!isUIReady) {
+        return;
+      }
       getJSON(GBFS_BASE_URL + '/station_status.json')
-        .then((s) => setBCycleStationStatusData(s.data.stations))
-    }, REFRESH_GBFS_TTL)
+        .then((s) => setBCycleStationStatusData(s.data.stations));
+    }, REFRESH_GBFS_TTL);
 
     // Run on unmount
     return () => {
-      clearInterval(refreshPositionsInterval)
-      clearInterval(refreshAlertsInterval)
-      clearInterval(refreshBCycleStatus)
-    }
-  }, []);
+      clearInterval(refreshPositionsInterval);
+      clearInterval(refreshAlertsInterval);
+      clearInterval(refreshBCycleStatus);
+    };
+  }, [isUIReady]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>)
+    return(<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
   const locateUserOnMap = function(map) {
     if (typeof map.current !== 'undefined' && map.current) {
-      map.current.locate()
+      map.current.locate();
     }
-  }
+  };
 
   // Combine BCycle data into one hash
   if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
     bCycleStations.forEach((station, index) => {
-      bCycleStations[index].status = bCycleStationsStatus.find(s => station.station_id === s.station_id)
-    })
+      bCycleStations[index].status = bCycleStationsStatus.find(s => station.station_id === s.station_id);
+    });
   }
 
   const mapControls = {
@@ -119,10 +131,10 @@ function Main() {
         <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
       </div>
     )
-  }
+  };
 
   return(
-    (!isAlertLoaded || !isAgencyLoaded || !isRoutesLoaded || !isVehiclePositionLoaded ) ? (
+    (!isUIReady) ? (
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (
       <div className="main">
@@ -130,7 +142,7 @@ function Main() {
         <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
       </div>
     )
-  )
+  );
 }
 
-export default Main
+export default Main;

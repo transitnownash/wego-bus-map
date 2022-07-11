@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { MapContainer, TileLayer, LayersControl, LayerGroup, Polyline } from 'react-leaflet';
 import VehicleMarker from './VehicleMarker';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -7,9 +7,9 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import bCycleIconImage from '../resources/bcycle.svg'
+import bCycleIconImage from '../resources/bcycle.svg';
 import './TransitMap.scss';
-import './StopTimeMarker'
+import './StopTimeMarker';
 import { formatShapePoints } from '../util';
 import { useState, useCallback } from 'react';
 import LocationMarker from './LocationMarker';
@@ -27,50 +27,50 @@ L.Icon.Default.mergeOptions({
 function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, map, bCycleStations, mapControls}) {
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback(val => {
-    setShapes(val)
-  }, [setShapes])
+    setShapes(val);
+  }, [setShapes]);
 
   const [stops, setStops] = useState(routeStops);
   const doSetStops = useCallback(val => {
-    setStops(val)
-  }, [setStops])
+    setStops(val);
+  }, [setStops]);
 
   const getRouteDataById = function (routeId) {
-    return routes.find(r => r.route_gid === routeId)
-  }
+    return routes.find(r => r.route_gid === routeId);
+  };
 
   const getAgencyDataById = function (agencyId) {
-    return agencies.find(a => a.agency_gid === agencyId)
-  }
+    return agencies.find(a => a.agency_gid === agencyId);
+  };
 
   const getRouteAlertsById = function (routeId) {
-    return alerts.filter(a => a.alert.informed_entity[0].route_id === routeId)
-  }
+    return alerts.filter(a => a.alert.informed_entity[0].route_id === routeId);
+  };
 
   const getStopAlertsById = function (stopCode) {
-    let stopAlerts = []
+    let stopAlerts = [];
     alerts.forEach(a => {
       a.alert.informed_entity.forEach(e => {
         if (e.stop_id === stopCode) {
-          stopAlerts.push(a)
+          stopAlerts.push(a);
         }
-      })
+      });
     });
-    return stopAlerts
-  }
+    return stopAlerts;
+  };
 
-  const cityCenter = [36.166512, -86.781581]
+  const cityCenter = [36.166512, -86.781581];
   const cityMaxBounds = [
     [36.725005, -87.579122], // northwest
     [35.541600, -86.097066]  // southeast
-  ]
+  ];
 
   const shapeEventHandlers = {
     click: (_e) => {
-      setShapes([])
-      setStops([])
+      setShapes([]);
+      setStops([]);
     }
-  }
+  };
 
   const bCycleMarkerIcon = L.Icon.extend({
     options: {
@@ -78,8 +78,8 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
       iconSize: [24, 24],
       shadowUrl: null
     }
-  })
-  const bCycleIcon = new bCycleMarkerIcon()
+  });
+  const bCycleIcon = new bCycleMarkerIcon();
 
   return(
     <MapContainer ref={map} className="map-container" center={cityCenter} zoom={12} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
@@ -94,14 +94,14 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
         <LayersControl.Overlay checked={true} name="Vehicles">
           <LayerGroup>
             {vehicleMarkers.map((item, _index) => {
-              let route = getRouteDataById(item.metadata.trip.route_id)
-              let routeAlerts = getRouteAlertsById(item.metadata.trip.route_id)
-              let agency = getAgencyDataById(route ? route.agency_gid : {})
-              let tripId = item.metadata.trip.trip_id
+              let route = getRouteDataById(item.metadata.trip.route_id);
+              let routeAlerts = getRouteAlertsById(item.metadata.trip.route_id);
+              let agency = getAgencyDataById(route ? route.agency_gid : {});
+              let tripId = item.metadata.trip.trip_id;
 
               return(
                 <VehicleMarker key={item.id} position={item.position} speed={item.speed} bearing={item.bearing} metadata={item.metadata} route={route} agency={agency} tripId={tripId} timestamp={item.timestamp} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
-              )
+              );
             })}
           </LayerGroup>
         </LayersControl.Overlay>
@@ -111,7 +111,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
               {shapes.map((item, _index) => {
                 return(
                   <Polyline key={item.shape_gid} opacity={0.6} weight={5} positions={formatShapePoints(item.points)} color={'#' + item.route_color} eventHandlers={shapeEventHandlers}></Polyline>
-                )
+                );
               })}
             </LayerGroup>
           </LayersControl.Overlay>
@@ -120,8 +120,8 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
           <LayersControl.Overlay checked={true} name="Stops">
             <LayerGroup>
               {stops.map((item, _index) => {
-                let stop_alerts = getStopAlertsById(item.stop.stop_code)
-                return(<StopTimeMarker key={item.id} stopTime={item} stopAlerts={stop_alerts}></StopTimeMarker>)
+                let stop_alerts = getStopAlertsById(item.stop.stop_code);
+                return(<StopTimeMarker key={item.id} stopTime={item} stopAlerts={stop_alerts}></StopTimeMarker>);
               })}
              </LayerGroup>
           </LayersControl.Overlay>
@@ -132,7 +132,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
               {bCycleStations.map((item, _index) => {
                 return(
                   <BCycleMarker key={item.station_id} station={item} icon={bCycleIcon}></BCycleMarker>
-                )
+                );
               })}
              </LayerGroup>
           </LayersControl.Overlay>
@@ -163,7 +163,7 @@ TransitMap.propTypes = {
   map: PropTypes.any,
   bCycleStations: PropTypes.array,
   mapControls: PropTypes.object
-}
+};
 
 TransitMap.defaultProps = {
   routes: [],
@@ -174,6 +174,6 @@ TransitMap.defaultProps = {
   alerts: [],
   bCycleStations: [],
   mapControls: {}
-}
+};
 
-export default TransitMap
+export default TransitMap;

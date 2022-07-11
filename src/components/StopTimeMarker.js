@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import L from 'leaflet';
-import { Circle, Marker, Popup, Tooltip } from "react-leaflet"
-import { formatTripTime } from "../util"
-import stopIconImage from '../resources/stop.svg'
+import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
+import { formatTripTime } from "../util";
+import stopIconImage from '../resources/stop.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning } from '@fortawesome/free-solid-svg-icons';
-import StopTimeSequence from './StopTimeSequence'
+import StopTimeSequence from './StopTimeSequence';
 
 function StopTimeMarker({stopTime, stopAlerts}) {
   const stopMarkerIcon = L.Icon.extend({
@@ -15,8 +15,8 @@ function StopTimeMarker({stopTime, stopAlerts}) {
       iconSize: [24, 24],
       shadowUrl: null
     }
-  })
-  const stopIcon = new stopMarkerIcon()
+  });
+  const stopIcon = new stopMarkerIcon();
 
   const content = (
     <div>
@@ -42,7 +42,7 @@ function StopTimeMarker({stopTime, stopAlerts}) {
         }
       </dl>
     </div>
-  )
+  );
 
   return(
     <>
@@ -59,17 +59,17 @@ function StopTimeMarker({stopTime, stopAlerts}) {
         (<Circle center={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} radius={70} pathOptions={{ color: 'orange' }}></Circle>)
       }
     </>
-  )
+  );
 }
 
 StopTimeMarker.propTypes = {
   stopTime: PropTypes.object,
   stopAlerts: PropTypes.array
-}
+};
 
 StopTimeMarker.defaultProps = {
   stopTime: {},
   stopAlerts: []
-}
+};
 
-export default StopTimeMarker
+export default StopTimeMarker;

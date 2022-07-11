@@ -1,27 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { useRef, useState } from 'react'
-import ReactLeafletDriftMarker from 'react-leaflet-drift-marker'
-import VehicleMarkerPopup from './VehicleMarkerPopup'
-import L from 'leaflet'
-import '../lib/leaflet-rotated-marker'
-import busMarkerImage from '../resources/bus.svg'
-import busMarkerImageShadow from '../resources/bus-shadow.svg'
-import trainMarkerImage from '../resources/train.svg'
-import trainMarkerImageShadow from '../resources/train-shadow.svg'
-import './VehicleMarker.scss'
-import VehicleMarkerTooltip from './VehicleMarkerTooltip'
-import { getJSON } from '../util'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useRef, useState } from 'react';
+import ReactLeafletDriftMarker from 'react-leaflet-drift-marker';
+import VehicleMarkerPopup from './VehicleMarkerPopup';
+import L from 'leaflet';
+import '../lib/leaflet-rotated-marker';
+import busMarkerImage from '../resources/bus.svg';
+import busMarkerImageShadow from '../resources/bus-shadow.svg';
+import trainMarkerImage from '../resources/train.svg';
+import trainMarkerImageShadow from '../resources/train-shadow.svg';
+import './VehicleMarker.scss';
+import VehicleMarkerTooltip from './VehicleMarkerTooltip';
+import { getJSON } from '../util';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
 function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, metadata, tripId, shapeSetter, stopSetter, alerts}) {
-  const [trip, setTripData] = useState({})
-  const marker = useRef()
+  const [trip, setTripData] = useState({});
+  const marker = useRef();
 
   if (!route) {
     console.log('[Warning] No matching route found for Trip #' + tripId);
-    return(<></>)
+    return(<></>);
   }
 
   let iconOptions = {
@@ -30,24 +30,24 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
     popupAnchor: [0, -14],
     shadowSize: [32, 50],
     shadowAnchor: [16, 16]
-  }
+  };
 
   // Set shadow rotation if bearing provided
   if (typeof bearing === 'number') {
-    iconOptions['shadowUrl'] = busMarkerImageShadow
+    iconOptions['shadowUrl'] = busMarkerImageShadow;
   }
   // Swap out images if vehicle is a train
   if (route.route_type === '2') {
-    iconOptions['iconUrl'] = trainMarkerImage
-    iconOptions['shadowUrl'] = trainMarkerImageShadow
+    iconOptions['iconUrl'] = trainMarkerImage;
+    iconOptions['shadowUrl'] = trainMarkerImageShadow;
   }
-  const markerIcon = L.Icon.extend({options: iconOptions})
-  const icon = new markerIcon()
+  const markerIcon = L.Icon.extend({options: iconOptions});
+  const icon = new markerIcon();
 
   // Fade stale icons a bit
-  let opacity = 1.0
+  let opacity = 1.0;
   if ((Date.now()/1000) - timestamp > 120) {
-    opacity = 0.25
+    opacity = 0.25;
   }
 
   // Handle click on marker
@@ -55,19 +55,19 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
     getJSON(GTFS_BASE_URL + '/trips/' + tripId + '.json')
       .then((trip) => {
         // Add shape to map
-        trip.shape['route_color'] = route.route_color
-        shapeSetter([trip.shape])
+        trip.shape['route_color'] = route.route_color;
+        shapeSetter([trip.shape]);
         // Add stops to map
-        stopSetter(trip.stop_times)
-        return trip
+        stopSetter(trip.stop_times);
+        return trip;
       })
       .then((data) => setTripData(data));
-  }
+  };
 
   // Rotate the shadow if bearing is set
   if (marker.current) {
     if (typeof bearing === 'number') {
-      marker.current.setRotationShadowAngle(bearing)
+      marker.current.setRotationShadowAngle(bearing);
     }
   }
 
@@ -76,7 +76,7 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
       <VehicleMarkerPopup speed={speed} bearing={bearing} metadata={metadata} route={route} agency={agency} tripId={tripId} trip={trip} timestamp={timestamp} alerts={alerts}></VehicleMarkerPopup>
       <VehicleMarkerTooltip route={route} metadata={metadata} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
-  )
+  );
 }
 
 VehicleMarker.propTypes = {
@@ -92,7 +92,7 @@ VehicleMarker.propTypes = {
   shapeSetter: PropTypes.func,
   stopSetter: PropTypes.func,
   alerts: PropTypes.array
-}
+};
 
 VehicleMarker.defaultProps = {
   id: null,
@@ -104,9 +104,9 @@ VehicleMarker.defaultProps = {
   timestamp: null,
   metadata: {},
   tripId: null,
-  shapeSetter: () => { console.error('No shapeSetter function set!') },
-  stopSetter: () => { console.error('No stopSetter function set!') },
+  shapeSetter: () => { console.error('No shapeSetter function set!'); },
+  stopSetter: () => { console.error('No stopSetter function set!'); },
   alerts: []
-}
+};
 
-export default VehicleMarker
+export default VehicleMarker;

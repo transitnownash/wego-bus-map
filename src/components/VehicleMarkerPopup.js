@@ -1,11 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Popup } from 'react-leaflet'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { formatBearing, formatSpeed, formatTimestamp } from './../util.js'
-import { Link } from 'react-router-dom'
-import TransitRouteHeader from './TransitRouteHeader.js'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Popup } from 'react-leaflet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { formatBearing, formatSpeed, formatTimestamp } from './../util.js';
+import { Link } from 'react-router-dom';
+import TransitRouteHeader from './TransitRouteHeader.js';
 
 function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, agency, tripId, alerts}) {
   const trip_headsign = (trip.trip_headsign)
@@ -48,7 +48,7 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
         <div className="text-end"><a href={agency.agency_url} className="text-muted" target="_blank" rel="noreferrer">{agency.agency_name}</a></div>
       </div>
     </Popup>
-  )
+  );
 }
 
 VehicleMarkerPopup.propTypes = {
@@ -61,7 +61,7 @@ VehicleMarkerPopup.propTypes = {
   agency: PropTypes.object,
   tripId: PropTypes.string,
   alerts: PropTypes.array
-}
+};
 
 VehicleMarkerPopup.defaultProps = {
   trip: {},
@@ -73,6 +73,6 @@ VehicleMarkerPopup.defaultProps = {
   agency: {},
   tripId: null,
   alerts: {}
-}
+};
 
 export default VehicleMarkerPopup;

@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { faRoute, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../resources/logo.svg';
 
 function TitleBar({hide}) {
   if (hide) {
-    return
+    return;
   }
   return(
     <div>
@@ -24,15 +24,15 @@ function TitleBar({hide}) {
         <Link className="btn btn-outline-light" to="/">Return to App</Link>
       </div>
     </div>
-  )
+  );
 }
 
 TitleBar.propTypes = {
   hide: PropTypes.bool
-}
+};
 
 TitleBar.defaultProps = {
   hide: false
-}
+};
 
-export default TitleBar
+export default TitleBar;

@@ -1,15 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faLandmark } from "@fortawesome/free-solid-svg-icons"
-import StopTimeSequence from './StopTimeSequence'
-import { formatTripTime, isTimeLaterThanNow, formatDistanceTraveled, formatStopTimeUpdate } from "../util"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLandmark } from "@fortawesome/free-solid-svg-icons";
+import StopTimeSequence from './StopTimeSequence';
+import { formatTripTime, isTimeLaterThanNow, formatDistanceTraveled, formatStopTimeUpdate } from "../util";
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
-  let rowStyle = {opacity: 1.0}
+  let rowStyle = {opacity: 1.0};
 
   if (!isTimeLaterThanNow(stopTime.departure_time)) {
-    rowStyle = {opacity: 0.3}
+    rowStyle = {opacity: 0.3};
   }
 
   // If updated time
@@ -19,7 +19,7 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
     ) {
     rowStyle = {
       opacity: 1.0
-    }
+    };
   }
 
   return(
@@ -50,17 +50,17 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
         )
       }</td>
     </tr>
-  )
+  );
 }
 
 StopTimeTableRow.propTypes = {
   stopTime: PropTypes.object,
   stopTimeUpdate: PropTypes.object
-}
+};
 
 StopTimeTableRow.defaultProps = {
   stopTime: {},
   stopTimeUpdate: {}
-}
+};
 
-export default StopTimeTableRow
+export default StopTimeTableRow;

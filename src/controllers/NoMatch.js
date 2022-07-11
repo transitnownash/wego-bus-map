@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import TitleBar from "../components/TitleBar";
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
 import { Link } from "react-router-dom";
 
 function NoMatch() {
@@ -19,4 +19,4 @@ function NoMatch() {
   );
 }
 
-export default NoMatch
+export default NoMatch;

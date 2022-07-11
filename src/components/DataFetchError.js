@@ -1,20 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import TitleBar from './TitleBar';
 import Footer from './Footer';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function DataFetchError({error}) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  let errorMessage = ''
+  let errorMessage = '';
   switch (error.name) {
     case 'AbortError':
-      errorMessage = 'The API request took too long and was canceled.'
+      errorMessage = 'The API request took too long and was canceled.';
       break;
     default:
-      errorMessage = 'An unexpected error has ocurred.'
+      errorMessage = 'An unexpected error has ocurred.';
       break;
   }
 
@@ -37,11 +37,11 @@ function DataFetchError({error}) {
       </div>
       <Footer></Footer>
     </>
-  )
+  );
 }
 
 DataFetchError.propTypes = {
   error: PropTypes.instanceOf(DOMException)
-}
+};
 
-export default DataFetchError
+export default DataFetchError;
