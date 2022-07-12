@@ -55,6 +55,9 @@ export function formatSpeed(speed) {
 
 // Determine if color is 'light'
 export function isHexLight(color) {
+  if (typeof color !== 'string' || !color) {
+    color = '000000';
+  }
   const hex = color.replace('#', '');
   const c_r = parseInt(hex.substr(0, 2), 16);
   const c_g = parseInt(hex.substr(2, 2), 16);
