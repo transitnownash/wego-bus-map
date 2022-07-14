@@ -54,12 +54,11 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
 }
 
 StopTimeTableRow.propTypes = {
-  stopTime: PropTypes.object,
+  stopTime: PropTypes.object.isRequired,
   stopTimeUpdate: PropTypes.object
 };
 
 StopTimeTableRow.defaultProps = {
-  stopTime: {},
   stopTimeUpdate: {}
 };
 

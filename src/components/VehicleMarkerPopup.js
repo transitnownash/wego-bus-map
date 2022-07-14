@@ -72,7 +72,7 @@ VehicleMarkerPopup.defaultProps = {
   metadata: {},
   agency: {},
   tripId: null,
-  alerts: {}
+  alerts: []
 };
 
 export default VehicleMarkerPopup;

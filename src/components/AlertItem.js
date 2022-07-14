@@ -42,12 +42,11 @@ function AlertItem({alert, route}) {
 }
 
 AlertItem.propTypes = {
-  alert: PropTypes.object,
+  alert: PropTypes.object.isRequired,
   route: PropTypes.object
 };
 
 AlertItem.defaultProps = {
-  alert: {},
   route: {
     route_color: '#999',
     route_long_name: 'Route Unavailable',

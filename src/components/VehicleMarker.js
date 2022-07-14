@@ -80,8 +80,8 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
 }
 
 VehicleMarker.propTypes = {
-  id: PropTypes.string,
-  position: PropTypes.array,
+  id: PropTypes.string.isRequired,
+  position: PropTypes.array.isRequired,
   route: PropTypes.object,
   agency: PropTypes.object,
   bearing: PropTypes.number,

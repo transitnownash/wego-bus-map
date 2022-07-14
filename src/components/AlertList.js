@@ -19,12 +19,11 @@ function AlertList({alerts, routes}) {
 }
 
 AlertList.propTypes = {
-  alerts: PropTypes.array,
+  alerts: PropTypes.array.isRequired,
   routes: PropTypes.array
 };
 
 AlertList.defaultProps = {
-  alerts: [],
   routes: []
 };
 
