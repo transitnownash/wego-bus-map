@@ -3,7 +3,7 @@
 /**
  * Modified to allow for shadow rotation isolated from marker
  * @author hanying33
- * @url https://raw.githubusercontent.com/hanying33/Leaflet.RotatedMarkerWithShadow
+ * @url https://github.com/hanying33/Leaflet.RotatedMarkerWithShadow
  **/
 (function (L) {
   // save these original methods before they are overwritten

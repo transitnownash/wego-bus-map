@@ -36,7 +36,7 @@ function About() {
             Backend
             <ul>
               <li><a href="https://github.com/transitnownash/gtfs-rails-api">GTFS Rails API</a></li>
-              <li><a href="https://nodejs.org">Sinatra</a></li>
+              <li><a href="https://create-react-app.dev/">Create React App</a></li>
             </ul>
           </div>
           <div className="col-sm-6">
@@ -44,13 +44,15 @@ function About() {
             <ul>
               <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
               <li><a href="https://fontawesome.com/">Font Awesome</a></li>
-              <li><a href="https://reactjs.org/">ReactJS</a></li>
+              <li><a href="https://reactjs.org/">React</a></li>
             </ul>
             Mapping
             <ul>
-              <li><a href="http://leafletjs.com/">Leaflet.js</a></li>
+              <li><a href="http://leafletjs.com/">Leaflet</a></li>
               <li><a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a></li>
               <li><a href="http://cartodb.com/attributions">CartoDB</a></li>
+              <li><a href="https://github.com/hanying33/Leaflet.RotatedMarkerWithShadow">Leaflet.RotatedMarkerWithShadow</a></li>
+              <li><a href="https://github.com/hugobarragon/react-leaflet-drift-marker">react-leaflet-drift-marker</a></li>
             </ul>
           </div>
         </div>
