@@ -12,10 +12,10 @@ function Footer() {
         </li>
         <li className="vr"></li>
         <li className="nav-item">
-          <Link className="nav-link" to='/'>About</Link>
+          <Link className="nav-link" to='/about'>About</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to='/'>Routes</Link>
+          <Link className="nav-link" to='/routes'>Routes</Link>
         </li>
         <li className="vr"></li>
         <li className="nav-item">
