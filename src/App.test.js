@@ -1,4 +1,4 @@
-/* globals test, expect*/
+/* globals test, expect */
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
