@@ -37,7 +37,7 @@ function LocationMarker() {
   return position === null ? null : (
     <>
       <Marker position={position} icon={icon}>
-        <Popup><strong>Your location.</strong><br />Accuracy: {accuracy} meters</Popup>
+        <Popup><strong>Your location.</strong><br />Accuracy: {accuracy.toFixed(1)} meters</Popup>
       </Marker>
       <Circle center={position} radius={accuracy}></Circle>
     </>
