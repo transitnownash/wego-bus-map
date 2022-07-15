@@ -5,7 +5,7 @@ import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
 import { formatTripTime } from "../util";
 import stopIconImage from '../resources/stop.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import StopTimeSequence from './StopTimeSequence';
 
 function StopTimeMarker({stopTime, stopAlerts}) {
@@ -21,13 +21,16 @@ function StopTimeMarker({stopTime, stopAlerts}) {
   const content = (
     <div>
       <div className="stop-name d-flex">
-          <div className="flex-grow-1"><StopTimeSequence stopTime={stopTime}></StopTimeSequence> {stopTime.stop.stop_name}</div>
-        </div>
+        <div className="flex-grow-1"><StopTimeSequence stopTime={stopTime}></StopTimeSequence> {stopTime.stop.stop_name}</div>
+      </div>
       {stopTime.timepoint === "1" &&
-          (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
+        (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
       }
       {stopAlerts.length > 0 &&
-          (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
+        (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
+      }
+      {stopTime.stop.parent_station != null &&
+        (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stopTime.stop.parent_station}</em></div>)
       }
       <dl>
         <dt>Scheduled Time</dt>
