@@ -136,7 +136,7 @@ function Trip() {
   return(
     <div>
       <TitleBar></TitleBar>
-      <div className="container routes">
+      <div className="container trip">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
         <table className="table table-vertical">
           <tbody>
@@ -173,7 +173,7 @@ function Trip() {
           <thead>
             <tr>
               <th>Sequence</th>
-              <th>Distance Traveled</th>
+              <th>Distance</th>
               <th>Stop</th>
               <th className="bg-secondary text-light text-center">Scheduled</th>
               <th className="bg-dark text-light text-center">Updated</th>

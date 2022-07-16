@@ -7,7 +7,7 @@ function About() {
   return (
     <div>
       <TitleBar></TitleBar>
-      <div className="container">
+      <div className="container about">
         <div className="row">
           <div className="col-lg-8">
             <p className="lead">Produced in collaboration with <a href="https://transitnownash.org/">Transit Now Nashville</a>, a local grassroots organization whose mission is to raise awareness of the benefits of regional mass transit options for the people living in the Greater Nashville Area.</p>

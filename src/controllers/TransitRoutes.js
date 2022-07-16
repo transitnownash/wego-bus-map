@@ -45,7 +45,7 @@ function TransitRoutes() {
     ) : (
       <div>
         <TitleBar></TitleBar>
-        <div className="container routes">
+        <div className="container transit-routes">
           {routes.map((item, _index) => {
             const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name);
             return(<TransitRouteHeader key={item.id} route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>);

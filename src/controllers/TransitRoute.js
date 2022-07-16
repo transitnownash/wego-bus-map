@@ -108,7 +108,7 @@ function TransitRoute() {
   return(
     <div>
       <TitleBar></TitleBar>
-      <div className="container routes">
+      <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
         <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>

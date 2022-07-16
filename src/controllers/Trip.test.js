@@ -1,11 +1,11 @@
 /* globals test */
 
 import React from 'react';
-import StopTimeMarker from './StopTimeMarker';
 import { createRoot } from 'react-dom/client';
+import Trip from './Trip';
 
-test('renders StopTimeMarker', () => {
+test('renders Trip', () => {
   const div = document.createElement('div');
   const root = createRoot(div);
-  root.render(<StopTimeMarker />);
+  root.render(<Trip />);
 });

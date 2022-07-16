@@ -9,12 +9,12 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import bCycleIconImage from '../resources/bcycle.svg';
 import './TransitMap.scss';
-import './StopTimeMarker';
+import './StopMarker';
 import { formatShapePoints } from '../util';
 import { useState, useCallback } from 'react';
 import LocationMarker from './LocationMarker';
 import BCycleMarker from './BCycleMarker';
-import StopTimeMarker from './StopTimeMarker';
+import StopMarker from './StopMarker';
 
 // Fix paths for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -121,7 +121,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
             <LayerGroup>
               {stops.map((item, _index) => {
                 let stop_alerts = getStopAlertsById(item.stop.stop_code);
-                return(<StopTimeMarker key={item.id} stopTime={item} stopAlerts={stop_alerts}></StopTimeMarker>);
+                return(<StopMarker key={item.id} stop={item.stop} stopTime={item} stopAlerts={stop_alerts}></StopMarker>);
               })}
              </LayerGroup>
           </LayersControl.Overlay>
@@ -160,7 +160,7 @@ TransitMap.propTypes = {
   routeShapes: PropTypes.array,
   routeStops: PropTypes.array,
   alerts: PropTypes.array,
-  map: PropTypes.any,
+  map: PropTypes.any.isRequired,
   bCycleStations: PropTypes.array,
   mapControls: PropTypes.object
 };

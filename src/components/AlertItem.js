@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {formatTimestamp, isHexLight} from './../util.js';
 import './AlertItem.scss';
+import { Link } from 'react-router-dom';
 
 function AlertItem({alert, route}) {
   const alertStyle = {
@@ -20,8 +21,8 @@ function AlertItem({alert, route}) {
 
   return(
     <div className="card mb-3" style={alertStyle}>
-      <div className="card-header">
-        <strong>{route.route_short_name} - {route.route_long_name}</strong>
+      <div className="card-header alert-item-header">
+        <strong><Link to={'/routes/' + route.route_short_name}>{route.route_short_name} - {route.route_long_name}</Link></strong>
       </div>
       <div className="card-body bg-light text-dark alert-item-text">
         <p>

@@ -42,20 +42,14 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
 
         }
       </td>
-      <td className="text-center">{stopTimeUpdate !== false
-        ? (
-          <>{formatStopTimeUpdate(stopTimeUpdate)}</>
-        ) : (
-          <>--</>
-        )
-      }</td>
+      <td className="text-center">{formatStopTimeUpdate(stopTimeUpdate)}</td>
     </tr>
   );
 }
 
 StopTimeTableRow.propTypes = {
   stopTime: PropTypes.object.isRequired,
-  stopTimeUpdate: PropTypes.object
+  stopTimeUpdate: PropTypes.any
 };
 
 StopTimeTableRow.defaultProps = {

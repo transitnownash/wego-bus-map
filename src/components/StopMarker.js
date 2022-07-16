@@ -7,8 +7,9 @@ import stopIconImage from '../resources/stop.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import StopTimeSequence from './StopTimeSequence';
+import { Link } from 'react-router-dom';
 
-function StopTimeMarker({stopTime, stopAlerts}) {
+function StopMarker({stop, stopTime, stopAlerts}) {
   const stopMarkerIcon = L.Icon.extend({
     options: {
       iconUrl: stopIconImage,
@@ -21,7 +22,12 @@ function StopTimeMarker({stopTime, stopAlerts}) {
   const content = (
     <div>
       <div className="stop-name d-flex">
-        <div className="flex-grow-1"><StopTimeSequence stopTime={stopTime}></StopTimeSequence> {stopTime.stop.stop_name}</div>
+        <div className="flex-grow-1">
+          {stopTime.stop_sequence &&
+            (<span className="pe-1"><StopTimeSequence stopTime={stopTime}></StopTimeSequence></span>)
+          }
+          <Link to={'/stops/' + stop.stop_code}>{stop.stop_name}</Link>
+        </div>
       </div>
       {stopTime.timepoint === "1" &&
         (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
@@ -29,18 +35,22 @@ function StopTimeMarker({stopTime, stopAlerts}) {
       {stopAlerts.length > 0 &&
         (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
       }
-      {stopTime.stop.parent_station != null &&
-        (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stopTime.stop.parent_station}</em></div>)
+      {stop.parent_station != null &&
+        (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stop.parent_station}</em></div>)
       }
       <dl>
-        <dt>Scheduled Time</dt>
-        <dd>{formatTripTime(stopTime.arrival_time)}</dd>
+        {typeof stopTime.arrival_time !== 'undefined' &&
+          (<>
+            <dt>Scheduled Time</dt>
+            <dd>{formatTripTime(stopTime.arrival_time)}</dd>
+          </>)
+        }
         <dt>Code</dt>
-        <dd><tt>{stopTime.stop.stop_code}</tt></dd>
-        {stopTime.stop.stop_desc != null &&
+        <dd><tt>{stop.stop_code}</tt></dd>
+        {stop.stop_desc != null &&
         <>
           <dt>Description</dt>
-          <dd>{stopTime.stop.stop_desc ? stopTime.stop.stop_desc : 'N/A'}</dd>
+          <dd>{stop.stop_desc ? stop.stop_desc : 'N/A'}</dd>
         </>
         }
       </dl>
@@ -49,30 +59,31 @@ function StopTimeMarker({stopTime, stopAlerts}) {
 
   return(
     <>
-      <Marker position={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} icon={stopIcon}>
+      <Marker position={[stop.stop_lat, stop.stop_lon]} icon={stopIcon}>
         {!L.Browser.mobile && (
           <Tooltip>{content}</Tooltip>
         )}
         <Popup>{content}</Popup>
       </Marker>
       {stopTime.timepoint === "1" &&
-        (<Circle center={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
+        (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
       }
       {stopAlerts.length > 0 &&
-        (<Circle center={[stopTime.stop.stop_lat, stopTime.stop.stop_lon]} radius={70} pathOptions={{ color: 'orange' }}></Circle>)
+        (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={70} pathOptions={{ color: 'orange' }}></Circle>)
       }
     </>
   );
 }
 
-StopTimeMarker.propTypes = {
+StopMarker.propTypes = {
+  stop: PropTypes.object.isRequired,
   stopTime: PropTypes.object,
   stopAlerts: PropTypes.array
 };
 
-StopTimeMarker.defaultProps = {
+StopMarker.defaultProps = {
   stopTime: {},
   stopAlerts: []
 };
 
-export default StopTimeMarker;
+export default StopMarker;
