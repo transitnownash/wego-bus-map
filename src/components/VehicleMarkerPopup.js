@@ -17,7 +17,7 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
     <Popup>
       <div className="popup-content">
         <TransitRouteHeader route={route} alerts={alerts} showRouteType={false}></TransitRouteHeader>
-        <table className="table table-borderless table-sm" style={{minWidth: '250px'}}>
+        <table className="table table-borderless table table-sm small" style={{minWidth: '250px'}}>
           <tbody>
             <tr>
               <th><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>

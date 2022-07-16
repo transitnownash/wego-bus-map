@@ -15,7 +15,7 @@ function VehicleMarkerTooltip({route, metadata, alerts}) {
     <Tooltip>
       <div className="tooltip-content">
         <TransitRouteHeader route={route} alerts={alerts} showRouteType={false}></TransitRouteHeader>
-        <table className="table table-borderless table-sm mb-0">
+        <table className="table table table-sm table-borderless small mb-0">
           <tbody>
             <tr>
               <th><FontAwesomeIcon icon={faBus}/> Vehicle</th>

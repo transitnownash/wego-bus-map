@@ -169,14 +169,13 @@ function Trip() {
         </table>
         <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
-        <table className="table">
+        <table className="table table-sm small">
           <thead>
             <tr>
-              <th>Sequence</th>
+              <th>Seq.</th>
               <th>Distance</th>
               <th>Stop</th>
-              <th className="bg-secondary text-light text-center">Scheduled</th>
-              <th className="bg-dark text-light text-center">Updated</th>
+              <th className="bg-dark text-light text-center">Time</th>
             </tr>
           </thead>
           <tbody>

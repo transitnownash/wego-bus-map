@@ -135,12 +135,49 @@ export function formatDistanceTraveled(kilometers) {
 }
 
 // Format stop time update time
-export function formatStopTimeUpdate(stop_update) {
-  if (typeof stop_update.departure !== 'undefined' && typeof stop_update.departure.time === 'number') {
-    return new Date(stop_update.departure.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+export function formatStopTimeUpdate(stopTimeUpdate) {
+  if (typeof stopTimeUpdate.departure !== 'undefined' && typeof stopTimeUpdate.departure.time === 'number') {
+    return new Date(stopTimeUpdate.departure.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
   }
-  if (typeof stop_update.arrival !== 'undefined' && typeof stop_update.arrival.time === 'number') {
-    return new Date(stop_update.arrival.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+  if (typeof stopTimeUpdate.arrival !== 'undefined' && typeof stopTimeUpdate.arrival.time === 'number') {
+    return new Date(stopTimeUpdate.arrival.time * 1000).toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
   }
   return '--';
+}
+
+// Render scheduled vs updated time
+export function renderTimePoint(scheduleData, updateData) {
+  // Determine which time point to use for trip update, or none.
+  let updateTime = false;
+  if (updateData && typeof updateData.departure !== 'undefined' && typeof updateData.departure.time === 'number') {
+    updateTime = updateData.departure.time;
+  } else if (updateData && typeof updateData.arrival !== 'undefined' && typeof updateData.arrival.time === 'number') {
+    updateTime = updateData.arrival.time;
+  }
+
+  // Grab the relevant pieces for the scheduled time
+  let scheduleTime = formatTripTime(scheduleData.departure_time);
+
+  // Handle case where departure and arrival time are mismatched
+  let scheduleDepartNote = '';
+  if (scheduleData.arrival_time !== scheduleData.departure_time) {
+    scheduleTime = formatTripTime(scheduleData.arrival_time);
+    scheduleDepartNote = (<> (Departs {formatTripTime(scheduleData.departure_time)})</>);
+  }
+
+  // If no update provided (e.g. past or far-future trip), return scheduled
+  if (!updateTime) {
+    return(<>{scheduleTime}{scheduleDepartNote}</>);
+  }
+
+  updateTime = formatStopTimeUpdate(updateData);
+
+  return(
+    <>
+      {scheduleTime !== updateTime && (
+        <small><strike className="text-muted">{scheduleTime}{scheduleDepartNote}</strike><br /></small>
+      )}
+      <strong className="text-primary">{updateTime}</strong>
+    </>
+  );
 }
