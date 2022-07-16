@@ -134,7 +134,7 @@ function Stops() {
               const route = routes.find((r) => r.route_gid === item.route_gid);
               const rowStyle = {
                 opacity: isTimeLaterThanNow(item.stop_times[0].arrival_time || item.stop_times[0].departure_time) ? 1 : 0.3
-              }
+              };
               return(
                 <tr key={item.id} style={rowStyle}>
                   <td><TransitRouteHeader route={route}></TransitRouteHeader></td>
@@ -150,7 +150,7 @@ function Stops() {
                   </td>
                   <td>{item.trip_headsign}</td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>

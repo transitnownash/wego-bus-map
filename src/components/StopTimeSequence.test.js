@@ -36,6 +36,6 @@ test('renders StopTimeSequence', () => {
       "stop_timezone": null,
       "wheelchair_boarding": "1"
     }
-  }
+  };
   root.render(<StopTimeSequence stopTime={stopTime} />);
 });

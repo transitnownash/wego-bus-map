@@ -36,6 +36,6 @@ test('renders StopTimeTableRow', () => {
       "stop_timezone": null,
       "wheelchair_boarding": "1"
     }
-  }
+  };
   root.render(<StopTimeTableRow stopTime={stopTime}/>);
 });

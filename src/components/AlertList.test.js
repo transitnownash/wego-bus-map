@@ -42,6 +42,6 @@ test('renders AlertList', () => {
         }
       }
     }
-  ]
+  ];
   root.render(<AlertList alerts={alerts} />);
 });

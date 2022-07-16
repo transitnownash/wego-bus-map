@@ -40,6 +40,6 @@ test('renders AlertItem', () => {
         ]
       }
     }
-  }
+  };
   root.render(<AlertItem alert={alert} />);
 });
