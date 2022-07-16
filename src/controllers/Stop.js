@@ -12,7 +12,7 @@ import AlertList from '../components/AlertList';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import StopTimeSequence from '../components/StopTimeSequence';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLandmark, faWarning, faWheelchair, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faLandmark, faWarning, faWheelchair, faBan, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
@@ -132,6 +132,42 @@ function Stops() {
     return aTime > bTime;
   });
 
+  // Determine accessibility information
+  let wheelchair_boarding = '';
+  switch (stop.wheelchair_boarding) {
+    case "1":
+      wheelchair_boarding = (
+        <span className="me-2">
+          <FontAwesomeIcon icon={faWheelchair} fixedWidth={true}></FontAwesomeIcon> Some vehicles at this stop can be boarded by a rider in a wheelchair.
+        </span>
+      );
+      break;
+
+    case "2":
+      wheelchair_boarding = (
+        <>
+          <span className="fa-layers fa-fw me-1">
+            <FontAwesomeIcon icon={faBan} fixedWidth={true} className="text-danger"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faWheelchair} fixedWidth={true} transform="shrink-7"></FontAwesomeIcon>
+          </span>
+          Wheelchair boarding is not possible at this stop.
+        </>
+      );
+      break;
+
+    case "0":
+    default:
+      wheelchair_boarding = (
+        <>
+          <span className="fa-layers fa-fw me-1">
+            <FontAwesomeIcon icon={faQuestionCircle} fixedWidth={true} className="text-warning"></FontAwesomeIcon>
+          </span>
+          No accessibility information for the stop.
+        </>
+      );
+      break;
+  }
+
   return(
     <div>
       <TitleBar></TitleBar>
@@ -147,17 +183,7 @@ function Stops() {
           {stop.stop_code} {stop.stop_desc}
         </div>
         <div className="text-center p-2 mb-2">
-          {stop.wheelchair_boarding === "1" ? (
-            <><FontAwesomeIcon icon={faWheelchair} fixedWidth={true}></FontAwesomeIcon> Some vehicles at this stop can be boarded by a rider in a wheelchair.</>
-          ) : (
-            <>
-              <span className="fa-layers fa-fw">
-                <FontAwesomeIcon icon={faBan} fixedWidth={true} className="text-danger"></FontAwesomeIcon>
-                <FontAwesomeIcon icon={faWheelchair} fixedWidth={true}></FontAwesomeIcon>
-              </span>
-              Wheelchair boarding is not possible at this stop.
-            </>
-          )}
+          {wheelchair_boarding}
         </div>
         <StopMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} stops={[stop]} alerts={alerts} mapControls={mapControls}></StopMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
@@ -170,7 +196,6 @@ function Stops() {
                   <th>Route</th>
                   <th>Trip</th>
                   <th>Headsign</th>
-                  <th>Direction</th>
                   <th className="bg-secondary text-light text-center">Scheduled</th>
                 </tr>
               </thead>
@@ -198,8 +223,10 @@ function Stops() {
                       <td className="text-center"><StopTimeSequence stopTime={item.stop_times[0]}></StopTimeSequence></td>
                       <td><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
                       <td><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
-                      <td>{item.trip_headsign}</td>
-                      <td>{item.direction_id === "1" ? 'Inbound' : 'Outbound'}</td>
+                      <td>
+                        <strong>{item.trip_headsign}</strong><br />
+                        {item.direction_id === "1" ? 'Inbound' : 'Outbound'}
+                      </td>
                       <td className="text-center">
                         {renderTimePoint(item.stop_times[0], stopTimeUpdate)}
                       </td>
@@ -207,6 +234,7 @@ function Stops() {
                   );
                 })}
               </tbody>
+              <caption><strong>Legend:</strong> <strike className="text-muted small">0:00 AM</strike> - Scheduled time has been updated. | <strong className="text-primary">0:00 AM</strong> - Updated with realtime trip information.</caption>
             </table>
           </div>
         )}

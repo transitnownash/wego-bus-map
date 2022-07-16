@@ -184,6 +184,7 @@ function Trip() {
               return(<StopTimeTableRow key={item.id + '-' + item.stop_sequence} stopTime={item} stopTimeUpdate={stopTimeUpdate}></StopTimeTableRow>);
             })}
           </tbody>
+          <caption><strong>Legend:</strong> <strike className="text-muted small">0:00 AM</strike> - Scheduled time has been updated. | <strong className="text-primary">0:00 AM</strong> - Updated with realtime trip information.</caption>
         </table>
         {isTripBlockLoaded &&
           <>
