@@ -128,25 +128,26 @@ function Stops() {
               <th>Route</th>
               <th>Trip</th>
               <th>Headsign</th>
-              <th>Distance</th>
               <th>Direction</th>
+              <th>Distance</th>
               <th className="bg-secondary text-light text-center">Scheduled</th>
             </tr>
           </thead>
           <tbody>
             {trips.map((item, _index) => {
               const route = routes.find((r) => r.route_gid === item.route_gid);
+              const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_gid);
               const rowStyle = {
                 opacity: isTimeLaterThanNow(item.stop_times[0].arrival_time || item.stop_times[0].departure_time) ? 1 : 0.3
               };
               return(
                 <tr key={item.id} style={rowStyle}>
                   <td className="text-center"><StopTimeSequence stopTime={item.stop_times[0]}></StopTimeSequence></td>
-                  <td><TransitRouteHeader route={route}></TransitRouteHeader></td>
+                  <td><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
                   <td><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
                   <td>{item.trip_headsign}</td>
-                  <td>{formatDistanceTraveled(item.stop_times[0].shape_dist_traveled)}</td>
                   <td>{item.direction_id === "1" ? 'Inbound' : 'Outbound'}</td>
+                  <td>{formatDistanceTraveled(item.stop_times[0].shape_dist_traveled)}</td>
                   <td className="text-center">
                     {formatTripTime(item.stop_times[0].arrival_time)}
                     {item.stop_times[0].arrival_time !== item.stop_times[0].departure_time &&

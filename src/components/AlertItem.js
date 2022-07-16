@@ -29,6 +29,17 @@ function AlertItem({alert, route}) {
           <strong>{alert.header_text.translation[0].text}</strong>
         </p>
         {alert.description_text.translation[0].text}
+        {alert.informed_entity.filter((ie) => typeof ie.stop_id !== 'undefined').length > 0 && (
+          <>
+            <hr />
+              <ul className="list-inline">
+                <li className="list-inline-item"><strong>Stops:</strong></li>
+                {alert.informed_entity.map((item, key) => {
+                  return(<li key={key} className="list-inline-item"><Link to={'/stops/' + item.stop_id}>{item.stop_id}</Link></li>);
+                })}
+            </ul>
+          </>
+        )}
       </div>
       <div className="card-footer alert-item-footer">
         {alert_cause}
