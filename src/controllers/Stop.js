@@ -12,7 +12,8 @@ import AlertList from '../components/AlertList';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import StopTimeSequence from '../components/StopTimeSequence';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLandmark } from '@fortawesome/free-solid-svg-icons';
+import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/Footer';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_ALERTS_TTL = 60 * 1000;
@@ -108,6 +109,9 @@ function Stops() {
       <TitleBar></TitleBar>
       <div className="container">
         <div className="stop-name">{stop.stop_name}</div>
+        {stopAlerts.length > 0 &&
+          (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
+       }
         <div className="text-center p-2 mb-2">
           {stop.parent_station && (
             <><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stop.parent_station}</em> - </>
@@ -117,16 +121,16 @@ function Stops() {
         <StopMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} stops={[stop]} alerts={alerts} mapControls={mapControls}></StopMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
-          <table className="table table-sm">
+          <table className="table">
           <thead>
             <tr>
+              <th>Sequence</th>
               <th>Route</th>
               <th>Trip</th>
-              <th>Sequence</th>
+              <th>Headsign</th>
               <th>Distance</th>
               <th>Direction</th>
-              <th>Time</th>
-              <th>Headsign</th>
+              <th className="bg-secondary text-light text-center">Scheduled</th>
             </tr>
           </thead>
           <tbody>
@@ -137,18 +141,18 @@ function Stops() {
               };
               return(
                 <tr key={item.id} style={rowStyle}>
+                  <td className="text-center"><StopTimeSequence stopTime={item.stop_times[0]}></StopTimeSequence></td>
                   <td><TransitRouteHeader route={route}></TransitRouteHeader></td>
                   <td><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
-                  <td><StopTimeSequence stopTime={item.stop_times[0]}></StopTimeSequence></td>
+                  <td>{item.trip_headsign}</td>
                   <td>{formatDistanceTraveled(item.stop_times[0].shape_dist_traveled)}</td>
                   <td>{item.direction_id === "1" ? 'Inbound' : 'Outbound'}</td>
-                  <td>
+                  <td className="text-center">
                     {formatTripTime(item.stop_times[0].arrival_time)}
                     {item.stop_times[0].arrival_time !== item.stop_times[0].departure_time &&
                       (<> (Departs {formatTripTime(item.stop_times[0].departure_time)})</>)
                     }
                   </td>
-                  <td>{item.trip_headsign}</td>
                 </tr>
               );
             })}
@@ -159,6 +163,7 @@ function Stops() {
           <div className="alert alert-info">No trips use this stop.</div>
         )}
       </div>
+      <Footer></Footer>
     </div>
   );
 }

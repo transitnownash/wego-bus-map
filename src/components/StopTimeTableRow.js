@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLandmark } from "@fortawesome/free-solid-svg-icons";
 import StopTimeSequence from './StopTimeSequence';
 import { formatTripTime, isTimeLaterThanNow, formatDistanceTraveled, formatStopTimeUpdate } from "../util";
+import { Link } from 'react-router-dom';
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
   let rowStyle = {opacity: 1.0};
@@ -29,7 +30,7 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
       </td>
       <td>{formatDistanceTraveled(stopTime.shape_dist_traveled)}</td>
       <td>
-        <strong>{stopTime.stop.stop_name}</strong><br />
+        <strong><Link to={'/stops/' + stopTime.stop.stop_code}>{stopTime.stop.stop_name}</Link></strong><br />
         <small>{stopTime.stop.stop_code} {stopTime.stop.stop_desc}</small>
         {stopTime.stop.parent_station &&
           (<em><br /><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside {stopTime.stop.parent_station}</em>)
