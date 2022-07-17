@@ -4,6 +4,9 @@ import AlertItem from './AlertItem';
 
 function AlertList({alerts, routes}) {
   alerts = alerts.sort((a, b) => {
+    if (a.alert.informed_entity[0].route_id === b.alert.informed_entity[0].route_id) {
+      return a.id > b.id;
+    }
     return parseInt(a.alert.informed_entity[0].route_id, 10) > parseInt(b.alert.informed_entity[0].route_id, 10);
   });
   return(
