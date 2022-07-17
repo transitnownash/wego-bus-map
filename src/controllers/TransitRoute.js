@@ -21,10 +21,13 @@ function TransitRoute() {
   const [route, setRouteData] = useState({});
   const [routeTrips, setRouteTripsData] = useState([]);
   const [routeStops, setRouteStops] = useState([]);
+  const [routeShapes, setRouteShapes] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [agencies, setAgencyData] = useState([]);
   const [vehicleMarkers, setVehicleMarkers] = useState([]);
   const [isRouteLoaded, setRouteLoaded] = useState(false);
+  const [isRouteStopsLoaded, setRouteStopsLoaded] = useState(false);
+  const [isRouteShapesLoaded, setRouteShapesLoaded] = useState(false);
   const [isRouteTripsLoaded, setRouteTripsLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
@@ -34,7 +37,7 @@ function TransitRoute() {
   const map = useRef(null);
 
   // Consolidated check that things are ready to go
-  const isUIReady = [isRouteLoaded, isRouteTripsLoaded, isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
+  const isUIReady = [isRouteLoaded, isRouteTripsLoaded, isRouteStopsLoaded, isRouteShapesLoaded, isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
 
   useEffect(() => {
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
@@ -44,6 +47,12 @@ function TransitRoute() {
 
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json')
       .then((rs) => setRouteStops(rs.data))
+      .then(() => setRouteStopsLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
+     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/shapes.json')
+      .then((rs) => setRouteShapes(rs.data))
+      .then(() => setRouteShapesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
@@ -105,19 +114,15 @@ function TransitRoute() {
 
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
 
-  // Extract unique shapes
-  let shapes = routeTrips.map((item, _index) => {
-    item.shape['route_color'] = route.route_color;
-    return item.shape;
-  });
-  shapes = [...new Map(shapes.map((item, _key) => [item['id'], item])).values()];
-
   // Nest stops for map compatibility
   const mapStops = [];
-  routeStops.map((s) => mapStops.push({stop: s}));
+  routeStops.map((s) => mapStops.push({id: s.id, stop: s}));
+
+  // Add route color to shapes
+  routeShapes.map((s) => s.route_color = route.route_color);
 
   // Set the map to center on the trip route
-  const getPolyLineBounds = L.latLngBounds(formatShapePoints(shapes[0].points));
+  const getPolyLineBounds = L.latLngBounds(formatShapePoints(routeShapes[0].points));
   const center = getPolyLineBounds.getCenter();
 
   return(
@@ -125,7 +130,7 @@ function TransitRoute() {
       <TitleBar></TitleBar>
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} routeStops={mapStops} alerts={routeAlerts} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={routeTrips}></TripTable>
       </div>
