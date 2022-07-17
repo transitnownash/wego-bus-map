@@ -45,7 +45,7 @@ function TransitRoute() {
       .then(() => setRouteLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json')
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json?per_page=200')
       .then((rs) => setRouteStops(rs.data))
       .then(() => setRouteStopsLoaded(true))
       .catch((error) => setDataFetchError(error));
