@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
@@ -19,14 +19,14 @@ const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
 const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
 
 function Trip() {
-  const [route, setRouteData] = useState({});
+  const [routes, setRoutes] = useState({});
   const [trip, setRouteTripData] = useState([]);
   const [tripBlock, setTripBlockData] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [agencies, setAgencyData] = useState([]);
   const [vehicleMarkers, setVehicleMarkers] = useState([]);
   const [tripUpdates, setTripUpdates] = useState([]);
-  const [isRouteLoaded, setRouteLoaded] = useState(false);
+  const [isRoutesLoaded, setRoutesLoaded] = useState(false);
   const [isRouteTripLoaded, setRouteTripLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
   const [isTripUpdateLoaded, setTripUpdateLoaded] = useState(false);
@@ -35,28 +35,30 @@ function Trip() {
   const [isTripBlockLoaded, setTripBlockLoaded] = useState(false);
   const { pathname } = useLocation();
   const params = useParams();
+  const map = useRef();
 
   // Consolidated check that things are ready to go
   const isUIReady = [
-    isRouteLoaded, isRouteTripLoaded, isTripUpdateLoaded,
-    isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded,
+    isRoutesLoaded,
+    isRouteTripLoaded,
+    isAlertLoaded,
+    isTripUpdateLoaded,
+    isAgencyLoaded,
+    isVehiclePositionLoaded,
     isTripBlockLoaded
   ].every((a) => a === true);
 
   useEffect(() => {
     // On intra-page navigation, scroll to top and restore lading screen
     window.scrollTo(0, 0);
-    setRouteTripLoaded(false);
 
     getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '.json')
-      .then((t) => {
-        setRouteTripData(t);
-        getJSON(GTFS_BASE_URL + '/routes/' + t.route_gid + '.json')
-
-          .then((r) => setRouteData(r))
-          .then(() => setRouteLoaded(true));
-      })
+      .then((t) => setRouteTripData(t))
       .then(() => setRouteTripLoaded(true));
+
+    getJSON(GTFS_BASE_URL + '/routes.json')
+      .then((r) => setRoutes(r.data))
+      .then(()=> setRoutesLoaded(true));
 
     getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '/block.json')
       .then((r) => setTripBlockData(r))
@@ -92,8 +94,7 @@ function Trip() {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
-        .then((data) => setTripUpdates(data))
-        .then(() => setTripUpdateLoaded(true));
+        .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
     // Run on unmount
@@ -108,8 +109,11 @@ function Trip() {
     return(<LoadingScreen></LoadingScreen>);
   }
 
+  // Get single route from routes set
+  const route = routes.find((r) => r.route_gid === trip.route_gid);
+
   // No matching route
-  if (!route || route.status === 404) {
+  if (!trip || trip.status === 404) {
     return(<NoMatch></NoMatch>);
   }
 
@@ -167,7 +171,7 @@ function Trip() {
             </tr>
           </tbody>
         </table>
-        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts}></TransitMap>
+        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts} map={map}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table table-sm small">
           <thead>

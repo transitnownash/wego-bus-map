@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLandmark } from "@fortawesome/free-solid-svg-icons";
 import StopTimeSequence from './StopTimeSequence';
-import { isTimeLaterThanNow, formatDistanceTraveled, renderTimePoint } from "../util";
+import TimePoint from './TimePoint';
+import { isTimeLaterThanNow, formatDistanceTraveled } from "../util";
 import { Link } from 'react-router-dom';
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
@@ -36,7 +37,9 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
           (<em><br /><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside {stopTime.stop.parent_station}</em>)
         }
       </td>
-      <td className="text-center">{renderTimePoint(stopTime, stopTimeUpdate)}</td>
+      <td className="text-center">
+        <TimePoint scheduleData={stopTime} updateData={stopTimeUpdate}></TimePoint>
+      </td>
     </tr>
   );
 }

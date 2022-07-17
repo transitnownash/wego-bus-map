@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import LoadingScreen from '../components/LoadingScreen';
-import { getJSON, isTimeLaterThanNow, renderTimePoint } from './../util.js';
+import { getJSON, isTimeLaterThanNow } from './../util.js';
 import DataFetchError from '../components/DataFetchError';
 import StopMap from '../components/StopMap';
 import MapLinks from '../components/MapLinks';
@@ -11,9 +11,11 @@ import TitleBar from '../components/TitleBar';
 import AlertList from '../components/AlertList';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import StopTimeSequence from '../components/StopTimeSequence';
+import TimePoint from '../components/TimePoint';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLandmark, faWarning, faWheelchair, faBan, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer';
+import StopAccessibilityInformation from '../components/StopAccessibilityInformation';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_ALERTS_TTL = 60 * 1000;
@@ -31,7 +33,7 @@ function Stops() {
   const [isAlertsLoaded, setAlertsLoaded] = useState(false);
   const [isTripUpdatesLoaded, setTripUpdatesLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
-  const map = useRef();
+  const map = useRef(null);
   const params = useParams();
 
   // Consolidated check that things are ready to go
@@ -132,42 +134,6 @@ function Stops() {
     return aTime > bTime;
   });
 
-  // Determine accessibility information
-  let wheelchair_boarding = '';
-  switch (stop.wheelchair_boarding) {
-    case "1":
-      wheelchair_boarding = (
-        <span className="me-2">
-          <FontAwesomeIcon icon={faWheelchair} fixedWidth={true}></FontAwesomeIcon> Some vehicles at this stop can be boarded by a rider in a wheelchair.
-        </span>
-      );
-      break;
-
-    case "2":
-      wheelchair_boarding = (
-        <>
-          <span className="fa-layers fa-fw me-1">
-            <FontAwesomeIcon icon={faBan} fixedWidth={true} className="text-danger"></FontAwesomeIcon>
-            <FontAwesomeIcon icon={faWheelchair} fixedWidth={true} transform="shrink-7"></FontAwesomeIcon>
-          </span>
-          Wheelchair boarding is not possible at this stop.
-        </>
-      );
-      break;
-
-    case "0":
-    default:
-      wheelchair_boarding = (
-        <>
-          <span className="fa-layers fa-fw me-1">
-            <FontAwesomeIcon icon={faQuestionCircle} fixedWidth={true} className="text-warning"></FontAwesomeIcon>
-          </span>
-          No accessibility information for the stop.
-        </>
-      );
-      break;
-  }
-
   return(
     <div>
       <TitleBar></TitleBar>
@@ -183,7 +149,7 @@ function Stops() {
           {stop.stop_code} {stop.stop_desc}
         </div>
         <div className="text-center p-2 mb-2">
-          {wheelchair_boarding}
+          <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
         <StopMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} stops={[stop]} alerts={alerts} mapControls={mapControls}></StopMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
@@ -196,7 +162,7 @@ function Stops() {
                   <th>Route</th>
                   <th>Trip</th>
                   <th>Headsign</th>
-                  <th className="bg-secondary text-light text-center">Scheduled</th>
+                  <th className="bg-dark text-light text-center">Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -228,7 +194,7 @@ function Stops() {
                         {item.direction_id === "1" ? 'Inbound' : 'Outbound'}
                       </td>
                       <td className="text-center">
-                        {renderTimePoint(item.stop_times[0], stopTimeUpdate)}
+                        <TimePoint scheduleData={item.stop_times[0]} updateData={stopTimeUpdate}></TimePoint>
                       </td>
                     </tr>
                   );

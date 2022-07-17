@@ -15,9 +15,9 @@ import { getJSON } from '../util';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
-function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, metadata, tripId, shapeSetter, stopSetter, alerts}) {
+function VehicleMarker({position, route, agency, bearing, speed, timestamp, metadata, tripId, shapeSetter, stopSetter, alerts}) {
   const [trip, setTripData] = useState({});
-  const marker = useRef();
+  const marker = useRef(null);
 
   if (typeof route.route_gid === 'undefined') {
     console.log('[Warning] No matching route found for Trip #' + tripId);
@@ -72,7 +72,7 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
   }
 
   return(
-    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} key={id} position={position} icon={icon} rotationShadowAngle={bearing} opacity={opacity}>
+    <ReactLeafletDriftMarker key={tripId} ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={position} icon={icon} rotationShadowAngle={bearing} opacity={opacity}>
       <VehicleMarkerPopup speed={speed} bearing={bearing} metadata={metadata} route={route} agency={agency} tripId={tripId} trip={trip} timestamp={timestamp} alerts={alerts}></VehicleMarkerPopup>
       <VehicleMarkerTooltip route={route} metadata={metadata} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
@@ -80,7 +80,6 @@ function VehicleMarker({id, position, route, agency, bearing, speed, timestamp, 
 }
 
 VehicleMarker.propTypes = {
-  id: PropTypes.string.isRequired,
   position: PropTypes.array.isRequired,
   route: PropTypes.object,
   agency: PropTypes.object,
@@ -95,7 +94,6 @@ VehicleMarker.propTypes = {
 };
 
 VehicleMarker.defaultProps = {
-  id: null,
   position: [],
   route: {},
   agency: {},

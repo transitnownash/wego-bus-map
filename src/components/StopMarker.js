@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import StopTimeSequence from './StopTimeSequence';
 import { Link } from 'react-router-dom';
+import StopAccessibilityInformation from './StopAccessibilityInformation';
 
 function StopMarker({stop, stopTime, stopAlerts}) {
   const stopMarkerIcon = L.Icon.extend({
@@ -38,6 +39,9 @@ function StopMarker({stop, stopTime, stopAlerts}) {
       {stop.parent_station != null &&
         (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stop.parent_station}</em></div>)
       }
+      <div className="p-2 mb-2 text-center">
+        <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
+      </div>
       <dl>
         {typeof stopTime.arrival_time !== 'undefined' &&
           (<>

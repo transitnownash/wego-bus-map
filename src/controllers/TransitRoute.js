@@ -1,6 +1,6 @@
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
@@ -29,6 +29,7 @@ function TransitRoute() {
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
   const params = useParams();
+  const map = useRef(null);
 
   // Consolidated check that things are ready to go
   const isUIReady = [isRouteLoaded, isRouteTripsLoaded, isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
@@ -110,7 +111,7 @@ function TransitRoute() {
       <TitleBar></TitleBar>
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts}></TransitMap>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts} map={map}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={route_trips}></TripTable>
       </div>

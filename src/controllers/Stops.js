@@ -17,7 +17,7 @@ function Stops() {
   const [isStopsLoaded, setStopsLoaded] = useState(false);
   const [isAlertsLoaded, setAlertsLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
-  const map = useRef();
+  const map = useRef(null);
 
   // Consolidated check that things are ready to go
   const isUIReady = [isStopsLoaded, isAlertsLoaded].every((a) => a === true);
