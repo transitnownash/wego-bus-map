@@ -19,7 +19,8 @@ const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
 
 function TransitRoute() {
   const [route, setRouteData] = useState({});
-  const [route_trips, setRouteTripsData] = useState([]);
+  const [routeTrips, setRouteTripsData] = useState([]);
+  const [routeStops, setRouteStops] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [agencies, setAgencyData] = useState([]);
   const [vehicleMarkers, setVehicleMarkers] = useState([]);
@@ -39,6 +40,10 @@ function TransitRoute() {
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
       .then((r) => setRouteData(r))
       .then(() => setRouteLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json')
+      .then((rs) => setRouteStops(rs.data))
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
@@ -101,11 +106,15 @@ function TransitRoute() {
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
 
   // Extract unique shapes
-  let shapes = route_trips.map((item, _index) => {
+  let shapes = routeTrips.map((item, _index) => {
     item.shape['route_color'] = route.route_color;
     return item.shape;
   });
   shapes = [...new Map(shapes.map((item, _key) => [item['id'], item])).values()];
+
+  // Nest stops for map compatibility
+  const mapStops = [];
+  routeStops.map((s) => mapStops.push({stop: s}));
 
   // Set the map to center on the trip route
   const getPolyLineBounds = L.latLngBounds(formatShapePoints(shapes[0].points));
@@ -116,9 +125,9 @@ function TransitRoute() {
       <TitleBar></TitleBar>
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts} map={map} center={center} zoom={13}></TransitMap>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} routeStops={mapStops} alerts={routeAlerts} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
-        <TripTable route={route} routeTrips={route_trips}></TripTable>
+        <TripTable route={route} routeTrips={routeTrips}></TripTable>
       </div>
       <Footer></Footer>
     </div>

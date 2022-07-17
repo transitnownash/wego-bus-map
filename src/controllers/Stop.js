@@ -205,7 +205,7 @@ function Stops() {
           </div>
         )}
         {trips.length == 0 && (
-          <div className="alert alert-info">No trips use this stop.</div>
+          <div className="alert alert-info">No active trips use this stop.</div>
         )}
       </div>
       <Footer></Footer>
