@@ -1,6 +1,7 @@
 
 
 import React, { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
 import { useParams } from 'react-router-dom';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
@@ -8,7 +9,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
-import { getJSON, formatPositionData } from './../util.js';
+import { getJSON, formatPositionData, formatShapePoints } from './../util.js';
 import AlertList from '../components/AlertList';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
@@ -106,12 +107,16 @@ function TransitRoute() {
   });
   shapes = [...new Map(shapes.map((item, _key) => [item['id'], item])).values()];
 
+  // Set the map to center on the trip route
+  const getPolyLineBounds = L.latLngBounds(formatShapePoints(shapes[0].points));
+  const center = getPolyLineBounds.getCenter();
+
   return(
     <div>
       <TitleBar></TitleBar>
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts} map={map}></TransitMap>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={shapes} alerts={routeAlerts} map={map} center={center} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={route_trips}></TripTable>
       </div>

@@ -24,7 +24,7 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: markerShadow,
 });
 
-function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, map, bCycleStations, mapControls}) {
+function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, map, bCycleStations, mapControls, center, zoom}) {
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback(val => {
     setShapes(val);
@@ -59,7 +59,6 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
     return stopAlerts;
   };
 
-  const cityCenter = [36.166512, -86.781581];
   const cityMaxBounds = [
     [36.725005, -87.579122], // northwest
     [35.541600, -86.097066]  // southeast
@@ -82,7 +81,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
   const bCycleIcon = new bCycleMarkerIcon();
 
   return(
-    <MapContainer ref={map} className="map-container" center={cityCenter} zoom={12} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
+    <MapContainer ref={map} className="map-container" center={center} zoom={zoom} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
       <TileLayer
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; <a href="http://www.wegotransit.com" target="blank">WeGo</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
@@ -162,7 +161,9 @@ TransitMap.propTypes = {
   alerts: PropTypes.array,
   map: PropTypes.any.isRequired,
   bCycleStations: PropTypes.array,
-  mapControls: PropTypes.object
+  mapControls: PropTypes.object,
+  center: PropTypes.array,
+  zoom: PropTypes.number
 };
 
 TransitMap.defaultProps = {
@@ -173,7 +174,9 @@ TransitMap.defaultProps = {
   routeStops: [],
   alerts: [],
   bCycleStations: [],
-  mapControls: {}
+  mapControls: {},
+  center: [36.166512, -86.781581],
+  zoom: 12
 };
 
 export default TransitMap;

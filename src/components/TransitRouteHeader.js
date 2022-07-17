@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import busIcon from '../resources/bus.svg';
 import trainIcon from '../resources/train.svg';
-import { isHexLight } from '../util';
 import { OverlayTrigger } from 'react-bootstrap';
 import { Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
 
   const routeStyle = {
     backgroundColor: '#' + route.route_color,
-    color: isHexLight(route.route_color) ? '#000' : '#FFF'
+    color: '#' + route.route_text_color
   };
 
   let vehicleIcon = busIcon;

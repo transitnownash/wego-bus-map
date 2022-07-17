@@ -32,14 +32,13 @@ function StopMap({stops, alerts, map, mapControls, center, zoom}) {
     return stopAlerts;
   };
 
-  const cityCenter = [36.166512, -86.781581];
   const cityMaxBounds = [
     [36.725005, -87.579122], // northwest
     [35.541600, -86.097066]  // southeast
   ];
 
   return(
-    <MapContainer ref={map} className="map-container" center={center ? center : cityCenter} zoom={zoom ? zoom : 12} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
+    <MapContainer ref={map} className="map-container" center={center} zoom={zoom} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
       <TileLayer
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; <a href="http://www.wegotransit.com" target="blank">WeGo</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
@@ -86,7 +85,9 @@ StopMap.propTypes = {
 StopMap.defaultProps = {
   stops: [],
   alerts: [],
-  mapControls: {}
+  mapControls: {},
+  center: [36.166512, -86.781581],
+  zoom: 12
 };
 
 export default StopMap;

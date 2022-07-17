@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
 import { useLocation, useParams } from 'react-router-dom';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
-import { getJSON, formatPositionData, formatTripTime } from './../util.js';
+import { getJSON, formatPositionData, formatTripTime, formatShapePoints } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow';
@@ -13,6 +14,7 @@ import Footer from '../components/Footer';
 import AlertList from '../components/AlertList';
 import StopTimeSequence from '../components/StopTimeSequence';
 import TransitRouteHeader from '../components/TransitRouteHeader';
+import DataFetchError from '../components/DataFetchError';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
@@ -33,6 +35,7 @@ function Trip() {
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [isTripBlockLoaded, setTripBlockLoaded] = useState(false);
+  const [dataFetchError, setDataFetchError] = useState(false);
   const { pathname } = useLocation();
   const params = useParams();
   const map = useRef();
@@ -54,31 +57,38 @@ function Trip() {
 
     getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '.json')
       .then((t) => setRouteTripData(t))
-      .then(() => setRouteTripLoaded(true));
+      .then(() => setRouteTripLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/routes.json')
       .then((r) => setRoutes(r.data))
-      .then(()=> setRoutesLoaded(true));
+      .then(()=> setRoutesLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '/block.json')
       .then((r) => setTripBlockData(r))
-      .then(()=> setTripBlockLoaded(true));
+      .then(()=> setTripBlockLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/agencies.json')
       .then((a) => setAgencyData(a.data))
-      .then(() => setAgencyLoaded(true));
+      .then(() => setAgencyLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
-      .then(() => setAlertLoaded(true));
+      .then(() => setAlertLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then((data) => setVehicleMarkers(formatPositionData(data)))
-      .then(() => setVehiclePositionLoaded(true));
+      .then(() => setVehiclePositionLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
       .then((data) => setTripUpdates(data))
-      .then(() => setTripUpdateLoaded(true));
+      .then(() => setTripUpdateLoaded(true))
+      .catch((error) => setDataFetchError(error));
 
     // Refresh position data at set interval
     const refreshPositionsInterval = setInterval(() => {
@@ -105,17 +115,25 @@ function Trip() {
 
   }, [params.trip_id, pathname, isUIReady]);
 
+  if (dataFetchError) {
+    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+  }
+
   if (!isUIReady) {
     return(<LoadingScreen></LoadingScreen>);
   }
-
-  // Get single route from routes set
-  const route = routes.find((r) => r.route_gid === trip.route_gid);
 
   // No matching route
   if (!trip || trip.status === 404) {
     return(<NoMatch></NoMatch>);
   }
+
+  // Set the map to center on the trip route
+  const getPolyLineBounds = L.latLngBounds(formatShapePoints(trip.shape.points));
+  const center = getPolyLineBounds.getCenter();
+
+  // Get single route from routes set
+  const route = routes.find((r) => r.route_gid === trip.route_gid);
 
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
 
@@ -171,7 +189,7 @@ function Trip() {
             </tr>
           </tbody>
         </table>
-        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts} map={map}></TransitMap>
+        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts} map={map} center={center} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table table-sm small">
           <thead>

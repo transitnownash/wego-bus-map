@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {formatTimestamp, isHexLight} from './../util.js';
+import {formatTimestamp} from './../util.js';
 import './AlertItem.scss';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ function AlertItem({alert, route}) {
   const alertStyle = {
     borderColor: (route.route_color) ? '#' + route.route_color : '#eee',
     backgroundColor: (route.route_color) ? '#' + route.route_color : '#eee',
-    color: isHexLight(route.route_color) ? '#000' : '#FFF'
+    color: (route.route_text_color) ? '#' + route.route_text_color : '#000'
   };
 
   const alert_cause = (typeof alert.cause !== 'undefined')
