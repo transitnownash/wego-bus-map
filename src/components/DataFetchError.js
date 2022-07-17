@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NoMatch from '../controllers/NoMatch';
 import TitleBar from './TitleBar';
 import Footer from './Footer';
 import { Button } from 'react-bootstrap';
@@ -7,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 function DataFetchError({error}) {
   const navigate = useNavigate();
+
+  // Send error context to browser
+  console.error(error);
 
   let errorMessage = '';
   switch (error.name) {
@@ -16,6 +20,11 @@ function DataFetchError({error}) {
     default:
       errorMessage = 'An unexpected error has ocurred.';
       break;
+  }
+
+  // Error returned was a 404.
+  if (error.response.status === 404) {
+    return(<NoMatch></NoMatch>);
   }
 
   return(
@@ -41,7 +50,7 @@ function DataFetchError({error}) {
 }
 
 DataFetchError.propTypes = {
-  error: PropTypes.instanceOf(DOMException)
+  error: PropTypes.any.isRequired
 };
 
 export default DataFetchError;

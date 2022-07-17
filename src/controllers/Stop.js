@@ -50,7 +50,7 @@ function Stops() {
       .then(() => setTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes.json')
+    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/routes.json')
       .then((r) => setRoutes(r.data))
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -141,7 +141,7 @@ function Stops() {
         <div className="stop-name">{stop.stop_name}</div>
         {stopAlerts.length > 0 &&
           (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
-       }
+        }
         <div className="text-center p-2 mb-2">
           {stop.parent_station && (
             <><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stop.parent_station}</em> - </>
@@ -151,6 +151,20 @@ function Stops() {
         <div className="text-center p-2 mb-2">
           <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
+        {routes.length > 0 && (
+          <>
+            <div className="row mb-2">
+              {routes.map((item) => {
+                const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_gid);
+                return(
+                  <div key={item.id} className="col-md-4">
+                    <TransitRouteHeader route={item} alerts={routeAlerts}></TransitRouteHeader>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
         <StopMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} stops={[stop]} alerts={alerts} mapControls={mapControls}></StopMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
