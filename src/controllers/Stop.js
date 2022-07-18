@@ -134,6 +134,15 @@ function Stops() {
     return aTime > bTime;
   });
 
+  // Assign current stop to be rendered
+  const stops = [stop];
+
+  // If a parent station, sort and render additional stops
+  if (stop.child_stops.length > 0) {
+    stop.child_stops.sort((a, b) => a.stop_code > b.stop_code);
+    stop.child_stops.map((item) => stops.push(item));
+  }
+
   return(
     <div>
       <TitleBar></TitleBar>
@@ -143,14 +152,24 @@ function Stops() {
           (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
         }
         <div className="text-center p-2 mb-2">
-          {stop.parent_station && (
-            <><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stop.parent_station}</em> - </>
+          <div>{stop.stop_code} {stop.stop_desc}</div>
+          {stop.parent_station_gid && (
+            <div className="p-2 mb-2"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <strong>Inside <Link to={'/stops/' + stop.parent_station_gid}>{stop.parent_station.stop_name}</Link></strong></div>
           )}
-          {stop.stop_code} {stop.stop_desc}
         </div>
         <div className="text-center p-2 mb-2">
           <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
+        {stop.child_stops.length > 0 && (
+            <ul className="list-linline small">
+              <li className="list-inline-item"><strong>Station Stops:</strong></li>
+              {stop.child_stops.map((item) => {
+                return(
+                  <li key={item.id} className="list-inline-item"><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></li>
+                )
+              })}
+            </ul>
+          )}
         {routes.length > 0 && (
           <>
             <div className="row mb-2">
@@ -158,14 +177,14 @@ function Stops() {
                 const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_gid);
                 return(
                   <div key={item.id} className="col-md-4">
-                    <TransitRouteHeader route={item} alerts={routeAlerts}></TransitRouteHeader>
+                    <TransitRouteHeader route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
                   </div>
                 );
               })}
             </div>
           </>
         )}
-        <StopMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} stops={[stop]} alerts={alerts} mapControls={mapControls}></StopMap>
+        <StopMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} stops={stops} alerts={alerts} mapControls={mapControls}></StopMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
           <div className="table-responsive-md">
