@@ -37,7 +37,7 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
         (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
       }
       {stop.parent_station_gid != null &&
-        (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <em>Inside {stop.parent_station_gid}</em></div>)
+        (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside <Link to={'/stops/' + stop.parent_station_gid}>{stop.parent_station_gid}</Link></div>)
       }
       <div className="p-2 mb-2 text-center">
         <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>

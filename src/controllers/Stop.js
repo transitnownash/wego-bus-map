@@ -161,15 +161,19 @@ function Stops() {
           <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
         {stop.child_stops.length > 0 && (
-            <ul className="list-linline small">
-              <li className="list-inline-item"><strong>Station Stops:</strong></li>
-              {stop.child_stops.map((item) => {
-                return(
-                  <li key={item.id} className="list-inline-item"><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></li>
-                );
-              })}
-            </ul>
-          )}
+          <div className="card mb-3 small">
+            <div className="card-header">Station Stops</div>
+            <div className="card-body">
+              <div className="row">
+                {stop.child_stops.map((item) => {
+                  return(
+                    <div key={item.id} className="col-sm-6 col-md-4 col-lg-3"><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
         {routes.length > 0 && (
           <>
             <div className="row mb-2">

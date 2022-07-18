@@ -34,7 +34,7 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
         <strong><Link to={'/stops/' + stopTime.stop.stop_code}>{stopTime.stop.stop_name}</Link></strong><br />
         <small>{stopTime.stop.stop_code} {stopTime.stop.stop_desc}</small>
         {stopTime.stop.parent_station_gid &&
-          (<em><br /><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside {stopTime.stop.parent_station_gid}</em>)
+          (<div><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside <Link to={'/stops/' + stopTime.stop.parent_station_gid}>{stopTime.stop.parent_station_gid}</Link></div>)
         }
       </td>
       <td className="text-center">
