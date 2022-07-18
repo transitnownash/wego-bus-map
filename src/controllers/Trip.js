@@ -189,7 +189,7 @@ function Trip() {
             </tr>
           </tbody>
         </table>
-        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
+        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table table-sm small">
           <thead>

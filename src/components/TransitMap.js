@@ -24,7 +24,7 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: markerShadow,
 });
 
-function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, map, bCycleStations, mapControls, center, zoom}) {
+function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, tripUpdates, map, bCycleStations, mapControls, center, zoom}) {
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback(val => {
     setShapes(val);
@@ -57,6 +57,19 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
       });
     });
     return stopAlerts;
+  };
+
+  const getStopUpdateByTripAndId = function (tripId, stopCode) {
+    let stopUpdate = {};
+    const trip = tripUpdates.find((item) => tripId === item.trip_update.trip.trip_id);
+    if (trip) {
+      trip.trip_update.stop_time_update.map((stu) => {
+        if (stu.stop_id === stopCode) {
+          stopUpdate = stu;
+        }
+      });
+    }
+    return stopUpdate;
   };
 
   const cityMaxBounds = [
@@ -119,8 +132,9 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
           <LayersControl.Overlay checked={true} name="Stops">
             <LayerGroup>
               {stops.map((item, _index) => {
-                let stop_alerts = getStopAlertsById(item.stop.stop_code);
-                return(<StopMarker key={item.id} stop={item.stop} stopTime={item} stopAlerts={stop_alerts}></StopMarker>);
+                const stopAlerts = getStopAlertsById(item.stop.stop_code);
+                const stopUpdate = getStopUpdateByTripAndId(item.trip_gid, item.stop.stop_code);
+                return(<StopMarker key={item.id} stop={item.stop} stopTime={item} stopUpdate={stopUpdate} stopAlerts={stopAlerts}></StopMarker>);
               })}
              </LayerGroup>
           </LayersControl.Overlay>
@@ -159,6 +173,7 @@ TransitMap.propTypes = {
   routeShapes: PropTypes.array,
   routeStops: PropTypes.array,
   alerts: PropTypes.array,
+  tripUpdates: PropTypes.array,
   map: PropTypes.any.isRequired,
   bCycleStations: PropTypes.array,
   mapControls: PropTypes.object,
@@ -173,6 +188,7 @@ TransitMap.defaultProps = {
   routeShapes: [],
   routeStops: [],
   alerts: [],
+  tripUpdates: [],
   bCycleStations: [],
   mapControls: {},
   center: [36.166512, -86.781581],

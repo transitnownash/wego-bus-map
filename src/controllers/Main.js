@@ -12,6 +12,7 @@ const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville';
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
 const REFRESH_ALERTS_TTL = 60 * 1000;
+const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
 const REFRESH_GBFS_TTL = 60 * 1000;
 
 function Main() {
@@ -19,10 +20,12 @@ function Main() {
   const [agencies, setAgencyData] = useState([]);
   const [vehicleMarkers, setVehicleMarkers] = useState([]);
   const [alerts, setAlerts] = useState([]);
+  const [tripUpdates, setTripUpdates] = useState([]);
   const [bCycleStations, setBCycleStationData] = useState([]);
   const [bCycleStationsStatus, setBCycleStationStatusData] = useState([]);
   const [isRoutesLoaded, setRoutesLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
+  const [isTripUpdateLoaded, setTripUpdateLoaded] = useState(false);
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
@@ -30,7 +33,7 @@ function Main() {
   const map = useRef(null);
 
   // Consolidated check that things are ready to go
-  const isUIReady = [isRoutesLoaded, isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
+  const isUIReady = [isRoutesLoaded, isAlertLoaded, isTripUpdateLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
 
   useEffect(() => {
     getJSON(GTFS_BASE_URL + '/routes.json')
@@ -46,6 +49,11 @@ function Main() {
     getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
+    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+      .then((data) => setTripUpdates(data))
+      .then(() => setTripUpdateLoaded(true))
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
@@ -85,6 +93,15 @@ function Main() {
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
+    // Refresh trip updates at a set interval
+    const refreshTripUpdatesInterval = setInterval(() => {
+      if (!isUIReady) {
+        return;
+      }
+      getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+        .then((data) => setTripUpdates(data));
+    }, REFRESH_TRIP_UPDATES_TTL);
+
     // Refresh BCycle station status at a set interval
     const refreshBCycleStatus = setInterval(() => {
       if (!isUIReady) {
@@ -98,6 +115,7 @@ function Main() {
     return () => {
       clearInterval(refreshPositionsInterval);
       clearInterval(refreshAlertsInterval);
+      clearInterval(refreshTripUpdatesInterval);
       clearInterval(refreshBCycleStatus);
     };
   }, [isUIReady]);
@@ -138,7 +156,7 @@ function Main() {
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (
       <div className="main">
-        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={alerts} map={map} bCycleStations={bCycleStations} mapControls={mapControls}></TransitMap>
+        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={alerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStations} mapControls={mapControls}></TransitMap>
         <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
       </div>
     )

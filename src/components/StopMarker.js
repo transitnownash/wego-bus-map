@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
 import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
-import { formatTripTime } from "../util";
 import stopIconImage from '../resources/stop.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import StopTimeSequence from './StopTimeSequence';
 import { Link } from 'react-router-dom';
 import StopAccessibilityInformation from './StopAccessibilityInformation';
+import TimePoint from './TimePoint';
 
-function StopMarker({stop, stopTime, stopAlerts}) {
+function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
   const stopMarkerIcon = L.Icon.extend({
     options: {
       iconUrl: stopIconImage,
@@ -45,8 +45,8 @@ function StopMarker({stop, stopTime, stopAlerts}) {
       <dl>
         {typeof stopTime.arrival_time !== 'undefined' &&
           (<>
-            <dt>Scheduled Time</dt>
-            <dd>{formatTripTime(stopTime.arrival_time)}</dd>
+            <dt>Time</dt>
+            <dd><TimePoint scheduleData={stopTime} updateData={stopUpdate}></TimePoint></dd>
           </>)
         }
         <dt>Code</dt>
@@ -82,11 +82,13 @@ function StopMarker({stop, stopTime, stopAlerts}) {
 StopMarker.propTypes = {
   stop: PropTypes.object.isRequired,
   stopTime: PropTypes.object,
+  stopUpdate: PropTypes.object,
   stopAlerts: PropTypes.array
 };
 
 StopMarker.defaultProps = {
   stopTime: {},
+  stopUpdate: {},
   stopAlerts: []
 };
 
