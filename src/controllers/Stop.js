@@ -166,7 +166,7 @@ function Stops() {
               {stop.child_stops.map((item) => {
                 return(
                   <li key={item.id} className="list-inline-item"><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></li>
-                )
+                );
               })}
             </ul>
           )}
