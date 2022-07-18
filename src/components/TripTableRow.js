@@ -43,14 +43,14 @@ function TripTableRow({trip, route}) {
       <td>
         <OverlayTrigger placement='top' overlay={<Tooltip>{wheelchair_accessible_tooltip}</Tooltip>}>
           <div className="fa-layers fa-fw me-1">
-            {wheelchair_accessible_icon}
             <FontAwesomeIcon icon={faWheelchair} fixedWidth={true}></FontAwesomeIcon>
+            {wheelchair_accessible_icon}
           </div>
         </OverlayTrigger>
         <OverlayTrigger placement='top' overlay={<Tooltip>{bikes_allowed_tooltip}</Tooltip>}>
           <div className="fa-layers fa-fw">
-            {bikes_allowed_icon}
             <FontAwesomeIcon icon={faBicycle} fixedWidth={true}></FontAwesomeIcon>
+            {bikes_allowed_icon}
           </div>
         </OverlayTrigger>
       </td>
