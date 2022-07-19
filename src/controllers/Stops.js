@@ -4,9 +4,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import LoadingScreen from '../components/LoadingScreen';
 import { getJSON } from './../util.js';
 import DataFetchError from '../components/DataFetchError';
-import StopMap from '../components/StopMap';
 import LocateButton from '../components/LocateButton';
 import MapLinks from '../components/MapLinks';
+import TransitMap from '../components/TransitMap';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_ALERTS_TTL = 60 * 1000;
@@ -76,9 +76,13 @@ function Stops() {
     }
   };
 
+  const routeStops = stops.map((item) => {
+    return { id: item.id, stop: item };
+  });
+
   return(
     <div className="stops">
-      <StopMap map={map} stops={stops} alerts={alerts} mapControls={mapControls}></StopMap>
+      <TransitMap map={map} routeStops={routeStops} alerts={alerts} mapControls={mapControls}></TransitMap>
     </div>
   );
 }

@@ -9,16 +9,24 @@ import StopTimeSequence from './StopTimeSequence';
 import { Link } from 'react-router-dom';
 import StopAccessibilityInformation from './StopAccessibilityInformation';
 import TimePoint from './TimePoint';
+import { isStopTimeUpdateLaterThanNow } from '../util';
+import './StopMarker.scss';
 
 function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
-  const stopMarkerIcon = L.Icon.extend({
-    options: {
-      iconUrl: stopIconImage,
-      iconSize: [24, 24],
-      shadowUrl: null
-    }
-  });
-  const stopIcon = new stopMarkerIcon();
+  const stopMarkerIconOptions = {
+    iconUrl: stopIconImage,
+    iconSize: [24, 24],
+    shadowUrl: null
+  };
+
+  // Fade markers when time has passed
+  if (typeof stopTime.departure_time !== 'undefined' && !isStopTimeUpdateLaterThanNow(stopTime, stopUpdate)) {
+    stopMarkerIconOptions['className'] = 'stop-marker-stale';
+    stopMarkerIconOptions['iconSize'] = [16, 16];
+  }
+
+  const stopMarkerIcon = L.Icon.extend({options: stopMarkerIconOptions});
+  const icon = new stopMarkerIcon();
 
   const content = (
     <div>
@@ -63,7 +71,7 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
 
   return(
     <>
-      <Marker position={[stop.stop_lat, stop.stop_lon]} icon={stopIcon}>
+      <Marker position={[stop.stop_lat, stop.stop_lon]} icon={icon}>
         {!L.Browser.mobile && (
           <Tooltip>{content}</Tooltip>
         )}

@@ -16,6 +16,8 @@ import TransitRouteHeader from '../components/TransitRouteHeader';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
+const REFRESH_ALERTS_TTL = 60 * 1000;
+const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
 
 function TransitRoute() {
   const [route, setRouteData] = useState({});
@@ -23,6 +25,7 @@ function TransitRoute() {
   const [routeStops, setRouteStops] = useState([]);
   const [routeShapes, setRouteShapes] = useState([]);
   const [alerts, setAlerts] = useState([]);
+  const [tripUpdates, setTripUpdates] = useState([]);
   const [agencies, setAgencyData] = useState([]);
   const [vehicleMarkers, setVehicleMarkers] = useState([]);
   const [isRouteLoaded, setRouteLoaded] = useState(false);
@@ -30,6 +33,7 @@ function TransitRoute() {
   const [isRouteShapesLoaded, setRouteShapesLoaded] = useState(false);
   const [isRouteTripsLoaded, setRouteTripsLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
+  const [isTripUpdateLoaded, setTripUpdateLoaded] = useState(false);
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
@@ -37,7 +41,10 @@ function TransitRoute() {
   const map = useRef(null);
 
   // Consolidated check that things are ready to go
-  const isUIReady = [isRouteLoaded, isRouteTripsLoaded, isRouteStopsLoaded, isRouteShapesLoaded, isAlertLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
+  const isUIReady = [
+    isRouteLoaded, isRouteTripsLoaded, isRouteStopsLoaded, isRouteShapesLoaded,
+    isAlertLoaded, isTripUpdateLoaded, isAgencyLoaded, isVehiclePositionLoaded
+  ].every((a) => a === true);
 
   useEffect(() => {
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
@@ -70,6 +77,11 @@ function TransitRoute() {
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error));
 
+    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+      .then((data) => setTripUpdates(data))
+      .then(() => setTripUpdateLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
         data = data.filter(v => v.vehicle.trip.route_id === params.route_id);
@@ -93,9 +105,30 @@ function TransitRoute() {
         .catch((error) => setDataFetchError(error));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
+    // Refresh alerts data at set interval
+    const refreshAlertsInterval = setInterval(() => {
+      if (!isUIReady) {
+        return;
+      }
+      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+        .then((data) => setAlerts(data))
+        .catch((error) => setDataFetchError(error));
+    }, REFRESH_ALERTS_TTL);
+
+    const refreshTripUpdatesInterval = setInterval(() => {
+      if (!isUIReady) {
+        return;
+      }
+      getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+        .then((data) => setTripUpdates(data))
+        .catch((error) => setDataFetchError(error));
+    }, REFRESH_TRIP_UPDATES_TTL);
+
     // Run on unmount
     return () => {
       clearInterval(refreshPositionsInterval);
+      clearInterval(refreshAlertsInterval);
+      clearInterval(refreshTripUpdatesInterval);
     };
   }, [params.route_id, isUIReady]);
 
@@ -130,7 +163,7 @@ function TransitRoute() {
       <TitleBar></TitleBar>
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={routeTrips}></TripTable>
       </div>

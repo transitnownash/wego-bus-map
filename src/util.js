@@ -76,7 +76,7 @@ export function formatShapePoints(points) {
   }));
 }
 
-// Format start/stop trip time
+// Format HH:MM:SS start/stop trip time
 export function formatTripTime(time) {
   const now = new Date();
   const [hour, minute, second] = time.split(':');
@@ -84,6 +84,31 @@ export function formatTripTime(time) {
   now.setMinutes(minute);
   now.setSeconds(second);
   return now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
+}
+
+export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {
+  let time = 0;
+
+  // Calculate with stopUpdate, if available
+  if (JSON.stringify(stopUpdate) !== '{}') {
+    if (typeof stopUpdate.departure !== 'undefined') {
+      time = stopUpdate.departure.time;
+    }
+    else if (typeof stopUpdate.arrival !== 'undefined') {
+      time = stopUpdate.arrival.time;
+    }
+    if (time * 1000 > Date.now()) {
+      return true;
+    }
+  }
+
+  // Fall back to scheduled time
+  time = Date.parse((new Date()).toLocaleDateString().split('T')[0] + ' ' + stopTime.departure_time);
+  if (time > Date.now()) {
+    return true;
+  }
+
+  return false;
 }
 
 // Check if HH:MM:SS is after now

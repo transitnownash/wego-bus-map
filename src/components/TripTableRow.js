@@ -6,7 +6,10 @@ import { formatTripTime, isTimeLaterThanNow, isTimeRangeIncludesNow } from "../u
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function TripTableRow({trip, route}) {
+function TripTableRow({trip, route, hidePastTrips}) {
+  if (!isTimeLaterThanNow(trip.end_time) && hidePastTrips) {
+    return(<></>);
+  }
 
   const bikes_allowed_icon = (trip.bikes_allowed !== "1")
     ? (<span className="text-danger"><FontAwesomeIcon icon={faBan} fixedWidth={true}></FontAwesomeIcon></span>)
@@ -60,12 +63,14 @@ function TripTableRow({trip, route}) {
 
 TripTableRow.propTypes = {
   trip: PropTypes.object,
-  route: PropTypes.object
+  route: PropTypes.object,
+  hidePastTrips: PropTypes.bool
 };
 
 TripTableRow.defaultProps = {
   trip: {},
-  route: {}
+  route: {},
+  hidePastTrips: false
 };
 
 export default TripTableRow;

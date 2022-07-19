@@ -4,23 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLandmark } from "@fortawesome/free-solid-svg-icons";
 import StopTimeSequence from './StopTimeSequence';
 import TimePoint from './TimePoint';
-import { isTimeLaterThanNow, formatDistanceTraveled } from "../util";
+import { formatDistanceTraveled, isStopTimeUpdateLaterThanNow } from "../util";
 import { Link } from 'react-router-dom';
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
   let rowStyle = {opacity: 1.0};
-
-  if (!isTimeLaterThanNow(stopTime.departure_time)) {
-    rowStyle = {opacity: 0.3};
-  }
-
-  // If updated time
-  if (
-      (stopTimeUpdate.departure && stopTimeUpdate.departure.time * 1000 > Date.now())
-      || (stopTimeUpdate.arrival && stopTimeUpdate.arrival.time * 1000 > Date.now())
-    ) {
+  if (!isStopTimeUpdateLaterThanNow(stopTime, stopTimeUpdate)) {
     rowStyle = {
-      opacity: 1.0
+      opacity: 0.3
     };
   }
 
