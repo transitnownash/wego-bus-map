@@ -36,6 +36,7 @@ function TransitRoute() {
   const [isTripUpdateLoaded, setTripUpdateLoaded] = useState(false);
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
+  const [isMapRendered, setMapRendered] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
   const params = useParams();
   const map = useRef(null);
@@ -155,8 +156,16 @@ function TransitRoute() {
   routeShapes.map((s) => s.route_color = route.route_color);
 
   // Set the map to center on the trip route
-  const getPolyLineBounds = L.latLngBounds(formatShapePoints(routeShapes[0].points));
+  const allPoints = [];
+  routeShapes.map((item) => {
+    item.points.map((point) => allPoints.push(point));
+  });
+  const getPolyLineBounds = L.latLngBounds(formatShapePoints(allPoints));
   const center = getPolyLineBounds.getCenter();
+  if (map.current && !isMapRendered) {
+    map.current.fitBounds(getPolyLineBounds, { padding: [25, 25]});
+    setMapRendered(true);
+  }
 
   return(
     <div>

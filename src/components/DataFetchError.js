@@ -22,8 +22,8 @@ function DataFetchError({error}) {
       break;
   }
 
-  // Error returned was a 404.
-  if (error.response.status === 404) {
+  // Error returned was a 404, switch to that instead
+  if (typeof error.response !== 'undefined' && error.response.status === 404) {
     return(<NoMatch></NoMatch>);
   }
 

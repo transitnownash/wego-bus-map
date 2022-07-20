@@ -1,35 +1,38 @@
 
 
 import React, { useEffect, useRef, useState } from 'react';
-import LoadingScreen from '../components/LoadingScreen';
-import { getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
-import DataFetchError from '../components/DataFetchError';
-import TransitMap from '../components/TransitMap';
-import { Link, useParams } from 'react-router-dom';
-import TitleBar from '../components/TitleBar';
-import AlertList from '../components/AlertList';
 import TransitRouteHeader from '../components/TransitRouteHeader';
-import StopTimeSequence from '../components/StopTimeSequence';
+import TransitMap from '../components/TransitMap';
+import TitleBar from '../components/TitleBar';
 import TimePoint from '../components/TimePoint';
+import StopAccessibilityInformation from '../components/StopAccessibilityInformation';
+import LoadingScreen from '../components/LoadingScreen';
+import HidePastTripsToggle from '../components/HidePastTripsToggle';
+import Footer from '../components/Footer';
+import DataFetchError from '../components/DataFetchError';
+import AlertList from '../components/AlertList';
+import { Link, useParams } from 'react-router-dom';
+import { formatPositionData, getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
-import Footer from '../components/Footer';
-import StopAccessibilityInformation from '../components/StopAccessibilityInformation';
-import HidePastTripsToggle from '../components/HidePastTripsToggle';
+import TimePointLegend from '../components/TimePointLegend';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
+const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
 const REFRESH_ALERTS_TTL = 60 * 1000;
 const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
 
 function Stops() {
-  const [alerts, setAlerts] = useState([]);
-  const [tripUpdates, setTripUpdates] = useState([]);
   const [stop, setStop] = useState([]);
   const [trips, setTrips] = useState([]);
   const [routes, setRoutes] = useState([]);
+  const [vehiclePositions, setVehiclePositions] = useState([]);
+  const [alerts, setAlerts] = useState([]);
+  const [tripUpdates, setTripUpdates] = useState([]);
   const [isStopLoaded, setStopLoaded] = useState(false);
   const [isTripsLoaded, setTripsLoaded] = useState(false);
   const [isRoutesLoaded, setRoutesLoaded] = useState(false);
+  const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [isAlertsLoaded, setAlertsLoaded] = useState(false);
   const [isTripUpdatesLoaded, setTripUpdatesLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
@@ -38,7 +41,10 @@ function Stops() {
   const params = useParams();
 
   // Consolidated check that things are ready to go
-  const isUIReady = [isStopLoaded, isTripsLoaded, isRoutesLoaded, isAlertsLoaded, isTripUpdatesLoaded].every((a) => a === true);
+  const isUIReady = [
+    isStopLoaded, isTripsLoaded, isRoutesLoaded,
+    isVehiclePositionLoaded, isAlertsLoaded, isTripUpdatesLoaded
+  ].every((a) => a === true);
 
   const handleCheckboxChange = function(e) {
     setHidePastTrips(e.target.checked === true);
@@ -60,6 +66,11 @@ function Stops() {
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
+    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+      .then((data) => setVehiclePositions(data))
+      .then(() => setVehiclePositionLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
     getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
       .then((data) => setAlerts(data))
       .then(() => setAlertsLoaded(true))
@@ -70,14 +81,20 @@ function Stops() {
       .then(() => setTripUpdatesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    // Refresh alerts data at set interval
+    const refreshPositionsInterval = setInterval(() => {
+        if (!isUIReady) {
+          return;
+        }
+        getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+          .then((data) => setVehiclePositions(data));
+      }, REFRESH_VEHICLE_POSITIONS_TTL);
+
     const refreshAlertsInterval = setInterval(() => {
       if (!isUIReady) {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
-        .then((data) => setAlerts(data))
-        .catch((error) => setDataFetchError(error));
+        .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
     const refreshTripUpdatesInterval = setInterval(() => {
@@ -85,12 +102,12 @@ function Stops() {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
-        .then((data) => setTripUpdates(data))
-        .catch((error) => setDataFetchError(error));
+        .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
     // Run on unmount
     return () => {
+      clearInterval(refreshPositionsInterval);
       clearInterval(refreshAlertsInterval);
       clearInterval(refreshTripUpdatesInterval);
     };
@@ -103,6 +120,16 @@ function Stops() {
   if (!isUIReady) {
     return(<LoadingScreen></LoadingScreen>);
   }
+
+  // Filter vehicle positions to relevant trips
+  const filteredVehiclePositions = [];
+  const tripsAtStop = trips.map((t) => t.trip_gid);
+  vehiclePositions.forEach(vp => {
+    if (tripsAtStop.includes(vp.vehicle.trip.trip_id)) {
+      filteredVehiclePositions.push(vp);
+    }
+  });
+  const vehicleMarkers = formatPositionData(filteredVehiclePositions);
 
   // Filter alerts to single stop
   let stopAlerts = [];
@@ -190,7 +217,7 @@ function Stops() {
             </div>
           </>
         )}
-        <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} routeStops={routeStops} alerts={alerts}></TransitMap>
+        <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} vehicleMarkers={vehicleMarkers} routes={routes} routeStops={routeStops} alerts={alerts}></TransitMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
           <>
@@ -199,7 +226,6 @@ function Stops() {
               <table className="table table-sm small">
                 <thead>
                   <tr>
-                    <th>Seq.</th>
                     <th>Route</th>
                     <th>Trip</th>
                     <th>Headsign</th>
@@ -224,7 +250,7 @@ function Stops() {
                     }
 
                     if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate) && hidePastTrips) {
-                      return(<></>);
+                      return;
                     }
 
                     const rowStyle = {
@@ -232,7 +258,6 @@ function Stops() {
                     };
                     return(
                       <tr key={item.id} style={rowStyle}>
-                        <td className="text-center"><StopTimeSequence stopTime={item.stop_times[0]}></StopTimeSequence></td>
                         <td><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
                         <td><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
                         <td>
@@ -246,8 +271,8 @@ function Stops() {
                     );
                   })}
                 </tbody>
-                <caption><strong>Legend:</strong> <strike className="text-muted small">0:00 AM</strike> - Scheduled time has been updated. | <strong className="text-primary">0:00 AM</strong> - Updated with realtime trip information.</caption>
               </table>
+              <TimePointLegend></TimePointLegend>
             </div>
           </>
         )}

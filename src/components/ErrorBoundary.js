@@ -23,16 +23,18 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
       return(
         <>
           <div className="container">
-            <div className="card my-3 border-danger">
-              <div className="card-header bg-danger text-light">Site Error</div>
-              <div className="card-body">An unexpected error has ocurred. Try reloading the page or wait a few moments before trying again.</div>
-              {this.state.error &&
-                (<div className="card-body"><div className="bg-light p-3" style={{fontFamily: 'monospace', whiteSpace: 'pre-wrap'}}>{JSON.stringify(this.state.error.message)}</div></div>)
-              }
+          <div className="card border-danger my-3">
+            <div className="card-header bg-danger text-light">Site Error</div>
+              <div className="card-body text-center">
+                <p>An unexpected error has ocurred. Try reloading the page or wait a few moments before trying again.</p>
+                {this.state.error &&
+                  (<div className="bg-light p-3 text-start" style={{fontFamily: 'monospace', whiteSpace: 'pre-wrap'}}>{JSON.stringify(this.state.error.message)}</div>)
+                }
+                <a href="" className="btn btn-primary">Reload Page</a>
+              </div>
             </div>
           </div>
         </>

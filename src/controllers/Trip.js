@@ -15,6 +15,7 @@ import AlertList from '../components/AlertList';
 import StopTimeSequence from '../components/StopTimeSequence';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import DataFetchError from '../components/DataFetchError';
+import TimePointLegend from '../components/TimePointLegend';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
@@ -35,6 +36,7 @@ function Trip() {
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [isTripBlockLoaded, setTripBlockLoaded] = useState(false);
+  const [isMapRendered, setMapRendered] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
   const { pathname } = useLocation();
   const params = useParams();
@@ -119,7 +121,7 @@ function Trip() {
     return(<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
-  if (!isUIReady) {
+  if (!isUIReady || !trip.shape) {
     return(<LoadingScreen></LoadingScreen>);
   }
 
@@ -131,24 +133,25 @@ function Trip() {
   // Set the map to center on the trip route
   const getPolyLineBounds = L.latLngBounds(formatShapePoints(trip.shape.points));
   const center = getPolyLineBounds.getCenter();
+  if (map.current && !isMapRendered) {
+    map.current.fitBounds(getPolyLineBounds, { padding: [50, 50]});
+    setMapRendered(true);
+  }
 
   // Get single route from routes set
   const route = routes.find((r) => r.route_gid === trip.route_gid);
 
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
 
-  // Extract stops
-  let stops = trip.stop_times;
-
   // Filter vehicle markers
-  const filtered_vehicleMarkers = vehicleMarkers.filter(v => v.metadata.trip.trip_id === trip.trip_gid);
+  const filteredVehicleMarkers = vehicleMarkers.filter(v => v.metadata.trip.trip_id === trip.trip_gid);
 
   // Filter updates to this trip, key stop time updates by sequence
   const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid);
-  let filteredTripUpdates_by_sequence = {};
+  let filteredTripUpdatesBySequence = {};
   if (filteredTripUpdates.length > 0 && typeof filteredTripUpdates[0].trip_update.stop_time_update !== 'undefined') {
     filteredTripUpdates[0].trip_update.stop_time_update.forEach((item, _i) => {
-      filteredTripUpdates_by_sequence[item.stop_sequence] = item;
+      filteredTripUpdatesBySequence[item.stop_sequence] = item;
     });
   }
 
@@ -169,8 +172,8 @@ function Trip() {
             <tr>
               <th className="text-nowrap"><FontAwesomeIcon icon={faBus} fixedWidth={true}></FontAwesomeIcon> Vehicle</th>
               <td>
-                {(filtered_vehicleMarkers.length > 0 && filtered_vehicleMarkers[0].metadata.vehicle)
-                  ? filtered_vehicleMarkers[0].metadata.vehicle.label
+                {(filteredVehicleMarkers.length > 0 && filteredVehicleMarkers[0].metadata.vehicle)
+                  ? filteredVehicleMarkers[0].metadata.vehicle.label
                   : 'None Assigned'
                 }
               </td>
@@ -189,7 +192,7 @@ function Trip() {
             </tr>
           </tbody>
         </table>
-        <TransitMap vehicleMarkers={filtered_vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={stops} alerts={alerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
+        <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={alerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table table-sm small">
           <thead>
@@ -202,12 +205,12 @@ function Trip() {
           </thead>
           <tbody>
             {trip.stop_times.map((item, _index) => {
-              let stopTimeUpdate = (typeof filteredTripUpdates_by_sequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdates_by_sequence[item.stop_sequence] : {};
+              let stopTimeUpdate = (typeof filteredTripUpdatesBySequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdatesBySequence[item.stop_sequence] : {};
               return(<StopTimeTableRow key={item.id + '-' + item.stop_sequence} stopTime={item} stopTimeUpdate={stopTimeUpdate}></StopTimeTableRow>);
             })}
           </tbody>
-          <caption><strong>Legend:</strong> <strike className="text-muted small">0:00 AM</strike> - Scheduled time has been updated. | <strong className="text-primary">0:00 AM</strong> - Updated with realtime trip information.</caption>
         </table>
+        <TimePointLegend></TimePointLegend>
         {isTripBlockLoaded &&
           <>
             <h2>Related Trips</h2>

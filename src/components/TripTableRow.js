@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons";
 import { formatTripTime, isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function TripTableRow({trip, route, hidePastTrips}) {
   if (!isTimeLaterThanNow(trip.end_time) && hidePastTrips) {
@@ -34,7 +33,7 @@ function TripTableRow({trip, route, hidePastTrips}) {
 
   return(
     <tr className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'bg-secondary text-light' : ''} style={rowStyle}>
-      <td><Link to={'/trips/' + trip.trip_gid} className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'text-light' : ''}>{trip.trip_gid}</Link></td>
+      <td><a href={'/trips/' + trip.trip_gid} className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'text-light' : ''}>{trip.trip_gid}</a></td>
       <td>{formatTripTime(trip.start_time)}</td>
       <td>{formatTripTime(trip.end_time)}</td>
       <td>

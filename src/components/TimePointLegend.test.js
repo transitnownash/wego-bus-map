@@ -1,11 +1,11 @@
 /* globals test */
 
 import React from 'react';
-import StopMap from './StopMap';
+import TimePointLegend from './TimePointLegend';
 import { createRoot } from 'react-dom/client';
 
-test('renders StopMap', () => {
+test('renders TimePointLegend', () => {
   const div = document.createElement('div');
   const root = createRoot(div);
-  root.render(<StopMap map={true} />);
+  root.render(<TimePointLegend />);
 });

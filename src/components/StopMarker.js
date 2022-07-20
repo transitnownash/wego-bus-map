@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import L from 'leaflet';
-import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
+import TimePoint from './TimePoint';
+import StopTimeSequence from './StopTimeSequence';
 import stopIconImage from '../resources/stop.svg';
+import StopAccessibilityInformation from './StopAccessibilityInformation';
+import L from 'leaflet';
+import { Link } from 'react-router-dom';
+import { isStopTimeUpdateLaterThanNow } from '../util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
-import StopTimeSequence from './StopTimeSequence';
-import { Link } from 'react-router-dom';
-import StopAccessibilityInformation from './StopAccessibilityInformation';
-import TimePoint from './TimePoint';
-import { isStopTimeUpdateLaterThanNow } from '../util';
+import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
 import './StopMarker.scss';
 
 function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
@@ -91,7 +91,7 @@ StopMarker.propTypes = {
   stop: PropTypes.object.isRequired,
   stopTime: PropTypes.object,
   stopUpdate: PropTypes.object,
-  stopAlerts: PropTypes.array
+  stopAlerts: PropTypes.array,
 };
 
 StopMarker.defaultProps = {
