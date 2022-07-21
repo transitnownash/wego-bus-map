@@ -5,15 +5,16 @@ import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
-import { getJSON, formatPositionData, formatTripTime, formatShapePoints } from './../util.js';
+import { getJSON, formatPositionData, formatTripTime, formatShapePoints, formatDistanceTraveled } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus } from '@fortawesome/free-solid-svg-icons';
+import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus, faRuler } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
 import AlertList from '../components/AlertList';
 import StopTimeSequence from '../components/StopTimeSequence';
 import TransitRouteHeader from '../components/TransitRouteHeader';
+import TripProgressBar from '../components/TripProgressBar';
 import DataFetchError from '../components/DataFetchError';
 import TimePointLegend from '../components/TimePointLegend';
 
@@ -149,6 +150,7 @@ function Trip() {
   // Filter updates to this trip, key stop time updates by sequence
   const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid);
   let filteredTripUpdatesBySequence = {};
+  let totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
   if (filteredTripUpdates.length > 0 && typeof filteredTripUpdates[0].trip_update.stop_time_update !== 'undefined') {
     filteredTripUpdates[0].trip_update.stop_time_update.forEach((item, _i) => {
       filteredTripUpdatesBySequence[item.stop_sequence] = item;
@@ -183,6 +185,10 @@ function Trip() {
               <td>{trip.trip_headsign}</td>
             </tr>
             <tr>
+              <th><FontAwesomeIcon icon={faRuler} fixedWidth={true}></FontAwesomeIcon> Distance</th>
+              <td>{formatDistanceTraveled(totalTripDistance)}</td>
+            </tr>
+            <tr>
               <th><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
               <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {formatTripTime(trip.start_time)} at {trip.stop_times[0].stop.stop_name}</td>
             </tr>
@@ -192,6 +198,9 @@ function Trip() {
             </tr>
           </tbody>
         </table>
+
+        <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
+
         <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={alerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table table-sm small">
