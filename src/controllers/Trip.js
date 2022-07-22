@@ -222,7 +222,9 @@ function Trip() {
         <TimePointLegend></TimePointLegend>
         {isTripBlockLoaded &&
           <>
-            <h2>Related Trips</h2>
+            <div>
+              <span className="h2">Related Trips</span> <span className="badge text-secondary border border-secondary">Block {trip.block_gid}</span>
+            </div>
             <TripTable routeTrips={tripBlock} route={route}></TripTable>
           </>
         }

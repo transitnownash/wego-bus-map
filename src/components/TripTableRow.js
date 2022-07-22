@@ -38,7 +38,7 @@ function TripTableRow({trip, route, hidePastTrips}) {
       <td>{formatTripTime(trip.end_time)}</td>
       <td>
         {trip.route_gid !== route.route_gid &&
-          (<OverlayTrigger placement='top' overlay={<Tooltip>Continues from Route {route.route_gid} on to Route {trip.route_gid}</Tooltip>}><span className="badge bg-secondary me-1">&raquo;</span></OverlayTrigger>)
+          (<OverlayTrigger placement='top' overlay={<Tooltip>Vehicle continues on to Route {trip.route_gid}</Tooltip>}><span className="badge bg-secondary me-1">&raquo;</span></OverlayTrigger>)
         }
         {trip.route_gid} - {trip.trip_headsign}
       </td>

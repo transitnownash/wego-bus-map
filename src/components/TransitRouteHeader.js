@@ -10,6 +10,9 @@ import { Link } from 'react-router-dom';
 import './TransitRouteHeader.scss';
 
 function TransitRouteHeader({route, alerts, showRouteType}) {
+  if (typeof route === 'undefined') {
+    return(<div className="transit-route-header">Invalid route!</div>);
+  }
 
   const routeStyle = {
     backgroundColor: '#' + route.route_color,

@@ -127,6 +127,7 @@ function TransitRoute() {
 
     // Run on unmount
     return () => {
+      setRouteLoaded(false);
       clearInterval(refreshPositionsInterval);
       clearInterval(refreshAlertsInterval);
       clearInterval(refreshTripUpdatesInterval);
