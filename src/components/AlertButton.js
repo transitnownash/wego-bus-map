@@ -15,13 +15,12 @@ function AlertButton({alerts, buttonAction}) {
 }
 
 AlertButton.propTypes = {
-  alerts: PropTypes.array,
-  buttonAction: PropTypes.func
+  alerts: PropTypes.array.isRequired,
+  buttonAction: PropTypes.func.isRequired
 };
 
 AlertButton.defaultProps = {
-  alerts: [],
-  buttonAction: () => { console.error('No buttonAction set!'); }
+  alerts: []
 };
 
 export default AlertButton;

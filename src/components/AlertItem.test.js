@@ -1,45 +1,32 @@
-/* globals test */
+/* globals test, expect */
 
 import React from 'react';
 import AlertItem from './AlertItem';
-import { createRoot } from 'react-dom/client';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router} from 'react-router-dom';
+const alertsFixture = require('../fixtures/alerts.json');
+const routesFixture = require('../fixtures/routes.json');
 
 test('renders AlertItem', () => {
-  const div = document.createElement('div');
-  const root = createRoot(div);
-  const alert = {
-    "id": "35399",
-    "alert": {
-      "active_period": [
-        {
-          "start": 1649057040,
-          "end": 32503701600
-        }
-      ],
-      "informed_entity": [
-        {
-          "route_id": "79"
-        }
-      ],
-      "cause": "Construction",
-      "effect": "Detour",
-      "header_text": {
-        "translation": [
-          {
-            "text": "Detour in effect on route 79 SKYLINE NORTHBOUND",
-            "language": "en"
-          }
-        ]
-      },
-      "description_text": {
-        "translation": [
-          {
-            "text": "Detour in effect on route 79 SKYLINE\r\n\r\nRoute 79 NORTHBOUND will detour \r\n\r\nDetour Route 79 from \r\nMadison to N Dickerson\r\nNo service on Skyline Ridge due to construction\r\nFrom Skyline Hospital, continue Doverside \r\nback to Dickerson\r\nR-Dickerson to regular route. ",
-            "language": "en"
-          }
-        ]
-      }
-    }
-  };
-  root.render(<AlertItem alert={alert} />);
+  const route = routesFixture.data.find((i) => i.route_gid === alertsFixture[0].alert.informed_entity[0].route_id);
+  const {container} = render(
+    <Router>
+      <AlertItem alert={alertsFixture[0].alert} route={route} />
+    </Router>
+  );
+  expect(screen.getByText('79 - SKYLINE')).toBeInTheDocument();
+  expect(screen.getByText('4/4/22, 2:24 AM')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
+});
+
+test('renders AlertItem with informed stops', () => {
+  const route = routesFixture.data.find((i) => i.route_gid === alertsFixture[3].alert.informed_entity[0].route_id);
+  const {container} = render(
+    <Router>
+      <AlertItem alert={alertsFixture[3].alert} route={route} />
+    </Router>
+  );
+  expect(screen.getByText('14 - WHITES CREEK')).toBeInTheDocument();
+  expect(screen.getByText('WHIDICSN')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });

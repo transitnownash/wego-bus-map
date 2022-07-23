@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders AlertItem 1`] = `
+<div>
+  <div
+    class="card mb-3"
+    style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+  >
+    <div
+      class="card-header alert-item-header"
+    >
+      <strong>
+        <a
+          href="/routes/79"
+        >
+          79
+           - 
+          SKYLINE
+        </a>
+      </strong>
+    </div>
+    <div
+      class="card-body bg-light text-dark alert-item-text"
+    >
+      <p>
+        <strong>
+          Detour in effect on route 79 SKYLINE NORTHBOUND
+        </strong>
+      </p>
+      Detour in effect on route 79 SKYLINE
+
+Route 79 NORTHBOUND will detour 
+
+Detour Route 79 from 
+Madison to N Dickerson
+No service on Skyline Ridge due to construction
+From Skyline Hospital, continue Doverside 
+back to Dickerson
+R-Dickerson to regular route. 
+    </div>
+    <div
+      class="card-footer alert-item-footer"
+    >
+      Construction
+       - 
+      Detour
+       - 
+      <strong>
+        Start:
+      </strong>
+       
+      <span
+        title="1649057040"
+      >
+        4/4/22, 2:24 AM
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders AlertItem with informed stops 1`] = `
+<div>
+  <div
+    class="card mb-3"
+    style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div
+      class="card-header alert-item-header"
+    >
+      <strong>
+        <a
+          href="/routes/14"
+        >
+          14
+           - 
+          WHITES CREEK
+        </a>
+      </strong>
+    </div>
+    <div
+      class="card-body bg-light text-dark alert-item-text"
+    >
+      <p>
+        <strong>
+          Detour in effect on route 14 WHITES CREEK TO DOWNTOWN
+        </strong>
+      </p>
+      Detour in effect on route 14 WHITES CREEK
+
+Route 14 TO DOWNTOWN will detour 
+
+Inbound Only.
+Continue FERN AVE (E)
+R-DICKERSON PIKE
+Back to regular route.
+
+Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND ST SB will not be served while this detour is in effect.
+      <hr />
+      <ul
+        class="list-inline"
+      >
+        <li
+          class="list-inline-item"
+        >
+          <strong>
+            Stops:
+          </strong>
+        </li>
+        <li
+          class="list-inline-item"
+        >
+          <a
+            href="/stops/WHIDICSN"
+          >
+            WHIDICSN
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="card-footer alert-item-footer"
+    >
+      Other Cause
+       - 
+      <strong>
+        Start:
+      </strong>
+       
+      <span
+        title="1654988700"
+      >
+        6/11/22, 6:05 PM
+      </span>
+    </div>
+  </div>
+</div>
+`;

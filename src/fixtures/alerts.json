@@ -1,0 +1,290 @@
+[
+  {
+    "id": "35399",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1649057040,
+          "end": 32503701600
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "79"
+        }
+      ],
+      "cause": "Construction",
+      "effect": "Detour",
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 79 SKYLINE NORTHBOUND",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 79 SKYLINE\r\n\r\nRoute 79 NORTHBOUND will detour \r\n\r\nDetour Route 79 from \r\nMadison to N Dickerson\r\nNo service on Skyline Ridge due to construction\r\nFrom Skyline Hospital, continue Doverside \r\nback to Dickerson\r\nR-Dickerson to regular route. ",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "35400",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1649057040,
+          "end": 32503701600
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "79"
+        }
+      ],
+      "cause": "Construction",
+      "effect": "Detour",
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 79 SKYLINE EASTBOUND",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 79 SKYLINE\r\n\r\nRoute 79 EASTBOUND will detour \r\n\r\nDetour Route 79 towards Madison\r\nNo service on Skyline Ridge due to construction\r\nOn Dickerson at Skyline Ridge Dr,\r\nContinue Dickerson\r\nL-Doverside to Skyline Hospital\r\nContinue regular route to Walmart",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "35998",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1654090200,
+          "end": 32503701600
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "22",
+          "stop_id": "FAICLAEN"
+        },
+        {
+          "route_id": "22",
+          "stop_id": "CLAFAISF"
+        },
+        {
+          "route_id": "22",
+          "stop_id": "CLAWHASN"
+        }
+      ],
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 22 BORDEAUX FROM DOWNTOWN",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 22 BORDEAUX\r\n\r\nRoute 22 FROM DOWNTOWN will detour \r\n\r\nFROM FAIRVIEW DR \r\nR-MEADOW RD\r\nL-West Hamilton Rd.\r\nR- Clarksville Hwy to regular route.\r\n\r\n\r\nStops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB will not be served while this detour is in effect.",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "36215",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1654988700,
+          "end": 32503701600
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "14",
+          "stop_id": "WHIDICSN"
+        }
+      ],
+      "cause": "Other Cause",
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 14 WHITES CREEK TO DOWNTOWN",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 14 WHITES CREEK\r\n\r\nRoute 14 TO DOWNTOWN will detour \r\n\r\nInbound Only.\r\nContinue FERN AVE (E)\r\nR-DICKERSON PIKE\r\nBack to regular route.\r\n\r\nStops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND ST SB will not be served while this detour is in effect.",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "36243",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1655145660,
+          "end": 32503701600
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "3",
+          "stop_id": "CXIWTBRG"
+        }
+      ],
+      "cause": "Other Cause",
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 3 WEST END FROM DOWNTOWN",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 3 WEST END\r\n\r\nRoute 3 FROM DOWNTOWN will detour \r\n\r\nOutbound\r\nContinue WHITE BRG PIKE (N)\r\nL-CHARLOTTE PIKE\r\nR-MIDLAND AVE\r\nR-OBRIEN AVE\r\nR-BRILEY PKWY\r\nBack to Regular Route\r\n\r\nStops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOTTE SHONE will not be served while this detour is in effect.",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "36494",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1657679040,
+          "end": 32503701600
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "75",
+          "stop_id": "20ABRONF"
+        },
+        {
+          "route_id": "75",
+          "stop_id": "20AWESNN"
+        },
+        {
+          "route_id": "75",
+          "stop_id": "21AGRANN"
+        },
+        {
+          "route_id": "75",
+          "stop_id": "20ACHUNN"
+        }
+      ],
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 75 MIDTOWN NORTHBOUND",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 75 MIDTOWN NORTHBOUND will detour \r\n\r\nBROADWAY AVE (NE)\r\nL-19TH AVE\r\nL-WEST END AVE\r\nR-20TH AVE\r\n\r\nStops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not be served while this detour is in effect.",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "36571",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1658581200,
+          "end": 1658635200
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "19",
+          "stop_id": "17AJACNN"
+        }
+      ],
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 19 HERMAN FROM DOWNTOWN",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 19 HERMAN FROM DOWNTOWN will detour \r\n\r\n7/23, 8:00am-11:00pm\r\nFrom Downtown\r\nOn Herman at 12th Ave N\r\nContinue Herman \r\nR-19th Ave N\r\nR-Hermosa\r\nL-DB Todd \r\nL-Albion to regular route\r\n\r\nStops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB will not be served while this detour is in effect.",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "36572",
+    "alert": {
+      "active_period": [
+        {
+          "start": 1658581200,
+          "end": 1658635200
+        }
+      ],
+      "informed_entity": [
+        {
+          "route_id": "19",
+          "stop_id": "JAC17AEN"
+        }
+      ],
+      "header_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 19 HERMAN TO DOWNTOWN",
+            "language": "en"
+          }
+        ]
+      },
+      "description_text": {
+        "translation": [
+          {
+            "text": "Detour in effect on route 19 HERMAN TO DOWNTOWN will detour \r\n\r\n7/23, 8:00am-11:00pm\r\nTo Downtown\r\nOn DB Todd at Jackson St\r\nContinue DB Todd\r\nR- Hermosa\r\nL-19th Ave N\r\nL-Herman to regular route\r\n\r\nStops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will not be served while this detour is in effect.",
+            "language": "en"
+          }
+        ]
+      }
+    }
+  }
+]

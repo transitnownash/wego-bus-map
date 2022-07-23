@@ -1,11 +1,11 @@
 /* globals test */
 
 import React from 'react';
-import AlertButton from './AlertButton';
+import TripTable from './TripTable';
 import { createRoot } from 'react-dom/client';
 
-test('renders AlertButton', () => {
+test('renders TripTable', () => {
   const div = document.createElement('div');
   const root = createRoot(div);
-  root.render(<AlertButton />);
+  root.render(<TripTable />);
 });

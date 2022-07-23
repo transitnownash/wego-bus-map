@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`does not render AlertButton when no alerts 1`] = `<div />`;
+
+exports[`renders AlertButton 1`] = `
+<div>
+  <button
+    class="btn btn-sm btn-primary bg-dark"
+  >
+    <span
+      class="badge bg-light text-dark"
+    >
+      8
+    </span>
+      Service Alerts
+  </button>
+</div>
+`;
