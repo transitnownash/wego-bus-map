@@ -15,12 +15,12 @@ import { getJSON } from '../util';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
-function VehicleMarker({position, route, agency, bearing, speed, timestamp, metadata, tripId, shapeSetter, stopSetter, alerts}) {
+function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSetter, alerts}) {
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
 
   if (typeof route.route_gid === 'undefined') {
-    console.log('[Warning] No matching route found for Trip #' + tripId);
+    console.log('[Warning] No matching route found for Trip #' + vehiclePositionData.metadata.trip.trip_id);
     return(<></>);
   }
 
@@ -33,7 +33,7 @@ function VehicleMarker({position, route, agency, bearing, speed, timestamp, meta
   };
 
   // Set shadow rotation if bearing provided
-  if (typeof bearing === 'number') {
+  if (typeof vehiclePositionData.bearing === 'number') {
     iconOptions['shadowUrl'] = busMarkerImageShadow;
   }
   // Swap out images if vehicle is a train
@@ -46,13 +46,13 @@ function VehicleMarker({position, route, agency, bearing, speed, timestamp, meta
 
   // Fade stale icons a bit
   let opacity = 1.0;
-  if ((Date.now()/1000) - timestamp > 120) {
+  if ((Date.now()/1000) - vehiclePositionData.timestamp > 120) {
     opacity = 0.25;
   }
 
   // Handle click on marker
   const showTripDetails = function() {
-    getJSON(GTFS_BASE_URL + '/trips/' + tripId + '.json')
+    getJSON(GTFS_BASE_URL + '/trips/' + vehiclePositionData.metadata.trip.trip_id + '.json')
       .then((trip) => {
         // Add shape to map
         trip.shape['route_color'] = route.route_color;
@@ -66,42 +66,31 @@ function VehicleMarker({position, route, agency, bearing, speed, timestamp, meta
 
   // Rotate the shadow if bearing is set
   if (marker.current) {
-    if (typeof bearing === 'number') {
-      marker.current.setRotationShadowAngle(bearing);
+    if (typeof vehiclePositionData.bearing === 'number') {
+      marker.current.setRotationShadowAngle(vehiclePositionData.bearing);
     }
   }
 
   return(
-    <ReactLeafletDriftMarker key={tripId} ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={position} icon={icon} rotationShadowAngle={bearing} opacity={opacity}>
-      <VehicleMarkerPopup speed={speed} bearing={bearing} metadata={metadata} route={route} agency={agency} tripId={tripId} trip={trip} timestamp={timestamp} alerts={alerts}></VehicleMarkerPopup>
-      <VehicleMarkerTooltip route={route} metadata={metadata} alerts={alerts}></VehicleMarkerTooltip>
+    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={vehiclePositionData.position} icon={icon} rotationShadowAngle={vehiclePositionData.bearing} opacity={opacity}>
+      <VehicleMarkerPopup speed={vehiclePositionData.speed} bearing={vehiclePositionData.bearing} metadata={vehiclePositionData.metadata} route={route} agency={agency} tripId={vehiclePositionData.metadata.trip.trip_id} trip={trip} timestamp={vehiclePositionData.timestamp} alerts={alerts}></VehicleMarkerPopup>
+      <VehicleMarkerTooltip route={route} metadata={vehiclePositionData.metadata} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
   );
 }
 
 VehicleMarker.propTypes = {
-  position: PropTypes.array.isRequired,
+  vehiclePositionData: PropTypes.object.isRequired,
   route: PropTypes.object,
   agency: PropTypes.object,
-  bearing: PropTypes.number,
-  speed: PropTypes.number,
-  timestamp: PropTypes.number,
-  metadata: PropTypes.object,
-  tripId: PropTypes.string,
   shapeSetter: PropTypes.func,
   stopSetter: PropTypes.func,
   alerts: PropTypes.array
 };
 
 VehicleMarker.defaultProps = {
-  position: [],
   route: {},
   agency: {},
-  bearing: null,
-  speed: null,
-  timestamp: null,
-  metadata: {},
-  tripId: null,
   shapeSetter: () => { console.error('No shapeSetter function set!'); },
   stopSetter: () => { console.error('No stopSetter function set!'); },
   alerts: []

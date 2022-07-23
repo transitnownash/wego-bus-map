@@ -1,0 +1,17 @@
+.bcycle-station-name {
+  text-align: center;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  background-color: rgb(51, 51, 51);
+  color: white;
+  padding: 1rem;
+  a:any-link {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.bcycle-inactive {
+  opacity: 0.3;
+}

@@ -1,0 +1,471 @@
+{
+  "ttl": 60,
+  "last_updated": 1658600403,
+  "data": {
+    "stations": [
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 7,
+        "num_bikes_available": 8,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 8,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2162"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 2,
+        "num_bikes_available": 7,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 7,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2165"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 7,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2166"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 9,
+        "num_bikes_available": 5,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 5,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2167"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 12,
+        "num_bikes_available": 2,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 2,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2168"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 4,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2169"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 4,
+        "num_bikes_available": 11,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 11,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2170"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 7,
+        "num_bikes_available": 4,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 4,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2171"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 3,
+        "num_bikes_available": 7,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 7,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2173"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 11,
+        "num_bikes_available": 4,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 4,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2175"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 4,
+        "num_bikes_available": 3,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 3,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2176"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 4,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 4,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2177"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 10,
+        "num_bikes_available": 1,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 1,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2179"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 7,
+        "num_bikes_available": 4,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 4,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2180"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 3,
+        "num_bikes_available": 8,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 8,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2181"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 4,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2516"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 3,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 3,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2517"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 7,
+        "num_bikes_available": 2,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 2,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2684"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2724"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 9,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2970"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 8,
+        "num_bikes_available": 3,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 3,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2971"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 10,
+        "num_bikes_available": 1,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 1,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2973"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 14,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 14,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2974"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 7,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 7,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_2975"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 10,
+        "num_bikes_available": 5,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 5,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3271"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 5,
+        "num_bikes_available": 8,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 8,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3315"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 5,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 5,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3456"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 3,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 3,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3467"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 4,
+        "num_bikes_available": 5,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 5,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3568"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 5,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3569"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 3,
+        "num_bikes_available": 6,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 6,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3597"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 6,
+        "num_bikes_available": 5,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 5,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3613"
+      },
+      {
+        "is_returning": 1,
+        "is_renting": 1,
+        "is_installed": 1,
+        "num_docks_available": 13,
+        "num_bikes_available": 4,
+        "last_reported": 1658600403,
+        "num_bikes_available_types": {
+          "electric": 4,
+          "smart": 0,
+          "classic": 0
+        },
+        "station_id": "bcycle_nashville_3784"
+      }
+    ]
+  },
+  "version": "1.1"
+}

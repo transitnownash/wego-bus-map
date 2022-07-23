@@ -7,7 +7,6 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import bCycleIconImage from '../resources/bcycle.svg';
 import './TransitMap.scss';
 import './StopMarker';
 import { formatShapePoints } from '../util';
@@ -84,15 +83,6 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
     }
   };
 
-  const bCycleMarkerIcon = L.Icon.extend({
-    options: {
-      iconUrl: bCycleIconImage,
-      iconSize: [24, 24],
-      shadowUrl: null
-    }
-  });
-  const bCycleIcon = new bCycleMarkerIcon();
-
   return(
     <MapContainer ref={map} className="map-container" center={center} zoom={zoom} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
       <TileLayer
@@ -109,10 +99,8 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
               let route = getRouteDataById(item.metadata.trip.route_id);
               let routeAlerts = getRouteAlertsById(item.metadata.trip.route_id);
               let agency = getAgencyDataById(route ? route.agency_gid : {});
-              let tripId = item.metadata.trip.trip_id;
-
               return(
-                <VehicleMarker key={item.id} position={item.position} speed={item.speed} bearing={item.bearing} metadata={item.metadata} route={route} agency={agency} tripId={tripId} timestamp={item.timestamp} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
               );
             })}
           </LayerGroup>
@@ -144,7 +132,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
             <LayerGroup>
               {bCycleStations.map((item, _index) => {
                 return(
-                  <BCycleMarker key={item.station_id} station={item} icon={bCycleIcon}></BCycleMarker>
+                  <BCycleMarker key={item.station_id} station={item}></BCycleMarker>
                 );
               })}
              </LayerGroup>

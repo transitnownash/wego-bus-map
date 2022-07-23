@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders TransitRouteHeader 1`] = `
+<div>
+  <div
+    class="transit-route-header d-flex"
+    style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div
+      class="flex-grow-1 align-bottom"
+    >
+      <a
+        href="/routes/4"
+      >
+        4
+         - 
+        SHELBY
+      </a>
+    </div>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`renders TransitRouteHeader 2`] = `
+<div>
+  <div
+    class="transit-route-header d-flex"
+    style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div
+      class="flex-grow-1 align-bottom"
+    >
+      <a
+        href="/routes/4"
+      >
+        4
+         - 
+        SHELBY
+      </a>
+    </div>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`renders TransitRouteHeader with icon 1`] = `
+<div>
+  <div
+    class="transit-route-header d-flex"
+    style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div>
+      <img
+        alt="Icon"
+        class="me-2"
+        src="bus.svg"
+        style="height: 1.5rem;"
+        title="Route Type: 3"
+      />
+    </div>
+    <div
+      class="flex-grow-1 align-bottom"
+    >
+      <a
+        href="/routes/4"
+      >
+        4
+         - 
+        SHELBY
+      </a>
+    </div>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`renders TransitRouteHeader with invalid route. 1`] = `
+<div>
+  <div
+    class="transit-route-header"
+  >
+    Invalid route!
+  </div>
+</div>
+`;

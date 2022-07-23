@@ -19,6 +19,7 @@ test('renders TripProgressBar', () => {
   );
   expect(container.querySelector('.trip-progress-bar > .progress > div')).toHaveStyle({width: '17.551%'});
   expect(screen.getByText('2.44 mi')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });
 
 test('renders TripProgressBar for completed trip', () => {
@@ -29,6 +30,7 @@ test('renders TripProgressBar for completed trip', () => {
   expect(container.querySelector('.trip-progress-bar-completed')).toBeInTheDocument();
   expect(container.querySelector('.trip-progress-bar > .progress > div')).toHaveStyle({width: '100%'});
   expect(screen.getByText('13.92 mi')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });
 
 test('renders empty TripProgressBar for trip not yet started', () => {
@@ -38,5 +40,6 @@ test('renders empty TripProgressBar for trip not yet started', () => {
     <TripProgressBar trip={tripFixture} tripUpdates={tripUpdates} />
   );
   expect(container.querySelector('.trip-progress-bar-empty')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });
 
