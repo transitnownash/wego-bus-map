@@ -4,13 +4,12 @@ import React from 'react';
 import TransitRouteHeader from './TransitRouteHeader';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router} from 'react-router-dom';
-import * as routeFixture from '../fixtures/routes-4.json';
+const routeFixture = require('../fixtures/routes-4.json');
 
 test('renders TransitRouteHeader', () => {
-  const route = routeFixture;
   const {container} = render(
     <Router>
-      <TransitRouteHeader route={route} />
+      <TransitRouteHeader route={routeFixture} />
     </Router>
   );
   expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
@@ -18,10 +17,9 @@ test('renders TransitRouteHeader', () => {
 });
 
 test('renders TransitRouteHeader', () => {
-  const route = routeFixture;
   const {container} = render(
     <Router>
-      <TransitRouteHeader route={route} />
+      <TransitRouteHeader route={routeFixture} />
     </Router>
   );
   expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
@@ -30,10 +28,9 @@ test('renders TransitRouteHeader', () => {
 });
 
 test('renders TransitRouteHeader with icon', () => {
-  const route = routeFixture;
   const {container} = render(
     <Router>
-      <TransitRouteHeader route={route} showRouteType={true} />
+      <TransitRouteHeader route={routeFixture} showRouteType={true} />
     </Router>
   );
   expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
@@ -42,9 +39,10 @@ test('renders TransitRouteHeader with icon', () => {
 });
 
 test('renders TransitRouteHeader with invalid route.', () => {
+  const route = {};
   render(
     <Router>
-      <TransitRouteHeader route={{}} />
+      <TransitRouteHeader route={route} />
     </Router>
   );
   expect(screen.getByText('Invalid route!')).toBeInTheDocument();

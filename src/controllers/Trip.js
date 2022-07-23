@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
@@ -190,11 +190,11 @@ function Trip() {
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
-              <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {formatTripTime(trip.start_time)} at {trip.stop_times[0].stop.stop_name}</td>
+              <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {formatTripTime(trip.start_time)} at <Link to={'/stops/' + trip.stop_times[0].stop.stop_code} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link></td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
-              <td><StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]}></StopTimeSequence> {formatTripTime(trip.end_time)} at {trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</td>
+              <td><StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]}></StopTimeSequence> {formatTripTime(trip.end_time)} at <Link to={'/stops/' + trip.stop_times[trip.stop_times.length - 1].stop.stop_code} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link></td>
             </tr>
           </tbody>
         </table>

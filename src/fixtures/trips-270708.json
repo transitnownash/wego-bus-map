@@ -1,0 +1,6483 @@
+{
+  "id": 643,
+  "route_gid": "3",
+  "route_id": 9,
+  "service_gid": "1",
+  "calendar_id": 1,
+  "trip_gid": "270708",
+  "trip_headsign": "B - BELLEVUE",
+  "trip_short_name": null,
+  "direction_id": "0",
+  "block_gid": "28892",
+  "shape_gid": "16899",
+  "shape_id": 121,
+  "wheelchair_accessible": "1",
+  "bikes_allowed": "1",
+  "start_time": "21:55:00",
+  "end_time": "22:35:00",
+  "created_at": "2022-07-17T21:24:49.061-05:00",
+  "updated_at": "2022-07-17T22:02:29.068-05:00",
+  "shape": {
+    "id": 121,
+    "shape_gid": "16899",
+    "points": [
+      {
+        "lat": "36.166510",
+        "lon": "-86.781172",
+        "sequence": "1",
+        "dist_traveled": "0.0000"
+      },
+      {
+        "lat": "36.166478",
+        "lon": "-86.781219",
+        "sequence": "2",
+        "dist_traveled": "0.0050"
+      },
+      {
+        "lat": "36.166509",
+        "lon": "-86.781171",
+        "sequence": "3",
+        "dist_traveled": "0.0050"
+      },
+      {
+        "lat": "36.166551",
+        "lon": "-86.781143",
+        "sequence": "4",
+        "dist_traveled": "0.0108"
+      },
+      {
+        "lat": "36.166607",
+        "lon": "-86.781116",
+        "sequence": "5",
+        "dist_traveled": "0.0172"
+      },
+      {
+        "lat": "36.166660",
+        "lon": "-86.781109",
+        "sequence": "6",
+        "dist_traveled": "0.0232"
+      },
+      {
+        "lat": "36.166660",
+        "lon": "-86.781108",
+        "sequence": "7",
+        "dist_traveled": "0.0232"
+      },
+      {
+        "lat": "36.166696",
+        "lon": "-86.781127",
+        "sequence": "8",
+        "dist_traveled": "0.0277"
+      },
+      {
+        "lat": "36.166733",
+        "lon": "-86.781146",
+        "sequence": "9",
+        "dist_traveled": "0.0322"
+      },
+      {
+        "lat": "36.166776",
+        "lon": "-86.781197",
+        "sequence": "10",
+        "dist_traveled": "0.0386"
+      },
+      {
+        "lat": "36.166796",
+        "lon": "-86.781283",
+        "sequence": "11",
+        "dist_traveled": "0.0468"
+      },
+      {
+        "lat": "36.166804",
+        "lon": "-86.781359",
+        "sequence": "12",
+        "dist_traveled": "0.0539"
+      },
+      {
+        "lat": "36.166786",
+        "lon": "-86.781427",
+        "sequence": "13",
+        "dist_traveled": "0.0602"
+      },
+      {
+        "lat": "36.166682",
+        "lon": "-86.781679",
+        "sequence": "14",
+        "dist_traveled": "0.0848"
+      },
+      {
+        "lat": "36.166567",
+        "lon": "-86.781977",
+        "sequence": "15",
+        "dist_traveled": "0.1148"
+      },
+      {
+        "lat": "36.166454",
+        "lon": "-86.782269",
+        "sequence": "16",
+        "dist_traveled": "0.1439"
+      },
+      {
+        "lat": "36.166454",
+        "lon": "-86.782268",
+        "sequence": "17",
+        "dist_traveled": "0.1439"
+      },
+      {
+        "lat": "36.166409",
+        "lon": "-86.782240",
+        "sequence": "18",
+        "dist_traveled": "0.1497"
+      },
+      {
+        "lat": "36.166126",
+        "lon": "-86.782064",
+        "sequence": "19",
+        "dist_traveled": "0.1850"
+      },
+      {
+        "lat": "36.165851",
+        "lon": "-86.781893",
+        "sequence": "20",
+        "dist_traveled": "0.2190"
+      },
+      {
+        "lat": "36.165549",
+        "lon": "-86.782606",
+        "sequence": "21",
+        "dist_traveled": "0.2915"
+      },
+      {
+        "lat": "36.165367",
+        "lon": "-86.783041",
+        "sequence": "22",
+        "dist_traveled": "0.3358"
+      },
+      {
+        "lat": "36.165320",
+        "lon": "-86.783168",
+        "sequence": "23",
+        "dist_traveled": "0.3479"
+      },
+      {
+        "lat": "36.164753",
+        "lon": "-86.782790",
+        "sequence": "24",
+        "dist_traveled": "0.4195"
+      },
+      {
+        "lat": "36.163990",
+        "lon": "-86.782290",
+        "sequence": "25",
+        "dist_traveled": "0.5161"
+      },
+      {
+        "lat": "36.162623",
+        "lon": "-86.781404",
+        "sequence": "26",
+        "dist_traveled": "0.6883"
+      },
+      {
+        "lat": "36.161497",
+        "lon": "-86.780671",
+        "sequence": "27",
+        "dist_traveled": "0.8305"
+      },
+      {
+        "lat": "36.161345",
+        "lon": "-86.780570",
+        "sequence": "28",
+        "dist_traveled": "0.8497"
+      },
+      {
+        "lat": "36.160819",
+        "lon": "-86.781774",
+        "sequence": "29",
+        "dist_traveled": "0.9728"
+      },
+      {
+        "lat": "36.160634",
+        "lon": "-86.782173",
+        "sequence": "30",
+        "dist_traveled": "1.0136"
+      },
+      {
+        "lat": "36.160473",
+        "lon": "-86.782524",
+        "sequence": "31",
+        "dist_traveled": "1.0503"
+      },
+      {
+        "lat": "36.160343",
+        "lon": "-86.782758",
+        "sequence": "32",
+        "dist_traveled": "1.0747"
+      },
+      {
+        "lat": "36.160241",
+        "lon": "-86.782933",
+        "sequence": "33",
+        "dist_traveled": "1.0947"
+      },
+      {
+        "lat": "36.159767",
+        "lon": "-86.782618",
+        "sequence": "34",
+        "dist_traveled": "1.1547"
+      },
+      {
+        "lat": "36.159654",
+        "lon": "-86.782546",
+        "sequence": "35",
+        "dist_traveled": "1.1681"
+      },
+      {
+        "lat": "36.159537",
+        "lon": "-86.782471",
+        "sequence": "36",
+        "dist_traveled": "1.1838"
+      },
+      {
+        "lat": "36.159040",
+        "lon": "-86.782154",
+        "sequence": "37",
+        "dist_traveled": "1.2455"
+      },
+      {
+        "lat": "36.158952",
+        "lon": "-86.782097",
+        "sequence": "38",
+        "dist_traveled": "1.2571"
+      },
+      {
+        "lat": "36.158886",
+        "lon": "-86.782056",
+        "sequence": "39",
+        "dist_traveled": "1.2648"
+      },
+      {
+        "lat": "36.158761",
+        "lon": "-86.782341",
+        "sequence": "40",
+        "dist_traveled": "1.2934"
+      },
+      {
+        "lat": "36.158671",
+        "lon": "-86.782548",
+        "sequence": "41",
+        "dist_traveled": "1.3154"
+      },
+      {
+        "lat": "36.158581",
+        "lon": "-86.782754",
+        "sequence": "42",
+        "dist_traveled": "1.3360"
+      },
+      {
+        "lat": "36.158337",
+        "lon": "-86.783348",
+        "sequence": "43",
+        "dist_traveled": "1.3954"
+      },
+      {
+        "lat": "36.158268",
+        "lon": "-86.783516",
+        "sequence": "44",
+        "dist_traveled": "1.4124"
+      },
+      {
+        "lat": "36.157995",
+        "lon": "-86.784183",
+        "sequence": "45",
+        "dist_traveled": "1.4777"
+      },
+      {
+        "lat": "36.157893",
+        "lon": "-86.784419",
+        "sequence": "46",
+        "dist_traveled": "1.5019"
+      },
+      {
+        "lat": "36.157616",
+        "lon": "-86.785062",
+        "sequence": "47",
+        "dist_traveled": "1.5677"
+      },
+      {
+        "lat": "36.157478",
+        "lon": "-86.785368",
+        "sequence": "48",
+        "dist_traveled": "1.5986"
+      },
+      {
+        "lat": "36.157434",
+        "lon": "-86.785467",
+        "sequence": "49",
+        "dist_traveled": "1.6089"
+      },
+      {
+        "lat": "36.157383",
+        "lon": "-86.785576",
+        "sequence": "50",
+        "dist_traveled": "1.6205"
+      },
+      {
+        "lat": "36.157358",
+        "lon": "-86.785633",
+        "sequence": "51",
+        "dist_traveled": "1.6264"
+      },
+      {
+        "lat": "36.157329",
+        "lon": "-86.785698",
+        "sequence": "52",
+        "dist_traveled": "1.6331"
+      },
+      {
+        "lat": "36.157128",
+        "lon": "-86.786147",
+        "sequence": "53",
+        "dist_traveled": "1.6787"
+      },
+      {
+        "lat": "36.157067",
+        "lon": "-86.786281",
+        "sequence": "54",
+        "dist_traveled": "1.6918"
+      },
+      {
+        "lat": "36.157012",
+        "lon": "-86.786404",
+        "sequence": "55",
+        "dist_traveled": "1.7043"
+      },
+      {
+        "lat": "36.156984",
+        "lon": "-86.786466",
+        "sequence": "56",
+        "dist_traveled": "1.7110"
+      },
+      {
+        "lat": "36.156576",
+        "lon": "-86.787470",
+        "sequence": "57",
+        "dist_traveled": "1.8121"
+      },
+      {
+        "lat": "36.156449",
+        "lon": "-86.787784",
+        "sequence": "58",
+        "dist_traveled": "1.8434"
+      },
+      {
+        "lat": "36.156170",
+        "lon": "-86.788437",
+        "sequence": "59",
+        "dist_traveled": "1.9096"
+      },
+      {
+        "lat": "36.156011",
+        "lon": "-86.788833",
+        "sequence": "60",
+        "dist_traveled": "1.9485"
+      },
+      {
+        "lat": "36.155972",
+        "lon": "-86.788925",
+        "sequence": "61",
+        "dist_traveled": "1.9580"
+      },
+      {
+        "lat": "36.155916",
+        "lon": "-86.789060",
+        "sequence": "62",
+        "dist_traveled": "1.9714"
+      },
+      {
+        "lat": "36.155855",
+        "lon": "-86.789208",
+        "sequence": "63",
+        "dist_traveled": "1.9861"
+      },
+      {
+        "lat": "36.155822",
+        "lon": "-86.789296",
+        "sequence": "64",
+        "dist_traveled": "1.9951"
+      },
+      {
+        "lat": "36.155795",
+        "lon": "-86.789364",
+        "sequence": "65",
+        "dist_traveled": "2.0018"
+      },
+      {
+        "lat": "36.155772",
+        "lon": "-86.789419",
+        "sequence": "66",
+        "dist_traveled": "2.0072"
+      },
+      {
+        "lat": "36.155751",
+        "lon": "-86.789472",
+        "sequence": "67",
+        "dist_traveled": "2.0130"
+      },
+      {
+        "lat": "36.155682",
+        "lon": "-86.789618",
+        "sequence": "68",
+        "dist_traveled": "2.0278"
+      },
+      {
+        "lat": "36.155643",
+        "lon": "-86.789715",
+        "sequence": "69",
+        "dist_traveled": "2.0381"
+      },
+      {
+        "lat": "36.155564",
+        "lon": "-86.789891",
+        "sequence": "70",
+        "dist_traveled": "2.0551"
+      },
+      {
+        "lat": "36.155530",
+        "lon": "-86.789971",
+        "sequence": "71",
+        "dist_traveled": "2.0631"
+      },
+      {
+        "lat": "36.155436",
+        "lon": "-86.790185",
+        "sequence": "72",
+        "dist_traveled": "2.0860"
+      },
+      {
+        "lat": "36.155238",
+        "lon": "-86.790634",
+        "sequence": "73",
+        "dist_traveled": "2.1316"
+      },
+      {
+        "lat": "36.154962",
+        "lon": "-86.791263",
+        "sequence": "74",
+        "dist_traveled": "2.1956"
+      },
+      {
+        "lat": "36.154631",
+        "lon": "-86.792038",
+        "sequence": "75",
+        "dist_traveled": "2.2739"
+      },
+      {
+        "lat": "36.154569",
+        "lon": "-86.792190",
+        "sequence": "76",
+        "dist_traveled": "2.2887"
+      },
+      {
+        "lat": "36.154279",
+        "lon": "-86.792900",
+        "sequence": "77",
+        "dist_traveled": "2.3602"
+      },
+      {
+        "lat": "36.154068",
+        "lon": "-86.793659",
+        "sequence": "78",
+        "dist_traveled": "2.4314"
+      },
+      {
+        "lat": "36.154043",
+        "lon": "-86.793748",
+        "sequence": "79",
+        "dist_traveled": "2.4399"
+      },
+      {
+        "lat": "36.153945",
+        "lon": "-86.794017",
+        "sequence": "80",
+        "dist_traveled": "2.4663"
+      },
+      {
+        "lat": "36.153889",
+        "lon": "-86.794175",
+        "sequence": "81",
+        "dist_traveled": "2.4816"
+      },
+      {
+        "lat": "36.153789",
+        "lon": "-86.794404",
+        "sequence": "82",
+        "dist_traveled": "2.5053"
+      },
+      {
+        "lat": "36.153737",
+        "lon": "-86.794524",
+        "sequence": "83",
+        "dist_traveled": "2.5169"
+      },
+      {
+        "lat": "36.153129",
+        "lon": "-86.795724",
+        "sequence": "84",
+        "dist_traveled": "2.6437"
+      },
+      {
+        "lat": "36.152997",
+        "lon": "-86.795989",
+        "sequence": "85",
+        "dist_traveled": "2.6720"
+      },
+      {
+        "lat": "36.152935",
+        "lon": "-86.796113",
+        "sequence": "86",
+        "dist_traveled": "2.6851"
+      },
+      {
+        "lat": "36.152548",
+        "lon": "-86.796911",
+        "sequence": "87",
+        "dist_traveled": "2.7681"
+      },
+      {
+        "lat": "36.152412",
+        "lon": "-86.797194",
+        "sequence": "88",
+        "dist_traveled": "2.7981"
+      },
+      {
+        "lat": "36.152294",
+        "lon": "-86.797430",
+        "sequence": "89",
+        "dist_traveled": "2.8233"
+      },
+      {
+        "lat": "36.151880",
+        "lon": "-86.798265",
+        "sequence": "90",
+        "dist_traveled": "2.9105"
+      },
+      {
+        "lat": "36.151824",
+        "lon": "-86.798377",
+        "sequence": "91",
+        "dist_traveled": "2.9221"
+      },
+      {
+        "lat": "36.151656",
+        "lon": "-86.798715",
+        "sequence": "92",
+        "dist_traveled": "2.9576"
+      },
+      {
+        "lat": "36.151364",
+        "lon": "-86.799318",
+        "sequence": "93",
+        "dist_traveled": "3.0209"
+      },
+      {
+        "lat": "36.150926",
+        "lon": "-86.800228",
+        "sequence": "94",
+        "dist_traveled": "3.1156"
+      },
+      {
+        "lat": "36.150440",
+        "lon": "-86.801207",
+        "sequence": "95",
+        "dist_traveled": "3.2180"
+      },
+      {
+        "lat": "36.150150",
+        "lon": "-86.801789",
+        "sequence": "96",
+        "dist_traveled": "3.2796"
+      },
+      {
+        "lat": "36.149603",
+        "lon": "-86.802909",
+        "sequence": "97",
+        "dist_traveled": "3.3967"
+      },
+      {
+        "lat": "36.149414",
+        "lon": "-86.803296",
+        "sequence": "98",
+        "dist_traveled": "3.4375"
+      },
+      {
+        "lat": "36.149339",
+        "lon": "-86.803450",
+        "sequence": "99",
+        "dist_traveled": "3.4528"
+      },
+      {
+        "lat": "36.148816",
+        "lon": "-86.804559",
+        "sequence": "100",
+        "dist_traveled": "3.5680"
+      },
+      {
+        "lat": "36.148714",
+        "lon": "-86.804777",
+        "sequence": "101",
+        "dist_traveled": "3.5909"
+      },
+      {
+        "lat": "36.148008",
+        "lon": "-86.806211",
+        "sequence": "102",
+        "dist_traveled": "3.7413"
+      },
+      {
+        "lat": "36.147887",
+        "lon": "-86.806460",
+        "sequence": "103",
+        "dist_traveled": "3.7673"
+      },
+      {
+        "lat": "36.147831",
+        "lon": "-86.806576",
+        "sequence": "104",
+        "dist_traveled": "3.7790"
+      },
+      {
+        "lat": "36.147293",
+        "lon": "-86.807679",
+        "sequence": "105",
+        "dist_traveled": "3.8948"
+      },
+      {
+        "lat": "36.147076",
+        "lon": "-86.808134",
+        "sequence": "106",
+        "dist_traveled": "3.9419"
+      },
+      {
+        "lat": "36.147074",
+        "lon": "-86.808134",
+        "sequence": "107",
+        "dist_traveled": "3.9419"
+      },
+      {
+        "lat": "36.146975",
+        "lon": "-86.808342",
+        "sequence": "108",
+        "dist_traveled": "3.9639"
+      },
+      {
+        "lat": "36.146972",
+        "lon": "-86.808348",
+        "sequence": "109",
+        "dist_traveled": "3.9639"
+      },
+      {
+        "lat": "36.146863",
+        "lon": "-86.808576",
+        "sequence": "110",
+        "dist_traveled": "3.9886"
+      },
+      {
+        "lat": "36.146354",
+        "lon": "-86.809663",
+        "sequence": "111",
+        "dist_traveled": "4.1002"
+      },
+      {
+        "lat": "36.146327",
+        "lon": "-86.809730",
+        "sequence": "112",
+        "dist_traveled": "4.1070"
+      },
+      {
+        "lat": "36.146295",
+        "lon": "-86.809804",
+        "sequence": "113",
+        "dist_traveled": "4.1146"
+      },
+      {
+        "lat": "36.146267",
+        "lon": "-86.809874",
+        "sequence": "114",
+        "dist_traveled": "4.1213"
+      },
+      {
+        "lat": "36.146030",
+        "lon": "-86.810378",
+        "sequence": "115",
+        "dist_traveled": "4.1738"
+      },
+      {
+        "lat": "36.145492",
+        "lon": "-86.811456",
+        "sequence": "116",
+        "dist_traveled": "4.2870"
+      },
+      {
+        "lat": "36.145262",
+        "lon": "-86.811914",
+        "sequence": "117",
+        "dist_traveled": "4.3355"
+      },
+      {
+        "lat": "36.145059",
+        "lon": "-86.812342",
+        "sequence": "118",
+        "dist_traveled": "4.3799"
+      },
+      {
+        "lat": "36.144987",
+        "lon": "-86.812494",
+        "sequence": "119",
+        "dist_traveled": "4.3961"
+      },
+      {
+        "lat": "36.144872",
+        "lon": "-86.812704",
+        "sequence": "120",
+        "dist_traveled": "4.4185"
+      },
+      {
+        "lat": "36.144699",
+        "lon": "-86.812967",
+        "sequence": "121",
+        "dist_traveled": "4.4490"
+      },
+      {
+        "lat": "36.144547",
+        "lon": "-86.813161",
+        "sequence": "122",
+        "dist_traveled": "4.4730"
+      },
+      {
+        "lat": "36.144531",
+        "lon": "-86.813183",
+        "sequence": "123",
+        "dist_traveled": "4.4759"
+      },
+      {
+        "lat": "36.144341",
+        "lon": "-86.813431",
+        "sequence": "124",
+        "dist_traveled": "4.5070"
+      },
+      {
+        "lat": "36.144181",
+        "lon": "-86.813627",
+        "sequence": "125",
+        "dist_traveled": "4.5318"
+      },
+      {
+        "lat": "36.144097",
+        "lon": "-86.813731",
+        "sequence": "126",
+        "dist_traveled": "4.5445"
+      },
+      {
+        "lat": "36.143965",
+        "lon": "-86.813875",
+        "sequence": "127",
+        "dist_traveled": "4.5644"
+      },
+      {
+        "lat": "36.143831",
+        "lon": "-86.814021",
+        "sequence": "128",
+        "dist_traveled": "4.5842"
+      },
+      {
+        "lat": "36.143681",
+        "lon": "-86.814201",
+        "sequence": "129",
+        "dist_traveled": "4.6076"
+      },
+      {
+        "lat": "36.143513",
+        "lon": "-86.814401",
+        "sequence": "130",
+        "dist_traveled": "4.6337"
+      },
+      {
+        "lat": "36.143169",
+        "lon": "-86.814812",
+        "sequence": "131",
+        "dist_traveled": "4.6868"
+      },
+      {
+        "lat": "36.143152",
+        "lon": "-86.814833",
+        "sequence": "132",
+        "dist_traveled": "4.6896"
+      },
+      {
+        "lat": "36.142693",
+        "lon": "-86.815392",
+        "sequence": "133",
+        "dist_traveled": "4.7603"
+      },
+      {
+        "lat": "36.142632",
+        "lon": "-86.815465",
+        "sequence": "134",
+        "dist_traveled": "4.7702"
+      },
+      {
+        "lat": "36.142612",
+        "lon": "-86.815491",
+        "sequence": "135",
+        "dist_traveled": "4.7738"
+      },
+      {
+        "lat": "36.142588",
+        "lon": "-86.815518",
+        "sequence": "136",
+        "dist_traveled": "4.7774"
+      },
+      {
+        "lat": "36.142495",
+        "lon": "-86.815631",
+        "sequence": "137",
+        "dist_traveled": "4.7923"
+      },
+      {
+        "lat": "36.142227",
+        "lon": "-86.815954",
+        "sequence": "138",
+        "dist_traveled": "4.8340"
+      },
+      {
+        "lat": "36.141977",
+        "lon": "-86.816220",
+        "sequence": "139",
+        "dist_traveled": "4.8703"
+      },
+      {
+        "lat": "36.141805",
+        "lon": "-86.816405",
+        "sequence": "140",
+        "dist_traveled": "4.8957"
+      },
+      {
+        "lat": "36.141653",
+        "lon": "-86.816576",
+        "sequence": "141",
+        "dist_traveled": "4.9184"
+      },
+      {
+        "lat": "36.141262",
+        "lon": "-86.817017",
+        "sequence": "142",
+        "dist_traveled": "4.9772"
+      },
+      {
+        "lat": "36.141217",
+        "lon": "-86.817067",
+        "sequence": "143",
+        "dist_traveled": "4.9843"
+      },
+      {
+        "lat": "36.140901",
+        "lon": "-86.817426",
+        "sequence": "144",
+        "dist_traveled": "5.0317"
+      },
+      {
+        "lat": "36.140741",
+        "lon": "-86.817605",
+        "sequence": "145",
+        "dist_traveled": "5.0558"
+      },
+      {
+        "lat": "36.140274",
+        "lon": "-86.818163",
+        "sequence": "146",
+        "dist_traveled": "5.1279"
+      },
+      {
+        "lat": "36.139850",
+        "lon": "-86.818614",
+        "sequence": "147",
+        "dist_traveled": "5.1904"
+      },
+      {
+        "lat": "36.139384",
+        "lon": "-86.819133",
+        "sequence": "148",
+        "dist_traveled": "5.2598"
+      },
+      {
+        "lat": "36.139361",
+        "lon": "-86.819159",
+        "sequence": "149",
+        "dist_traveled": "5.2634"
+      },
+      {
+        "lat": "36.138810",
+        "lon": "-86.819654",
+        "sequence": "150",
+        "dist_traveled": "5.3395"
+      },
+      {
+        "lat": "36.138408",
+        "lon": "-86.820114",
+        "sequence": "151",
+        "dist_traveled": "5.4003"
+      },
+      {
+        "lat": "36.138393",
+        "lon": "-86.820131",
+        "sequence": "152",
+        "dist_traveled": "5.4026"
+      },
+      {
+        "lat": "36.137874",
+        "lon": "-86.820627",
+        "sequence": "153",
+        "dist_traveled": "5.4754"
+      },
+      {
+        "lat": "36.137526",
+        "lon": "-86.820954",
+        "sequence": "154",
+        "dist_traveled": "5.5246"
+      },
+      {
+        "lat": "36.137339",
+        "lon": "-86.821126",
+        "sequence": "155",
+        "dist_traveled": "5.5504"
+      },
+      {
+        "lat": "36.137251",
+        "lon": "-86.821210",
+        "sequence": "156",
+        "dist_traveled": "5.5632"
+      },
+      {
+        "lat": "36.137093",
+        "lon": "-86.821368",
+        "sequence": "157",
+        "dist_traveled": "5.5852"
+      },
+      {
+        "lat": "36.137037",
+        "lon": "-86.821422",
+        "sequence": "158",
+        "dist_traveled": "5.5933"
+      },
+      {
+        "lat": "36.136959",
+        "lon": "-86.821500",
+        "sequence": "159",
+        "dist_traveled": "5.6039"
+      },
+      {
+        "lat": "36.136882",
+        "lon": "-86.821574",
+        "sequence": "160",
+        "dist_traveled": "5.6153"
+      },
+      {
+        "lat": "36.136728",
+        "lon": "-86.821729",
+        "sequence": "161",
+        "dist_traveled": "5.6373"
+      },
+      {
+        "lat": "36.136623",
+        "lon": "-86.821833",
+        "sequence": "162",
+        "dist_traveled": "5.6523"
+      },
+      {
+        "lat": "36.136262",
+        "lon": "-86.822197",
+        "sequence": "163",
+        "dist_traveled": "5.7042"
+      },
+      {
+        "lat": "36.136170",
+        "lon": "-86.822295",
+        "sequence": "164",
+        "dist_traveled": "5.7178"
+      },
+      {
+        "lat": "36.136032",
+        "lon": "-86.822462",
+        "sequence": "165",
+        "dist_traveled": "5.7390"
+      },
+      {
+        "lat": "36.135905",
+        "lon": "-86.822623",
+        "sequence": "166",
+        "dist_traveled": "5.7595"
+      },
+      {
+        "lat": "36.135707",
+        "lon": "-86.822889",
+        "sequence": "167",
+        "dist_traveled": "5.7921"
+      },
+      {
+        "lat": "36.135575",
+        "lon": "-86.823090",
+        "sequence": "168",
+        "dist_traveled": "5.8149"
+      },
+      {
+        "lat": "36.135491",
+        "lon": "-86.823223",
+        "sequence": "169",
+        "dist_traveled": "5.8305"
+      },
+      {
+        "lat": "36.135407",
+        "lon": "-86.823362",
+        "sequence": "170",
+        "dist_traveled": "5.8463"
+      },
+      {
+        "lat": "36.135318",
+        "lon": "-86.823529",
+        "sequence": "171",
+        "dist_traveled": "5.8635"
+      },
+      {
+        "lat": "36.135308",
+        "lon": "-86.823552",
+        "sequence": "172",
+        "dist_traveled": "5.8657"
+      },
+      {
+        "lat": "36.135308",
+        "lon": "-86.823542",
+        "sequence": "173",
+        "dist_traveled": "5.8657"
+      },
+      {
+        "lat": "36.135132",
+        "lon": "-86.823874",
+        "sequence": "174",
+        "dist_traveled": "5.9010"
+      },
+      {
+        "lat": "36.135089",
+        "lon": "-86.823958",
+        "sequence": "175",
+        "dist_traveled": "5.9104"
+      },
+      {
+        "lat": "36.135091",
+        "lon": "-86.823957",
+        "sequence": "176",
+        "dist_traveled": "5.9104"
+      },
+      {
+        "lat": "36.135066",
+        "lon": "-86.824018",
+        "sequence": "177",
+        "dist_traveled": "5.9158"
+      },
+      {
+        "lat": "36.134893",
+        "lon": "-86.824430",
+        "sequence": "178",
+        "dist_traveled": "5.9578"
+      },
+      {
+        "lat": "36.134668",
+        "lon": "-86.825068",
+        "sequence": "179",
+        "dist_traveled": "6.0201"
+      },
+      {
+        "lat": "36.134645",
+        "lon": "-86.825135",
+        "sequence": "180",
+        "dist_traveled": "6.0264"
+      },
+      {
+        "lat": "36.134623",
+        "lon": "-86.825195",
+        "sequence": "181",
+        "dist_traveled": "6.0322"
+      },
+      {
+        "lat": "36.134573",
+        "lon": "-86.825340",
+        "sequence": "182",
+        "dist_traveled": "6.0462"
+      },
+      {
+        "lat": "36.134354",
+        "lon": "-86.825922",
+        "sequence": "183",
+        "dist_traveled": "6.1039"
+      },
+      {
+        "lat": "36.134177",
+        "lon": "-86.826399",
+        "sequence": "184",
+        "dist_traveled": "6.1504"
+      },
+      {
+        "lat": "36.134133",
+        "lon": "-86.826516",
+        "sequence": "185",
+        "dist_traveled": "6.1625"
+      },
+      {
+        "lat": "36.133828",
+        "lon": "-86.827331",
+        "sequence": "186",
+        "dist_traveled": "6.2430"
+      },
+      {
+        "lat": "36.133800",
+        "lon": "-86.827407",
+        "sequence": "187",
+        "dist_traveled": "6.2497"
+      },
+      {
+        "lat": "36.133711",
+        "lon": "-86.827669",
+        "sequence": "188",
+        "dist_traveled": "6.2757"
+      },
+      {
+        "lat": "36.133491",
+        "lon": "-86.828308",
+        "sequence": "189",
+        "dist_traveled": "6.3379"
+      },
+      {
+        "lat": "36.133130",
+        "lon": "-86.829306",
+        "sequence": "190",
+        "dist_traveled": "6.4355"
+      },
+      {
+        "lat": "36.133089",
+        "lon": "-86.829414",
+        "sequence": "191",
+        "dist_traveled": "6.4454"
+      },
+      {
+        "lat": "36.132931",
+        "lon": "-86.829827",
+        "sequence": "192",
+        "dist_traveled": "6.4865"
+      },
+      {
+        "lat": "36.132788",
+        "lon": "-86.830201",
+        "sequence": "193",
+        "dist_traveled": "6.5241"
+      },
+      {
+        "lat": "36.132716",
+        "lon": "-86.830386",
+        "sequence": "194",
+        "dist_traveled": "6.5420"
+      },
+      {
+        "lat": "36.132607",
+        "lon": "-86.830669",
+        "sequence": "195",
+        "dist_traveled": "6.5697"
+      },
+      {
+        "lat": "36.132579",
+        "lon": "-86.830736",
+        "sequence": "196",
+        "dist_traveled": "6.5769"
+      },
+      {
+        "lat": "36.132425",
+        "lon": "-86.831141",
+        "sequence": "197",
+        "dist_traveled": "6.6167"
+      },
+      {
+        "lat": "36.132301",
+        "lon": "-86.831484",
+        "sequence": "198",
+        "dist_traveled": "6.6507"
+      },
+      {
+        "lat": "36.132075",
+        "lon": "-86.832118",
+        "sequence": "199",
+        "dist_traveled": "6.7130"
+      },
+      {
+        "lat": "36.132027",
+        "lon": "-86.832267",
+        "sequence": "200",
+        "dist_traveled": "6.7269"
+      },
+      {
+        "lat": "36.131772",
+        "lon": "-86.833051",
+        "sequence": "201",
+        "dist_traveled": "6.8027"
+      },
+      {
+        "lat": "36.131632",
+        "lon": "-86.833545",
+        "sequence": "202",
+        "dist_traveled": "6.8492"
+      },
+      {
+        "lat": "36.131471",
+        "lon": "-86.834112",
+        "sequence": "203",
+        "dist_traveled": "6.9023"
+      },
+      {
+        "lat": "36.131429",
+        "lon": "-86.834256",
+        "sequence": "204",
+        "dist_traveled": "6.9162"
+      },
+      {
+        "lat": "36.131353",
+        "lon": "-86.834531",
+        "sequence": "205",
+        "dist_traveled": "6.9428"
+      },
+      {
+        "lat": "36.131220",
+        "lon": "-86.835003",
+        "sequence": "206",
+        "dist_traveled": "6.9874"
+      },
+      {
+        "lat": "36.131027",
+        "lon": "-86.835591",
+        "sequence": "207",
+        "dist_traveled": "7.0435"
+      },
+      {
+        "lat": "36.131013",
+        "lon": "-86.835630",
+        "sequence": "208",
+        "dist_traveled": "7.0480"
+      },
+      {
+        "lat": "36.130967",
+        "lon": "-86.835771",
+        "sequence": "209",
+        "dist_traveled": "7.0610"
+      },
+      {
+        "lat": "36.130825",
+        "lon": "-86.836203",
+        "sequence": "210",
+        "dist_traveled": "7.1031"
+      },
+      {
+        "lat": "36.130632",
+        "lon": "-86.836790",
+        "sequence": "211",
+        "dist_traveled": "7.1592"
+      },
+      {
+        "lat": "36.130498",
+        "lon": "-86.837196",
+        "sequence": "212",
+        "dist_traveled": "7.1991"
+      },
+      {
+        "lat": "36.130298",
+        "lon": "-86.837798",
+        "sequence": "213",
+        "dist_traveled": "7.2569"
+      },
+      {
+        "lat": "36.130142",
+        "lon": "-86.838270",
+        "sequence": "214",
+        "dist_traveled": "7.3022"
+      },
+      {
+        "lat": "36.130041",
+        "lon": "-86.838573",
+        "sequence": "215",
+        "dist_traveled": "7.3314"
+      },
+      {
+        "lat": "36.130001",
+        "lon": "-86.838693",
+        "sequence": "216",
+        "dist_traveled": "7.3434"
+      },
+      {
+        "lat": "36.129938",
+        "lon": "-86.838878",
+        "sequence": "217",
+        "dist_traveled": "7.3618"
+      },
+      {
+        "lat": "36.129844",
+        "lon": "-86.839146",
+        "sequence": "218",
+        "dist_traveled": "7.3878"
+      },
+      {
+        "lat": "36.129808",
+        "lon": "-86.839250",
+        "sequence": "219",
+        "dist_traveled": "7.3977"
+      },
+      {
+        "lat": "36.129699",
+        "lon": "-86.839556",
+        "sequence": "220",
+        "dist_traveled": "7.4276"
+      },
+      {
+        "lat": "36.129516",
+        "lon": "-86.840066",
+        "sequence": "221",
+        "dist_traveled": "7.4778"
+      },
+      {
+        "lat": "36.129400",
+        "lon": "-86.840345",
+        "sequence": "222",
+        "dist_traveled": "7.5051"
+      },
+      {
+        "lat": "36.129329",
+        "lon": "-86.840512",
+        "sequence": "223",
+        "dist_traveled": "7.5221"
+      },
+      {
+        "lat": "36.129112",
+        "lon": "-86.840970",
+        "sequence": "224",
+        "dist_traveled": "7.5696"
+      },
+      {
+        "lat": "36.129043",
+        "lon": "-86.841115",
+        "sequence": "225",
+        "dist_traveled": "7.5849"
+      },
+      {
+        "lat": "36.128826",
+        "lon": "-86.841545",
+        "sequence": "226",
+        "dist_traveled": "7.6307"
+      },
+      {
+        "lat": "36.128748",
+        "lon": "-86.841695",
+        "sequence": "227",
+        "dist_traveled": "7.6465"
+      },
+      {
+        "lat": "36.128707",
+        "lon": "-86.841766",
+        "sequence": "228",
+        "dist_traveled": "7.6543"
+      },
+      {
+        "lat": "36.128519",
+        "lon": "-86.842078",
+        "sequence": "229",
+        "dist_traveled": "7.6893"
+      },
+      {
+        "lat": "36.128482",
+        "lon": "-86.842145",
+        "sequence": "230",
+        "dist_traveled": "7.6965"
+      },
+      {
+        "lat": "36.127970",
+        "lon": "-86.843107",
+        "sequence": "231",
+        "dist_traveled": "7.7997"
+      },
+      {
+        "lat": "36.127922",
+        "lon": "-86.843202",
+        "sequence": "232",
+        "dist_traveled": "7.8091"
+      },
+      {
+        "lat": "36.127724",
+        "lon": "-86.843586",
+        "sequence": "233",
+        "dist_traveled": "7.8510"
+      },
+      {
+        "lat": "36.127671",
+        "lon": "-86.843689",
+        "sequence": "234",
+        "dist_traveled": "7.8618"
+      },
+      {
+        "lat": "36.127565",
+        "lon": "-86.843867",
+        "sequence": "235",
+        "dist_traveled": "7.8812"
+      },
+      {
+        "lat": "36.127536",
+        "lon": "-86.843917",
+        "sequence": "236",
+        "dist_traveled": "7.8869"
+      },
+      {
+        "lat": "36.127433",
+        "lon": "-86.844089",
+        "sequence": "237",
+        "dist_traveled": "7.9063"
+      },
+      {
+        "lat": "36.127416",
+        "lon": "-86.844119",
+        "sequence": "238",
+        "dist_traveled": "7.9091"
+      },
+      {
+        "lat": "36.127197",
+        "lon": "-86.844456",
+        "sequence": "239",
+        "dist_traveled": "7.9482"
+      },
+      {
+        "lat": "36.127044",
+        "lon": "-86.844683",
+        "sequence": "240",
+        "dist_traveled": "7.9752"
+      },
+      {
+        "lat": "36.126924",
+        "lon": "-86.844864",
+        "sequence": "241",
+        "dist_traveled": "7.9958"
+      },
+      {
+        "lat": "36.126558",
+        "lon": "-86.845356",
+        "sequence": "242",
+        "dist_traveled": "8.0560"
+      },
+      {
+        "lat": "36.126389",
+        "lon": "-86.845604",
+        "sequence": "243",
+        "dist_traveled": "8.0850"
+      },
+      {
+        "lat": "36.126099",
+        "lon": "-86.846032",
+        "sequence": "244",
+        "dist_traveled": "8.1347"
+      },
+      {
+        "lat": "36.125783",
+        "lon": "-86.846505",
+        "sequence": "245",
+        "dist_traveled": "8.1900"
+      },
+      {
+        "lat": "36.125550",
+        "lon": "-86.846837",
+        "sequence": "246",
+        "dist_traveled": "8.2297"
+      },
+      {
+        "lat": "36.125314",
+        "lon": "-86.847171",
+        "sequence": "247",
+        "dist_traveled": "8.2694"
+      },
+      {
+        "lat": "36.125227",
+        "lon": "-86.847288",
+        "sequence": "248",
+        "dist_traveled": "8.2836"
+      },
+      {
+        "lat": "36.124991",
+        "lon": "-86.847611",
+        "sequence": "249",
+        "dist_traveled": "8.3225"
+      },
+      {
+        "lat": "36.124867",
+        "lon": "-86.847779",
+        "sequence": "250",
+        "dist_traveled": "8.3430"
+      },
+      {
+        "lat": "36.124785",
+        "lon": "-86.847891",
+        "sequence": "251",
+        "dist_traveled": "8.3572"
+      },
+      {
+        "lat": "36.124676",
+        "lon": "-86.848043",
+        "sequence": "252",
+        "dist_traveled": "8.3749"
+      },
+      {
+        "lat": "36.123991",
+        "lon": "-86.848980",
+        "sequence": "253",
+        "dist_traveled": "8.4881"
+      },
+      {
+        "lat": "36.123407",
+        "lon": "-86.849768",
+        "sequence": "254",
+        "dist_traveled": "8.5843"
+      },
+      {
+        "lat": "36.123323",
+        "lon": "-86.849880",
+        "sequence": "255",
+        "dist_traveled": "8.5978"
+      },
+      {
+        "lat": "36.123237",
+        "lon": "-86.850003",
+        "sequence": "256",
+        "dist_traveled": "8.6127"
+      },
+      {
+        "lat": "36.123072",
+        "lon": "-86.850241",
+        "sequence": "257",
+        "dist_traveled": "8.6411"
+      },
+      {
+        "lat": "36.123035",
+        "lon": "-86.850295",
+        "sequence": "258",
+        "dist_traveled": "8.6467"
+      },
+      {
+        "lat": "36.122704",
+        "lon": "-86.850773",
+        "sequence": "259",
+        "dist_traveled": "8.7035"
+      },
+      {
+        "lat": "36.122556",
+        "lon": "-86.850987",
+        "sequence": "260",
+        "dist_traveled": "8.7290"
+      },
+      {
+        "lat": "36.122326",
+        "lon": "-86.851298",
+        "sequence": "261",
+        "dist_traveled": "8.7672"
+      },
+      {
+        "lat": "36.121764",
+        "lon": "-86.852059",
+        "sequence": "262",
+        "dist_traveled": "8.8599"
+      },
+      {
+        "lat": "36.121337",
+        "lon": "-86.852625",
+        "sequence": "263",
+        "dist_traveled": "8.9285"
+      },
+      {
+        "lat": "36.120926",
+        "lon": "-86.853168",
+        "sequence": "264",
+        "dist_traveled": "8.9957"
+      },
+      {
+        "lat": "36.120899",
+        "lon": "-86.853202",
+        "sequence": "265",
+        "dist_traveled": "9.0000"
+      },
+      {
+        "lat": "36.120408",
+        "lon": "-86.853864",
+        "sequence": "266",
+        "dist_traveled": "9.0806"
+      },
+      {
+        "lat": "36.120384",
+        "lon": "-86.853895",
+        "sequence": "267",
+        "dist_traveled": "9.0849"
+      },
+      {
+        "lat": "36.120098",
+        "lon": "-86.854263",
+        "sequence": "268",
+        "dist_traveled": "9.1308"
+      },
+      {
+        "lat": "36.119673",
+        "lon": "-86.854830",
+        "sequence": "269",
+        "dist_traveled": "9.2001"
+      },
+      {
+        "lat": "36.119559",
+        "lon": "-86.854982",
+        "sequence": "270",
+        "dist_traveled": "9.2186"
+      },
+      {
+        "lat": "36.119347",
+        "lon": "-86.855266",
+        "sequence": "271",
+        "dist_traveled": "9.2532"
+      },
+      {
+        "lat": "36.119241",
+        "lon": "-86.855403",
+        "sequence": "272",
+        "dist_traveled": "9.2702"
+      },
+      {
+        "lat": "36.119126",
+        "lon": "-86.855556",
+        "sequence": "273",
+        "dist_traveled": "9.2893"
+      },
+      {
+        "lat": "36.118383",
+        "lon": "-86.856541",
+        "sequence": "274",
+        "dist_traveled": "9.4103"
+      },
+      {
+        "lat": "36.118233",
+        "lon": "-86.856729",
+        "sequence": "275",
+        "dist_traveled": "9.4343"
+      },
+      {
+        "lat": "36.118052",
+        "lon": "-86.856972",
+        "sequence": "276",
+        "dist_traveled": "9.4633"
+      },
+      {
+        "lat": "36.117921",
+        "lon": "-86.857147",
+        "sequence": "277",
+        "dist_traveled": "9.4852"
+      },
+      {
+        "lat": "36.117583",
+        "lon": "-86.857652",
+        "sequence": "278",
+        "dist_traveled": "9.5435"
+      },
+      {
+        "lat": "36.117405",
+        "lon": "-86.857943",
+        "sequence": "279",
+        "dist_traveled": "9.5763"
+      },
+      {
+        "lat": "36.117116",
+        "lon": "-86.858463",
+        "sequence": "280",
+        "dist_traveled": "9.6337"
+      },
+      {
+        "lat": "36.117107",
+        "lon": "-86.858477",
+        "sequence": "281",
+        "dist_traveled": "9.6351"
+      },
+      {
+        "lat": "36.116915",
+        "lon": "-86.858832",
+        "sequence": "282",
+        "dist_traveled": "9.6726"
+      },
+      {
+        "lat": "36.116717",
+        "lon": "-86.859169",
+        "sequence": "283",
+        "dist_traveled": "9.7106"
+      },
+      {
+        "lat": "36.116586",
+        "lon": "-86.859366",
+        "sequence": "284",
+        "dist_traveled": "9.7333"
+      },
+      {
+        "lat": "36.116502",
+        "lon": "-86.859501",
+        "sequence": "285",
+        "dist_traveled": "9.7483"
+      },
+      {
+        "lat": "36.116457",
+        "lon": "-86.859574",
+        "sequence": "286",
+        "dist_traveled": "9.7569"
+      },
+      {
+        "lat": "36.116236",
+        "lon": "-86.859865",
+        "sequence": "287",
+        "dist_traveled": "9.7929"
+      },
+      {
+        "lat": "36.115919",
+        "lon": "-86.860243",
+        "sequence": "288",
+        "dist_traveled": "9.8418"
+      },
+      {
+        "lat": "36.115750",
+        "lon": "-86.860423",
+        "sequence": "289",
+        "dist_traveled": "9.8666"
+      },
+      {
+        "lat": "36.114954",
+        "lon": "-86.861256",
+        "sequence": "290",
+        "dist_traveled": "9.9830"
+      },
+      {
+        "lat": "36.114368",
+        "lon": "-86.861832",
+        "sequence": "291",
+        "dist_traveled": "10.0656"
+      },
+      {
+        "lat": "36.113816",
+        "lon": "-86.862373",
+        "sequence": "292",
+        "dist_traveled": "10.1447"
+      },
+      {
+        "lat": "36.113308",
+        "lon": "-86.862881",
+        "sequence": "293",
+        "dist_traveled": "10.2173"
+      },
+      {
+        "lat": "36.113034",
+        "lon": "-86.863154",
+        "sequence": "294",
+        "dist_traveled": "10.2557"
+      },
+      {
+        "lat": "36.112922",
+        "lon": "-86.863264",
+        "sequence": "295",
+        "dist_traveled": "10.2721"
+      },
+      {
+        "lat": "36.112622",
+        "lon": "-86.863560",
+        "sequence": "296",
+        "dist_traveled": "10.3155"
+      },
+      {
+        "lat": "36.112427",
+        "lon": "-86.863718",
+        "sequence": "297",
+        "dist_traveled": "10.3408"
+      },
+      {
+        "lat": "36.112212",
+        "lon": "-86.863878",
+        "sequence": "298",
+        "dist_traveled": "10.3685"
+      },
+      {
+        "lat": "36.112152",
+        "lon": "-86.863921",
+        "sequence": "299",
+        "dist_traveled": "10.3766"
+      },
+      {
+        "lat": "36.112067",
+        "lon": "-86.863984",
+        "sequence": "300",
+        "dist_traveled": "10.3878"
+      },
+      {
+        "lat": "36.111849",
+        "lon": "-86.864106",
+        "sequence": "301",
+        "dist_traveled": "10.4142"
+      },
+      {
+        "lat": "36.111587",
+        "lon": "-86.864234",
+        "sequence": "302",
+        "dist_traveled": "10.4456"
+      },
+      {
+        "lat": "36.111447",
+        "lon": "-86.864298",
+        "sequence": "303",
+        "dist_traveled": "10.4627"
+      },
+      {
+        "lat": "36.110925",
+        "lon": "-86.864514",
+        "sequence": "304",
+        "dist_traveled": "10.5246"
+      },
+      {
+        "lat": "36.110134",
+        "lon": "-86.864835",
+        "sequence": "305",
+        "dist_traveled": "10.6173"
+      },
+      {
+        "lat": "36.109856",
+        "lon": "-86.864954",
+        "sequence": "306",
+        "dist_traveled": "10.6499"
+      },
+      {
+        "lat": "36.109582",
+        "lon": "-86.865068",
+        "sequence": "307",
+        "dist_traveled": "10.6824"
+      },
+      {
+        "lat": "36.109289",
+        "lon": "-86.865208",
+        "sequence": "308",
+        "dist_traveled": "10.7179"
+      },
+      {
+        "lat": "36.109247",
+        "lon": "-86.865229",
+        "sequence": "309",
+        "dist_traveled": "10.7224"
+      },
+      {
+        "lat": "36.109052",
+        "lon": "-86.865330",
+        "sequence": "310",
+        "dist_traveled": "10.7461"
+      },
+      {
+        "lat": "36.108907",
+        "lon": "-86.865409",
+        "sequence": "311",
+        "dist_traveled": "10.7636"
+      },
+      {
+        "lat": "36.108645",
+        "lon": "-86.865571",
+        "sequence": "312",
+        "dist_traveled": "10.7967"
+      },
+      {
+        "lat": "36.108380",
+        "lon": "-86.865742",
+        "sequence": "313",
+        "dist_traveled": "10.8298"
+      },
+      {
+        "lat": "36.108241",
+        "lon": "-86.865845",
+        "sequence": "314",
+        "dist_traveled": "10.8482"
+      },
+      {
+        "lat": "36.108125",
+        "lon": "-86.865928",
+        "sequence": "315",
+        "dist_traveled": "10.8630"
+      },
+      {
+        "lat": "36.107892",
+        "lon": "-86.866116",
+        "sequence": "316",
+        "dist_traveled": "10.8940"
+      },
+      {
+        "lat": "36.107434",
+        "lon": "-86.866512",
+        "sequence": "317",
+        "dist_traveled": "10.9559"
+      },
+      {
+        "lat": "36.106675",
+        "lon": "-86.867192",
+        "sequence": "318",
+        "dist_traveled": "11.0605"
+      },
+      {
+        "lat": "36.105918",
+        "lon": "-86.867871",
+        "sequence": "319",
+        "dist_traveled": "11.1651"
+      },
+      {
+        "lat": "36.105662",
+        "lon": "-86.868105",
+        "sequence": "320",
+        "dist_traveled": "11.2009"
+      },
+      {
+        "lat": "36.105632",
+        "lon": "-86.868132",
+        "sequence": "321",
+        "dist_traveled": "11.2045"
+      },
+      {
+        "lat": "36.105585",
+        "lon": "-86.868173",
+        "sequence": "322",
+        "dist_traveled": "11.2109"
+      },
+      {
+        "lat": "36.105537",
+        "lon": "-86.868215",
+        "sequence": "323",
+        "dist_traveled": "11.2182"
+      },
+      {
+        "lat": "36.105335",
+        "lon": "-86.868393",
+        "sequence": "324",
+        "dist_traveled": "11.2448"
+      },
+      {
+        "lat": "36.105125",
+        "lon": "-86.868565",
+        "sequence": "325",
+        "dist_traveled": "11.2736"
+      },
+      {
+        "lat": "36.104607",
+        "lon": "-86.868943",
+        "sequence": "326",
+        "dist_traveled": "11.3409"
+      },
+      {
+        "lat": "36.104356",
+        "lon": "-86.869122",
+        "sequence": "327",
+        "dist_traveled": "11.3731"
+      },
+      {
+        "lat": "36.104102",
+        "lon": "-86.869288",
+        "sequence": "328",
+        "dist_traveled": "11.4044"
+      },
+      {
+        "lat": "36.104065",
+        "lon": "-86.869311",
+        "sequence": "329",
+        "dist_traveled": "11.4094"
+      },
+      {
+        "lat": "36.103735",
+        "lon": "-86.869514",
+        "sequence": "330",
+        "dist_traveled": "11.4506"
+      },
+      {
+        "lat": "36.103713",
+        "lon": "-86.869527",
+        "sequence": "331",
+        "dist_traveled": "11.4537"
+      },
+      {
+        "lat": "36.103539",
+        "lon": "-86.869631",
+        "sequence": "332",
+        "dist_traveled": "11.4747"
+      },
+      {
+        "lat": "36.103438",
+        "lon": "-86.869689",
+        "sequence": "333",
+        "dist_traveled": "11.4877"
+      },
+      {
+        "lat": "36.103160",
+        "lon": "-86.869833",
+        "sequence": "334",
+        "dist_traveled": "11.5214"
+      },
+      {
+        "lat": "36.103031",
+        "lon": "-86.869895",
+        "sequence": "335",
+        "dist_traveled": "11.5366"
+      },
+      {
+        "lat": "36.102877",
+        "lon": "-86.869965",
+        "sequence": "336",
+        "dist_traveled": "11.5546"
+      },
+      {
+        "lat": "36.102670",
+        "lon": "-86.870054",
+        "sequence": "337",
+        "dist_traveled": "11.5799"
+      },
+      {
+        "lat": "36.102189",
+        "lon": "-86.870261",
+        "sequence": "338",
+        "dist_traveled": "11.6359"
+      },
+      {
+        "lat": "36.102068",
+        "lon": "-86.870314",
+        "sequence": "339",
+        "dist_traveled": "11.6508"
+      },
+      {
+        "lat": "36.101228",
+        "lon": "-86.870687",
+        "sequence": "340",
+        "dist_traveled": "11.7507"
+      },
+      {
+        "lat": "36.100846",
+        "lon": "-86.870856",
+        "sequence": "341",
+        "dist_traveled": "11.7963"
+      },
+      {
+        "lat": "36.100436",
+        "lon": "-86.871051",
+        "sequence": "342",
+        "dist_traveled": "11.8453"
+      },
+      {
+        "lat": "36.100359",
+        "lon": "-86.871086",
+        "sequence": "343",
+        "dist_traveled": "11.8538"
+      },
+      {
+        "lat": "36.100203",
+        "lon": "-86.871152",
+        "sequence": "344",
+        "dist_traveled": "11.8728"
+      },
+      {
+        "lat": "36.100145",
+        "lon": "-86.871234",
+        "sequence": "345",
+        "dist_traveled": "11.8820"
+      },
+      {
+        "lat": "36.100007",
+        "lon": "-86.871318",
+        "sequence": "346",
+        "dist_traveled": "11.8999"
+      },
+      {
+        "lat": "36.099783",
+        "lon": "-86.871471",
+        "sequence": "347",
+        "dist_traveled": "11.9286"
+      },
+      {
+        "lat": "36.099623",
+        "lon": "-86.871608",
+        "sequence": "348",
+        "dist_traveled": "11.9502"
+      },
+      {
+        "lat": "36.099498",
+        "lon": "-86.871731",
+        "sequence": "349",
+        "dist_traveled": "11.9680"
+      },
+      {
+        "lat": "36.099474",
+        "lon": "-86.871755",
+        "sequence": "350",
+        "dist_traveled": "11.9708"
+      },
+      {
+        "lat": "36.099273",
+        "lon": "-86.871971",
+        "sequence": "351",
+        "dist_traveled": "12.0007"
+      },
+      {
+        "lat": "36.099097",
+        "lon": "-86.872201",
+        "sequence": "352",
+        "dist_traveled": "12.0297"
+      },
+      {
+        "lat": "36.098987",
+        "lon": "-86.872346",
+        "sequence": "353",
+        "dist_traveled": "12.0474"
+      },
+      {
+        "lat": "36.098903",
+        "lon": "-86.872480",
+        "sequence": "354",
+        "dist_traveled": "12.0624"
+      },
+      {
+        "lat": "36.098771",
+        "lon": "-86.872712",
+        "sequence": "355",
+        "dist_traveled": "12.0874"
+      },
+      {
+        "lat": "36.098595",
+        "lon": "-86.873045",
+        "sequence": "356",
+        "dist_traveled": "12.1234"
+      },
+      {
+        "lat": "36.098368",
+        "lon": "-86.873507",
+        "sequence": "357",
+        "dist_traveled": "12.1714"
+      },
+      {
+        "lat": "36.097967",
+        "lon": "-86.874336",
+        "sequence": "358",
+        "dist_traveled": "12.2580"
+      },
+      {
+        "lat": "36.097695",
+        "lon": "-86.874923",
+        "sequence": "359",
+        "dist_traveled": "12.3189"
+      },
+      {
+        "lat": "36.097565",
+        "lon": "-86.875217",
+        "sequence": "360",
+        "dist_traveled": "12.3490"
+      },
+      {
+        "lat": "36.097269",
+        "lon": "-86.875871",
+        "sequence": "361",
+        "dist_traveled": "12.4166"
+      },
+      {
+        "lat": "36.097163",
+        "lon": "-86.876102",
+        "sequence": "362",
+        "dist_traveled": "12.4399"
+      },
+      {
+        "lat": "36.097074",
+        "lon": "-86.876161",
+        "sequence": "363",
+        "dist_traveled": "12.4511"
+      },
+      {
+        "lat": "36.096875",
+        "lon": "-86.876607",
+        "sequence": "364",
+        "dist_traveled": "12.4967"
+      },
+      {
+        "lat": "36.096867",
+        "lon": "-86.876624",
+        "sequence": "365",
+        "dist_traveled": "12.4990"
+      },
+      {
+        "lat": "36.096759",
+        "lon": "-86.876839",
+        "sequence": "366",
+        "dist_traveled": "12.5214"
+      },
+      {
+        "lat": "36.096569",
+        "lon": "-86.877219",
+        "sequence": "367",
+        "dist_traveled": "12.5614"
+      },
+      {
+        "lat": "36.096494",
+        "lon": "-86.877367",
+        "sequence": "368",
+        "dist_traveled": "12.5772"
+      },
+      {
+        "lat": "36.096464",
+        "lon": "-86.877428",
+        "sequence": "369",
+        "dist_traveled": "12.5839"
+      },
+      {
+        "lat": "36.096368",
+        "lon": "-86.877627",
+        "sequence": "370",
+        "dist_traveled": "12.6042"
+      },
+      {
+        "lat": "36.096229",
+        "lon": "-86.877918",
+        "sequence": "371",
+        "dist_traveled": "12.6342"
+      },
+      {
+        "lat": "36.096157",
+        "lon": "-86.878072",
+        "sequence": "372",
+        "dist_traveled": "12.6503"
+      },
+      {
+        "lat": "36.096116",
+        "lon": "-86.878159",
+        "sequence": "373",
+        "dist_traveled": "12.6597"
+      },
+      {
+        "lat": "36.095855",
+        "lon": "-86.878694",
+        "sequence": "374",
+        "dist_traveled": "12.7158"
+      },
+      {
+        "lat": "36.095627",
+        "lon": "-86.879148",
+        "sequence": "375",
+        "dist_traveled": "12.7635"
+      },
+      {
+        "lat": "36.095372",
+        "lon": "-86.879708",
+        "sequence": "376",
+        "dist_traveled": "12.8208"
+      },
+      {
+        "lat": "36.095148",
+        "lon": "-86.880129",
+        "sequence": "377",
+        "dist_traveled": "12.8663"
+      },
+      {
+        "lat": "36.094894",
+        "lon": "-86.880677",
+        "sequence": "378",
+        "dist_traveled": "12.9228"
+      },
+      {
+        "lat": "36.094632",
+        "lon": "-86.881219",
+        "sequence": "379",
+        "dist_traveled": "12.9794"
+      },
+      {
+        "lat": "36.094501",
+        "lon": "-86.881484",
+        "sequence": "380",
+        "dist_traveled": "13.0071"
+      },
+      {
+        "lat": "36.094397",
+        "lon": "-86.881696",
+        "sequence": "381",
+        "dist_traveled": "13.0296"
+      },
+      {
+        "lat": "36.094274",
+        "lon": "-86.881947",
+        "sequence": "382",
+        "dist_traveled": "13.0557"
+      },
+      {
+        "lat": "36.094179",
+        "lon": "-86.882139",
+        "sequence": "383",
+        "dist_traveled": "13.0754"
+      },
+      {
+        "lat": "36.093891",
+        "lon": "-86.882730",
+        "sequence": "384",
+        "dist_traveled": "13.1378"
+      },
+      {
+        "lat": "36.093814",
+        "lon": "-86.882891",
+        "sequence": "385",
+        "dist_traveled": "13.1540"
+      },
+      {
+        "lat": "36.093662",
+        "lon": "-86.883209",
+        "sequence": "386",
+        "dist_traveled": "13.1876"
+      },
+      {
+        "lat": "36.093457",
+        "lon": "-86.883640",
+        "sequence": "387",
+        "dist_traveled": "13.2320"
+      },
+      {
+        "lat": "36.093317",
+        "lon": "-86.883923",
+        "sequence": "388",
+        "dist_traveled": "13.2617"
+      },
+      {
+        "lat": "36.093263",
+        "lon": "-86.884034",
+        "sequence": "389",
+        "dist_traveled": "13.2733"
+      },
+      {
+        "lat": "36.093173",
+        "lon": "-86.884214",
+        "sequence": "390",
+        "dist_traveled": "13.2922"
+      },
+      {
+        "lat": "36.093068",
+        "lon": "-86.884422",
+        "sequence": "391",
+        "dist_traveled": "13.3147"
+      },
+      {
+        "lat": "36.092978",
+        "lon": "-86.884602",
+        "sequence": "392",
+        "dist_traveled": "13.3336"
+      },
+      {
+        "lat": "36.092966",
+        "lon": "-86.884628",
+        "sequence": "393",
+        "dist_traveled": "13.3358"
+      },
+      {
+        "lat": "36.092778",
+        "lon": "-86.885031",
+        "sequence": "394",
+        "dist_traveled": "13.3775"
+      },
+      {
+        "lat": "36.092652",
+        "lon": "-86.885296",
+        "sequence": "395",
+        "dist_traveled": "13.4053"
+      },
+      {
+        "lat": "36.092604",
+        "lon": "-86.885395",
+        "sequence": "396",
+        "dist_traveled": "13.4156"
+      },
+      {
+        "lat": "36.092523",
+        "lon": "-86.885564",
+        "sequence": "397",
+        "dist_traveled": "13.4336"
+      },
+      {
+        "lat": "36.092419",
+        "lon": "-86.885769",
+        "sequence": "398",
+        "dist_traveled": "13.4547"
+      },
+      {
+        "lat": "36.092269",
+        "lon": "-86.886074",
+        "sequence": "399",
+        "dist_traveled": "13.4866"
+      },
+      {
+        "lat": "36.092217",
+        "lon": "-86.886182",
+        "sequence": "400",
+        "dist_traveled": "13.4982"
+      },
+      {
+        "lat": "36.092081",
+        "lon": "-86.886457",
+        "sequence": "401",
+        "dist_traveled": "13.5274"
+      },
+      {
+        "lat": "36.092025",
+        "lon": "-86.886573",
+        "sequence": "402",
+        "dist_traveled": "13.5391"
+      },
+      {
+        "lat": "36.091986",
+        "lon": "-86.886655",
+        "sequence": "403",
+        "dist_traveled": "13.5477"
+      },
+      {
+        "lat": "36.091877",
+        "lon": "-86.886875",
+        "sequence": "404",
+        "dist_traveled": "13.5710"
+      },
+      {
+        "lat": "36.091611",
+        "lon": "-86.887433",
+        "sequence": "405",
+        "dist_traveled": "13.6288"
+      },
+      {
+        "lat": "36.091391",
+        "lon": "-86.887901",
+        "sequence": "406",
+        "dist_traveled": "13.6777"
+      },
+      {
+        "lat": "36.091376",
+        "lon": "-86.887931",
+        "sequence": "407",
+        "dist_traveled": "13.6805"
+      },
+      {
+        "lat": "36.091182",
+        "lon": "-86.888324",
+        "sequence": "408",
+        "dist_traveled": "13.7213"
+      },
+      {
+        "lat": "36.090899",
+        "lon": "-86.888945",
+        "sequence": "409",
+        "dist_traveled": "13.7858"
+      },
+      {
+        "lat": "36.090741",
+        "lon": "-86.889234",
+        "sequence": "410",
+        "dist_traveled": "13.8174"
+      },
+      {
+        "lat": "36.090555",
+        "lon": "-86.889619",
+        "sequence": "411",
+        "dist_traveled": "13.8574"
+      },
+      {
+        "lat": "36.090415",
+        "lon": "-86.889867",
+        "sequence": "412",
+        "dist_traveled": "13.8840"
+      },
+      {
+        "lat": "36.090270",
+        "lon": "-86.890119",
+        "sequence": "413",
+        "dist_traveled": "13.9120"
+      },
+      {
+        "lat": "36.090225",
+        "lon": "-86.890194",
+        "sequence": "414",
+        "dist_traveled": "13.9198"
+      },
+      {
+        "lat": "36.090110",
+        "lon": "-86.890376",
+        "sequence": "415",
+        "dist_traveled": "13.9412"
+      },
+      {
+        "lat": "36.090097",
+        "lon": "-86.890398",
+        "sequence": "416",
+        "dist_traveled": "13.9441"
+      },
+      {
+        "lat": "36.089999",
+        "lon": "-86.890544",
+        "sequence": "417",
+        "dist_traveled": "13.9611"
+      },
+      {
+        "lat": "36.089954",
+        "lon": "-86.890618",
+        "sequence": "418",
+        "dist_traveled": "13.9689"
+      },
+      {
+        "lat": "36.089890",
+        "lon": "-86.890709",
+        "sequence": "419",
+        "dist_traveled": "13.9795"
+      },
+      {
+        "lat": "36.089831",
+        "lon": "-86.890785",
+        "sequence": "420",
+        "dist_traveled": "13.9894"
+      },
+      {
+        "lat": "36.089614",
+        "lon": "-86.891063",
+        "sequence": "421",
+        "dist_traveled": "14.0241"
+      },
+      {
+        "lat": "36.089557",
+        "lon": "-86.891140",
+        "sequence": "422",
+        "dist_traveled": "14.0333"
+      },
+      {
+        "lat": "36.089468",
+        "lon": "-86.891244",
+        "sequence": "423",
+        "dist_traveled": "14.0468"
+      },
+      {
+        "lat": "36.089278",
+        "lon": "-86.891469",
+        "sequence": "424",
+        "dist_traveled": "14.0758"
+      },
+      {
+        "lat": "36.089120",
+        "lon": "-86.891621",
+        "sequence": "425",
+        "dist_traveled": "14.0986"
+      },
+      {
+        "lat": "36.088895",
+        "lon": "-86.891847",
+        "sequence": "426",
+        "dist_traveled": "14.1306"
+      },
+      {
+        "lat": "36.088703",
+        "lon": "-86.892024",
+        "sequence": "427",
+        "dist_traveled": "14.1578"
+      },
+      {
+        "lat": "36.088490",
+        "lon": "-86.892203",
+        "sequence": "428",
+        "dist_traveled": "14.1866"
+      },
+      {
+        "lat": "36.088426",
+        "lon": "-86.892258",
+        "sequence": "429",
+        "dist_traveled": "14.1952"
+      },
+      {
+        "lat": "36.088295",
+        "lon": "-86.892373",
+        "sequence": "430",
+        "dist_traveled": "14.2124"
+      },
+      {
+        "lat": "36.088113",
+        "lon": "-86.892500",
+        "sequence": "431",
+        "dist_traveled": "14.2362"
+      },
+      {
+        "lat": "36.088027",
+        "lon": "-86.892555",
+        "sequence": "432",
+        "dist_traveled": "14.2465"
+      },
+      {
+        "lat": "36.087839",
+        "lon": "-86.892679",
+        "sequence": "433",
+        "dist_traveled": "14.2702"
+      },
+      {
+        "lat": "36.087829",
+        "lon": "-86.892684",
+        "sequence": "434",
+        "dist_traveled": "14.2724"
+      },
+      {
+        "lat": "36.087654",
+        "lon": "-86.892797",
+        "sequence": "435",
+        "dist_traveled": "14.2939"
+      },
+      {
+        "lat": "36.087532",
+        "lon": "-86.892869",
+        "sequence": "436",
+        "dist_traveled": "14.3091"
+      },
+      {
+        "lat": "36.087374",
+        "lon": "-86.892962",
+        "sequence": "437",
+        "dist_traveled": "14.3283"
+      },
+      {
+        "lat": "36.087354",
+        "lon": "-86.892975",
+        "sequence": "438",
+        "dist_traveled": "14.3315"
+      },
+      {
+        "lat": "36.087064",
+        "lon": "-86.893149",
+        "sequence": "439",
+        "dist_traveled": "14.3668"
+      },
+      {
+        "lat": "36.086918",
+        "lon": "-86.893238",
+        "sequence": "440",
+        "dist_traveled": "14.3847"
+      },
+      {
+        "lat": "36.086754",
+        "lon": "-86.893336",
+        "sequence": "441",
+        "dist_traveled": "14.4057"
+      },
+      {
+        "lat": "36.086473",
+        "lon": "-86.893505",
+        "sequence": "442",
+        "dist_traveled": "14.4402"
+      },
+      {
+        "lat": "36.086165",
+        "lon": "-86.893684",
+        "sequence": "443",
+        "dist_traveled": "14.4787"
+      },
+      {
+        "lat": "36.085802",
+        "lon": "-86.893902",
+        "sequence": "444",
+        "dist_traveled": "14.5234"
+      },
+      {
+        "lat": "36.085564",
+        "lon": "-86.894039",
+        "sequence": "445",
+        "dist_traveled": "14.5529"
+      },
+      {
+        "lat": "36.085302",
+        "lon": "-86.894196",
+        "sequence": "446",
+        "dist_traveled": "14.5851"
+      },
+      {
+        "lat": "36.085202",
+        "lon": "-86.894259",
+        "sequence": "447",
+        "dist_traveled": "14.5986"
+      },
+      {
+        "lat": "36.085031",
+        "lon": "-86.894375",
+        "sequence": "448",
+        "dist_traveled": "14.6200"
+      },
+      {
+        "lat": "36.084815",
+        "lon": "-86.894525",
+        "sequence": "449",
+        "dist_traveled": "14.6478"
+      },
+      {
+        "lat": "36.084708",
+        "lon": "-86.894600",
+        "sequence": "450",
+        "dist_traveled": "14.6612"
+      },
+      {
+        "lat": "36.084618",
+        "lon": "-86.894674",
+        "sequence": "451",
+        "dist_traveled": "14.6734"
+      },
+      {
+        "lat": "36.084436",
+        "lon": "-86.894828",
+        "sequence": "452",
+        "dist_traveled": "14.6978"
+      },
+      {
+        "lat": "36.084258",
+        "lon": "-86.894993",
+        "sequence": "453",
+        "dist_traveled": "14.7223"
+      },
+      {
+        "lat": "36.084150",
+        "lon": "-86.895106",
+        "sequence": "454",
+        "dist_traveled": "14.7385"
+      },
+      {
+        "lat": "36.083883",
+        "lon": "-86.895398",
+        "sequence": "455",
+        "dist_traveled": "14.7782"
+      },
+      {
+        "lat": "36.083589",
+        "lon": "-86.895735",
+        "sequence": "456",
+        "dist_traveled": "14.8228"
+      },
+      {
+        "lat": "36.083382",
+        "lon": "-86.895965",
+        "sequence": "457",
+        "dist_traveled": "14.8533"
+      },
+      {
+        "lat": "36.083027",
+        "lon": "-86.896357",
+        "sequence": "458",
+        "dist_traveled": "14.9065"
+      },
+      {
+        "lat": "36.082888",
+        "lon": "-86.896518",
+        "sequence": "459",
+        "dist_traveled": "14.9277"
+      },
+      {
+        "lat": "36.082789",
+        "lon": "-86.896631",
+        "sequence": "460",
+        "dist_traveled": "14.9433"
+      },
+      {
+        "lat": "36.082592",
+        "lon": "-86.896857",
+        "sequence": "461",
+        "dist_traveled": "14.9730"
+      },
+      {
+        "lat": "36.082400",
+        "lon": "-86.897072",
+        "sequence": "462",
+        "dist_traveled": "15.0014"
+      },
+      {
+        "lat": "36.082281",
+        "lon": "-86.897199",
+        "sequence": "463",
+        "dist_traveled": "15.0190"
+      },
+      {
+        "lat": "36.082140",
+        "lon": "-86.897373",
+        "sequence": "464",
+        "dist_traveled": "15.0410"
+      },
+      {
+        "lat": "36.082017",
+        "lon": "-86.897544",
+        "sequence": "465",
+        "dist_traveled": "15.0615"
+      },
+      {
+        "lat": "36.081876",
+        "lon": "-86.897738",
+        "sequence": "466",
+        "dist_traveled": "15.0856"
+      },
+      {
+        "lat": "36.081857",
+        "lon": "-86.897768",
+        "sequence": "467",
+        "dist_traveled": "15.0884"
+      },
+      {
+        "lat": "36.081714",
+        "lon": "-86.897985",
+        "sequence": "468",
+        "dist_traveled": "15.1140"
+      },
+      {
+        "lat": "36.081494",
+        "lon": "-86.898377",
+        "sequence": "469",
+        "dist_traveled": "15.1565"
+      },
+      {
+        "lat": "36.081315",
+        "lon": "-86.898708",
+        "sequence": "470",
+        "dist_traveled": "15.1917"
+      },
+      {
+        "lat": "36.081178",
+        "lon": "-86.899002",
+        "sequence": "471",
+        "dist_traveled": "15.2231"
+      },
+      {
+        "lat": "36.081107",
+        "lon": "-86.899172",
+        "sequence": "472",
+        "dist_traveled": "15.2401"
+      },
+      {
+        "lat": "36.080911",
+        "lon": "-86.899636",
+        "sequence": "473",
+        "dist_traveled": "15.2861"
+      },
+      {
+        "lat": "36.080804",
+        "lon": "-86.899872",
+        "sequence": "474",
+        "dist_traveled": "15.3103"
+      },
+      {
+        "lat": "36.080686",
+        "lon": "-86.900199",
+        "sequence": "475",
+        "dist_traveled": "15.3434"
+      },
+      {
+        "lat": "36.080613",
+        "lon": "-86.900410",
+        "sequence": "476",
+        "dist_traveled": "15.3631"
+      },
+      {
+        "lat": "36.080586",
+        "lon": "-86.900487",
+        "sequence": "477",
+        "dist_traveled": "15.3707"
+      },
+      {
+        "lat": "36.080580",
+        "lon": "-86.900509",
+        "sequence": "478",
+        "dist_traveled": "15.3727"
+      },
+      {
+        "lat": "36.080501",
+        "lon": "-86.900770",
+        "sequence": "479",
+        "dist_traveled": "15.3974"
+      },
+      {
+        "lat": "36.080424",
+        "lon": "-86.901036",
+        "sequence": "480",
+        "dist_traveled": "15.4231"
+      },
+      {
+        "lat": "36.080379",
+        "lon": "-86.901213",
+        "sequence": "481",
+        "dist_traveled": "15.4398"
+      },
+      {
+        "lat": "36.080224",
+        "lon": "-86.901761",
+        "sequence": "482",
+        "dist_traveled": "15.4917"
+      },
+      {
+        "lat": "36.080136",
+        "lon": "-86.902103",
+        "sequence": "483",
+        "dist_traveled": "15.5243"
+      },
+      {
+        "lat": "36.080003",
+        "lon": "-86.902625",
+        "sequence": "484",
+        "dist_traveled": "15.5727"
+      },
+      {
+        "lat": "36.079919",
+        "lon": "-86.902953",
+        "sequence": "485",
+        "dist_traveled": "15.6030"
+      },
+      {
+        "lat": "36.079883",
+        "lon": "-86.903100",
+        "sequence": "486",
+        "dist_traveled": "15.6176"
+      },
+      {
+        "lat": "36.079779",
+        "lon": "-86.903519",
+        "sequence": "487",
+        "dist_traveled": "15.6565"
+      },
+      {
+        "lat": "36.079644",
+        "lon": "-86.904042",
+        "sequence": "488",
+        "dist_traveled": "15.7058"
+      },
+      {
+        "lat": "36.079512",
+        "lon": "-86.904561",
+        "sequence": "489",
+        "dist_traveled": "15.7542"
+      },
+      {
+        "lat": "36.079455",
+        "lon": "-86.904779",
+        "sequence": "490",
+        "dist_traveled": "15.7741"
+      },
+      {
+        "lat": "36.079415",
+        "lon": "-86.904937",
+        "sequence": "491",
+        "dist_traveled": "15.7896"
+      },
+      {
+        "lat": "36.079352",
+        "lon": "-86.905191",
+        "sequence": "492",
+        "dist_traveled": "15.8127"
+      },
+      {
+        "lat": "36.079236",
+        "lon": "-86.905643",
+        "sequence": "493",
+        "dist_traveled": "15.8557"
+      },
+      {
+        "lat": "36.079154",
+        "lon": "-86.905985",
+        "sequence": "494",
+        "dist_traveled": "15.8874"
+      },
+      {
+        "lat": "36.079088",
+        "lon": "-86.906253",
+        "sequence": "495",
+        "dist_traveled": "15.9124"
+      },
+      {
+        "lat": "36.078953",
+        "lon": "-86.906783",
+        "sequence": "496",
+        "dist_traveled": "15.9617"
+      },
+      {
+        "lat": "36.078813",
+        "lon": "-86.907292",
+        "sequence": "497",
+        "dist_traveled": "16.0104"
+      },
+      {
+        "lat": "36.078761",
+        "lon": "-86.907512",
+        "sequence": "498",
+        "dist_traveled": "16.0301"
+      },
+      {
+        "lat": "36.078719",
+        "lon": "-86.907696",
+        "sequence": "499",
+        "dist_traveled": "16.0478"
+      },
+      {
+        "lat": "36.078561",
+        "lon": "-86.908291",
+        "sequence": "500",
+        "dist_traveled": "16.1037"
+      },
+      {
+        "lat": "36.078513",
+        "lon": "-86.908471",
+        "sequence": "501",
+        "dist_traveled": "16.1205"
+      },
+      {
+        "lat": "36.078417",
+        "lon": "-86.908827",
+        "sequence": "502",
+        "dist_traveled": "16.1543"
+      },
+      {
+        "lat": "36.078404",
+        "lon": "-86.908884",
+        "sequence": "503",
+        "dist_traveled": "16.1594"
+      },
+      {
+        "lat": "36.078397",
+        "lon": "-86.908911",
+        "sequence": "504",
+        "dist_traveled": "16.1617"
+      },
+      {
+        "lat": "36.078383",
+        "lon": "-86.908965",
+        "sequence": "505",
+        "dist_traveled": "16.1671"
+      },
+      {
+        "lat": "36.078316",
+        "lon": "-86.909235",
+        "sequence": "506",
+        "dist_traveled": "16.1921"
+      },
+      {
+        "lat": "36.078292",
+        "lon": "-86.909316",
+        "sequence": "507",
+        "dist_traveled": "16.2006"
+      },
+      {
+        "lat": "36.078210",
+        "lon": "-86.909612",
+        "sequence": "508",
+        "dist_traveled": "16.2281"
+      },
+      {
+        "lat": "36.078144",
+        "lon": "-86.909847",
+        "sequence": "509",
+        "dist_traveled": "16.2503"
+      },
+      {
+        "lat": "36.078114",
+        "lon": "-86.909950",
+        "sequence": "510",
+        "dist_traveled": "16.2601"
+      },
+      {
+        "lat": "36.078006",
+        "lon": "-86.910294",
+        "sequence": "511",
+        "dist_traveled": "16.2934"
+      },
+      {
+        "lat": "36.077985",
+        "lon": "-86.910374",
+        "sequence": "512",
+        "dist_traveled": "16.3006"
+      },
+      {
+        "lat": "36.077957",
+        "lon": "-86.910467",
+        "sequence": "513",
+        "dist_traveled": "16.3092"
+      },
+      {
+        "lat": "36.077930",
+        "lon": "-86.910562",
+        "sequence": "514",
+        "dist_traveled": "16.3187"
+      },
+      {
+        "lat": "36.077873",
+        "lon": "-86.910750",
+        "sequence": "515",
+        "dist_traveled": "16.3367"
+      },
+      {
+        "lat": "36.077852",
+        "lon": "-86.910815",
+        "sequence": "516",
+        "dist_traveled": "16.3425"
+      },
+      {
+        "lat": "36.077742",
+        "lon": "-86.911164",
+        "sequence": "517",
+        "dist_traveled": "16.3767"
+      },
+      {
+        "lat": "36.077664",
+        "lon": "-86.911386",
+        "sequence": "518",
+        "dist_traveled": "16.3977"
+      },
+      {
+        "lat": "36.077634",
+        "lon": "-86.911476",
+        "sequence": "519",
+        "dist_traveled": "16.4063"
+      },
+      {
+        "lat": "36.077599",
+        "lon": "-86.911576",
+        "sequence": "520",
+        "dist_traveled": "16.4161"
+      },
+      {
+        "lat": "36.077438",
+        "lon": "-86.912066",
+        "sequence": "521",
+        "dist_traveled": "16.4637"
+      },
+      {
+        "lat": "36.077390",
+        "lon": "-86.912213",
+        "sequence": "522",
+        "dist_traveled": "16.4776"
+      },
+      {
+        "lat": "36.077318",
+        "lon": "-86.912423",
+        "sequence": "523",
+        "dist_traveled": "16.4982"
+      },
+      {
+        "lat": "36.077166",
+        "lon": "-86.912872",
+        "sequence": "524",
+        "dist_traveled": "16.5417"
+      },
+      {
+        "lat": "36.077012",
+        "lon": "-86.913325",
+        "sequence": "525",
+        "dist_traveled": "16.5864"
+      },
+      {
+        "lat": "36.076929",
+        "lon": "-86.913575",
+        "sequence": "526",
+        "dist_traveled": "16.6102"
+      },
+      {
+        "lat": "36.076853",
+        "lon": "-86.913798",
+        "sequence": "527",
+        "dist_traveled": "16.6317"
+      },
+      {
+        "lat": "36.076760",
+        "lon": "-86.914072",
+        "sequence": "528",
+        "dist_traveled": "16.6581"
+      },
+      {
+        "lat": "36.076596",
+        "lon": "-86.914554",
+        "sequence": "529",
+        "dist_traveled": "16.7048"
+      },
+      {
+        "lat": "36.076516",
+        "lon": "-86.914800",
+        "sequence": "530",
+        "dist_traveled": "16.7285"
+      },
+      {
+        "lat": "36.076341",
+        "lon": "-86.915323",
+        "sequence": "531",
+        "dist_traveled": "16.7792"
+      },
+      {
+        "lat": "36.076248",
+        "lon": "-86.915602",
+        "sequence": "532",
+        "dist_traveled": "16.8065"
+      },
+      {
+        "lat": "36.076169",
+        "lon": "-86.915824",
+        "sequence": "533",
+        "dist_traveled": "16.8285"
+      },
+      {
+        "lat": "36.076031",
+        "lon": "-86.916250",
+        "sequence": "534",
+        "dist_traveled": "16.8693"
+      },
+      {
+        "lat": "36.075857",
+        "lon": "-86.916769",
+        "sequence": "535",
+        "dist_traveled": "16.9191"
+      },
+      {
+        "lat": "36.075767",
+        "lon": "-86.917051",
+        "sequence": "536",
+        "dist_traveled": "16.9464"
+      },
+      {
+        "lat": "36.075689",
+        "lon": "-86.917259",
+        "sequence": "537",
+        "dist_traveled": "16.9670"
+      },
+      {
+        "lat": "36.075657",
+        "lon": "-86.917353",
+        "sequence": "538",
+        "dist_traveled": "16.9760"
+      },
+      {
+        "lat": "36.075572",
+        "lon": "-86.917605",
+        "sequence": "539",
+        "dist_traveled": "17.0007"
+      },
+      {
+        "lat": "36.075445",
+        "lon": "-86.917987",
+        "sequence": "540",
+        "dist_traveled": "17.0374"
+      },
+      {
+        "lat": "36.075323",
+        "lon": "-86.918319",
+        "sequence": "541",
+        "dist_traveled": "17.0696"
+      },
+      {
+        "lat": "36.075203",
+        "lon": "-86.918668",
+        "sequence": "542",
+        "dist_traveled": "17.1042"
+      },
+      {
+        "lat": "36.075156",
+        "lon": "-86.918806",
+        "sequence": "543",
+        "dist_traveled": "17.1176"
+      },
+      {
+        "lat": "36.075077",
+        "lon": "-86.919037",
+        "sequence": "544",
+        "dist_traveled": "17.1404"
+      },
+      {
+        "lat": "36.075063",
+        "lon": "-86.919077",
+        "sequence": "545",
+        "dist_traveled": "17.1436"
+      },
+      {
+        "lat": "36.074915",
+        "lon": "-86.919512",
+        "sequence": "546",
+        "dist_traveled": "17.1861"
+      },
+      {
+        "lat": "36.074882",
+        "lon": "-86.919612",
+        "sequence": "547",
+        "dist_traveled": "17.1956"
+      },
+      {
+        "lat": "36.074815",
+        "lon": "-86.919827",
+        "sequence": "548",
+        "dist_traveled": "17.2163"
+      },
+      {
+        "lat": "36.074764",
+        "lon": "-86.919981",
+        "sequence": "549",
+        "dist_traveled": "17.2311"
+      },
+      {
+        "lat": "36.074700",
+        "lon": "-86.920179",
+        "sequence": "550",
+        "dist_traveled": "17.2508"
+      },
+      {
+        "lat": "36.074568",
+        "lon": "-86.920579",
+        "sequence": "551",
+        "dist_traveled": "17.2885"
+      },
+      {
+        "lat": "36.074468",
+        "lon": "-86.920907",
+        "sequence": "552",
+        "dist_traveled": "17.3205"
+      },
+      {
+        "lat": "36.074446",
+        "lon": "-86.920988",
+        "sequence": "553",
+        "dist_traveled": "17.3281"
+      },
+      {
+        "lat": "36.074412",
+        "lon": "-86.921103",
+        "sequence": "554",
+        "dist_traveled": "17.3389"
+      },
+      {
+        "lat": "36.074355",
+        "lon": "-86.921343",
+        "sequence": "555",
+        "dist_traveled": "17.3617"
+      },
+      {
+        "lat": "36.074325",
+        "lon": "-86.921461",
+        "sequence": "556",
+        "dist_traveled": "17.3721"
+      },
+      {
+        "lat": "36.074251",
+        "lon": "-86.921782",
+        "sequence": "557",
+        "dist_traveled": "17.4025"
+      },
+      {
+        "lat": "36.074238",
+        "lon": "-86.921854",
+        "sequence": "558",
+        "dist_traveled": "17.4085"
+      },
+      {
+        "lat": "36.074228",
+        "lon": "-86.921910",
+        "sequence": "559",
+        "dist_traveled": "17.4136"
+      },
+      {
+        "lat": "36.074197",
+        "lon": "-86.922072",
+        "sequence": "560",
+        "dist_traveled": "17.4292"
+      },
+      {
+        "lat": "36.074150",
+        "lon": "-86.922362",
+        "sequence": "561",
+        "dist_traveled": "17.4556"
+      },
+      {
+        "lat": "36.074139",
+        "lon": "-86.922430",
+        "sequence": "562",
+        "dist_traveled": "17.4617"
+      },
+      {
+        "lat": "36.074099",
+        "lon": "-86.922728",
+        "sequence": "563",
+        "dist_traveled": "17.4882"
+      },
+      {
+        "lat": "36.074045",
+        "lon": "-86.923139",
+        "sequence": "564",
+        "dist_traveled": "17.5257"
+      },
+      {
+        "lat": "36.074028",
+        "lon": "-86.923307",
+        "sequence": "565",
+        "dist_traveled": "17.5407"
+      },
+      {
+        "lat": "36.074003",
+        "lon": "-86.923568",
+        "sequence": "566",
+        "dist_traveled": "17.5639"
+      },
+      {
+        "lat": "36.073971",
+        "lon": "-86.924102",
+        "sequence": "567",
+        "dist_traveled": "17.6121"
+      },
+      {
+        "lat": "36.073964",
+        "lon": "-86.924258",
+        "sequence": "568",
+        "dist_traveled": "17.6261"
+      },
+      {
+        "lat": "36.073960",
+        "lon": "-86.924379",
+        "sequence": "569",
+        "dist_traveled": "17.6371"
+      },
+      {
+        "lat": "36.073958",
+        "lon": "-86.924529",
+        "sequence": "570",
+        "dist_traveled": "17.6501"
+      },
+      {
+        "lat": "36.073952",
+        "lon": "-86.925008",
+        "sequence": "571",
+        "dist_traveled": "17.6931"
+      },
+      {
+        "lat": "36.073952",
+        "lon": "-86.925040",
+        "sequence": "572",
+        "dist_traveled": "17.6961"
+      },
+      {
+        "lat": "36.073927",
+        "lon": "-86.925708",
+        "sequence": "573",
+        "dist_traveled": "17.7552"
+      },
+      {
+        "lat": "36.073926",
+        "lon": "-86.925956",
+        "sequence": "574",
+        "dist_traveled": "17.7772"
+      },
+      {
+        "lat": "36.073925",
+        "lon": "-86.926178",
+        "sequence": "575",
+        "dist_traveled": "17.7972"
+      },
+      {
+        "lat": "36.073926",
+        "lon": "-86.926272",
+        "sequence": "576",
+        "dist_traveled": "17.8062"
+      },
+      {
+        "lat": "36.073907",
+        "lon": "-86.926769",
+        "sequence": "577",
+        "dist_traveled": "17.8503"
+      },
+      {
+        "lat": "36.073902",
+        "lon": "-86.926889",
+        "sequence": "578",
+        "dist_traveled": "17.8613"
+      },
+      {
+        "lat": "36.073896",
+        "lon": "-86.927257",
+        "sequence": "579",
+        "dist_traveled": "17.8934"
+      },
+      {
+        "lat": "36.073890",
+        "lon": "-86.927591",
+        "sequence": "580",
+        "dist_traveled": "17.9234"
+      },
+      {
+        "lat": "36.073880",
+        "lon": "-86.928118",
+        "sequence": "581",
+        "dist_traveled": "17.9704"
+      },
+      {
+        "lat": "36.073863",
+        "lon": "-86.928685",
+        "sequence": "582",
+        "dist_traveled": "18.0214"
+      },
+      {
+        "lat": "36.073851",
+        "lon": "-86.929287",
+        "sequence": "583",
+        "dist_traveled": "18.0754"
+      },
+      {
+        "lat": "36.073850",
+        "lon": "-86.929318",
+        "sequence": "584",
+        "dist_traveled": "18.0776"
+      },
+      {
+        "lat": "36.073837",
+        "lon": "-86.929800",
+        "sequence": "585",
+        "dist_traveled": "18.1207"
+      },
+      {
+        "lat": "36.073836",
+        "lon": "-86.930133",
+        "sequence": "586",
+        "dist_traveled": "18.1507"
+      },
+      {
+        "lat": "36.073835",
+        "lon": "-86.930183",
+        "sequence": "587",
+        "dist_traveled": "18.1557"
+      },
+      {
+        "lat": "36.073825",
+        "lon": "-86.930513",
+        "sequence": "588",
+        "dist_traveled": "18.1847"
+      },
+      {
+        "lat": "36.073815",
+        "lon": "-86.930979",
+        "sequence": "589",
+        "dist_traveled": "18.2267"
+      },
+      {
+        "lat": "36.073810",
+        "lon": "-86.931158",
+        "sequence": "590",
+        "dist_traveled": "18.2427"
+      },
+      {
+        "lat": "36.073809",
+        "lon": "-86.931231",
+        "sequence": "591",
+        "dist_traveled": "18.2487"
+      },
+      {
+        "lat": "36.073803",
+        "lon": "-86.931628",
+        "sequence": "592",
+        "dist_traveled": "18.2847"
+      },
+      {
+        "lat": "36.073790",
+        "lon": "-86.932095",
+        "sequence": "593",
+        "dist_traveled": "18.3257"
+      },
+      {
+        "lat": "36.073781",
+        "lon": "-86.932581",
+        "sequence": "594",
+        "dist_traveled": "18.3698"
+      },
+      {
+        "lat": "36.073780",
+        "lon": "-86.932961",
+        "sequence": "595",
+        "dist_traveled": "18.4038"
+      },
+      {
+        "lat": "36.073782",
+        "lon": "-86.933324",
+        "sequence": "596",
+        "dist_traveled": "18.4358"
+      },
+      {
+        "lat": "36.073782",
+        "lon": "-86.933331",
+        "sequence": "597",
+        "dist_traveled": "18.4368"
+      },
+      {
+        "lat": "36.073793",
+        "lon": "-86.933531",
+        "sequence": "598",
+        "dist_traveled": "18.4539"
+      },
+      {
+        "lat": "36.073803",
+        "lon": "-86.933720",
+        "sequence": "599",
+        "dist_traveled": "18.4709"
+      },
+      {
+        "lat": "36.073835",
+        "lon": "-86.934066",
+        "sequence": "600",
+        "dist_traveled": "18.5021"
+      },
+      {
+        "lat": "36.073875",
+        "lon": "-86.934381",
+        "sequence": "601",
+        "dist_traveled": "18.5305"
+      },
+      {
+        "lat": "36.073917",
+        "lon": "-86.934674",
+        "sequence": "602",
+        "dist_traveled": "18.5570"
+      },
+      {
+        "lat": "36.073976",
+        "lon": "-86.935055",
+        "sequence": "603",
+        "dist_traveled": "18.5915"
+      },
+      {
+        "lat": "36.074025",
+        "lon": "-86.935282",
+        "sequence": "604",
+        "dist_traveled": "18.6133"
+      },
+      {
+        "lat": "36.074030",
+        "lon": "-86.935299",
+        "sequence": "605",
+        "dist_traveled": "18.6143"
+      },
+      {
+        "lat": "36.073964",
+        "lon": "-86.935322",
+        "sequence": "606",
+        "dist_traveled": "18.6216"
+      },
+      {
+        "lat": "36.073833",
+        "lon": "-86.935340",
+        "sequence": "607",
+        "dist_traveled": "18.6367"
+      },
+      {
+        "lat": "36.073733",
+        "lon": "-86.935343",
+        "sequence": "608",
+        "dist_traveled": "18.6477"
+      },
+      {
+        "lat": "36.073664",
+        "lon": "-86.935332",
+        "sequence": "609",
+        "dist_traveled": "18.6558"
+      },
+      {
+        "lat": "36.073598",
+        "lon": "-86.935308",
+        "sequence": "610",
+        "dist_traveled": "18.6631"
+      },
+      {
+        "lat": "36.073337",
+        "lon": "-86.935200",
+        "sequence": "611",
+        "dist_traveled": "18.6935"
+      },
+      {
+        "lat": "36.072906",
+        "lon": "-86.934984",
+        "sequence": "612",
+        "dist_traveled": "18.7464"
+      },
+      {
+        "lat": "36.072815",
+        "lon": "-86.934944",
+        "sequence": "613",
+        "dist_traveled": "18.7568"
+      },
+      {
+        "lat": "36.072545",
+        "lon": "-86.934809",
+        "sequence": "614",
+        "dist_traveled": "18.7891"
+      },
+      {
+        "lat": "36.072137",
+        "lon": "-86.934614",
+        "sequence": "615",
+        "dist_traveled": "18.8385"
+      },
+      {
+        "lat": "36.072079",
+        "lon": "-86.934584",
+        "sequence": "616",
+        "dist_traveled": "18.8449"
+      },
+      {
+        "lat": "36.071903",
+        "lon": "-86.934498",
+        "sequence": "617",
+        "dist_traveled": "18.8664"
+      },
+      {
+        "lat": "36.071749",
+        "lon": "-86.934422",
+        "sequence": "618",
+        "dist_traveled": "18.8848"
+      },
+      {
+        "lat": "36.071390",
+        "lon": "-86.934246",
+        "sequence": "619",
+        "dist_traveled": "18.9275"
+      },
+      {
+        "lat": "36.071225",
+        "lon": "-86.934162",
+        "sequence": "620",
+        "dist_traveled": "18.9481"
+      },
+      {
+        "lat": "36.070351",
+        "lon": "-86.933725",
+        "sequence": "621",
+        "dist_traveled": "19.0536"
+      },
+      {
+        "lat": "36.070313",
+        "lon": "-86.933706",
+        "sequence": "622",
+        "dist_traveled": "19.0577"
+      },
+      {
+        "lat": "36.070140",
+        "lon": "-86.933620",
+        "sequence": "623",
+        "dist_traveled": "19.0783"
+      },
+      {
+        "lat": "36.069927",
+        "lon": "-86.933519",
+        "sequence": "624",
+        "dist_traveled": "19.1040"
+      },
+      {
+        "lat": "36.069868",
+        "lon": "-86.933494",
+        "sequence": "625",
+        "dist_traveled": "19.1112"
+      },
+      {
+        "lat": "36.069783",
+        "lon": "-86.933458",
+        "sequence": "626",
+        "dist_traveled": "19.1207"
+      },
+      {
+        "lat": "36.069704",
+        "lon": "-86.933441",
+        "sequence": "627",
+        "dist_traveled": "19.1299"
+      },
+      {
+        "lat": "36.069659",
+        "lon": "-86.933440",
+        "sequence": "628",
+        "dist_traveled": "19.1349"
+      },
+      {
+        "lat": "36.069590",
+        "lon": "-86.933442",
+        "sequence": "629",
+        "dist_traveled": "19.1429"
+      },
+      {
+        "lat": "36.069525",
+        "lon": "-86.933451",
+        "sequence": "630",
+        "dist_traveled": "19.1500"
+      },
+      {
+        "lat": "36.069503",
+        "lon": "-86.933458",
+        "sequence": "631",
+        "dist_traveled": "19.1532"
+      },
+      {
+        "lat": "36.069389",
+        "lon": "-86.933507",
+        "sequence": "632",
+        "dist_traveled": "19.1668"
+      },
+      {
+        "lat": "36.069200",
+        "lon": "-86.933607",
+        "sequence": "633",
+        "dist_traveled": "19.1896"
+      },
+      {
+        "lat": "36.069224",
+        "lon": "-86.933662",
+        "sequence": "634",
+        "dist_traveled": "19.1955"
+      },
+      {
+        "lat": "36.069270",
+        "lon": "-86.933814",
+        "sequence": "635",
+        "dist_traveled": "19.2103"
+      },
+      {
+        "lat": "36.069298",
+        "lon": "-86.933936",
+        "sequence": "636",
+        "dist_traveled": "19.2208"
+      },
+      {
+        "lat": "36.069310",
+        "lon": "-86.934044",
+        "sequence": "637",
+        "dist_traveled": "19.2310"
+      },
+      {
+        "lat": "36.069317",
+        "lon": "-86.934242",
+        "sequence": "638",
+        "dist_traveled": "19.2490"
+      },
+      {
+        "lat": "36.069320",
+        "lon": "-86.934521",
+        "sequence": "639",
+        "dist_traveled": "19.2740"
+      },
+      {
+        "lat": "36.069316",
+        "lon": "-86.934711",
+        "sequence": "640",
+        "dist_traveled": "19.2910"
+      },
+      {
+        "lat": "36.069303",
+        "lon": "-86.934842",
+        "sequence": "641",
+        "dist_traveled": "19.3021"
+      },
+      {
+        "lat": "36.069298",
+        "lon": "-86.934912",
+        "sequence": "642",
+        "dist_traveled": "19.3091"
+      },
+      {
+        "lat": "36.069278",
+        "lon": "-86.935165",
+        "sequence": "643",
+        "dist_traveled": "19.3312"
+      },
+      {
+        "lat": "36.069168",
+        "lon": "-86.935934",
+        "sequence": "644",
+        "dist_traveled": "19.4013"
+      },
+      {
+        "lat": "36.069066",
+        "lon": "-86.936832",
+        "sequence": "645",
+        "dist_traveled": "19.4820"
+      },
+      {
+        "lat": "36.069018",
+        "lon": "-86.937337",
+        "sequence": "646",
+        "dist_traveled": "19.5274"
+      },
+      {
+        "lat": "36.069002",
+        "lon": "-86.937500",
+        "sequence": "647",
+        "dist_traveled": "19.5424"
+      },
+      {
+        "lat": "36.068949",
+        "lon": "-86.938030",
+        "sequence": "648",
+        "dist_traveled": "19.5898"
+      },
+      {
+        "lat": "36.068939",
+        "lon": "-86.938125",
+        "sequence": "649",
+        "dist_traveled": "19.5979"
+      },
+      {
+        "lat": "36.068901",
+        "lon": "-86.938450",
+        "sequence": "650",
+        "dist_traveled": "19.6273"
+      },
+      {
+        "lat": "36.068885",
+        "lon": "-86.938592",
+        "sequence": "651",
+        "dist_traveled": "19.6403"
+      },
+      {
+        "lat": "36.068852",
+        "lon": "-86.938941",
+        "sequence": "652",
+        "dist_traveled": "19.6716"
+      },
+      {
+        "lat": "36.068835",
+        "lon": "-86.939196",
+        "sequence": "653",
+        "dist_traveled": "19.6947"
+      },
+      {
+        "lat": "36.068822",
+        "lon": "-86.939394",
+        "sequence": "654",
+        "dist_traveled": "19.7127"
+      },
+      {
+        "lat": "36.068804",
+        "lon": "-86.939714",
+        "sequence": "655",
+        "dist_traveled": "19.7408"
+      },
+      {
+        "lat": "36.068802",
+        "lon": "-86.940071",
+        "sequence": "656",
+        "dist_traveled": "19.7728"
+      },
+      {
+        "lat": "36.068801",
+        "lon": "-86.940168",
+        "sequence": "657",
+        "dist_traveled": "19.7818"
+      },
+      {
+        "lat": "36.068808",
+        "lon": "-86.940493",
+        "sequence": "658",
+        "dist_traveled": "19.8108"
+      },
+      {
+        "lat": "36.068833",
+        "lon": "-86.940861",
+        "sequence": "659",
+        "dist_traveled": "19.8439"
+      },
+      {
+        "lat": "36.068862",
+        "lon": "-86.941386",
+        "sequence": "660",
+        "dist_traveled": "19.8901"
+      },
+      {
+        "lat": "36.068867",
+        "lon": "-86.941448",
+        "sequence": "661",
+        "dist_traveled": "19.8961"
+      },
+      {
+        "lat": "36.068885",
+        "lon": "-86.941698",
+        "sequence": "662",
+        "dist_traveled": "19.9182"
+      },
+      {
+        "lat": "36.068910",
+        "lon": "-86.941904",
+        "sequence": "663",
+        "dist_traveled": "19.9374"
+      },
+      {
+        "lat": "36.068939",
+        "lon": "-86.942305",
+        "sequence": "664",
+        "dist_traveled": "19.9736"
+      },
+      {
+        "lat": "36.068952",
+        "lon": "-86.942508",
+        "sequence": "665",
+        "dist_traveled": "19.9917"
+      },
+      {
+        "lat": "36.068955",
+        "lon": "-86.942531",
+        "sequence": "666",
+        "dist_traveled": "19.9937"
+      },
+      {
+        "lat": "36.068960",
+        "lon": "-86.942585",
+        "sequence": "667",
+        "dist_traveled": "19.9978"
+      },
+      {
+        "lat": "36.068967",
+        "lon": "-86.942639",
+        "sequence": "668",
+        "dist_traveled": "20.0028"
+      },
+      {
+        "lat": "36.068983",
+        "lon": "-86.942792",
+        "sequence": "669",
+        "dist_traveled": "20.0169"
+      },
+      {
+        "lat": "36.069002",
+        "lon": "-86.942991",
+        "sequence": "670",
+        "dist_traveled": "20.0350"
+      },
+      {
+        "lat": "36.069026",
+        "lon": "-86.943187",
+        "sequence": "671",
+        "dist_traveled": "20.0523"
+      },
+      {
+        "lat": "36.069077",
+        "lon": "-86.943409",
+        "sequence": "672",
+        "dist_traveled": "20.0732"
+      },
+      {
+        "lat": "36.069108",
+        "lon": "-86.943536",
+        "sequence": "673",
+        "dist_traveled": "20.0846"
+      },
+      {
+        "lat": "36.069181",
+        "lon": "-86.943723",
+        "sequence": "674",
+        "dist_traveled": "20.1038"
+      },
+      {
+        "lat": "36.069254",
+        "lon": "-86.943894",
+        "sequence": "675",
+        "dist_traveled": "20.1208"
+      },
+      {
+        "lat": "36.069354",
+        "lon": "-86.944116",
+        "sequence": "676",
+        "dist_traveled": "20.1436"
+      },
+      {
+        "lat": "36.069431",
+        "lon": "-86.944274",
+        "sequence": "677",
+        "dist_traveled": "20.1603"
+      },
+      {
+        "lat": "36.069516",
+        "lon": "-86.944412",
+        "sequence": "678",
+        "dist_traveled": "20.1753"
+      },
+      {
+        "lat": "36.069612",
+        "lon": "-86.944546",
+        "sequence": "679",
+        "dist_traveled": "20.1916"
+      },
+      {
+        "lat": "36.069671",
+        "lon": "-86.944628",
+        "sequence": "680",
+        "dist_traveled": "20.2022"
+      },
+      {
+        "lat": "36.069773",
+        "lon": "-86.944709",
+        "sequence": "681",
+        "dist_traveled": "20.2152"
+      },
+      {
+        "lat": "36.069886",
+        "lon": "-86.944820",
+        "sequence": "682",
+        "dist_traveled": "20.2316"
+      },
+      {
+        "lat": "36.070002",
+        "lon": "-86.944925",
+        "sequence": "683",
+        "dist_traveled": "20.2474"
+      },
+      {
+        "lat": "36.070016",
+        "lon": "-86.944943",
+        "sequence": "684",
+        "dist_traveled": "20.2497"
+      },
+      {
+        "lat": "36.070117",
+        "lon": "-86.945077",
+        "sequence": "685",
+        "dist_traveled": "20.2667"
+      },
+      {
+        "lat": "36.070226",
+        "lon": "-86.945282",
+        "sequence": "686",
+        "dist_traveled": "20.2883"
+      },
+      {
+        "lat": "36.070254",
+        "lon": "-86.945325",
+        "sequence": "687",
+        "dist_traveled": "20.2933"
+      },
+      {
+        "lat": "36.070320",
+        "lon": "-86.945427",
+        "sequence": "688",
+        "dist_traveled": "20.3047"
+      },
+      {
+        "lat": "36.070424",
+        "lon": "-86.945622",
+        "sequence": "689",
+        "dist_traveled": "20.3255"
+      },
+      {
+        "lat": "36.070518",
+        "lon": "-86.945793",
+        "sequence": "690",
+        "dist_traveled": "20.3449"
+      },
+      {
+        "lat": "36.070655",
+        "lon": "-86.946068",
+        "sequence": "691",
+        "dist_traveled": "20.3732"
+      },
+      {
+        "lat": "36.070822",
+        "lon": "-86.946405",
+        "sequence": "692",
+        "dist_traveled": "20.4087"
+      },
+      {
+        "lat": "36.070953",
+        "lon": "-86.946690",
+        "sequence": "693",
+        "dist_traveled": "20.4387"
+      },
+      {
+        "lat": "36.071109",
+        "lon": "-86.947049",
+        "sequence": "694",
+        "dist_traveled": "20.4750"
+      },
+      {
+        "lat": "36.071179",
+        "lon": "-86.947008",
+        "sequence": "695",
+        "dist_traveled": "20.4839"
+      },
+      {
+        "lat": "36.071543",
+        "lon": "-86.946801",
+        "sequence": "696",
+        "dist_traveled": "20.5291"
+      },
+      {
+        "lat": "36.071694",
+        "lon": "-86.946720",
+        "sequence": "697",
+        "dist_traveled": "20.5466"
+      },
+      {
+        "lat": "36.072018",
+        "lon": "-86.946581",
+        "sequence": "698",
+        "dist_traveled": "20.5855"
+      },
+      {
+        "lat": "36.072262",
+        "lon": "-86.946482",
+        "sequence": "699",
+        "dist_traveled": "20.6139"
+      },
+      {
+        "lat": "36.072513",
+        "lon": "-86.946405",
+        "sequence": "700",
+        "dist_traveled": "20.6428"
+      },
+      {
+        "lat": "36.072790",
+        "lon": "-86.946337",
+        "sequence": "701",
+        "dist_traveled": "20.6744"
+      },
+      {
+        "lat": "36.072992",
+        "lon": "-86.946298",
+        "sequence": "702",
+        "dist_traveled": "20.6977"
+      },
+      {
+        "lat": "36.073483",
+        "lon": "-86.946243",
+        "sequence": "703",
+        "dist_traveled": "20.7529"
+      },
+      {
+        "lat": "36.073666",
+        "lon": "-86.946220",
+        "sequence": "704",
+        "dist_traveled": "20.7730"
+      },
+      {
+        "lat": "36.073961",
+        "lon": "-86.946180",
+        "sequence": "705",
+        "dist_traveled": "20.8063"
+      },
+      {
+        "lat": "36.074132",
+        "lon": "-86.946154",
+        "sequence": "706",
+        "dist_traveled": "20.8254"
+      },
+      {
+        "lat": "36.074456",
+        "lon": "-86.946098",
+        "sequence": "707",
+        "dist_traveled": "20.8627"
+      },
+      {
+        "lat": "36.074573",
+        "lon": "-86.946084",
+        "sequence": "708",
+        "dist_traveled": "20.8758"
+      },
+      {
+        "lat": "36.074806",
+        "lon": "-86.946045",
+        "sequence": "709",
+        "dist_traveled": "20.9021"
+      },
+      {
+        "lat": "36.074939",
+        "lon": "-86.946018",
+        "sequence": "710",
+        "dist_traveled": "20.9172"
+      },
+      {
+        "lat": "36.075155",
+        "lon": "-86.945967",
+        "sequence": "711",
+        "dist_traveled": "20.9417"
+      },
+      {
+        "lat": "36.075342",
+        "lon": "-86.945914",
+        "sequence": "712",
+        "dist_traveled": "20.9633"
+      },
+      {
+        "lat": "36.075426",
+        "lon": "-86.945885",
+        "sequence": "713",
+        "dist_traveled": "20.9725"
+      },
+      {
+        "lat": "36.075472",
+        "lon": "-86.945871",
+        "sequence": "714",
+        "dist_traveled": "20.9776"
+      },
+      {
+        "lat": "36.075610",
+        "lon": "-86.945820",
+        "sequence": "715",
+        "dist_traveled": "20.9944"
+      },
+      {
+        "lat": "36.075725",
+        "lon": "-86.945776",
+        "sequence": "716",
+        "dist_traveled": "21.0080"
+      },
+      {
+        "lat": "36.075893",
+        "lon": "-86.945712",
+        "sequence": "717",
+        "dist_traveled": "21.0279"
+      },
+      {
+        "lat": "36.076083",
+        "lon": "-86.945645",
+        "sequence": "718",
+        "dist_traveled": "21.0498"
+      },
+      {
+        "lat": "36.076275",
+        "lon": "-86.945569",
+        "sequence": "719",
+        "dist_traveled": "21.0719"
+      },
+      {
+        "lat": "36.076413",
+        "lon": "-86.945505",
+        "sequence": "720",
+        "dist_traveled": "21.0887"
+      },
+      {
+        "lat": "36.076695",
+        "lon": "-86.945385",
+        "sequence": "721",
+        "dist_traveled": "21.1215"
+      },
+      {
+        "lat": "36.076813",
+        "lon": "-86.945334",
+        "sequence": "722",
+        "dist_traveled": "21.1364"
+      },
+      {
+        "lat": "36.076908",
+        "lon": "-86.945288",
+        "sequence": "723",
+        "dist_traveled": "21.1472"
+      },
+      {
+        "lat": "36.076941",
+        "lon": "-86.945388",
+        "sequence": "724",
+        "dist_traveled": "21.1570"
+      },
+      {
+        "lat": "36.077042",
+        "lon": "-86.945478",
+        "sequence": "725",
+        "dist_traveled": "21.1706"
+      },
+      {
+        "lat": "36.077095",
+        "lon": "-86.945654",
+        "sequence": "726",
+        "dist_traveled": "21.1877"
+      },
+      {
+        "lat": "36.077103",
+        "lon": "-86.945682",
+        "sequence": "727",
+        "dist_traveled": "21.1900"
+      },
+      {
+        "lat": "36.077331",
+        "lon": "-86.946397",
+        "sequence": "728",
+        "dist_traveled": "21.2590"
+      },
+      {
+        "lat": "36.077445",
+        "lon": "-86.946810",
+        "sequence": "729",
+        "dist_traveled": "21.2983"
+      },
+      {
+        "lat": "36.077536",
+        "lon": "-86.947104",
+        "sequence": "730",
+        "dist_traveled": "21.3261"
+      },
+      {
+        "lat": "36.077568",
+        "lon": "-86.947206",
+        "sequence": "731",
+        "dist_traveled": "21.3356"
+      },
+      {
+        "lat": "36.077916",
+        "lon": "-86.948362",
+        "sequence": "732",
+        "dist_traveled": "21.4461"
+      },
+      {
+        "lat": "36.078072",
+        "lon": "-86.948877",
+        "sequence": "733",
+        "dist_traveled": "21.4951"
+      },
+      {
+        "lat": "36.078110",
+        "lon": "-86.948968",
+        "sequence": "734",
+        "dist_traveled": "21.5041"
+      },
+      {
+        "lat": "36.078199",
+        "lon": "-86.949317",
+        "sequence": "735",
+        "dist_traveled": "21.5376"
+      },
+      {
+        "lat": "36.078359",
+        "lon": "-86.949881",
+        "sequence": "736",
+        "dist_traveled": "21.5907"
+      },
+      {
+        "lat": "36.078444",
+        "lon": "-86.950145",
+        "sequence": "737",
+        "dist_traveled": "21.6158"
+      },
+      {
+        "lat": "36.078468",
+        "lon": "-86.950230",
+        "sequence": "738",
+        "dist_traveled": "21.6244"
+      },
+      {
+        "lat": "36.078526",
+        "lon": "-86.950448",
+        "sequence": "739",
+        "dist_traveled": "21.6443"
+      },
+      {
+        "lat": "36.078600",
+        "lon": "-86.950697",
+        "sequence": "740",
+        "dist_traveled": "21.6686"
+      },
+      {
+        "lat": "36.078624",
+        "lon": "-86.950775",
+        "sequence": "741",
+        "dist_traveled": "21.6763"
+      },
+      {
+        "lat": "36.078639",
+        "lon": "-86.950823",
+        "sequence": "742",
+        "dist_traveled": "21.6807"
+      },
+      {
+        "lat": "36.078684",
+        "lon": "-86.950972",
+        "sequence": "743",
+        "dist_traveled": "21.6947"
+      },
+      {
+        "lat": "36.078728",
+        "lon": "-86.951141",
+        "sequence": "744",
+        "dist_traveled": "21.7105"
+      },
+      {
+        "lat": "36.078783",
+        "lon": "-86.951356",
+        "sequence": "745",
+        "dist_traveled": "21.7304"
+      },
+      {
+        "lat": "36.078893",
+        "lon": "-86.951706",
+        "sequence": "746",
+        "dist_traveled": "21.7646"
+      },
+      {
+        "lat": "36.078914",
+        "lon": "-86.951777",
+        "sequence": "747",
+        "dist_traveled": "21.7713"
+      },
+      {
+        "lat": "36.078967",
+        "lon": "-86.951931",
+        "sequence": "748",
+        "dist_traveled": "21.7865"
+      },
+      {
+        "lat": "36.078996",
+        "lon": "-86.952017",
+        "sequence": "749",
+        "dist_traveled": "21.7941"
+      },
+      {
+        "lat": "36.079079",
+        "lon": "-86.952276",
+        "sequence": "750",
+        "dist_traveled": "21.8188"
+      },
+      {
+        "lat": "36.079127",
+        "lon": "-86.952426",
+        "sequence": "751",
+        "dist_traveled": "21.8341"
+      },
+      {
+        "lat": "36.079253",
+        "lon": "-86.952737",
+        "sequence": "752",
+        "dist_traveled": "21.8654"
+      },
+      {
+        "lat": "36.079369",
+        "lon": "-86.952997",
+        "sequence": "753",
+        "dist_traveled": "21.8918"
+      },
+      {
+        "lat": "36.079507",
+        "lon": "-86.953262",
+        "sequence": "754",
+        "dist_traveled": "21.9192"
+      },
+      {
+        "lat": "36.079676",
+        "lon": "-86.953548",
+        "sequence": "755",
+        "dist_traveled": "21.9514"
+      },
+      {
+        "lat": "36.079615",
+        "lon": "-86.953593",
+        "sequence": "756",
+        "dist_traveled": "21.9587"
+      },
+      {
+        "lat": "36.079552",
+        "lon": "-86.953641",
+        "sequence": "757",
+        "dist_traveled": "21.9667"
+      },
+      {
+        "lat": "36.079481",
+        "lon": "-86.953695",
+        "sequence": "758",
+        "dist_traveled": "21.9762"
+      },
+      {
+        "lat": "36.079325",
+        "lon": "-86.953811",
+        "sequence": "759",
+        "dist_traveled": "21.9967"
+      },
+      {
+        "lat": "36.079234",
+        "lon": "-86.953881",
+        "sequence": "760",
+        "dist_traveled": "22.0090"
+      },
+      {
+        "lat": "36.079100",
+        "lon": "-86.953989",
+        "sequence": "761",
+        "dist_traveled": "22.0264"
+      },
+      {
+        "lat": "36.079001",
+        "lon": "-86.954084",
+        "sequence": "762",
+        "dist_traveled": "22.0407"
+      },
+      {
+        "lat": "36.078903",
+        "lon": "-86.954172",
+        "sequence": "763",
+        "dist_traveled": "22.0543"
+      },
+      {
+        "lat": "36.078870",
+        "lon": "-86.954203",
+        "sequence": "764",
+        "dist_traveled": "22.0593"
+      },
+      {
+        "lat": "36.078810",
+        "lon": "-86.954268",
+        "sequence": "765",
+        "dist_traveled": "22.0671"
+      },
+      {
+        "lat": "36.078769",
+        "lon": "-86.954321",
+        "sequence": "766",
+        "dist_traveled": "22.0741"
+      },
+      {
+        "lat": "36.078723",
+        "lon": "-86.954393",
+        "sequence": "767",
+        "dist_traveled": "22.0827"
+      },
+      {
+        "lat": "36.078665",
+        "lon": "-86.954523",
+        "sequence": "768",
+        "dist_traveled": "22.0958"
+      },
+      {
+        "lat": "36.078620",
+        "lon": "-86.954637",
+        "sequence": "769",
+        "dist_traveled": "22.1070"
+      },
+      {
+        "lat": "36.078575",
+        "lon": "-86.954763",
+        "sequence": "770",
+        "dist_traveled": "22.1200"
+      },
+      {
+        "lat": "36.078553",
+        "lon": "-86.954855",
+        "sequence": "771",
+        "dist_traveled": "22.1282"
+      },
+      {
+        "lat": "36.078542",
+        "lon": "-86.954909",
+        "sequence": "772",
+        "dist_traveled": "22.1333"
+      },
+      {
+        "lat": "36.078532",
+        "lon": "-86.954990",
+        "sequence": "773",
+        "dist_traveled": "22.1404"
+      },
+      {
+        "lat": "36.078525",
+        "lon": "-86.955132",
+        "sequence": "774",
+        "dist_traveled": "22.1534"
+      },
+      {
+        "lat": "36.078525",
+        "lon": "-86.955144",
+        "sequence": "775",
+        "dist_traveled": "22.1544"
+      },
+      {
+        "lat": "36.078526",
+        "lon": "-86.955280",
+        "sequence": "776",
+        "dist_traveled": "22.1664"
+      },
+      {
+        "lat": "36.078541",
+        "lon": "-86.955395",
+        "sequence": "777",
+        "dist_traveled": "22.1766"
+      },
+      {
+        "lat": "36.078560",
+        "lon": "-86.955562",
+        "sequence": "778",
+        "dist_traveled": "22.1917"
+      },
+      {
+        "lat": "36.078599",
+        "lon": "-86.955729",
+        "sequence": "779",
+        "dist_traveled": "22.2073"
+      },
+      {
+        "lat": "36.078636",
+        "lon": "-86.955837",
+        "sequence": "780",
+        "dist_traveled": "22.2171"
+      },
+      {
+        "lat": "36.078677",
+        "lon": "-86.955928",
+        "sequence": "781",
+        "dist_traveled": "22.2274"
+      },
+      {
+        "lat": "36.078728",
+        "lon": "-86.956032",
+        "sequence": "782",
+        "dist_traveled": "22.2382"
+      },
+      {
+        "lat": "36.078795",
+        "lon": "-86.956142",
+        "sequence": "783",
+        "dist_traveled": "22.2504"
+      },
+      {
+        "lat": "36.078849",
+        "lon": "-86.956229",
+        "sequence": "784",
+        "dist_traveled": "22.2597"
+      },
+      {
+        "lat": "36.079002",
+        "lon": "-86.956470",
+        "sequence": "785",
+        "dist_traveled": "22.2875"
+      },
+      {
+        "lat": "36.079440",
+        "lon": "-86.955862",
+        "sequence": "786",
+        "dist_traveled": "22.3611"
+      },
+      {
+        "lat": "36.079467",
+        "lon": "-86.955705",
+        "sequence": "787",
+        "dist_traveled": "22.3754"
+      },
+      {
+        "lat": "36.079494",
+        "lon": "-86.955615",
+        "sequence": "788",
+        "dist_traveled": "22.3840"
+      },
+      {
+        "lat": "36.079547",
+        "lon": "-86.955604",
+        "sequence": "789",
+        "dist_traveled": "22.3901"
+      },
+      {
+        "lat": "36.079601",
+        "lon": "-86.955661",
+        "sequence": "790",
+        "dist_traveled": "22.3979"
+      }
+    ]
+  },
+  "stop_times": [
+    {
+      "id": 23236,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "21:55:00",
+      "departure_time": "21:55:00",
+      "stop_gid": "MCC5_5",
+      "stop_id": 1121,
+      "stop_sequence": 1,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": null,
+      "timepoint": "1",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1121,
+        "stop_gid": "MCC5_5",
+        "stop_code": "MCC5_5",
+        "stop_name": "CENTRAL 5TH AVE - BAY 5",
+        "stop_desc": "MUSIC CITY CENTRAL 5TH CIR & 5TH AVE N",
+        "stop_lat": "36.166456",
+        "stop_lon": "-86.781188",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": "0",
+        "parent_station_gid": "MTAMCC",
+        "parent_station_id": 1179,
+        "stop_timezone": null,
+        "wheelchair_boarding": "1",
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:33:21.639-05:00"
+      }
+    },
+    {
+      "id": 23237,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "21:56:15",
+      "departure_time": "21:56:15",
+      "stop_gid": "6AVDEASN",
+      "stop_id": 1136,
+      "stop_sequence": 2,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "0.4047",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1136,
+        "stop_gid": "6AVDEASN",
+        "stop_code": "6AVDEASN",
+        "stop_name": "6TH AVE & DEADERICK ST SB",
+        "stop_desc": "6TH AVE N & UNION ST",
+        "stop_lat": "36.16483",
+        "stop_lon": "-86.782945",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:24:34.711-05:00"
+      }
+    },
+    {
+      "id": 23238,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "21:57:03",
+      "departure_time": "21:57:03",
+      "stop_gid": "6AVCHUSN",
+      "stop_id": 87,
+      "stop_sequence": 3,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "0.6668",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 87,
+        "stop_gid": "6AVCHUSN",
+        "stop_code": "6AVCHUSN",
+        "stop_name": "6TH AVE N & CHURCH ST SB",
+        "stop_desc": "6TH AV N & UNKNOWN AL",
+        "stop_lat": "36.16277",
+        "stop_lon": "-86.781552",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23239,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "21:58:49",
+      "departure_time": "21:58:49",
+      "stop_gid": "8ABROSN",
+      "stop_id": 96,
+      "stop_sequence": 4,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "1.2388",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 96,
+        "stop_gid": "8ABROSN",
+        "stop_code": "8ABROSN",
+        "stop_name": "8TH AVE S & BROADWAY AVE SB",
+        "stop_desc": "105 ROSA L PARKS BLVD & BROADWAY AVE",
+        "stop_lat": "36.159047",
+        "stop_lon": "-86.782292",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "1",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23240,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "21:59:20",
+      "departure_time": "21:59:20",
+      "stop_gid": "BRO9AWF",
+      "stop_id": 168,
+      "stop_sequence": 5,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "1.4106",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 168,
+        "stop_gid": "BRO9AWF",
+        "stop_code": "BRO9AWF",
+        "stop_name": "BROADWAY AVE & 9TH AVE S WB",
+        "stop_desc": "BROADWAY & 10TH AV N",
+        "stop_lat": "36.158394",
+        "stop_lon": "-86.783577",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23241,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:00:31",
+      "departure_time": "22:00:31",
+      "stop_gid": "BRO12WN",
+      "stop_id": 169,
+      "stop_sequence": 6,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "1.7964",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 169,
+        "stop_gid": "BRO12WN",
+        "stop_code": "BRO12WN",
+        "stop_name": "BROADWAY AVE & 12TH AVE N WB",
+        "stop_desc": "103 12TH AVE & BROADWAY AVE",
+        "stop_lat": "36.156751",
+        "stop_lon": "-86.787397",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23242,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:02:40",
+      "departure_time": "22:02:40",
+      "stop_gid": "WES17AWN",
+      "stop_id": 738,
+      "stop_sequence": 7,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "2.4905",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 738,
+        "stop_gid": "WES17AWN",
+        "stop_code": "WES17AWN",
+        "stop_name": "WEST END AVE & 17TH AVE S WB",
+        "stop_desc": "WEST END AV & 17TH AV N",
+        "stop_lat": "36.153941",
+        "stop_lon": "-86.794329",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23243,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:04:15",
+      "departure_time": "22:04:15",
+      "stop_gid": "WES20AWN",
+      "stop_id": 740,
+      "stop_sequence": 8,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "3.002",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 740,
+        "stop_gid": "WES20AWN",
+        "stop_code": "WES20AWN",
+        "stop_name": "WEST END AVE & 20TH AVE S WB",
+        "stop_desc": "WEST END AV & 20TH AV S",
+        "stop_lat": "36.151548",
+        "stop_lon": "-86.79923",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23244,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:04:51",
+      "departure_time": "22:04:51",
+      "stop_gid": "WES21AWN",
+      "stop_id": 742,
+      "stop_sequence": 9,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "3.1991",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 742,
+        "stop_gid": "WES21AWN",
+        "stop_code": "WES21AWN",
+        "stop_name": "WEST END AVE & 21ST AVE S WB",
+        "stop_desc": "WEST END AV & 21ST AV N",
+        "stop_lat": "36.150628",
+        "stop_lon": "-86.801112",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23245,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:06:00",
+      "departure_time": "22:06:00",
+      "stop_gid": "WES23AWN",
+      "stop_id": 744,
+      "stop_sequence": 10,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "3.5483",
+      "timepoint": "1",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 744,
+        "stop_gid": "WES23AWN",
+        "stop_code": "WES23AWN",
+        "stop_name": "WEST END AVE & 23RD AVE S WB",
+        "stop_desc": "WEST END AV & 23RD AV N",
+        "stop_lat": "36.149007",
+        "stop_lon": "-86.804449",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23246,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:06:58",
+      "departure_time": "22:06:58",
+      "stop_gid": "WES25AWN",
+      "stop_id": 746,
+      "stop_sequence": 11,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "3.9311",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 746,
+        "stop_gid": "WES25AWN",
+        "stop_code": "WES25AWN",
+        "stop_name": "WEST END AVE & 25TH AVE S WB",
+        "stop_desc": "WEST END AV & 25TH AV S",
+        "stop_lat": "36.147202",
+        "stop_lon": "-86.808104",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23247,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:07:50",
+      "departure_time": "22:07:50",
+      "stop_gid": "WES27AWN",
+      "stop_id": 748,
+      "stop_sequence": 12,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "4.2725",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 748,
+        "stop_gid": "WES27AWN",
+        "stop_code": "WES27AWN",
+        "stop_name": "WEST END AVE & 27TH AVE S WB",
+        "stop_desc": "WEST END AV & 27TH AV N",
+        "stop_lat": "36.145648",
+        "stop_lon": "-86.811401",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23248,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:09:00",
+      "departure_time": "22:09:00",
+      "stop_gid": "WES31AWN",
+      "stop_id": 751,
+      "stop_sequence": 13,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "4.7186",
+      "timepoint": "1",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 751,
+        "stop_gid": "WES31AWN",
+        "stop_code": "WES31AWN",
+        "stop_name": "WEST END AVE & 31ST AVE N WB",
+        "stop_desc": "3062 WEST END AVE",
+        "stop_lat": "36.14304",
+        "stop_lon": "-86.815175",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23249,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:09:26",
+      "departure_time": "22:09:26",
+      "stop_gid": "WESACKWN",
+      "stop_id": 753,
+      "stop_sequence": 14,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "5.0154",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 753,
+        "stop_gid": "WESACKWN",
+        "stop_code": "WESACKWN",
+        "stop_name": "WEST END AVE & ACKLEN PARK DR WB",
+        "stop_desc": null,
+        "stop_lat": "36.141069",
+        "stop_lon": "-86.817404",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23250,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:09:58",
+      "departure_time": "22:09:58",
+      "stop_gid": "WES440WN",
+      "stop_id": 760,
+      "stop_sequence": 15,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "5.3791",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 760,
+        "stop_gid": "WES440WN",
+        "stop_code": "WES440WN",
+        "stop_name": "WEST END AVE & I-440 RAMP WB",
+        "stop_desc": null,
+        "stop_lat": "36.138604",
+        "stop_lon": "-86.820053",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23251,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:10:54",
+      "departure_time": "22:10:54",
+      "stop_gid": "WESBOWWN",
+      "stop_id": 754,
+      "stop_sequence": 16,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "6.0044",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 754,
+        "stop_gid": "WESBOWWN",
+        "stop_code": "WESBOWWN",
+        "stop_name": "WEST END AVE & BOWLING AVE WB",
+        "stop_desc": null,
+        "stop_lat": "36.134804",
+        "stop_lon": "-86.824957",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23252,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:11:43",
+      "departure_time": "22:11:43",
+      "stop_gid": "WESCHRWN",
+      "stop_id": 1548,
+      "stop_sequence": 17,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "6.5541",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1548,
+        "stop_gid": "WESCHRWN",
+        "stop_code": "WESCHRWN",
+        "stop_name": "WEST END & CHRISTOPHER WB",
+        "stop_desc": null,
+        "stop_lat": "36.13278",
+        "stop_lon": "-86.830579",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.847-05:00",
+        "updated_at": "2022-07-17T21:24:34.847-05:00"
+      }
+    },
+    {
+      "id": 23253,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:12:15",
+      "departure_time": "22:12:15",
+      "stop_gid": "WESWILWM",
+      "stop_id": 762,
+      "stop_sequence": 18,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "6.914",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 762,
+        "stop_gid": "WESWILWM",
+        "stop_code": "WESWILWM",
+        "stop_name": "WEST END AVE & WILSON BLVD WB",
+        "stop_desc": "WEST END AV & WILSON BV",
+        "stop_lat": "36.131505",
+        "stop_lon": "-86.834269",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23254,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:12:59",
+      "departure_time": "22:12:59",
+      "stop_gid": "HARVINWN",
+      "stop_id": 394,
+      "stop_sequence": 19,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "7.4089",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 394,
+        "stop_gid": "HARVINWN",
+        "stop_code": "HARVINWN",
+        "stop_name": "HARDING PIKE & VINE CT WB",
+        "stop_desc": "HARDING PK & VINE CT",
+        "stop_lat": "36.129868",
+        "stop_lon": "-86.839437",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23255,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:13:40",
+      "departure_time": "22:13:40",
+      "stop_gid": "HARBOSWN",
+      "stop_id": 397,
+      "stop_sequence": 20,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "7.869",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 397,
+        "stop_gid": "HARBOSWN",
+        "stop_code": "HARBOSWN",
+        "stop_name": "HARDING PIKE & BOSLEY SPRINGS RD WB",
+        "stop_desc": "HARDING & WOODLAWN",
+        "stop_lat": "36.127696",
+        "stop_lon": "-86.843826",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23256,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:14:00",
+      "departure_time": "22:14:00",
+      "stop_gid": "HARBOSWM",
+      "stop_id": 383,
+      "stop_sequence": 21,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "8.027",
+      "timepoint": "1",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 383,
+        "stop_gid": "HARBOSWM",
+        "stop_code": "HARBOSWM",
+        "stop_name": "HARDING PIKE & BOSLEY SPRINGS RD WB",
+        "stop_desc": null,
+        "stop_lat": "36.126788",
+        "stop_lon": "-86.845188",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23257,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:14:41",
+      "departure_time": "22:14:41",
+      "stop_gid": "HARWHBWM",
+      "stop_id": 396,
+      "stop_sequence": 22,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "8.6269",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 396,
+        "stop_gid": "HARWHBWM",
+        "stop_code": "HARWHBWM",
+        "stop_name": "HARDING PIKE & WHITE BRIDGE WB",
+        "stop_desc": "4628 HARDING PIKE",
+        "stop_lat": "36.12324",
+        "stop_lon": "-86.850219",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23258,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:15:02",
+      "departure_time": "22:15:02",
+      "stop_gid": "HARLYNWF",
+      "stop_id": 391,
+      "stop_sequence": 23,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "8.9327",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 391,
+        "stop_gid": "HARLYNWF",
+        "stop_code": "HARLYNWF",
+        "stop_name": "HARDING PIKE & LYNNWOOD BLVD WB",
+        "stop_desc": "HARDING PK & GARDNER DR",
+        "stop_lat": "36.121384",
+        "stop_lon": "-86.852753",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23259,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:16:17",
+      "departure_time": "22:16:17",
+      "stop_gid": "HARDAVWF",
+      "stop_id": 877,
+      "stop_sequence": 24,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "10.0158",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 877,
+        "stop_gid": "HARDAVWF",
+        "stop_code": "HARDAVWF",
+        "stop_name": "HARDING PIKE & DAVIDSON RD WB",
+        "stop_desc": null,
+        "stop_lat": "36.114773",
+        "stop_lon": "-86.861586",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23260,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:17:54",
+      "departure_time": "22:17:54",
+      "stop_gid": "HARPOSSN",
+      "stop_id": 389,
+      "stop_sequence": 25,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "11.4094",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 389,
+        "stop_gid": "HARPOSSN",
+        "stop_code": "HARPOSSN",
+        "stop_name": "HARDING PIKE & POST RD SB",
+        "stop_desc": "HARDING & LEAKE AVE",
+        "stop_lat": "36.104123",
+        "stop_lon": "-86.869403",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23261,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:18:24",
+      "departure_time": "22:18:24",
+      "stop_gid": "HARPAGSN",
+      "stop_id": 392,
+      "stop_sequence": 26,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "11.8453",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 392,
+        "stop_gid": "HARPAGSN",
+        "stop_code": "HARPAGSN",
+        "stop_name": "HARDING PIKE & PAGE RD SB",
+        "stop_desc": null,
+        "stop_lat": "36.100465",
+        "stop_lon": "-86.871159",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23262,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:19:16",
+      "departure_time": "22:19:16",
+      "stop_gid": "H70VOSWN",
+      "stop_id": 878,
+      "stop_sequence": 27,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "12.5897",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 878,
+        "stop_gid": "H70VOSWN",
+        "stop_code": "H70VOSWN",
+        "stop_name": "HIGHWAY 70 S & VOSSLAND DR WB",
+        "stop_desc": "STATE HWY 1 & MEMPHIS BRISTOL HWY",
+        "stop_lat": "36.096467",
+        "stop_lon": "-86.877528",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23263,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:19:45",
+      "departure_time": "22:19:45",
+      "stop_gid": "H70BROSN",
+      "stop_id": 879,
+      "stop_sequence": 28,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "13.0107",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 879,
+        "stop_gid": "H70BROSN",
+        "stop_code": "H70BROSN",
+        "stop_name": "HWY 70 S & BROOK HOLLOW RD WB",
+        "stop_desc": "HIGHWAY 70 S & BROOK HOLLOW RD",
+        "stop_lat": "36.094568",
+        "stop_lon": "-86.881598",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23264,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:20:12",
+      "departure_time": "22:20:12",
+      "stop_gid": "H70VAUWN",
+      "stop_id": 880,
+      "stop_sequence": 29,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "13.4025",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 880,
+        "stop_gid": "H70VAUWN",
+        "stop_code": "H70VAUWN",
+        "stop_name": "HWY 70 S & VAUGHNS GAP RD WB",
+        "stop_desc": "HIGHWAY 70 S & VAUGHNS GAP RD",
+        "stop_lat": "36.092753",
+        "stop_lon": "-86.885343",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23265,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:20:53",
+      "departure_time": "22:20:53",
+      "stop_gid": "H70CARSN",
+      "stop_id": 426,
+      "stop_sequence": 30,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "13.9979",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 426,
+        "stop_gid": "H70CARSN",
+        "stop_code": "H70CARSN",
+        "stop_name": "HWY 70 S & CARNAVON PKWY WB",
+        "stop_desc": null,
+        "stop_lat": "36.089861",
+        "stop_lon": "-86.890964",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23266,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:21:40",
+      "departure_time": "22:21:40",
+      "stop_gid": "H70PERWF",
+      "stop_id": 881,
+      "stop_sequence": 31,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "14.6698",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 881,
+        "stop_gid": "H70PERWF",
+        "stop_code": "H70PERWF",
+        "stop_name": "HWY 70S & PERCY WARNER BLVD WB",
+        "stop_desc": "HIGHWAY 70 S & PERCY WARNER BV",
+        "stop_lat": "36.084699",
+        "stop_lon": "-86.894763",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23267,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:22:35",
+      "departure_time": "22:22:35",
+      "stop_gid": "H70HILWN",
+      "stop_id": 1338,
+      "stop_sequence": 32,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "15.4651",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1338,
+        "stop_gid": "H70HILWN",
+        "stop_code": "H70HILWN",
+        "stop_name": "HWY 70 & HILLMEAD APTS WB",
+        "stop_desc": null,
+        "stop_lat": "36.080411",
+        "stop_lon": "-86.901534",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:24:34.711-05:00"
+      }
+    },
+    {
+      "id": 23268,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:22:52",
+      "departure_time": "22:22:52",
+      "stop_gid": "MONTVIEW",
+      "stop_id": 1151,
+      "stop_sequence": 33,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "15.7153",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1151,
+        "stop_gid": "MONTVIEW",
+        "stop_code": "MONTVIEW",
+        "stop_name": "HWY 70 S & MONTVIEW CONDOS WB",
+        "stop_desc": "STATE HWY 1 & HARDING PIKE",
+        "stop_lat": "36.079646",
+        "stop_lon": "-86.904175",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:24:34.711-05:00"
+      }
+    },
+    {
+      "id": 23269,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:23:21",
+      "departure_time": "22:23:21",
+      "stop_gid": "H70ERIWN",
+      "stop_id": 431,
+      "stop_sequence": 34,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "16.1373",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 431,
+        "stop_gid": "H70ERIWN",
+        "stop_code": "H70ERIWN",
+        "stop_name": "HWY 70 S & ERIN LN WB",
+        "stop_desc": "70 S & OAKMONT CR",
+        "stop_lat": "36.078579",
+        "stop_lon": "-86.908706",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23270,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:23:42",
+      "departure_time": "22:23:42",
+      "stop_gid": "H70FORWM",
+      "stop_id": 1333,
+      "stop_sequence": 35,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "16.444",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1333,
+        "stop_gid": "H70FORWM",
+        "stop_code": "H70FORWM",
+        "stop_name": "HWY 70 & FOREST PARK APARTMENTS WB",
+        "stop_desc": null,
+        "stop_lat": "36.077611",
+        "stop_lon": "-86.911923",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:24:34.711-05:00"
+      }
+    },
+    {
+      "id": 23271,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:24:08",
+      "departure_time": "22:24:08",
+      "stop_gid": "H70CHIWN",
+      "stop_id": 882,
+      "stop_sequence": 36,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "16.8262",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 882,
+        "stop_gid": "H70CHIWN",
+        "stop_code": "H70CHIWN",
+        "stop_name": "HWY 70 S & CHIMNEY HILL WB",
+        "stop_desc": null,
+        "stop_lat": "36.076259",
+        "stop_lon": "-86.915859",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23272,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:24:33",
+      "departure_time": "22:24:33",
+      "stop_gid": "H70OLDWN",
+      "stop_id": 1335,
+      "stop_sequence": 37,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "17.1848",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1335,
+        "stop_gid": "H70OLDWN",
+        "stop_code": "H70OLDWN",
+        "stop_name": "HWY 70 & OLD HICKORY BLVD WB",
+        "stop_desc": null,
+        "stop_lat": "36.074995",
+        "stop_lon": "-86.919547",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:24:34.711-05:00"
+      }
+    },
+    {
+      "id": 23273,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:24:57",
+      "departure_time": "22:24:57",
+      "stop_gid": "H70OLDWF",
+      "stop_id": 436,
+      "stop_sequence": 38,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "17.5337",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 436,
+        "stop_gid": "H70OLDWF",
+        "stop_code": "H70OLDWF",
+        "stop_name": "HWY 70 S & OLD HARDING PIKE WB",
+        "stop_desc": "70 S & OLD HARDING PK",
+        "stop_lat": "36.074125",
+        "stop_lon": "-86.923236",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23274,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:25:13",
+      "departure_time": "22:25:13",
+      "stop_gid": "H70HICWN",
+      "stop_id": 433,
+      "stop_sequence": 39,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "17.7741",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 433,
+        "stop_gid": "H70HICWN",
+        "stop_code": "H70HICWN",
+        "stop_name": "HWY 70 S & HICKS RD WB",
+        "stop_desc": "STATE HWY 1 & MEMPHIS BRISTOL HWY",
+        "stop_lat": "36.074021",
+        "stop_lon": "-86.92593",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23275,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:26:14",
+      "departure_time": "22:26:14",
+      "stop_gid": "COLHWYSF",
+      "stop_id": 1594,
+      "stop_sequence": 40,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "18.6477",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1594,
+        "stop_gid": "COLHWYSF",
+        "stop_code": "COLHWYSF",
+        "stop_name": "COLICE JEANNE RD & HWY 70 SB",
+        "stop_desc": "693 COLICE JEANNE RD & CROSS TIMBERS DR",
+        "stop_lat": "36.073714",
+        "stop_lon": "-86.935402",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.847-05:00",
+        "updated_at": "2022-07-17T21:24:34.847-05:00"
+      }
+    },
+    {
+      "id": 23276,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:27:00",
+      "departure_time": "22:27:00",
+      "stop_gid": "COLBAUSN",
+      "stop_id": 1596,
+      "stop_sequence": 41,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "19.1744",
+      "timepoint": "1",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1596,
+        "stop_gid": "COLBAUSN",
+        "stop_code": "COLBAUSN",
+        "stop_name": "COLICE JEANNE RD & BAUGH RD SB",
+        "stop_desc": "603 COLICE JEANNE RD & BAUGH RD",
+        "stop_lat": "36.069342",
+        "stop_lon": "-86.933604",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.847-05:00",
+        "updated_at": "2022-07-17T21:24:34.847-05:00"
+      }
+    },
+    {
+      "id": 23277,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:27:38",
+      "departure_time": "22:27:38",
+      "stop_gid": "BAUSHEWN",
+      "stop_id": 148,
+      "stop_sequence": 42,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "19.4315",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 148,
+        "stop_gid": "BAUSHEWN",
+        "stop_code": "BAUSHEWN",
+        "stop_name": "BAUGH RD & SHEFFIELD SQ WB",
+        "stop_desc": "734 BAUGH RD",
+        "stop_lat": "36.069199",
+        "stop_lon": "-86.936292",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23278,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:28:45",
+      "departure_time": "22:28:45",
+      "stop_gid": "BAUBELWN",
+      "stop_id": 1051,
+      "stop_sequence": 43,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "19.8861",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 1051,
+        "stop_gid": "BAUBELWN",
+        "stop_code": "BAUBELWN",
+        "stop_name": "BAUGH RD & BELLVUE RD WB",
+        "stop_desc": "BAUGH RD & BELLEVUE RD",
+        "stop_lat": "36.068959",
+        "stop_lon": "-86.941341",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.711-05:00",
+        "updated_at": "2022-07-17T21:24:34.711-05:00"
+      }
+    },
+    {
+      "id": 23279,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:29:43",
+      "departure_time": "22:29:43",
+      "stop_gid": "TODDORWN",
+      "stop_id": 712,
+      "stop_sequence": 44,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "20.2802",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 712,
+        "stop_gid": "TODDORWN",
+        "stop_code": "TODDORWN",
+        "stop_name": "TODD PREIS DR & DORAL COUNTRY DR WB",
+        "stop_desc": null,
+        "stop_lat": "36.070268",
+        "stop_lon": "-86.945138",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23280,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:30:09",
+      "departure_time": "22:30:09",
+      "stop_gid": "TODSAWWN",
+      "stop_id": 713,
+      "stop_sequence": 45,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "20.4562",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 713,
+        "stop_gid": "TODSAWWN",
+        "stop_code": "TODSAWWN",
+        "stop_name": "TODD PREIST DR & SAWYER BROWN RD WB",
+        "stop_desc": null,
+        "stop_lat": "36.07108",
+        "stop_lon": "-86.94684",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23281,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:31:14",
+      "departure_time": "22:31:14",
+      "stop_gid": "SAWPLANM",
+      "stop_id": 679,
+      "stop_sequence": 46,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "20.8981",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 679,
+        "stop_gid": "SAWPLANM",
+        "stop_code": "SAWPLANM",
+        "stop_name": "SAWYER BROWN RD & PLANTATION DR NB",
+        "stop_desc": null,
+        "stop_lat": "36.074755",
+        "stop_lon": "-86.945953",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.506-05:00",
+        "updated_at": "2022-07-17T21:24:34.506-05:00"
+      }
+    },
+    {
+      "id": 23282,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:32:24",
+      "departure_time": "22:32:24",
+      "stop_gid": "HWYSAWWM",
+      "stop_id": 425,
+      "stop_sequence": 47,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "21.3701",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 425,
+        "stop_gid": "HWYSAWWM",
+        "stop_code": "HWYSAWWM",
+        "stop_name": "HWY 70 S & SAWYER BROWN WB",
+        "stop_desc": "HWY 70 S & BELLEVUE CENTER",
+        "stop_lat": "36.077742",
+        "stop_lon": "-86.947539",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23283,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:33:16",
+      "departure_time": "22:33:16",
+      "stop_gid": "H70BAPWM",
+      "stop_id": 424,
+      "stop_sequence": 48,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "21.7203",
+      "timepoint": "0",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 424,
+        "stop_gid": "H70BAPWM",
+        "stop_code": "H70BAPWM",
+        "stop_name": "HWY 70 S & BAPTIST BELLEVUE MEDICAL WB",
+        "stop_desc": "HWY 70 S & BAPTIST BELLEVUE MEDICAL CENTER",
+        "stop_lat": "36.078807",
+        "stop_lon": "-86.951223",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": "0",
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    },
+    {
+      "id": 23284,
+      "trip_gid": "270708",
+      "trip_id": 643,
+      "arrival_time": "22:35:00",
+      "departure_time": "22:35:00",
+      "stop_gid": "COLDAVPR",
+      "stop_id": 243,
+      "stop_sequence": 49,
+      "stop_headsign": null,
+      "pickup_type": "0",
+      "drop_off_type": "0",
+      "shape_dist_traveled": "22.3979",
+      "timepoint": "1",
+      "created_at": "2022-07-17T21:26:16.506-05:00",
+      "updated_at": "2022-07-17T21:26:16.506-05:00",
+      "stop": {
+        "id": 243,
+        "stop_gid": "COLDAVPR",
+        "stop_code": "COLDAVPR",
+        "stop_name": "COLEY DAVIS RD SHELTER PARK-N-RIDE",
+        "stop_desc": "COLEY DAVIS-SHELTER-PARK N RIDE",
+        "stop_lat": "36.079608",
+        "stop_lon": "-86.955657",
+        "zone_gid": null,
+        "stop_url": null,
+        "location_type": null,
+        "parent_station_gid": null,
+        "parent_station_id": null,
+        "stop_timezone": null,
+        "wheelchair_boarding": null,
+        "created_at": "2022-07-17T21:24:34.227-05:00",
+        "updated_at": "2022-07-17T21:24:34.227-05:00"
+      }
+    }
+  ]
+}
