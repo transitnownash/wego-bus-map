@@ -1,0 +1,14 @@
+{
+  "id": 11,
+  "route_gid": "4",
+  "agency_gid": "WeGo Public Transit",
+  "agency_id": 1,
+  "route_short_name": "4",
+  "route_long_name": "SHELBY",
+  "route_desc": null,
+  "route_type": "3",
+  "route_url": null,
+  "route_color": "753CBE",
+  "route_text_color": "FFFFFF",
+  "route_sort_order": null
+}

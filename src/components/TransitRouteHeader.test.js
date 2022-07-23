@@ -1,11 +1,51 @@
-/* globals test */
+/* globals test, expect */
 
 import React from 'react';
-import AlertButton from './AlertButton';
-import { createRoot } from 'react-dom/client';
+import TransitRouteHeader from './TransitRouteHeader';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router} from 'react-router-dom';
+import * as routeFixture from '../fixtures/routes-4.json';
 
-test('renders AlertButton', () => {
-  const div = document.createElement('div');
-  const root = createRoot(div);
-  root.render(<AlertButton />);
+test('renders TransitRouteHeader', () => {
+  const route = routeFixture;
+  const {container} = render(
+    <Router>
+      <TransitRouteHeader route={route} />
+    </Router>
+  );
+  expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
+  expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
+});
+
+test('renders TransitRouteHeader', () => {
+  const route = routeFixture;
+  const {container} = render(
+    <Router>
+      <TransitRouteHeader route={route} />
+    </Router>
+  );
+  expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
+  expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
+  expect(screen.queryByAltText('Icon')).toBeNull();
+});
+
+test('renders TransitRouteHeader with icon', () => {
+  const route = routeFixture;
+  const {container} = render(
+    <Router>
+      <TransitRouteHeader route={route} showRouteType={true} />
+    </Router>
+  );
+  expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
+  expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
+  expect(screen.getByAltText('Icon')).toBeInTheDocument();
+});
+
+test('renders TransitRouteHeader with invalid route.', () => {
+  render(
+    <Router>
+      <TransitRouteHeader route={{}} />
+    </Router>
+  );
+  expect(screen.getByText('Invalid route!')).toBeInTheDocument();
 });
