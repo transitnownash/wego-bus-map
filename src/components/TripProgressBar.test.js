@@ -12,7 +12,7 @@ afterEach(() => {
 });
 
 test('renders TripProgressBar', () => {
-  Date.now = () => Date.parse('Fri Jul 22 2022 22:10:00 GMT-0500 ');
+  Date.now = () => Date.parse('Fri Jul 22 2022 22:10:00 GMT-0500');
   const tripUpdates = tripUpdatesFixture.filter((i) => i.trip_update.trip.trip_id === tripFixture.trip_gid);
   const {container} = render(
     <TripProgressBar trip={tripFixture} tripUpdates={tripUpdates} />
@@ -22,16 +22,17 @@ test('renders TripProgressBar', () => {
 });
 
 test('renders TripProgressBar for completed trip', () => {
-  Date.now = () => Date.parse('Fri Jul 22 2022 23:40:00 GMT-0500 ');
+  Date.now = () => Date.parse('Fri Jul 22 2022 23:40:00 GMT-0500');
   const {container} = render(
     <TripProgressBar trip={tripFixture} tripUpdates={[]} />
   );
+  expect(container.querySelector('.trip-progress-bar-completed')).toBeInTheDocument();
   expect(container.querySelector('.trip-progress-bar > .progress > div')).toHaveStyle({width: '100%'});
   expect(screen.getByText('13.92 mi')).toBeInTheDocument();
 });
 
 test('renders empty TripProgressBar for trip not yet started', () => {
-  Date.now = () => Date.parse('Fri Jul 22 2022 23:45:00 GMT-0500 ');
+  Date.now = () => Date.parse('Fri Jul 22 2022 23:45:00 GMT-0500');
   const tripUpdates = tripUpdatesFixture.filter((i) => i.trip_update.trip.trip_id === tripFixture.trip_gid);
   const {container} = render(
     <TripProgressBar trip={tripFixture} tripUpdates={tripUpdates} />
