@@ -24,7 +24,7 @@ function TripProgressBar({trip, tripUpdates}) {
         </div>
       );
     }
-
+    // Trip hasn't completed and there's no updates; Assume it's before tracking picks it up
     return renderEmptyProgressBar();
   }
 
