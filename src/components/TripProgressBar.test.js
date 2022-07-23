@@ -21,6 +21,15 @@ test('renders TripProgressBar', () => {
   expect(screen.getByText('2.44 mi')).toBeInTheDocument();
 });
 
+test('renders TripProgressBar for completed trip', () => {
+  Date.now = () => Date.parse('2022-07-22 23:40:00');
+  const {container} = render(
+    <TripProgressBar trip={tripFixture} tripUpdates={[]} />
+  );
+  expect(container.querySelector('.trip-progress-bar > .progress > div')).toHaveStyle({width: '100%'});
+  expect(screen.getByText('13.92 mi')).toBeInTheDocument();
+});
+
 test('renders empty TripProgressBar for trip not yet started', () => {
   Date.now = () => Date.parse('2022-07-22 23:45');
   const tripUpdates = tripUpdatesFixture.filter((i) => i.trip_update.trip.trip_id === tripFixture.trip_gid);
@@ -30,11 +39,3 @@ test('renders empty TripProgressBar for trip not yet started', () => {
   expect(container.querySelector('.trip-progress-bar-empty')).toBeInTheDocument();
 });
 
-test('renders empty TripProgressBar for completed trip', () => {
-  Date.now = () => Date.parse('2022-07-22 22:40:00');
-  const tripUpdates = tripUpdatesFixture.filter((i) => i.trip_update.trip.trip_id === tripFixture.trip_gid);
-  const {container} = render(
-    <TripProgressBar trip={tripFixture} tripUpdates={tripUpdates} />
-  );
-  expect(container.querySelector('.trip-progress-bar-empty')).toBeInTheDocument();
-});

@@ -1,20 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
-import { formatDistanceTraveled } from '../util';
+import { formatDistanceTraveled, isTimeLaterThanNow } from '../util';
 
 function TripProgressBar({trip, tripUpdates}) {
   function renderEmptyProgressBar() {
-    return(<div className="trip-progress-bar-empty"></div>);
-  }
-
-  // Do not render if no updates provided
-  if (tripUpdates.length === 0) {
-    return renderEmptyProgressBar();
+    return(
+      <div className="trip-progress-bar trip-progress-bar-empty my-4">
+        <ProgressBar min={0} max={100} label={''} now={0}></ProgressBar>
+      </div>
+    );
   }
 
   let currentStopDistance = 0;
   let totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
+
+  // If no updates provided, render either empty or completed bar based on static schedule
+  if (tripUpdates.length === 0) {
+    if (!isTimeLaterThanNow(trip.stop_times[trip.stop_times.length - 1].arrival_time)) {
+      return(
+        <div className="trip-progress-bar trip-progress-bar-completed my-4">
+          <ProgressBar min={0} max={totalTripDistance} label={formatDistanceTraveled(totalTripDistance)} now={totalTripDistance}></ProgressBar>
+        </div>
+      );
+    }
+
+    return renderEmptyProgressBar();
+  }
+
   const currentStopUpdate = tripUpdates[0].trip_update.stop_time_update.find((item) => typeof item.departure !== 'undefined' && item.departure.time * 1000 > Date.now());
   if (typeof currentStopUpdate === 'undefined') {
     return renderEmptyProgressBar();
