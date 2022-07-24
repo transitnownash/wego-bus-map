@@ -3,7 +3,7 @@
 import React from 'react';
 import nock from 'nock';
 import './util';
-import { renderBearing, formatDistanceTraveled, formatPositionData, renderSpeed, renderTimestamp, getJSON, formatTripTime } from './util';
+import { renderBearing, formatDistanceTraveled, renderSpeed, renderTimestamp, getJSON, formatTripTime } from './util';
 import httpAdapter from 'axios/lib/adapters/http';
 
 beforeAll(() => {
@@ -42,13 +42,6 @@ test('test renderBearing', () => {
 test('test renderSpeed', () => {
   expect(renderSpeed(10)).toEqual(<span title={10}>22 mph</span>);
   expect(renderSpeed(undefined)).toEqual(<>N/A</>);
-});
-
-test('test formatPositionData', () => {
-  const vehiclePositionsFixture = require('./fixtures/vehicle_positions.json');
-  expect(formatPositionData(vehiclePositionsFixture)[0]['bearing']).toEqual(225);
-  expect(formatPositionData(vehiclePositionsFixture)[0]['position'][0]).toEqual(36.24689865112305);
-  expect(formatPositionData(vehiclePositionsFixture)[0]['position'][1]).toEqual(-86.72112274169922);
 });
 
 // formatShapePoints(points)

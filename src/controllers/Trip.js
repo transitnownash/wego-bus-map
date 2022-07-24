@@ -5,7 +5,7 @@ import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
-import { getJSON, formatPositionData, formatTripTime, formatShapePoints, formatDistanceTraveled } from './../util.js';
+import { getJSON, formatTripTime, formatShapePoints, formatDistanceTraveled } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus, faRuler } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow';
@@ -85,7 +85,7 @@ function Trip() {
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-      .then((data) => setVehicleMarkers(formatPositionData(data)))
+      .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
 
@@ -100,7 +100,7 @@ function Trip() {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-        .then((data) => setVehicleMarkers(formatPositionData(data)));
+        .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
     const refreshTripUpdatesInterval = setInterval(() => {
@@ -146,7 +146,7 @@ function Trip() {
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
 
   // Filter vehicle markers
-  const filteredVehicleMarkers = vehicleMarkers.filter(v => v.metadata.trip.trip_id === trip.trip_gid);
+  const filteredVehicleMarkers = vehicleMarkers.filter(v => v.vehicle.trip.trip_id === trip.trip_gid);
 
   // Filter updates to this trip, key stop time updates by sequence
   const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid);
@@ -175,8 +175,8 @@ function Trip() {
             <tr>
               <th className="text-nowrap"><FontAwesomeIcon icon={faBus} fixedWidth={true}></FontAwesomeIcon> Vehicle</th>
               <td>
-                {(filteredVehicleMarkers.length > 0 && filteredVehicleMarkers[0].metadata.vehicle)
-                  ? filteredVehicleMarkers[0].metadata.vehicle.label
+                {(filteredVehicleMarkers.length > 0 && filteredVehicleMarkers[0].vehicle.vehicle)
+                  ? filteredVehicleMarkers[0].vehicle.vehicle.label
                   : 'None Assigned'
                 }
               </td>

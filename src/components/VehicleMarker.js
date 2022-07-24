@@ -20,7 +20,7 @@ function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSet
   const marker = useRef(null);
 
   if (typeof route.route_gid === 'undefined') {
-    console.log('[Warning] No matching route found for Trip #' + vehiclePositionData.metadata.trip.trip_id);
+    console.log('[Warning] No matching route found for Trip #' + vehiclePositionData.vehicle.trip.trip_id);
     return(<></>);
   }
 
@@ -32,27 +32,27 @@ function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSet
     shadowAnchor: [16, 16]
   };
 
-  // Set shadow rotation if bearing provided
-  if (typeof vehiclePositionData.bearing === 'number') {
+  // Set shadow image if bearing provided
+  if (typeof vehiclePositionData.vehicle.position.bearing === 'number') {
     iconOptions['shadowUrl'] = busMarkerImageShadow;
-  }
-  // Swap out images if vehicle is a train
-  if (route.route_type === '2') {
-    iconOptions['iconUrl'] = trainMarkerImage;
-    iconOptions['shadowUrl'] = trainMarkerImageShadow;
+    // Swap out images if vehicle is a train
+    if (route.route_type === '2') {
+      iconOptions['iconUrl'] = trainMarkerImage;
+      iconOptions['shadowUrl'] = trainMarkerImageShadow;
+    }
   }
   const markerIcon = L.Icon.extend({options: iconOptions});
   const icon = new markerIcon();
 
   // Fade stale icons a bit
   let opacity = 1.0;
-  if ((Date.now()/1000) - vehiclePositionData.timestamp > 120) {
+  if ((Date.now()/1000) - vehiclePositionData.vehicle.timestamp > 120) {
     opacity = 0.25;
   }
 
   // Handle click on marker
   const showTripDetails = function() {
-    getJSON(GTFS_BASE_URL + '/trips/' + vehiclePositionData.metadata.trip.trip_id + '.json')
+    getJSON(GTFS_BASE_URL + '/trips/' + vehiclePositionData.vehicle.trip.trip_id + '.json')
       .then((trip) => {
         // Add shape to map
         trip.shape['route_color'] = route.route_color;
@@ -66,33 +66,29 @@ function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSet
 
   // Rotate the shadow if bearing is set
   if (marker.current) {
-    if (typeof vehiclePositionData.bearing === 'number') {
-      marker.current.setRotationShadowAngle(vehiclePositionData.bearing);
+    if (typeof vehiclePositionData.vehicle.position.bearing === 'number') {
+      marker.current.setRotationShadowAngle(vehiclePositionData.vehicle.position.bearing);
     }
   }
 
   return(
-    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={vehiclePositionData.position} icon={icon} rotationShadowAngle={vehiclePositionData.bearing} opacity={opacity}>
-      <VehicleMarkerPopup speed={vehiclePositionData.speed} bearing={vehiclePositionData.bearing} metadata={vehiclePositionData.metadata} route={route} agency={agency} tripId={vehiclePositionData.metadata.trip.trip_id} trip={trip} timestamp={vehiclePositionData.timestamp} alerts={alerts}></VehicleMarkerPopup>
-      <VehicleMarkerTooltip route={route} metadata={vehiclePositionData.metadata} alerts={alerts}></VehicleMarkerTooltip>
+    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={[vehiclePositionData.vehicle.position.latitude, vehiclePositionData.vehicle.position.longitude]} icon={icon} rotationShadowAngle={vehiclePositionData.vehicle.position.bearing} opacity={opacity}>
+      <VehicleMarkerPopup vehiclePositionData={vehiclePositionData} route={route} agency={agency} trip={trip} alerts={alerts}></VehicleMarkerPopup>
+      <VehicleMarkerTooltip vehiclePositionData={vehiclePositionData} route={route} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
   );
 }
 
 VehicleMarker.propTypes = {
   vehiclePositionData: PropTypes.object.isRequired,
-  route: PropTypes.object,
-  agency: PropTypes.object,
-  shapeSetter: PropTypes.func,
-  stopSetter: PropTypes.func,
+  route: PropTypes.object.isRequired,
+  agency: PropTypes.object.isRequired,
+  shapeSetter: PropTypes.func.isRequired,
+  stopSetter: PropTypes.func.isRequired,
   alerts: PropTypes.array
 };
 
 VehicleMarker.defaultProps = {
-  route: {},
-  agency: {},
-  shapeSetter: () => { console.error('No shapeSetter function set!'); },
-  stopSetter: () => { console.error('No stopSetter function set!'); },
   alerts: []
 };
 

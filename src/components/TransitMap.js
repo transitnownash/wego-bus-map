@@ -96,9 +96,13 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
         <LayersControl.Overlay checked={true} name="Vehicles">
           <LayerGroup>
             {vehicleMarkers.map((item, _index) => {
-              let route = getRouteDataById(item.metadata.trip.route_id);
-              let routeAlerts = getRouteAlertsById(item.metadata.trip.route_id);
+              let route = getRouteDataById(item.vehicle.trip.route_id);
+              let routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
               let agency = getAgencyDataById(route ? route.agency_gid : {});
+              console.log('route', route);
+              console.log('agencies', agencies);
+              console.log('agency', agency);
+
               return(
                 <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
               );

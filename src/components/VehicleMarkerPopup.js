@@ -7,7 +7,7 @@ import { renderBearing, renderSpeed, renderTimestamp } from './../util.js';
 import { Link } from 'react-router-dom';
 import TransitRouteHeader from './TransitRouteHeader.js';
 
-function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, agency, tripId, alerts}) {
+function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, alerts}) {
   const trip_headsign = (trip.trip_headsign)
     ? trip.trip_headsign
     : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>)
@@ -20,28 +20,28 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
         <table className="table table-borderless table table-sm small" style={{minWidth: '250px'}}>
           <tbody>
             <tr>
-              <th><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>
+              <th className="text-nowrap"><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>
               <td>{trip_headsign}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faBus} fixedWidth/> Vehicle</th>
-              <td>{metadata.vehicle.label}</td>
+              <td>{vehiclePositionData.vehicle.vehicle.label}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faMap} fixedWidth/> Trip</th>
-              <td><Link to={'/trips/' + tripId}>{tripId}</Link></td>
+              <td><Link to={'/trips/' + trip.trip_gid}>{trip.trip_gid}</Link></td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
-              <td>{renderBearing(bearing)}</td>
+              <td>{renderBearing(vehiclePositionData.vehicle.position.bearing)}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faTachometer} fixedWidth/> Speed</th>
-              <td>{renderSpeed(speed)}</td>
+              <td>{renderSpeed(vehiclePositionData.vehicle.position.speed)}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faClock} fixedWidth/> Updated</th>
-              <td>{renderTimestamp(timestamp)}</td>
+              <td>{renderTimestamp(vehiclePositionData.vehicle.timestamp)}</td>
             </tr>
           </tbody>
         </table>
@@ -52,26 +52,14 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
 }
 
 VehicleMarkerPopup.propTypes = {
-  trip: PropTypes.object,
-  route: PropTypes.object,
-  bearing: PropTypes.number,
-  speed: PropTypes.number,
-  timestamp: PropTypes.number,
-  metadata: PropTypes.object,
-  agency: PropTypes.object,
-  tripId: PropTypes.string,
+  vehiclePositionData: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
+  trip: PropTypes.object.isRequired,
+  agency: PropTypes.object.isRequired,
   alerts: PropTypes.array
 };
 
 VehicleMarkerPopup.defaultProps = {
-  trip: {},
-  route: {},
-  bearing: null,
-  speed: null,
-  timestamp: null,
-  metadata: {},
-  agency: {},
-  tripId: null,
   alerts: []
 };
 

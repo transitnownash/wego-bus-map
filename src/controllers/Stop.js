@@ -12,7 +12,7 @@ import Footer from '../components/Footer';
 import DataFetchError from '../components/DataFetchError';
 import AlertList from '../components/AlertList';
 import { Link, useParams } from 'react-router-dom';
-import { formatPositionData, getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
+import { getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
 import TimePointLegend from '../components/TimePointLegend';
@@ -26,11 +26,13 @@ function Stops() {
   const [stop, setStop] = useState([]);
   const [trips, setTrips] = useState([]);
   const [routes, setRoutes] = useState([]);
+  const [agencies, setAgencies] = useState([]);
   const [vehiclePositions, setVehiclePositions] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [tripUpdates, setTripUpdates] = useState([]);
   const [isStopLoaded, setStopLoaded] = useState(false);
   const [isTripsLoaded, setTripsLoaded] = useState(false);
+  const [isAgenciesLoaded, setAgenciesLoaded] = useState(false);
   const [isRoutesLoaded, setRoutesLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
   const [isAlertsLoaded, setAlertsLoaded] = useState(false);
@@ -42,7 +44,7 @@ function Stops() {
 
   // Consolidated check that things are ready to go
   const isUIReady = [
-    isStopLoaded, isTripsLoaded, isRoutesLoaded,
+    isStopLoaded, isTripsLoaded, isRoutesLoaded, isAgenciesLoaded,
     isVehiclePositionLoaded, isAlertsLoaded, isTripUpdatesLoaded
   ].every((a) => a === true);
 
@@ -64,6 +66,11 @@ function Stops() {
     getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/routes.json')
       .then((r) => setRoutes(r.data))
       .then(() => setRoutesLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
+    getJSON(GTFS_BASE_URL + '/agencies.json')
+      .then((a) => setAgencies(a.data))
+      .then(() => setAgenciesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
@@ -129,7 +136,6 @@ function Stops() {
       filteredVehiclePositions.push(vp);
     }
   });
-  const vehicleMarkers = formatPositionData(filteredVehiclePositions);
 
   // Filter alerts to single stop
   let stopAlerts = [];
@@ -217,7 +223,7 @@ function Stops() {
             </div>
           </>
         )}
-        <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} vehicleMarkers={vehicleMarkers} routes={routes} routeStops={routeStops} alerts={alerts}></TransitMap>
+        <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} vehicleMarkers={filteredVehiclePositions} routes={routes} agencies={agencies} routeStops={routeStops} alerts={alerts}></TransitMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
           <>

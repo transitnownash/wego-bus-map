@@ -53,22 +53,6 @@ export function renderSpeed(speed) {
   );
 }
 
-// Format position data for markers
-export function formatPositionData(data) {
-  let positions = [];
-  data.forEach(function (pos) {
-    positions.push({
-      id: pos.id,
-      position: [pos.vehicle.position.latitude, pos.vehicle.position.longitude],
-      speed: pos.vehicle.position.speed,
-      bearing: pos.vehicle.position.bearing,
-      metadata: pos.vehicle,
-      timestamp: pos.vehicle.timestamp
-    });
-  });
-  return positions;
-}
-
 // Format shape points for Polyline
 export function formatShapePoints(points) {
   return (points.map((p, _i) => {

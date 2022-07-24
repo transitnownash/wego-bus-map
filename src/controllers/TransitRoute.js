@@ -9,7 +9,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
-import { getJSON, formatPositionData, formatShapePoints } from './../util.js';
+import { getJSON, formatShapePoints } from './../util.js';
 import AlertList from '../components/AlertList';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
@@ -85,8 +85,8 @@ function TransitRoute() {
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
       .then(function (data) {
-        data = data.filter(v => v.vehicle.trip.route_id === params.route_id);
-        return formatPositionData(data);
+        const filteredPositions = data.filter(v => v.vehicle.trip.route_id === params.route_id);
+        return filteredPositions;
       })
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
@@ -99,8 +99,8 @@ function TransitRoute() {
       }
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
         .then(function (data) {
-          data = data.filter(v => v.vehicle.trip.route_id === params.route_id);
-          return formatPositionData(data);
+          const filteredPositions = data.filter(v => v.vehicle.trip.route_id === params.route_id);
+          return filteredPositions;
         })
         .then((data) => setVehicleMarkers(data))
         .catch((error) => setDataFetchError(error));

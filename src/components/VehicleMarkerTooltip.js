@@ -6,7 +6,7 @@ import { faBus, faMap } from '@fortawesome/free-solid-svg-icons';
 import L from 'leaflet';
 import TransitRouteHeader from './TransitRouteHeader';
 
-function VehicleMarkerTooltip({route, metadata, alerts}) {
+function VehicleMarkerTooltip({vehiclePositionData, route, alerts}) {
   if (L.Browser.mobile) {
     return;
   }
@@ -19,11 +19,11 @@ function VehicleMarkerTooltip({route, metadata, alerts}) {
           <tbody>
             <tr>
               <th><FontAwesomeIcon icon={faBus}/> Vehicle</th>
-              <td>{metadata.vehicle.label}</td>
+              <td>{vehiclePositionData.vehicle.vehicle.label}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faMap}/> Trip</th>
-              <td>{metadata.trip.trip_id}</td>
+              <td>{vehiclePositionData.vehicle.trip.trip_id}</td>
             </tr>
           </tbody>
         </table>
@@ -33,14 +33,12 @@ function VehicleMarkerTooltip({route, metadata, alerts}) {
 }
 
 VehicleMarkerTooltip.propTypes = {
-  route: PropTypes.object,
-  metadata: PropTypes.object,
+  vehiclePositionData: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   alerts: PropTypes.array
 };
 
 VehicleMarkerTooltip.defaultProps = {
-  route: {},
-  metadata: {},
   alerts: []
 };
 
