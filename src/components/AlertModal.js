@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWarning } from '@fortawesome/free-solid-svg-icons';
 import AlertList from './AlertList';
 
-function AlertModal({alerts, show, onHide, routes}) {
+function AlertModal({alerts, routes, show, onHide}) {
   return(
     <Modal show={show} onHide={onHide} aria-labelledby="alerts_modal">
       <Modal.Header closeButton>
@@ -23,17 +23,10 @@ function AlertModal({alerts, show, onHide, routes}) {
 }
 
 AlertModal.propTypes = {
-  alerts: PropTypes.array,
-  show: PropTypes.bool,
-  onHide: PropTypes.func,
-  routes: PropTypes.array
-};
-
-AlertModal.defaultProps = {
-  alerts: [],
-  show: false,
-  onHide: () => { console.error('No onHide function set!'); },
-  routes: []
+  alerts: PropTypes.array.isRequired,
+  routes: PropTypes.array.isRequired,
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired
 };
 
 export default AlertModal;

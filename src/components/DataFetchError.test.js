@@ -3,10 +3,14 @@
 import React from 'react';
 import DataFetchError from './DataFetchError';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 test('renders DataFetchError', () => {
   const div = document.createElement('div');
   const root = createRoot(div);
-  const error = new Error('A runtime error has occurred.');
-  root.render(<DataFetchError error={error} />);
+  root.render(
+    <Router>
+      <DataFetchError error={'An error ocurred!'} />
+    </Router>
+  );
 });

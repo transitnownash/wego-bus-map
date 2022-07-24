@@ -12,25 +12,37 @@ function TripProgressBar({trip, tripUpdates}) {
     );
   }
 
+  function renderCompleteProgressBar() {
+    return(
+      <div className="trip-progress-bar trip-progress-bar-completed my-4">
+        <ProgressBar min={0} max={totalTripDistance} label={formatDistanceTraveled(totalTripDistance)} now={totalTripDistance}></ProgressBar>
+      </div>
+    );
+  }
+
   let currentStopDistance = 0;
   let totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
 
   // If no updates provided, render either empty or completed bar based on static schedule
   if (tripUpdates.length === 0) {
     if (!isTimeLaterThanNow(trip.stop_times[trip.stop_times.length - 1].arrival_time)) {
-      return(
-        <div className="trip-progress-bar trip-progress-bar-completed my-4">
-          <ProgressBar min={0} max={totalTripDistance} label={formatDistanceTraveled(totalTripDistance)} now={totalTripDistance}></ProgressBar>
-        </div>
-      );
+      return renderCompleteProgressBar();
     }
     // Trip hasn't completed and there's no updates; Assume it's before tracking picks it up
     return renderEmptyProgressBar();
   }
 
-  const currentStopUpdate = tripUpdates[0].trip_update.stop_time_update.find((item) => typeof item.departure !== 'undefined' && item.departure.time * 1000 > Date.now());
+  const currentStopUpdate = tripUpdates[0].trip_update.stop_time_update.find((item) => {
+    if (typeof item.departure !== 'undefined' && item.departure.time * 1000 > Date.now()) {
+      return true;
+    }
+    if (typeof item.arrival !== 'undefined' && item.arrival.time * 1000 > Date.now()) {
+      return true;
+    }
+    return false;
+  });
   if (typeof currentStopUpdate === 'undefined') {
-    return renderEmptyProgressBar();
+    return renderCompleteProgressBar();
   }
   const currentStop = trip.stop_times.find(i => i.stop_sequence == currentStopUpdate.stop_sequence);
 

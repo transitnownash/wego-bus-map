@@ -100,6 +100,7 @@ export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {
     if (time * 1000 > Date.now()) {
       return true;
     }
+    return false;
   }
 
   // Fall back to scheduled time

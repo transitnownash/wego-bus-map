@@ -89,7 +89,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; <a href="http://www.wegotransit.com" target="blank">WeGo</a>'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
         subdomains='abcd'
-        minZoom={11}
+        minZoom={10}
         maxZoom={19}
       />
       <LayersControl position="topright">

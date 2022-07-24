@@ -3,9 +3,16 @@
 import React from 'react';
 import AlertModal from './AlertModal';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router} from 'react-router-dom';
+const alertsFixture = require('../fixtures/alerts.json');
+const routesFixture = require('../fixtures/routes.json');
 
 test('renders AlertModal', () => {
   const div = document.createElement('div');
   const root = createRoot(div);
-  root.render(<AlertModal />);
+  root.render(
+    <Router>
+      <AlertModal alerts={alertsFixture} routes={routesFixture.data} show={true} onHide={() => console.log('Hidden!')} />
+    </Router>
+  );
 });

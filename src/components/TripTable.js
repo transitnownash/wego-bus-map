@@ -8,7 +8,7 @@ function TripTable({routeTrips, route}) {
   const [hidePastTrips, setHidePastTrips] = useState(true);
 
   if (routeTrips.length === 0) {
-    return(<div className="alert alert-info">No trips scheduled for {route.route_long_name} today.</div>);
+    return(<div className="alert alert-info">No trips scheduled for <strong>{route.route_short_name} - {route.route_long_name}</strong> today.</div>);
   }
 
   const handleCheckboxChange = function(e) {

@@ -34,10 +34,9 @@ test('renders TripProgressBar for completed trip', () => {
 });
 
 test('renders empty TripProgressBar for trip not yet started', () => {
-  MockDate.set('Fri Jul 22 2022 23:45:00 GMT-0500');
-  const tripUpdates = tripUpdatesFixture.filter((i) => i.trip_update.trip.trip_id === tripFixture.trip_gid);
+  MockDate.set('Fri Jul 22 2022 10:45:00 GMT-0500');
   const {container} = render(
-    <TripProgressBar trip={tripFixture} tripUpdates={tripUpdates} />
+    <TripProgressBar trip={tripFixture} tripUpdates={[]} />
   );
   expect(container.querySelector('.trip-progress-bar-empty')).toBeInTheDocument();
   expect(container).toMatchSnapshot();

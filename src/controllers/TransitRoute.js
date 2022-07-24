@@ -170,14 +170,14 @@ function TransitRoute() {
 
   return(
     <div>
-      <TitleBar></TitleBar>
+      <TitleBar />
       <div className="container transit-route">
-        <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
+        <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
+        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={routeTrips}></TripTable>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }
