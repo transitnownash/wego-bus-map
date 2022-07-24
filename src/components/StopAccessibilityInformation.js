@@ -18,8 +18,8 @@ export function StopAccessibilityInformation({stop}) {
       wheelchair_boarding = (
         <>
           <span className="fa-layers fa-fw me-1">
-            <FontAwesomeIcon icon={faBan} fixedWidth={true} className="text-danger"></FontAwesomeIcon>
             <FontAwesomeIcon icon={faWheelchair} fixedWidth={true} transform="shrink-7"></FontAwesomeIcon>
+            <FontAwesomeIcon icon={faBan} fixedWidth={true} className="text-danger"></FontAwesomeIcon>
           </span>
           Wheelchair boarding is not possible at this stop.
         </>

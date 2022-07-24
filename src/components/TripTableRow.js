@@ -61,8 +61,8 @@ function TripTableRow({trip, route, hidePastTrips}) {
 }
 
 TripTableRow.propTypes = {
-  trip: PropTypes.object,
-  route: PropTypes.object,
+  trip: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   hidePastTrips: PropTypes.bool
 };
 

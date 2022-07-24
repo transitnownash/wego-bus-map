@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Popup } from 'react-leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { formatBearing, formatSpeed, formatTimestamp } from './../util.js';
+import { renderBearing, renderSpeed, renderTimestamp } from './../util.js';
 import { Link } from 'react-router-dom';
 import TransitRouteHeader from './TransitRouteHeader.js';
 
@@ -33,15 +33,15 @@ function VehicleMarkerPopup({trip, route, bearing, speed, timestamp, metadata, a
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
-              <td>{formatBearing(bearing)}</td>
+              <td>{renderBearing(bearing)}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faTachometer} fixedWidth/> Speed</th>
-              <td>{formatSpeed(speed)}</td>
+              <td>{renderSpeed(speed)}</td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faClock} fixedWidth/> Updated</th>
-              <td>{formatTimestamp(timestamp)}</td>
+              <td>{renderTimestamp(timestamp)}</td>
             </tr>
           </tbody>
         </table>

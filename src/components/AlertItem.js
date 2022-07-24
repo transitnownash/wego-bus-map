@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {formatTimestamp} from './../util.js';
+import {renderTimestamp} from './../util.js';
 import './AlertItem.scss';
 import { Link } from 'react-router-dom';
 
@@ -44,9 +44,9 @@ function AlertItem({alert, route}) {
       <div className="card-footer alert-item-footer">
         {alert_cause}
         {alert_effect}
-        <strong>Start:</strong> {formatTimestamp(alert.active_period[0].start)}
+        <strong>Start:</strong> {renderTimestamp(alert.active_period[0].start)}
         {(alert.active_period[0].end && alert.active_period[0].end < 32503701600)&&
-          <>&nbsp;-&nbsp;<strong>End:</strong> {formatTimestamp(alert.active_period[0].end)}</>
+          <>&nbsp;-&nbsp;<strong>End:</strong> {renderTimestamp(alert.active_period[0].end)}</>
         }
       </div>
     </div>

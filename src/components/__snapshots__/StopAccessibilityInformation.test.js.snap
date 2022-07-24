@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders StopAccessibilityInformation declared unknown wheelchair boarding (0) 1`] = `
+<div>
+  <span
+    class="fa-layers fa-fw me-1"
+  >
+    <svg
+      aria-hidden="true"
+      class="svg-inline--fa fa-circle-question fa-fw text-warning"
+      data-icon="circle-question"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 400c-18 0-32-14-32-32s13.1-32 32-32c17.1 0 32 14 32 32S273.1 400 256 400zM325.1 258L280 286V288c0 13-11 24-24 24S232 301 232 288V272c0-8 4-16 12-21l57-34C308 213 312 206 312 198C312 186 301.1 176 289.1 176h-51.1C225.1 176 216 186 216 198c0 13-11 24-24 24s-24-11-24-24C168 159 199 128 237.1 128h51.1C329 128 360 159 360 198C360 222 347 245 325.1 258z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+  No accessibility information for the stop.
+</div>
+`;
+
+exports[`renders StopAccessibilityInformation with wheelchair boarding (1) 1`] = `
+<div>
+  <span
+    class="me-2"
+  >
+    <svg
+      aria-hidden="true"
+      class="svg-inline--fa fa-wheelchair fa-fw "
+      data-icon="wheelchair"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M510.3 421.9c-5.594-16.75-23.53-25.84-40.47-20.22l-19.38 6.438l-41.7-99.97C403.9 295.1 392.2 288 379.1 288h-97.78l-10.4-48h65.11c17.69 0 32-14.31 32-32s-14.31-32-32-32h-78.98L255.6 169.2C251.8 142.1 227.2 124.8 201.2 128.5C174.1 132.2 156.7 156.5 160.5 182.8l23.68 140.4C185.8 339.6 199.6 352 216 352h141.4l44.86 107.9C407.3 472.3 419.3 480 432 480c3.344 0 6.781-.5313 10.12-1.656l48-16C506.9 456.8 515.9 438.7 510.3 421.9zM160 464c-61.76 0-112-50.24-112-112c0-54.25 38.78-99.55 90.06-109.8L130.1 195C56.06 209 0 273.9 0 352c0 88.37 71.63 160 160 160c77.4 0 141.9-54.97 156.8-128h-49.1C252.9 430.1 210.6 464 160 464zM192 96c26.51 0 48-21.49 48-48S218.5 0 192 0S144 21.49 144 48S165.5 96 192 96z"
+        fill="currentColor"
+      />
+    </svg>
+     Some vehicles at this stop can be boarded by a rider in a wheelchair.
+  </span>
+</div>
+`;
+
+exports[`renders StopAccessibilityInformation with wheelchair boarding unavailable (2) 1`] = `
+<div>
+  <span
+    class="fa-layers fa-fw me-1"
+  >
+    <svg
+      aria-hidden="true"
+      class="svg-inline--fa fa-wheelchair fa-fw "
+      data-icon="wheelchair"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      style="transform-origin: 0.5em 0.5em;"
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        transform="translate(256 256)"
+      >
+        <g
+          transform="translate(0, 0)  scale(0.5625, 0.5625)  rotate(0 0 0)"
+        >
+          <path
+            d="M510.3 421.9c-5.594-16.75-23.53-25.84-40.47-20.22l-19.38 6.438l-41.7-99.97C403.9 295.1 392.2 288 379.1 288h-97.78l-10.4-48h65.11c17.69 0 32-14.31 32-32s-14.31-32-32-32h-78.98L255.6 169.2C251.8 142.1 227.2 124.8 201.2 128.5C174.1 132.2 156.7 156.5 160.5 182.8l23.68 140.4C185.8 339.6 199.6 352 216 352h141.4l44.86 107.9C407.3 472.3 419.3 480 432 480c3.344 0 6.781-.5313 10.12-1.656l48-16C506.9 456.8 515.9 438.7 510.3 421.9zM160 464c-61.76 0-112-50.24-112-112c0-54.25 38.78-99.55 90.06-109.8L130.1 195C56.06 209 0 273.9 0 352c0 88.37 71.63 160 160 160c77.4 0 141.9-54.97 156.8-128h-49.1C252.9 430.1 210.6 464 160 464zM192 96c26.51 0 48-21.49 48-48S218.5 0 192 0S144 21.49 144 48S165.5 96 192 96z"
+            fill="currentColor"
+            transform="translate(-256 -256)"
+          />
+        </g>
+      </g>
+    </svg>
+    <svg
+      aria-hidden="true"
+      class="svg-inline--fa fa-ban fa-fw text-danger"
+      data-icon="ban"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM99.5 144.8C77.15 176.1 64 214.5 64 256C64 362 149.1 448 256 448C297.5 448 335.9 434.9 367.2 412.5L99.5 144.8zM448 256C448 149.1 362 64 256 64C214.5 64 176.1 77.15 144.8 99.5L412.5 367.2C434.9 335.9 448 297.5 448 256V256z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+  Wheelchair boarding is not possible at this stop.
+</div>
+`;
+
+exports[`renders StopAccessibilityInformation with wheelchair boarding unset (null) 1`] = `
+<div>
+  <span
+    class="fa-layers fa-fw me-1"
+  >
+    <svg
+      aria-hidden="true"
+      class="svg-inline--fa fa-circle-question fa-fw text-warning"
+      data-icon="circle-question"
+      data-prefix="fas"
+      focusable="false"
+      role="img"
+      viewBox="0 0 512 512"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 400c-18 0-32-14-32-32s13.1-32 32-32c17.1 0 32 14 32 32S273.1 400 256 400zM325.1 258L280 286V288c0 13-11 24-24 24S232 301 232 288V272c0-8 4-16 12-21l57-34C308 213 312 206 312 198C312 186 301.1 176 289.1 176h-51.1C225.1 176 216 186 216 198c0 13-11 24-24 24s-24-11-24-24C168 159 199 128 237.1 128h51.1C329 128 360 159 360 198C360 222 347 245 325.1 258z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+  No accessibility information for the stop.
+</div>
+`;

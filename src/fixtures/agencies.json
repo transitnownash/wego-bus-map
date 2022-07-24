@@ -1,0 +1,20 @@
+{
+  "total": 1,
+  "page": 1,
+  "per_page": 100,
+  "data": [
+    {
+      "id": 2,
+      "agency_gid": "WeGo Public Transit",
+      "agency_name": "WeGo Public Transit",
+      "agency_url": "http://www.wegotransit.com",
+      "agency_timezone": "America/Chicago",
+      "agency_lang": "en",
+      "agency_phone": "615-862-8833",
+      "agency_fare_url": null,
+      "agency_email": null,
+      "created_at": "2022-07-24T02:04:13.741-05:00",
+      "updated_at": "2022-07-24T02:04:13.741-05:00"
+    }
+  ]
+}

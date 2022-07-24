@@ -1,0 +1,20 @@
+{
+  "id": 1623,
+  "stop_gid": "10AHERNN",
+  "stop_code": "10AHERNN",
+  "stop_name": "10TH AVE N & HERMAN ST NB",
+  "stop_desc": "10TH AV N & HERMAN ST",
+  "stop_lat": "36.168831",
+  "stop_lon": "-86.792339",
+  "zone_gid": null,
+  "stop_url": null,
+  "location_type": null,
+  "parent_station_gid": null,
+  "parent_station_id": null,
+  "stop_timezone": null,
+  "wheelchair_boarding": null,
+  "created_at": "2022-07-24T02:04:14.676-05:00",
+  "updated_at": "2022-07-24T02:04:14.676-05:00",
+  "child_stops": [],
+  "parent_station": null
+}

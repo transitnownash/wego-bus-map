@@ -69,8 +69,8 @@ function TripTable({routeTrips, route}) {
 }
 
 TripTable.propTypes = {
-  routeTrips: PropTypes.array,
-  route: PropTypes.object
+  routeTrips: PropTypes.array.isRequired,
+  route: PropTypes.object.isRequired
 };
 
 TripTable.defaultProps = {

@@ -1,0 +1,20 @@
+{
+  "id": 2875,
+  "stop_gid": "DOVDICWF",
+  "stop_code": "DOVDICWF",
+  "stop_name": "DOVERSIDE DR & DICKERSON PIKE WB",
+  "stop_desc": null,
+  "stop_lat": "36.24406",
+  "stop_lon": "-86.757403",
+  "zone_gid": null,
+  "stop_url": null,
+  "location_type": null,
+  "parent_station_gid": null,
+  "parent_station_id": null,
+  "stop_timezone": null,
+  "wheelchair_boarding": "0",
+  "created_at": "2022-07-24T02:04:15.886-05:00",
+  "updated_at": "2022-07-24T02:04:15.886-05:00",
+  "child_stops": [],
+  "parent_station": null
+}

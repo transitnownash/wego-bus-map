@@ -12,7 +12,7 @@ export async function getJSON(url, options={}) {
 }
 
 // Format a timestamp to human readable
-export function formatTimestamp(timestamp, format) {
+export function renderTimestamp(timestamp, format) {
   if (!timestamp || typeof timestamp === 'undefined') {
     return(<>N/A</>);
   }
@@ -26,7 +26,7 @@ export function formatTimestamp(timestamp, format) {
 }
 
 // Convert degrees to ordinal direction
-export function formatBearing(bearing) {
+export function renderBearing(bearing) {
   if (!bearing || typeof bearing === 'undefined') {
     return(<>N/A</>);
   }
@@ -43,7 +43,7 @@ export function formatBearing(bearing) {
 }
 
 // Convert meters per second into miles per hour
-export function formatSpeed(speed) {
+export function renderSpeed(speed) {
   if (!speed || typeof speed === 'undefined') {
     return(<>N/A</>);
   }
@@ -78,12 +78,16 @@ export function formatShapePoints(points) {
 
 // Format HH:MM:SS start/stop trip time
 export function formatTripTime(time) {
+  let addOn = '';
   const now = new Date();
   const [hour, minute, second] = time.split(':');
   now.setHours(hour);
   now.setMinutes(minute);
   now.setSeconds(second);
-  return now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
+  if (hour > 23) {
+    addOn = ' (next day)';
+  }
+  return now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) + addOn;
 }
 
 export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {

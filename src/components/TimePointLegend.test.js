@@ -1,11 +1,12 @@
-/* globals test */
+/* globals test, expect */
 
 import React from 'react';
 import TimePointLegend from './TimePointLegend';
-import { createRoot } from 'react-dom/client';
+import { render } from '@testing-library/react';
 
 test('renders TimePointLegend', () => {
-  const div = document.createElement('div');
-  const root = createRoot(div);
-  root.render(<TimePointLegend />);
+  const {container} = render(
+    <TimePointLegend />
+  );
+  expect(container).toMatchSnapshot();
 });
