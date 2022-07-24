@@ -7,7 +7,7 @@
   "env": {
     "REACT_APP_GTFS_BASE_URL": {
       "description": "Base URL (no trailing slash) of the GTFS API endpoint.",
-      "value": "https://gtfs.example.com"
+      "value": "https://gtfs.transitnownash.org"
     }
   }
 }
