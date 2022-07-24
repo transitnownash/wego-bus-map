@@ -17,6 +17,7 @@ import TransitRouteHeader from '../components/TransitRouteHeader';
 import TripProgressBar from '../components/TripProgressBar';
 import DataFetchError from '../components/DataFetchError';
 import TimePointLegend from '../components/TimePointLegend';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
@@ -222,8 +223,13 @@ function Trip() {
         <TimePointLegend></TimePointLegend>
         {isTripBlockLoaded &&
           <>
-            <div>
-              <span className="h2">Related Trips</span> <span className="badge text-secondary border border-secondary">Block {trip.block_gid}</span>
+            <div className="d-flex">
+              <div className="h2">Related Trips</div>
+              <div className="align-self-center">
+                <OverlayTrigger placement='top' overlay={<Tooltip>A block is a single trip or many sequential trips made using the same vehicle.</Tooltip>}>
+                  <span className="ms-2 badge text-secondary border border-secondary">Block {trip.block_gid}</span>
+                </OverlayTrigger>
+              </div>
             </div>
             <TripTable routeTrips={tripBlock} route={route}></TripTable>
           </>

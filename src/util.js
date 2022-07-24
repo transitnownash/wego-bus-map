@@ -104,12 +104,7 @@ export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {
   }
 
   // Fall back to scheduled time
-  time = Date.parse((new Date()).toLocaleDateString().split('T')[0] + ' ' + stopTime.departure_time);
-  if (time > Date.now()) {
-    return true;
-  }
-
-  return false;
+  return isTimeLaterThanNow(stopTime.departure_time);
 }
 
 // Check if HH:MM:SS is after now
