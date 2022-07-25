@@ -93,22 +93,21 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
         maxZoom={19}
       />
       <LayersControl position="topright">
-        <LayersControl.Overlay checked={true} name="Vehicles">
-          <LayerGroup>
-            {vehicleMarkers.map((item, _index) => {
-              let route = getRouteDataById(item.vehicle.trip.route_id);
-              let routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
-              let agency = getAgencyDataById(route ? route.agency_gid : {});
-              console.log('route', route);
-              console.log('agencies', agencies);
-              console.log('agency', agency);
+        {vehicleMarkers.length > 0 && (
+          <LayersControl.Overlay checked={true} name="Vehicles">
+            <LayerGroup>
+              {vehicleMarkers.map((item, _index) => {
+                let route = getRouteDataById(item.vehicle.trip.route_id);
+                let routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
+                let agency = getAgencyDataById(route ? route.agency_gid : {});
+                return(
+                  <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                );
+              })}
+            </LayerGroup>
+          </LayersControl.Overlay>
+        )}
 
-              return(
-                <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
-              );
-            })}
-          </LayerGroup>
-        </LayersControl.Overlay>
         {shapes.length > 0 &&
           <LayersControl.Overlay checked={true} name="Routes">
             <LayerGroup>

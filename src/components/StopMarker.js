@@ -81,7 +81,7 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
         (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
       }
       {stopAlerts.length > 0 &&
-        (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={70} pathOptions={{ color: 'orange' }}></Circle>)
+        (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={80} pathOptions={{ color: 'orange' }}></Circle>)
       }
     </>
   );
