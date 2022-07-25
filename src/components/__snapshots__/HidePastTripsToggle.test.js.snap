@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders HidePastTripsToggle 1`] = `
+<div>
+  <div
+    class="my-2"
+  >
+    <div
+      class="form-check form-switch"
+    >
+      <input
+        checked=""
+        class="form-check-input"
+        id="hidePastTrips"
+        type="checkbox"
+      />
+      <label
+        class="form-check-label"
+        for="hidePastTrips"
+      >
+        Hide Past Trips
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders HidePastTripsToggle unchecked 1`] = `
+<div>
+  <div
+    class="my-2"
+  >
+    <div
+      class="form-check form-switch"
+    >
+      <input
+        class="form-check-input"
+        id="hidePastTrips"
+        type="checkbox"
+      />
+      <label
+        class="form-check-label"
+        for="hidePastTrips"
+      >
+        Hide Past Trips
+      </label>
+    </div>
+  </div>
+</div>
+`;

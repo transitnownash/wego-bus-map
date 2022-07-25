@@ -11,12 +11,12 @@ exports[`renders TripTable 1`] = `
       <input
         checked=""
         class="form-check-input"
-        id="flexSwitchCheckChecked"
+        id="hidePastTrips"
         type="checkbox"
       />
       <label
         class="form-check-label"
-        for="flexSwitchCheckChecked"
+        for="hidePastTrips"
       >
         Hide Past Trips
       </label>
@@ -2187,12 +2187,12 @@ exports[`renders TripTable with past trips 1`] = `
       <input
         checked=""
         class="form-check-input"
-        id="flexSwitchCheckChecked"
+        id="hidePastTrips"
         type="checkbox"
       />
       <label
         class="form-check-label"
-        for="flexSwitchCheckChecked"
+        for="hidePastTrips"
       >
         Hide Past Trips
       </label>

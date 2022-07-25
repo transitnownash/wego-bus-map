@@ -17,7 +17,7 @@ function TripTable({routeTrips, route}) {
 
   return(
     <>
-      <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange}></HidePastTripsToggle>
+      <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange} />
       <div className="row">
         <div className="col-md-6">
           <div className="h4">Inbound</div>

@@ -1,11 +1,17 @@
-/* globals test */
+/* globals test, expect */
 
 import React from 'react';
 import TripTableRowEmpty from './TripTableRowEmpty';
-import { createRoot } from 'react-dom/client';
+import { render, screen } from '@testing-library/react';
 
 test('renders TripTableRowEmpty', () => {
-  const div = document.createElement('div');
-  const root = createRoot(div);
-  root.render(<TripTableRowEmpty />);
+  const {container} = render(
+    <table>
+      <tbody>
+        <TripTableRowEmpty />
+      </tbody>
+    </table>
+  );
+  expect(screen.getByText('No scheduled trips.')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });

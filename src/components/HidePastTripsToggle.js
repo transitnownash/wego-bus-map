@@ -5,15 +5,15 @@ function HidePastTripsToggle({hidePastTrips, onChange}) {
   return(
     <div className="my-2">
       <div className="form-check form-switch">
-        <input className="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked={hidePastTrips} onChange={onChange} />
-        <label className="form-check-label" htmlFor="flexSwitchCheckChecked">Hide Past Trips</label>
+        <input className="form-check-input" type="checkbox" id="hidePastTrips" checked={hidePastTrips} onChange={onChange} />
+        <label className="form-check-label" htmlFor="hidePastTrips">Hide Past Trips</label>
       </div>
     </div>
   );
 }
 
 HidePastTripsToggle.propTypes = {
-  hidePastTrips: PropTypes.bool,
+  hidePastTrips: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired
 };
 

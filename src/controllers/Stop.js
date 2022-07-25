@@ -227,7 +227,7 @@ function Stops() {
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
           <>
-            <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange}></HidePastTripsToggle>
+            <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange} />
             <div className="table-responsive-md">
               <table className="table table-sm small">
                 <thead>
