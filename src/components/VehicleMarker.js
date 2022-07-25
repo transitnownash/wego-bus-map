@@ -19,7 +19,7 @@ function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSet
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
 
-  if (typeof route.route_gid === 'undefined') {
+  if (typeof route === 'undefined' || typeof route.route_gid === 'undefined') {
     console.log('[Warning] No matching route found for Trip #' + vehiclePositionData.vehicle.trip.trip_id);
     return(<></>);
   }
