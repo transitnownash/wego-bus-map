@@ -60,7 +60,7 @@ function Stops() {
   const mapControls = {
     topRight: (
       <div className="map-top-right-container">
-        <MapLinks></MapLinks>
+        <MapLinks />
       </div>
     ),
     bottomLeft: (
