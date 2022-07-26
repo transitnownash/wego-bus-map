@@ -20,7 +20,7 @@ exports[`renders AlertItem 1`] = `
       </strong>
     </div>
     <div
-      class="card-body bg-light text-dark alert-item-text"
+      class="card-body bg-white text-black alert-item-text"
     >
       <p>
         <strong>
@@ -79,7 +79,7 @@ exports[`renders AlertItem with informed stops 1`] = `
       </strong>
     </div>
     <div
-      class="card-body bg-light text-dark alert-item-text"
+      class="card-body bg-white text-black alert-item-text"
     >
       <p>
         <strong>

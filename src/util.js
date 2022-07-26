@@ -60,20 +60,6 @@ export function formatShapePoints(points) {
   }));
 }
 
-// Format HH:MM:SS start/stop trip time
-export function formatTripTime(time) {
-  let addOn = '';
-  const now = new Date();
-  const [hour, minute, second] = time.split(':');
-  now.setHours(hour);
-  now.setMinutes(minute);
-  now.setSeconds(second);
-  if (hour > 23) {
-    addOn = ' (next day)';
-  }
-  return now.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'}) + addOn;
-}
-
 export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {
   let time = 0;
 

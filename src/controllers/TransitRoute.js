@@ -15,9 +15,9 @@ import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
-const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
-const REFRESH_ALERTS_TTL = 60 * 1000;
-const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
+const REFRESH_VEHICLE_POSITIONS_TTL = 10 * 1000;
+const REFRESH_ALERTS_TTL = 120 * 1000;
+const REFRESH_TRIP_UPDATES_TTL = 120 * 1000;
 
 function TransitRoute() {
   const [route, setRouteData] = useState({});
@@ -102,8 +102,7 @@ function TransitRoute() {
           const filteredPositions = data.filter(v => v.vehicle.trip.route_id === params.route_id);
           return filteredPositions;
         })
-        .then((data) => setVehicleMarkers(data))
-        .catch((error) => setDataFetchError(error));
+        .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
     // Refresh alerts data at set interval
@@ -112,8 +111,7 @@ function TransitRoute() {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
-        .then((data) => setAlerts(data))
-        .catch((error) => setDataFetchError(error));
+        .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
     const refreshTripUpdatesInterval = setInterval(() => {
@@ -121,8 +119,7 @@ function TransitRoute() {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
-        .then((data) => setTripUpdates(data))
-        .catch((error) => setDataFetchError(error));
+        .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
     // Run on unmount
@@ -175,7 +172,7 @@ function TransitRoute() {
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
         <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
-        <TripTable route={route} routeTrips={routeTrips}></TripTable>
+        <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates}></TripTable>
       </div>
       <Footer />
     </div>

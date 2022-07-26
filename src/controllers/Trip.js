@@ -5,7 +5,7 @@ import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
-import { getJSON, formatTripTime, formatShapePoints, formatDistanceTraveled } from './../util.js';
+import { getJSON, formatShapePoints, formatDistanceTraveled } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus, faRuler } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow';
@@ -18,6 +18,7 @@ import TripProgressBar from '../components/TripProgressBar';
 import DataFetchError from '../components/DataFetchError';
 import TimePointLegend from '../components/TimePointLegend';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import TimePoint from '../components/TimePoint';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
@@ -169,11 +170,11 @@ function Trip() {
         <table className="table table-vertical">
           <tbody>
             <tr>
-              <th className="text-nowrap" style={{width: '130px'}}><FontAwesomeIcon icon={faMap} fixedWidth={true}></FontAwesomeIcon> Trip</th>
+              <th className="text-nowrap align-middle" style={{width: '130px'}}><FontAwesomeIcon icon={faMap} fixedWidth={true}></FontAwesomeIcon> Trip</th>
               <td>{trip.trip_gid}</td>
             </tr>
             <tr>
-              <th className="text-nowrap"><FontAwesomeIcon icon={faBus} fixedWidth={true}></FontAwesomeIcon> Vehicle</th>
+              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faBus} fixedWidth={true}></FontAwesomeIcon> Vehicle</th>
               <td>
                 {(filteredVehicleMarkers.length > 0 && filteredVehicleMarkers[0].vehicle.vehicle)
                   ? filteredVehicleMarkers[0].vehicle.vehicle.label
@@ -182,7 +183,7 @@ function Trip() {
               </td>
             </tr>
             <tr>
-              <th className="text-nowrap"><FontAwesomeIcon icon={faMapSigns} fixedWidth={true}></FontAwesomeIcon> Headsign</th>
+              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faMapSigns} fixedWidth={true}></FontAwesomeIcon> Headsign</th>
               <td>{trip.trip_headsign}</td>
             </tr>
             <tr>
@@ -190,12 +191,36 @@ function Trip() {
               <td>{formatDistanceTraveled(totalTripDistance)}</td>
             </tr>
             <tr>
-              <th><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
-              <td><StopTimeSequence stopTime={trip.stop_times[0]}></StopTimeSequence> {formatTripTime(trip.start_time)} at <Link to={'/stops/' + trip.stop_times[0].stop.stop_code} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link></td>
+              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
+              <td>
+                <div className="d-flex align-items-center">
+                  <div className="p-1">
+                    <StopTimeSequence stopTime={trip.stop_times[0]} />
+                  </div>
+                  <div className="p-1 text-center">
+                    <TimePoint scheduleData={trip.stop_times[0]} updateData={filteredTripUpdatesBySequence[1]} />
+                  </div>
+                  <div className="p-1">
+                    at <Link to={'/stops/' + trip.stop_times[0].stop.stop_code} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <th><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
-              <td><StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]}></StopTimeSequence> {formatTripTime(trip.end_time)} at <Link to={'/stops/' + trip.stop_times[trip.stop_times.length - 1].stop.stop_code} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link></td>
+              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
+              <td>
+                <div className="d-flex align-items-center">
+                  <div className="p-1">
+                    <StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]} />
+                  </div>
+                  <div className="p-1 text-center">
+                    <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={filteredTripUpdatesBySequence[trip.stop_times.length]} />
+                  </div>
+                  <div className="p-1">
+                    at <Link to={'/stops/' + trip.stop_times[trip.stop_times.length - 1].stop.stop_code} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link>
+                  </div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -231,7 +256,7 @@ function Trip() {
                 </OverlayTrigger>
               </div>
             </div>
-            <TripTable routeTrips={tripBlock} route={route}></TripTable>
+            <TripTable routeTrips={tripBlock} route={route} tripUpdates={tripUpdates}></TripTable>
           </>
         }
       </div>

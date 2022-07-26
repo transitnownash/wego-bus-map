@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons";
-import { formatTripTime, isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util";
+import { isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import TimePoint from './TimePoint';
 
-function TripTableRow({trip, route, hidePastTrips}) {
+function TripTableRow({trip, route, tripUpdate, hidePastTrips}) {
   if (!isTimeLaterThanNow(trip.end_time) && hidePastTrips) {
     return(<></>);
   }
@@ -25,22 +26,34 @@ function TripTableRow({trip, route, hidePastTrips}) {
     ? 'Vehicle being used on this particular trip can accommodate at least one rider in a wheelchair.'
     : 'No riders in wheelchairs can be accommodated on this trip.';
 
-  const rowStyle = !isTimeLaterThanNow(trip.end_time)
-    ? {
-      opacity: 0.3
-    }
-    : {};
+  let updateStart = {};
+  let updateEnd = {};
+  if (typeof tripUpdate.trip_update !== 'undefined') {
+    updateStart = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === 1) || {};
+    updateEnd = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === trip.stop_times[trip.stop_times.length - 1].stop_sequence) || {};
+  }
+
+  let rowClasses = '';
+  if (isTimeRangeIncludesNow(trip.start_time, trip.end_time)) {
+    rowClasses = 'border-start border-primary border-5';
+  } else if (!isTimeLaterThanNow(trip.end_time) && !tripUpdate.trip_update) {
+    rowClasses = 'border-start border-gray border-5';
+  }
 
   return(
-    <tr className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'bg-secondary text-light' : ''} style={rowStyle}>
-      <td><a href={'/trips/' + trip.trip_gid} className={isTimeRangeIncludesNow(trip.start_time, trip.end_time) ? 'text-light' : ''}>{trip.trip_gid}</a></td>
-      <td>{formatTripTime(trip.start_time)}</td>
-      <td>{formatTripTime(trip.end_time)}</td>
+    <tr className={rowClasses}>
+      <td><a href={'/trips/' + trip.trip_gid}>{trip.trip_gid}</a></td>
+      <td className="text-center text-nowrap">
+        <TimePoint scheduleData={trip.stop_times[0]} updateData={updateStart}></TimePoint>
+      </td>
+      <td className="text-center text-nowrap">
+        <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={updateEnd}></TimePoint>
+      </td>
       <td>
-        {trip.route_gid !== route.route_gid &&
-          (<OverlayTrigger placement='top' overlay={<Tooltip>Vehicle continues on to Route {trip.route_gid}</Tooltip>}><span className="badge bg-secondary me-1">&raquo;</span></OverlayTrigger>)
-        }
-        {trip.route_gid} - {trip.trip_headsign}
+        {trip.route_gid !== route.route_gid && (
+          <span className="badge bg-secondary me-1">{trip.route_gid}</span>
+        )}
+        {trip.trip_headsign}
       </td>
       <td>
         <OverlayTrigger placement='top' overlay={<Tooltip>{wheelchair_accessible_tooltip}</Tooltip>}>
@@ -63,12 +76,14 @@ function TripTableRow({trip, route, hidePastTrips}) {
 TripTableRow.propTypes = {
   trip: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
+  tripUpdate: PropTypes.object,
   hidePastTrips: PropTypes.bool
 };
 
 TripTableRow.defaultProps = {
   trip: {},
   route: {},
+  tripUpdate: {},
   hidePastTrips: false
 };
 

@@ -24,7 +24,7 @@ function AlertItem({alert, route}) {
       <div className="card-header alert-item-header">
         <strong><Link to={'/routes/' + route.route_short_name}>{route.route_short_name} - {route.route_long_name}</Link></strong>
       </div>
-      <div className="card-body bg-light text-dark alert-item-text">
+      <div className="card-body bg-white text-black alert-item-text">
         <p>
           <strong>{alert.header_text.translation[0].text}</strong>
         </p>

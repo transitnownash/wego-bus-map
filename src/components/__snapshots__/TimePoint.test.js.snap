@@ -8,18 +8,21 @@ exports[`renders TimePoint 1`] = `
 
 exports[`renders TimePoint with trip update 1`] = `
 <div>
-  <small>
+  <div
+    class="small"
+  >
     <strike
       class="text-muted"
     >
       9:55 PM
     </strike>
-    <br />
-  </small>
-  <strong
-    class="text-primary"
-  >
-    9:59 PM
-  </strong>
+  </div>
+  <div>
+    <strong
+      class="text-primary"
+    >
+      9:59 PM
+    </strong>
+  </div>
 </div>
 `;

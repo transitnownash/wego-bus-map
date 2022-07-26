@@ -17,8 +17,8 @@ test('renders TripTable', () => {
   const {container} = render(
     <TripTable routeTrips={routeTripsFixture.data} route={routeFixture} />
   );
-  expect(screen.getAllByText('4 - DOWNTOWN')).toHaveLength(16);
-  expect(screen.getAllByText('4 - INGLEWOOD')).toHaveLength(16);
+  expect(screen.getAllByText('DOWNTOWN')).toHaveLength(16);
+  expect(screen.getAllByText('INGLEWOOD')).toHaveLength(16);
   expect(screen.queryAllByText('266924')).toHaveLength(0);
   expect(screen.queryAllByText('11:26 AM')).toHaveLength(0);
   expect(screen.getByText('266927')).toBeInTheDocument();
@@ -36,8 +36,8 @@ test('renders TripTable with past trips', async () => {
 
   await user.click(screen.getByRole('checkbox', {name: /Hide Past Trips/i}));
 
-  expect(screen.getAllByText('4 - DOWNTOWN')).toHaveLength(26);
-  expect(screen.getAllByText('4 - INGLEWOOD')).toHaveLength(25);
+  expect(screen.getAllByText('DOWNTOWN')).toHaveLength(26);
+  expect(screen.getAllByText('INGLEWOOD')).toHaveLength(25);
   expect(screen.getByText('266924')).toBeInTheDocument();
   expect(screen.getByText('11:26 AM')).toBeInTheDocument();
   expect(screen.getByText('266927')).toBeInTheDocument();

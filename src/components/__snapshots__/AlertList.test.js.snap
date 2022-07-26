@@ -21,7 +21,7 @@ exports[`renders AlertList 1`] = `
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -75,7 +75,7 @@ R-Dickerson to regular route.
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -129,7 +129,7 @@ Continue regular route to Walmart
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -219,7 +219,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -292,7 +292,7 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -368,7 +368,7 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -464,7 +464,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>
@@ -547,7 +547,7 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
         </strong>
       </div>
       <div
-        class="card-body bg-light text-dark alert-item-text"
+        class="card-body bg-white text-black alert-item-text"
       >
         <p>
           <strong>

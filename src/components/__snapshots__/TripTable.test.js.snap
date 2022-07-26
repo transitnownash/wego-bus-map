@@ -26,7 +26,7 @@ exports[`renders TripTable 1`] = `
     class="row"
   >
     <div
-      class="col-md-6"
+      class="col-lg-6"
     >
       <div
         class="h4"
@@ -34,17 +34,21 @@ exports[`renders TripTable 1`] = `
         Inbound
       </div>
       <table
-        class="table table-sm small"
+        class="table table-sm table-striped small"
       >
         <thead>
           <tr>
             <th>
               Trip
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               Start
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               End
             </th>
             <th>
@@ -57,25 +61,26 @@ exports[`renders TripTable 1`] = `
         </thead>
         <tbody>
           <tr
-            class="bg-secondary text-light"
+            class="border-start border-primary border-5"
           >
             <td>
               <a
-                class="text-light"
                 href="/trips/266927"
               >
                 266927
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -124,21 +129,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266928"
               >
                 266928
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -187,21 +193,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266929"
               >
                 266929
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:29 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -250,21 +257,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266930"
               >
                 266930
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -313,21 +321,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266931"
               >
                 266931
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -376,21 +385,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266932"
               >
                 266932
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:29 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -439,21 +449,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266933"
               >
                 266933
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -502,21 +513,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266934"
               >
                 266934
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -565,21 +577,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266935"
               >
                 266935
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:29 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -628,21 +641,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266936"
               >
                 266936
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -691,21 +705,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266937"
               >
                 266937
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -754,21 +769,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266938"
               >
                 266938
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:28 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:02 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -817,21 +833,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266939"
               >
                 266939
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:05 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:38 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -880,21 +897,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266940"
               >
                 266940
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:11 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -943,21 +961,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266941"
               >
                 266941
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:11 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -1006,21 +1025,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266942"
               >
                 266942
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:11 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -1069,21 +1089,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266943"
               >
                 266943
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:58 PM
             </td>
             <td>
-              4
-               - 
               SHELBY PARK
             </td>
             <td>
@@ -1131,7 +1152,7 @@ exports[`renders TripTable 1`] = `
       </table>
     </div>
     <div
-      class="col-md-6"
+      class="col-lg-6"
     >
       <div
         class="h4"
@@ -1139,17 +1160,21 @@ exports[`renders TripTable 1`] = `
         Outbound
       </div>
       <table
-        class="table table-sm small"
+        class="table table-sm table-striped small"
       >
         <thead>
           <tr>
             <th>
               Trip
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               Start
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               End
             </th>
             <th>
@@ -1166,21 +1191,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266905"
               >
                 266905
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1229,21 +1255,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266904"
               >
                 266904
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1292,21 +1319,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266903"
               >
                 266903
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:03 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1355,21 +1383,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266902"
               >
                 266902
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1418,21 +1447,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266901"
               >
                 266901
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1481,21 +1511,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266900"
               >
                 266900
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:03 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1544,21 +1575,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266899"
               >
                 266899
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1607,21 +1639,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266898"
               >
                 266898
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1670,21 +1703,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266897"
               >
                 266897
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:03 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1733,21 +1767,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266896"
               >
                 266896
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1796,21 +1831,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266895"
               >
                 266895
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1859,21 +1895,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266894"
               >
                 266894
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:01 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1922,21 +1959,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266893"
               >
                 266893
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:41 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -1985,21 +2023,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266892"
               >
                 266892
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:41 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -2048,21 +2087,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266915"
               >
                 266915
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:41 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -2111,21 +2151,22 @@ exports[`renders TripTable 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266916"
               >
                 266916
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:40 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -2172,6 +2213,68 @@ exports[`renders TripTable 1`] = `
         </tbody>
       </table>
     </div>
+  </div>
+  <div
+    class="small"
+  >
+    <ul
+      class="list-inline"
+    >
+      <li
+        class="list-inline-item mb-2"
+      >
+        <span
+          class="px-1 border"
+        >
+          0:00 AM
+        </span>
+         Scheduled time.
+      </li>
+      <li
+        class="list-inline-item mb-2"
+      >
+        <strike
+          class="text-muted px-1 border"
+        >
+          0:00 AM
+        </strike>
+         Previous scheduled time.
+      </li>
+      <li
+        class="list-inline-item mb-2"
+      >
+        <strong
+          class="text-primary px-1 border"
+        >
+          0:00 AM
+        </strong>
+         Updated time from tracking.
+      </li>
+      <li
+        class="list-inline-item mb-2"
+      >
+        <strong
+          class="px-1 border"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-calendar-day fa-fw px-3"
+            data-icon="calendar-day"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32zM0 192H448V464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192zM80 256C71.16 256 64 263.2 64 272V368C64 376.8 71.16 384 80 384H176C184.8 384 192 376.8 192 368V272C192 263.2 184.8 256 176 256H80z"
+              fill="currentColor"
+            />
+          </svg>
+        </strong>
+         Time spans into the next day.
+      </li>
+    </ul>
   </div>
 </div>
 `;
@@ -2202,7 +2305,7 @@ exports[`renders TripTable with past trips 1`] = `
     class="row"
   >
     <div
-      class="col-md-6"
+      class="col-lg-6"
     >
       <div
         class="h4"
@@ -2210,17 +2313,21 @@ exports[`renders TripTable with past trips 1`] = `
         Inbound
       </div>
       <table
-        class="table table-sm small"
+        class="table table-sm table-striped small"
       >
         <thead>
           <tr>
             <th>
               Trip
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               Start
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               End
             </th>
             <th>
@@ -2233,26 +2340,26 @@ exports[`renders TripTable with past trips 1`] = `
         </thead>
         <tbody>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266918"
               >
                 266918
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:35 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:06 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2297,26 +2404,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266917"
               >
                 266917
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:15 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:46 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2361,26 +2468,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266919"
               >
                 266919
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:49 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:26 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2425,26 +2532,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266920"
               >
                 266920
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:29 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:06 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2489,26 +2596,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266921"
               >
                 266921
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:09 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:46 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2553,26 +2660,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266922"
               >
                 266922
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:49 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:26 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2617,26 +2724,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266923"
               >
                 266923
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:29 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:06 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2681,26 +2788,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266924"
               >
                 266924
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:09 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:46 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2745,26 +2852,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266925"
               >
                 266925
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:49 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:26 AM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2809,26 +2916,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266926"
               >
                 266926
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:29 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2873,25 +2980,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="bg-secondary text-light"
+            class="border-start border-primary border-5"
           >
             <td>
               <a
-                class="text-light"
                 href="/trips/266927"
               >
                 266927
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -2940,21 +3048,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266928"
               >
                 266928
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3003,21 +3112,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266929"
               >
                 266929
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:29 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3066,21 +3176,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266930"
               >
                 266930
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3129,21 +3240,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266931"
               >
                 266931
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3192,21 +3304,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266932"
               >
                 266932
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:29 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3255,21 +3368,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266933"
               >
                 266933
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3318,21 +3432,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266934"
               >
                 266934
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3381,21 +3496,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266935"
               >
                 266935
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:29 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:06 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3444,21 +3560,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266936"
               >
                 266936
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:09 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:46 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3507,21 +3624,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266937"
               >
                 266937
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:49 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:26 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3570,21 +3688,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266938"
               >
                 266938
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:28 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:02 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3633,21 +3752,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266939"
               >
                 266939
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:05 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:38 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3696,21 +3816,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266940"
               >
                 266940
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:11 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3759,21 +3880,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266941"
               >
                 266941
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:11 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3822,21 +3944,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266942"
               >
                 266942
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:11 PM
             </td>
             <td>
-              4
-               - 
               DOWNTOWN
             </td>
             <td>
@@ -3885,21 +4008,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266943"
               >
                 266943
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:41 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:58 PM
             </td>
             <td>
-              4
-               - 
               SHELBY PARK
             </td>
             <td>
@@ -3947,7 +4071,7 @@ exports[`renders TripTable with past trips 1`] = `
       </table>
     </div>
     <div
-      class="col-md-6"
+      class="col-lg-6"
     >
       <div
         class="h4"
@@ -3955,17 +4079,21 @@ exports[`renders TripTable with past trips 1`] = `
         Outbound
       </div>
       <table
-        class="table table-sm small"
+        class="table table-sm table-striped small"
       >
         <thead>
           <tr>
             <th>
               Trip
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               Start
             </th>
-            <th>
+            <th
+              class="text-center"
+            >
               End
             </th>
             <th>
@@ -3978,26 +4106,26 @@ exports[`renders TripTable with past trips 1`] = `
         </thead>
         <tbody>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266914"
               >
                 266914
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:15 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:38 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4042,26 +4170,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266913"
               >
                 266913
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:55 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:20 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4106,26 +4234,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266912"
               >
                 266912
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:35 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:00 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4170,26 +4298,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266911"
               >
                 266911
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:15 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:42 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4234,26 +4362,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266910"
               >
                 266910
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:55 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:22 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4298,26 +4426,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266909"
               >
                 266909
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:35 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:02 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4362,26 +4490,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266908"
               >
                 266908
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:15 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:42 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4426,26 +4554,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266907"
               >
                 266907
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:55 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:22 AM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4490,26 +4618,26 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class=""
-            style="opacity: 0.3;"
+            class="border-start border-gray border-5"
           >
             <td>
               <a
-                class=""
                 href="/trips/266906"
               >
                 266906
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:35 AM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:02 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4558,21 +4686,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266905"
               >
                 266905
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4621,21 +4750,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266904"
               >
                 266904
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               12:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4684,21 +4814,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266903"
               >
                 266903
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               1:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:03 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4747,21 +4878,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266902"
               >
                 266902
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4810,21 +4942,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266901"
               >
                 266901
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               2:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4873,21 +5006,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266900"
               >
                 266900
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               3:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:03 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4936,21 +5070,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266899"
               >
                 266899
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -4999,21 +5134,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266898"
               >
                 266898
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               4:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5062,21 +5198,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266897"
               >
                 266897
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               5:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:03 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5125,21 +5262,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266896"
               >
                 266896
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:43 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5188,21 +5326,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266895"
               >
                 266895
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               6:55 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:23 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5251,21 +5390,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266894"
               >
                 266894
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               7:35 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:01 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5314,21 +5454,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266893"
               >
                 266893
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               8:41 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5377,21 +5518,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266892"
               >
                 266892
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               9:41 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5440,21 +5582,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266915"
               >
                 266915
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               10:41 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5503,21 +5646,22 @@ exports[`renders TripTable with past trips 1`] = `
           >
             <td>
               <a
-                class=""
                 href="/trips/266916"
               >
                 266916
               </a>
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:15 PM
             </td>
-            <td>
+            <td
+              class="text-center text-nowrap"
+            >
               11:40 PM
             </td>
             <td>
-              4
-               - 
               INGLEWOOD
             </td>
             <td>
@@ -5564,6 +5708,68 @@ exports[`renders TripTable with past trips 1`] = `
         </tbody>
       </table>
     </div>
+  </div>
+  <div
+    class="small"
+  >
+    <ul
+      class="list-inline"
+    >
+      <li
+        class="list-inline-item mb-2"
+      >
+        <span
+          class="px-1 border"
+        >
+          0:00 AM
+        </span>
+         Scheduled time.
+      </li>
+      <li
+        class="list-inline-item mb-2"
+      >
+        <strike
+          class="text-muted px-1 border"
+        >
+          0:00 AM
+        </strike>
+         Previous scheduled time.
+      </li>
+      <li
+        class="list-inline-item mb-2"
+      >
+        <strong
+          class="text-primary px-1 border"
+        >
+          0:00 AM
+        </strong>
+         Updated time from tracking.
+      </li>
+      <li
+        class="list-inline-item mb-2"
+      >
+        <strong
+          class="px-1 border"
+        >
+          <svg
+            aria-hidden="true"
+            class="svg-inline--fa fa-calendar-day fa-fw px-3"
+            data-icon="calendar-day"
+            data-prefix="fas"
+            focusable="false"
+            role="img"
+            viewBox="0 0 448 512"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M160 32V64H288V32C288 14.33 302.3 0 320 0C337.7 0 352 14.33 352 32V64H400C426.5 64 448 85.49 448 112V160H0V112C0 85.49 21.49 64 48 64H96V32C96 14.33 110.3 0 128 0C145.7 0 160 14.33 160 32zM0 192H448V464C448 490.5 426.5 512 400 512H48C21.49 512 0 490.5 0 464V192zM80 256C71.16 256 64 263.2 64 272V368C64 376.8 71.16 384 80 384H176C184.8 384 192 376.8 192 368V272C192 263.2 184.8 256 176 256H80z"
+              fill="currentColor"
+            />
+          </svg>
+        </strong>
+         Time spans into the next day.
+      </li>
+    </ul>
   </div>
 </div>
 `;

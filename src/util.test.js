@@ -3,7 +3,7 @@
 import React from 'react';
 import nock from 'nock';
 import './util';
-import { renderBearing, formatDistanceTraveled, renderSpeed, renderTimestamp, getJSON, formatTripTime } from './util';
+import { renderBearing, formatDistanceTraveled, renderSpeed, renderTimestamp, getJSON } from './util';
 import httpAdapter from 'axios/lib/adapters/http';
 
 beforeAll(() => {
@@ -45,12 +45,6 @@ test('test renderSpeed', () => {
 });
 
 // formatShapePoints(points)
-
-test('test formatTripTime', () => {
-  expect(formatTripTime(' 1:24:31')).toEqual("1:24 AM");
-  expect(formatTripTime('13:42:44')).toEqual("1:42 PM");
-  expect(formatTripTime('24:15:13')).toEqual("12:15 AM (next day)");
-});
 
 // isStopTimeUpdateLaterThanNow(stopTime, stopUpdate)
 
