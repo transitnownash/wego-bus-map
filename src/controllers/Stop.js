@@ -161,6 +161,9 @@ function Stops() {
   trips.sort((a, b) => {
     const aTime = a.stop_times[0].arrival_time ? a.stop_times[0].arrival_time : a.stop_times[0].departure_time;
     const bTime = b.stop_times[0].arrival_time ? b.stop_times[0].arrival_time : b.stop_times[0].departure_time;
+    if (aTime === bTime) {
+      return parseInt(a.route_gid, 10) > parseInt(b.route_gid, 10);
+    }
     return aTime > bTime;
   });
 
