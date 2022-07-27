@@ -5,293 +5,6 @@ exports[`renders AlertList 1`] = `
   <div>
     <div
       class="card mb-3"
-      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-    >
-      <div
-        class="card-header alert-item-header"
-      >
-        <strong>
-          <a
-            href="/routes/79"
-          >
-            79
-             - 
-            SKYLINE
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body bg-white text-black alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 79 SKYLINE NORTHBOUND
-          </strong>
-        </p>
-        Detour in effect on route 79 SKYLINE
-
-Route 79 NORTHBOUND will detour 
-
-Detour Route 79 from 
-Madison to N Dickerson
-No service on Skyline Ridge due to construction
-From Skyline Hospital, continue Doverside 
-back to Dickerson
-R-Dickerson to regular route. 
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-      >
-        Construction
-         - 
-        Detour
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1649057040"
-        >
-          4/4/22, 2:24 AM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-    >
-      <div
-        class="card-header alert-item-header"
-      >
-        <strong>
-          <a
-            href="/routes/79"
-          >
-            79
-             - 
-            SKYLINE
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body bg-white text-black alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 79 SKYLINE EASTBOUND
-          </strong>
-        </p>
-        Detour in effect on route 79 SKYLINE
-
-Route 79 EASTBOUND will detour 
-
-Detour Route 79 towards Madison
-No service on Skyline Ridge due to construction
-On Dickerson at Skyline Ridge Dr,
-Continue Dickerson
-L-Doverside to Skyline Hospital
-Continue regular route to Walmart
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-      >
-        Construction
-         - 
-        Detour
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1649057040"
-        >
-          4/4/22, 2:24 AM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-      style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
-    >
-      <div
-        class="card-header alert-item-header"
-      >
-        <strong>
-          <a
-            href="/routes/22"
-          >
-            22
-             - 
-            BORDEAUX
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body bg-white text-black alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 22 BORDEAUX FROM DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 22 BORDEAUX
-
-Route 22 FROM DOWNTOWN will detour 
-
-FROM FAIRVIEW DR 
-R-MEADOW RD
-L-West Hamilton Rd.
-R- Clarksville Hwy to regular route.
-
-
-Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
-        >
-          <li
-            class="list-inline-item"
-          >
-            <strong>
-              Stops:
-            </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/FAICLAEN"
-              >
-                FAICLAEN
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/CLAFAISF"
-              >
-                CLAFAISF
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/CLAWHASN"
-              >
-                CLAWHASN
-              </a>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-      >
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1654090200"
-        >
-          6/1/22, 8:30 AM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
-    >
-      <div
-        class="card-header alert-item-header"
-      >
-        <strong>
-          <a
-            href="/routes/14"
-          >
-            14
-             - 
-            WHITES CREEK
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body bg-white text-black alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 14 WHITES CREEK TO DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 14 WHITES CREEK
-
-Route 14 TO DOWNTOWN will detour 
-
-Inbound Only.
-Continue FERN AVE (E)
-R-DICKERSON PIKE
-Back to regular route.
-
-Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND ST SB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
-        >
-          <li
-            class="list-inline-item"
-          >
-            <strong>
-              Stops:
-            </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/WHIDICSN"
-              >
-                WHIDICSN
-              </a>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-      >
-        Other Cause
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1654988700"
-        >
-          6/11/22, 6:05 PM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
       style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <div
@@ -372,18 +85,18 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
     </div>
     <div
       class="card mb-3"
-      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
       >
         <strong>
           <a
-            href="/routes/75"
+            href="/routes/14"
           >
-            75
+            14
              - 
-            MIDTOWN
+            WHITES CREEK
           </a>
         </strong>
       </div>
@@ -392,17 +105,19 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
       >
         <p>
           <strong>
-            Detour in effect on route 75 MIDTOWN NORTHBOUND
+            Detour in effect on route 14 WHITES CREEK TO DOWNTOWN
           </strong>
         </p>
-        Detour in effect on route 75 MIDTOWN NORTHBOUND will detour 
+        Detour in effect on route 14 WHITES CREEK
 
-BROADWAY AVE (NE)
-L-19TH AVE
-L-WEST END AVE
-R-20TH AVE
+Route 14 TO DOWNTOWN will detour 
 
-Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not be served while this detour is in effect.
+Inbound Only.
+Continue FERN AVE (E)
+R-DICKERSON PIKE
+Back to regular route.
+
+Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND ST SB will not be served while this detour is in effect.
         <hr />
         <ul
           class="list-inline"
@@ -421,48 +136,9 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
               class="stop-code badge bg-white text-black border border-secondary"
             >
               <a
-                href="/stops/20ABRONF"
+                href="/stops/WHIDICSN"
               >
-                20ABRONF
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/20AWESNN"
-              >
-                20AWESNN
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/21AGRANN"
-              >
-                21AGRANN
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/20ACHUNN"
-              >
-                20ACHUNN
+                WHIDICSN
               </a>
             </span>
           </li>
@@ -471,14 +147,16 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
       <div
         class="card-footer alert-item-footer"
       >
+        Other Cause
+         - 
         <strong>
           Start:
         </strong>
          
         <span
-          title="1657679040"
+          title="1654988700"
         >
-          7/12/22, 9:24 PM
+          6/11/22, 6:05 PM
         </span>
       </div>
     </div>
@@ -652,6 +330,328 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
           title="1658635200"
         >
           7/23/22, 11:00 PM
+        </span>
+      </div>
+    </div>
+    <div
+      class="card mb-3"
+      style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
+    >
+      <div
+        class="card-header alert-item-header"
+      >
+        <strong>
+          <a
+            href="/routes/22"
+          >
+            22
+             - 
+            BORDEAUX
+          </a>
+        </strong>
+      </div>
+      <div
+        class="card-body bg-white text-black alert-item-text"
+      >
+        <p>
+          <strong>
+            Detour in effect on route 22 BORDEAUX FROM DOWNTOWN
+          </strong>
+        </p>
+        Detour in effect on route 22 BORDEAUX
+
+Route 22 FROM DOWNTOWN will detour 
+
+FROM FAIRVIEW DR 
+R-MEADOW RD
+L-West Hamilton Rd.
+R- Clarksville Hwy to regular route.
+
+
+Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB will not be served while this detour is in effect.
+        <hr />
+        <ul
+          class="list-inline"
+        >
+          <li
+            class="list-inline-item"
+          >
+            <strong>
+              Stops:
+            </strong>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/FAICLAEN"
+              >
+                FAICLAEN
+              </a>
+            </span>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/CLAFAISF"
+              >
+                CLAFAISF
+              </a>
+            </span>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/CLAWHASN"
+              >
+                CLAWHASN
+              </a>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="card-footer alert-item-footer"
+      >
+        <strong>
+          Start:
+        </strong>
+         
+        <span
+          title="1654090200"
+        >
+          6/1/22, 8:30 AM
+        </span>
+      </div>
+    </div>
+    <div
+      class="card mb-3"
+      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+    >
+      <div
+        class="card-header alert-item-header"
+      >
+        <strong>
+          <a
+            href="/routes/75"
+          >
+            75
+             - 
+            MIDTOWN
+          </a>
+        </strong>
+      </div>
+      <div
+        class="card-body bg-white text-black alert-item-text"
+      >
+        <p>
+          <strong>
+            Detour in effect on route 75 MIDTOWN NORTHBOUND
+          </strong>
+        </p>
+        Detour in effect on route 75 MIDTOWN NORTHBOUND will detour 
+
+BROADWAY AVE (NE)
+L-19TH AVE
+L-WEST END AVE
+R-20TH AVE
+
+Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not be served while this detour is in effect.
+        <hr />
+        <ul
+          class="list-inline"
+        >
+          <li
+            class="list-inline-item"
+          >
+            <strong>
+              Stops:
+            </strong>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/20ABRONF"
+              >
+                20ABRONF
+              </a>
+            </span>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/20AWESNN"
+              >
+                20AWESNN
+              </a>
+            </span>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/21AGRANN"
+              >
+                21AGRANN
+              </a>
+            </span>
+          </li>
+          <li
+            class="list-inline-item"
+          >
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
+            >
+              <a
+                href="/stops/20ACHUNN"
+              >
+                20ACHUNN
+              </a>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="card-footer alert-item-footer"
+      >
+        <strong>
+          Start:
+        </strong>
+         
+        <span
+          title="1657679040"
+        >
+          7/12/22, 9:24 PM
+        </span>
+      </div>
+    </div>
+    <div
+      class="card mb-3"
+      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+    >
+      <div
+        class="card-header alert-item-header"
+      >
+        <strong>
+          <a
+            href="/routes/79"
+          >
+            79
+             - 
+            SKYLINE
+          </a>
+        </strong>
+      </div>
+      <div
+        class="card-body bg-white text-black alert-item-text"
+      >
+        <p>
+          <strong>
+            Detour in effect on route 79 SKYLINE NORTHBOUND
+          </strong>
+        </p>
+        Detour in effect on route 79 SKYLINE
+
+Route 79 NORTHBOUND will detour 
+
+Detour Route 79 from 
+Madison to N Dickerson
+No service on Skyline Ridge due to construction
+From Skyline Hospital, continue Doverside 
+back to Dickerson
+R-Dickerson to regular route. 
+      </div>
+      <div
+        class="card-footer alert-item-footer"
+      >
+        Construction
+         - 
+        Detour
+         - 
+        <strong>
+          Start:
+        </strong>
+         
+        <span
+          title="1649057040"
+        >
+          4/4/22, 2:24 AM
+        </span>
+      </div>
+    </div>
+    <div
+      class="card mb-3"
+      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+    >
+      <div
+        class="card-header alert-item-header"
+      >
+        <strong>
+          <a
+            href="/routes/79"
+          >
+            79
+             - 
+            SKYLINE
+          </a>
+        </strong>
+      </div>
+      <div
+        class="card-body bg-white text-black alert-item-text"
+      >
+        <p>
+          <strong>
+            Detour in effect on route 79 SKYLINE EASTBOUND
+          </strong>
+        </p>
+        Detour in effect on route 79 SKYLINE
+
+Route 79 EASTBOUND will detour 
+
+Detour Route 79 towards Madison
+No service on Skyline Ridge due to construction
+On Dickerson at Skyline Ridge Dr,
+Continue Dickerson
+L-Doverside to Skyline Hospital
+Continue regular route to Walmart
+      </div>
+      <div
+        class="card-footer alert-item-footer"
+      >
+        Construction
+         - 
+        Detour
+         - 
+        <strong>
+          Start:
+        </strong>
+         
+        <span
+          title="1649057040"
+        >
+          4/4/22, 2:24 AM
         </span>
       </div>
     </div>
