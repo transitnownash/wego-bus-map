@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {renderTimestamp} from './../util.js';
 import './AlertItem.scss';
 import { Link } from 'react-router-dom';
+import StopCode from './StopCode.js';
 
 function AlertItem({alert, route}) {
   const alertStyle = {
@@ -35,7 +36,7 @@ function AlertItem({alert, route}) {
               <ul className="list-inline">
                 <li className="list-inline-item"><strong>Stops:</strong></li>
                 {alert.informed_entity.map((item, key) => {
-                  return(<li key={key} className="list-inline-item"><Link to={'/stops/' + item.stop_id}>{item.stop_id}</Link></li>);
+                  return(<li key={key} className="list-inline-item"><StopCode stop={{stop_code: item.stop_id}}/></li>);
                 })}
             </ul>
           </>

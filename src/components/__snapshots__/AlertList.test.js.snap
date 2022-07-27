@@ -161,29 +161,41 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/FAICLAEN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              FAICLAEN
-            </a>
+              <a
+                href="/stops/FAICLAEN"
+              >
+                FAICLAEN
+              </a>
+            </span>
           </li>
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/CLAFAISF"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              CLAFAISF
-            </a>
+              <a
+                href="/stops/CLAFAISF"
+              >
+                CLAFAISF
+              </a>
+            </span>
           </li>
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/CLAWHASN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              CLAWHASN
-            </a>
+              <a
+                href="/stops/CLAWHASN"
+              >
+                CLAWHASN
+              </a>
+            </span>
           </li>
         </ul>
       </div>
@@ -250,11 +262,15 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/WHIDICSN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              WHIDICSN
-            </a>
+              <a
+                href="/stops/WHIDICSN"
+              >
+                WHIDICSN
+              </a>
+            </span>
           </li>
         </ul>
       </div>
@@ -326,11 +342,15 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/CXIWTBRG"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              CXIWTBRG
-            </a>
+              <a
+                href="/stops/CXIWTBRG"
+              >
+                CXIWTBRG
+              </a>
+            </span>
           </li>
         </ul>
       </div>
@@ -397,38 +417,54 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/20ABRONF"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              20ABRONF
-            </a>
+              <a
+                href="/stops/20ABRONF"
+              >
+                20ABRONF
+              </a>
+            </span>
           </li>
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/20AWESNN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              20AWESNN
-            </a>
+              <a
+                href="/stops/20AWESNN"
+              >
+                20AWESNN
+              </a>
+            </span>
           </li>
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/21AGRANN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              21AGRANN
-            </a>
+              <a
+                href="/stops/21AGRANN"
+              >
+                21AGRANN
+              </a>
+            </span>
           </li>
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/20ACHUNN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              20ACHUNN
-            </a>
+              <a
+                href="/stops/20ACHUNN"
+              >
+                20ACHUNN
+              </a>
+            </span>
           </li>
         </ul>
       </div>
@@ -497,11 +533,15 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/17AJACNN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              17AJACNN
-            </a>
+              <a
+                href="/stops/17AJACNN"
+              >
+                17AJACNN
+              </a>
+            </span>
           </li>
         </ul>
       </div>
@@ -579,11 +619,15 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
           <li
             class="list-inline-item"
           >
-            <a
-              href="/stops/JAC17AEN"
+            <span
+              class="stop-code badge bg-white text-black border border-secondary"
             >
-              JAC17AEN
-            </a>
+              <a
+                href="/stops/JAC17AEN"
+              >
+                JAC17AEN
+              </a>
+            </span>
           </li>
         </ul>
       </div>

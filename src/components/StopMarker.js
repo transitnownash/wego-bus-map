@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
 import './StopMarker.scss';
+import StopCode from './StopCode';
 
 function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
   const stopMarkerIconOptions = {
@@ -58,7 +59,7 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
           </>)
         }
         <dt>Code</dt>
-        <dd><tt>{stop.stop_code}</tt></dd>
+        <dd><StopCode stop={stop}/></dd>
         {stop.stop_desc != null &&
         <>
           <dt>Description</dt>

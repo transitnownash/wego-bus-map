@@ -110,11 +110,15 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
         <li
           class="list-inline-item"
         >
-          <a
-            href="/stops/WHIDICSN"
+          <span
+            class="stop-code badge bg-white text-black border border-secondary"
           >
-            WHIDICSN
-          </a>
+            <a
+              href="/stops/WHIDICSN"
+            >
+              WHIDICSN
+            </a>
+          </span>
         </li>
       </ul>
     </div>

@@ -6,6 +6,7 @@ import StopTimeSequence from './StopTimeSequence';
 import TimePoint from './TimePoint';
 import { formatDistanceTraveled, isStopTimeUpdateLaterThanNow } from "../util";
 import { Link } from 'react-router-dom';
+import StopCode from './StopCode';
 
 function StopTimeTableRow({stopTime, stopTimeUpdate}) {
   let rowStyle = {opacity: 1.0};
@@ -23,7 +24,7 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
       <td>{formatDistanceTraveled(stopTime.shape_dist_traveled)}</td>
       <td>
         <strong><Link to={'/stops/' + stopTime.stop.stop_code}>{stopTime.stop.stop_name}</Link></strong><br />
-        <small>{stopTime.stop.stop_code} {stopTime.stop.stop_desc}</small>
+        <small><StopCode stop={stopTime.stop}/> {stopTime.stop.stop_desc}</small>
         {stopTime.stop.parent_station_gid &&
           (<div><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside <Link to={'/stops/' + stopTime.stop.parent_station_gid}>{stopTime.stop.parent_station_gid}</Link></div>)
         }

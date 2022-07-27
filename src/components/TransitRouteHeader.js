@@ -32,7 +32,7 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
         </div>
       )}
       <div className="flex-grow-1 align-bottom">
-        <Link to={'/routes/' + route.route_short_name}>{route.route_short_name} - {route.route_long_name}</Link>
+        <Link to={'/routes/' + route.route_short_name}><span className="badge text-bg-light">{route.route_short_name}</span> {route.route_long_name}</Link>
       </div>
       <div>
         {alerts.length > 0 && (

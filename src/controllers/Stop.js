@@ -16,6 +16,7 @@ import { getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
 import TimePointLegend from '../components/TimePointLegend';
+import StopCode from '../components/StopCode';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -190,7 +191,7 @@ function Stops() {
           (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
         }
         <div className="text-center p-2 mb-2">
-          <div>{stop.stop_code} {stop.stop_desc}</div>
+          <div><StopCode stop={stop}/> {stop.stop_desc}</div>
           {stop.parent_station_gid && (
             <div className="p-2 mb-2"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <strong>Inside <Link to={'/stops/' + stop.parent_station_gid}>{stop.parent_station.stop_name}</Link></strong></div>
           )}
@@ -258,22 +259,23 @@ function Stops() {
                       }
                     }
 
-                    if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate) && hidePastTrips) {
-                      return;
+                    let rowClasses = '';
+                    if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate)) {
+                      if (hidePastTrips) {
+                        return;
+                      }
+                      rowClasses = 'border-start border-gray border-5';
                     }
 
-                    const rowStyle = {
-                      opacity: isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate) ? 1 : 0.3
-                    };
                     return(
-                      <tr key={item.id} style={rowStyle}>
-                        <td><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
-                        <td><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
-                        <td>
+                      <tr key={item.id} className={rowClasses}>
+                        <td className="align-middle"><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
+                        <td className="align-middle"><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
+                        <td className="align-middle">
                           <strong>{item.trip_headsign}</strong><br />
                           {item.direction_id === "1" ? 'Inbound' : 'Outbound'}
                         </td>
-                        <td className="text-center">
+                        <td className="align-middle text-center text-nowrap ">
                           <TimePoint scheduleData={item.stop_times[0]} updateData={stopTimeUpdate}></TimePoint>
                         </td>
                       </tr>

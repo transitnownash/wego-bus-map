@@ -12,7 +12,7 @@ test('renders TransitRouteHeader', () => {
       <TransitRouteHeader route={routeFixture} />
     </Router>
   );
-  expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
+  expect(screen.getByText('SHELBY')).toBeInTheDocument();
   expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
   expect(container).toMatchSnapshot();
 });
@@ -23,7 +23,7 @@ test('renders TransitRouteHeader', () => {
       <TransitRouteHeader route={routeFixture} />
     </Router>
   );
-  expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
+  expect(screen.getByText('SHELBY')).toBeInTheDocument();
   expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
   expect(screen.queryByAltText('Icon')).toBeNull();
   expect(container).toMatchSnapshot();
@@ -35,7 +35,7 @@ test('renders TransitRouteHeader with icon', () => {
       <TransitRouteHeader route={routeFixture} showRouteType={true} />
     </Router>
   );
-  expect(screen.getByText('4 - SHELBY')).toBeInTheDocument();
+  expect(screen.getByText('SHELBY')).toBeInTheDocument();
   expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
   expect(screen.getByAltText('Icon')).toBeInTheDocument();
   expect(container).toMatchSnapshot();

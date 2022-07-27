@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders StopCode 1`] = `
+<div>
+  <span
+    class="stop-code badge bg-white text-black border border-secondary"
+  >
+    <a
+      href="/stops/10AHERNN"
+    >
+      10AHERNN
+    </a>
+  </span>
+</div>
+`;

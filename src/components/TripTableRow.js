@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icons";
-import { isTimeLaterThanNow, isTimeRangeIncludesNow } from "../util";
+import { isTimeRangeIncludesNow, isStopTimeUpdateLaterThanNow } from "../util";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import TimePoint from './TimePoint';
 
 function TripTableRow({trip, route, tripUpdate, hidePastTrips}) {
-  if (!isTimeLaterThanNow(trip.end_time) && hidePastTrips) {
-    return(<></>);
-  }
-
   const bikes_allowed_icon = (trip.bikes_allowed !== "1")
     ? (<span className="text-danger"><FontAwesomeIcon icon={faBan} fixedWidth={true}></FontAwesomeIcon></span>)
     : (<></>);
@@ -36,7 +32,10 @@ function TripTableRow({trip, route, tripUpdate, hidePastTrips}) {
   let rowClasses = '';
   if (isTimeRangeIncludesNow(trip.start_time, trip.end_time)) {
     rowClasses = 'border-start border-primary border-5';
-  } else if (!isTimeLaterThanNow(trip.end_time) && !tripUpdate.trip_update) {
+  } else if (!isStopTimeUpdateLaterThanNow(trip.stop_times[trip.stop_times.length - 1], updateEnd)) {
+    if (hidePastTrips) {
+      return;
+    }
     rowClasses = 'border-start border-gray border-5';
   }
 

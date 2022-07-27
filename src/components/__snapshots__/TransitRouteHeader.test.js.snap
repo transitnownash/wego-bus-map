@@ -12,8 +12,12 @@ exports[`renders TransitRouteHeader 1`] = `
       <a
         href="/routes/4"
       >
-        4
-         - 
+        <span
+          class="badge text-bg-light"
+        >
+          4
+        </span>
+         
         SHELBY
       </a>
     </div>
@@ -34,8 +38,12 @@ exports[`renders TransitRouteHeader 2`] = `
       <a
         href="/routes/4"
       >
-        4
-         - 
+        <span
+          class="badge text-bg-light"
+        >
+          4
+        </span>
+         
         SHELBY
       </a>
     </div>
@@ -65,8 +73,12 @@ exports[`renders TransitRouteHeader with icon 1`] = `
       <a
         href="/routes/4"
       >
-        4
-         - 
+        <span
+          class="badge text-bg-light"
+        >
+          4
+        </span>
+         
         SHELBY
       </a>
     </div>

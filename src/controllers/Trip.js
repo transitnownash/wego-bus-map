@@ -12,7 +12,6 @@ import StopTimeTableRow from '../components/StopTimeTableRow';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
 import AlertList from '../components/AlertList';
-import StopTimeSequence from '../components/StopTimeSequence';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import TripProgressBar from '../components/TripProgressBar';
 import DataFetchError from '../components/DataFetchError';
@@ -194,10 +193,7 @@ function Trip() {
               <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
               <td>
                 <div className="d-flex align-items-center">
-                  <div className="p-1">
-                    <StopTimeSequence stopTime={trip.stop_times[0]} />
-                  </div>
-                  <div className="p-1 text-center">
+                  <div className="p-1 text-center text-nowrap">
                     <TimePoint scheduleData={trip.stop_times[0]} updateData={filteredTripUpdatesBySequence[1]} />
                   </div>
                   <div className="p-1">
@@ -210,10 +206,7 @@ function Trip() {
               <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
               <td>
                 <div className="d-flex align-items-center">
-                  <div className="p-1">
-                    <StopTimeSequence stopTime={trip.stop_times[trip.stop_times.length - 1]} />
-                  </div>
-                  <div className="p-1 text-center">
+                  <div className="p-1 text-center text-nowrap">
                     <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={filteredTripUpdatesBySequence[trip.stop_times.length]} />
                   </div>
                   <div className="p-1">
