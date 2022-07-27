@@ -29,7 +29,7 @@ function StopTimeTableRow({stopTime, stopTimeUpdate}) {
           (<div><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside <Link to={'/stops/' + stopTime.stop.parent_station_gid}>{stopTime.stop.parent_station_gid}</Link></div>)
         }
       </td>
-      <td className="text-center">
+      <td className="text-center text-nowrap">
         <TimePoint scheduleData={stopTime} updateData={stopTimeUpdate}></TimePoint>
       </td>
     </tr>
