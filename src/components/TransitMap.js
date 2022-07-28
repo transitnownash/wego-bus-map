@@ -58,6 +58,10 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
     return stopAlerts;
   };
 
+  const getTripUpdateById = (tripId) => {
+    return tripUpdates.find((i) => tripId === i.trip_update.trip.trip_id);
+  };
+
   const getStopUpdateByTripAndId = function (tripId, stopCode) {
     let stopUpdate = {};
     const trip = tripUpdates.find((item) => tripId === item.trip_update.trip.trip_id);
@@ -97,11 +101,12 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
           <LayersControl.Overlay checked={true} name="Vehicles">
             <LayerGroup>
               {vehicleMarkers.map((item, _index) => {
-                let route = getRouteDataById(item.vehicle.trip.route_id);
-                let routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
-                let agency = getAgencyDataById(route ? route.agency_gid : {});
+                const route = getRouteDataById(item.vehicle.trip.route_id);
+                const routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
+                const agency = getAgencyDataById(route ? route.agency_gid : {});
+                const tripUpdate = getTripUpdateById(item.vehicle.trip.trip_id);
                 return(
-                  <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                  <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
                 );
               })}
             </LayerGroup>

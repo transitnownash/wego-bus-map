@@ -193,11 +193,11 @@ function Trip() {
               <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
               <td>
                 <div className="d-flex align-items-center">
-                  <div className="p-1 text-center text-nowrap">
+                  <div className="pe-2 text-center text-nowrap">
                     <TimePoint scheduleData={trip.stop_times[0]} updateData={filteredTripUpdatesBySequence[1]} />
                   </div>
-                  <div className="p-1">
-                    at <Link to={'/stops/' + trip.stop_times[0].stop.stop_code} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link>
+                  <div className="ps-2 border-start border-gray border-5">
+                    <Link to={'/stops/' + trip.stop_times[0].stop.stop_code} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link>
                   </div>
                 </div>
               </td>
@@ -206,11 +206,11 @@ function Trip() {
               <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
               <td>
                 <div className="d-flex align-items-center">
-                  <div className="p-1 text-center text-nowrap">
+                  <div className="pe-2 text-center text-nowrap">
                     <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={filteredTripUpdatesBySequence[trip.stop_times.length]} />
                   </div>
-                  <div className="p-1">
-                    at <Link to={'/stops/' + trip.stop_times[trip.stop_times.length - 1].stop.stop_code} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link>
+                  <div className="ps-2 border-start border-gray border-5">
+                    <Link to={'/stops/' + trip.stop_times[trip.stop_times.length - 1].stop.stop_code} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link>
                   </div>
                 </div>
               </td>

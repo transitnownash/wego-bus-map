@@ -15,7 +15,7 @@ import { getJSON } from '../util';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 
-function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSetter, alerts}) {
+function VehicleMarker({vehiclePositionData, route, agency, tripUpdate, shapeSetter, stopSetter, alerts}) {
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
 
@@ -73,7 +73,7 @@ function VehicleMarker({vehiclePositionData, route, agency, shapeSetter, stopSet
 
   return(
     <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={[vehiclePositionData.vehicle.position.latitude, vehiclePositionData.vehicle.position.longitude]} icon={icon} rotationShadowAngle={vehiclePositionData.vehicle.position.bearing} opacity={opacity}>
-      <VehicleMarkerPopup vehiclePositionData={vehiclePositionData} route={route} agency={agency} trip={trip} alerts={alerts}></VehicleMarkerPopup>
+      <VehicleMarkerPopup vehiclePositionData={vehiclePositionData} route={route} agency={agency} trip={trip} tripUpdate={tripUpdate} alerts={alerts}></VehicleMarkerPopup>
       <VehicleMarkerTooltip vehiclePositionData={vehiclePositionData} route={route} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
   );
@@ -85,10 +85,12 @@ VehicleMarker.propTypes = {
   agency: PropTypes.object.isRequired,
   shapeSetter: PropTypes.func.isRequired,
   stopSetter: PropTypes.func.isRequired,
+  tripUpdate: PropTypes.object,
   alerts: PropTypes.array
 };
 
 VehicleMarker.defaultProps = {
+  tripUpdate: {},
   alerts: []
 };
 
