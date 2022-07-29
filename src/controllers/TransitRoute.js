@@ -84,10 +84,6 @@ function TransitRoute() {
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-      .then(function (data) {
-        const filteredPositions = data.filter(v => v.vehicle.trip.route_id === params.route_id);
-        return filteredPositions;
-      })
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -144,6 +140,8 @@ function TransitRoute() {
     return(<NoMatch></NoMatch>);
   }
 
+  // Filter data to only those relevant to this route
+  const filteredVehiclePositions = vehicleMarkers.filter(v => v.vehicle.trip.route_id === params.route_id);
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
 
   // Nest stops for map compatibility
@@ -170,7 +168,7 @@ function TransitRoute() {
       <TitleBar />
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
-        <TransitMap vehicleMarkers={vehicleMarkers} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
+        <TransitMap vehicleMarkers={filteredVehiclePositions} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates}></TripTable>
       </div>
