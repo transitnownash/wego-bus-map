@@ -19,8 +19,16 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
     : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>)
   ;
 
+  let tripStopTimes = [];
   if (trip.trip_gid && tripUpdate.trip_update && tripUpdate.trip_update.stop_time_update.length > 0) {
     isTripTabActive = true;
+    tripStopTimes = trip.stop_times.filter((item) => {
+      const updateTime = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === item.stop_sequence) || {};
+      if (!isStopTimeUpdateLaterThanNow(item, updateTime)) {
+        return false;
+      }
+      return true;
+    });
   }
 
   return(
@@ -66,11 +74,8 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
             {isTripTabActive && (
               <table className="table table-sm table-striped small">
                 <tbody>
-                  {trip.stop_times.map((item) => {
+                  {tripStopTimes.map((item) => {
                     const updateTime = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === item.stop_sequence) || {};
-                    if (!isStopTimeUpdateLaterThanNow(item, updateTime)) {
-                      return;
-                    }
                     return(
                       <tr key={item.id}>
                         <td><StopTimeSequence stopTime={item} /></td>
@@ -82,6 +87,9 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
                       </tr>
                     );
                   })}
+                  {tripStopTimes.length === 0 && (
+                    <div className="alert bg-info">No upcoming stops for this trip.</div>
+                  )}
                 </tbody>
               </table>
             )}
