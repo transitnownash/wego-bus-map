@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +8,11 @@ import { OverlayTrigger } from 'react-bootstrap';
 import { Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './TransitRouteHeader.scss';
+import AlertModal from './AlertModal';
 
 function TransitRouteHeader({route, alerts, showRouteType}) {
+  const [alertModalShow, setAlertModalShow] = useState(false);
+
   if (typeof route !== 'object' || !route.route_short_name) {
     return(<div className="transit-route-header">Invalid route!</div>);
   }
@@ -38,8 +41,9 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
         {alerts.length > 0 && (
           <div className="ms-2">
             <OverlayTrigger placement={'top'} overlay={<Tooltip>{alerts.length > 1 ? alerts.length + ' alerts' : '1 alert'}</Tooltip>}>
-              <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true}></FontAwesomeIcon>
+              <span className="transit-route-header-alert-trigger" onClick={() => setAlertModalShow(true)}><FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true}></FontAwesomeIcon></span>
             </OverlayTrigger>
+            <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={[route]}></AlertModal>
           </div>
         )}
       </div>
