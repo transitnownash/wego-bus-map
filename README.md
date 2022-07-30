@@ -1,5 +1,7 @@
 # WeGo Transit Map
 
+[![Node CI](https://github.com/transitnownash/wego-bus-map/actions/workflows/nodejs.yml/badge.svg)](https://github.com/transitnownash/wego-bus-map/actions/workflows/nodejs.yml)
+
 ![screenshot](screenshot.png)
 
 Implementation of the General Transit Feed Specification (GTFS) Realtime feed for Nashville's WeGo Public Transit bus system. Displays all vehicle locations on a map.
@@ -10,6 +12,20 @@ Requires a [separate application](https://github.com/transitnownash/gtfs-rails-a
 
 ## Development
 
+Start the application with the default endpoint.
+
 ```bash
-$ npm run start
+$ npm start
+```
+
+Run the test suite.
+
+```bash
+$ npm test
+```
+
+Build static app to `./build` folder.
+
+```bash
+$ npm run build
 ```
