@@ -59,7 +59,7 @@ function Stops() {
       .then(() => setStopLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json?per_page=1000')
+    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json?per_page=2000')
       .then((t) => setTrips(t.data))
       .then(() => setTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -216,7 +216,7 @@ function Stops() {
         {routes.length > 0 && (
           <>
             <div className="row mb-2">
-              {routes.map((item) => {
+              {routes.sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10)).map((item) => {
                 const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_gid);
                 return(
                   <div key={item.id} className="col-md-4">
