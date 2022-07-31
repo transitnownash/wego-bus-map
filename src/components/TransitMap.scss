@@ -6,15 +6,8 @@
   margin-bottom: 1rem;
 }
 
-.main, .stops {
-  .leaflet-container {
-    height: 100vh;
-    margin: 0;
-  }
-}
-
 .map-bottom-left-container {
-  position: fixed;
+  position: absolute;
   bottom: 1.25rem;
   left: 1rem;
   z-index: 999;
@@ -38,3 +31,15 @@
     margin-bottom: 5px;
   }
 }
+
+.main, .stops {
+  .leaflet-container {
+    height: 100vh;
+    margin: 0;
+  }
+  .map-bottom-left-container {
+    position: fixed;
+  }
+}
+
+

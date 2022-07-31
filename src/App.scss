@@ -1,3 +1,14 @@
+.navbar-dark.bg-dark {
+  a:any-link {
+    text-decoration: none;
+  }
+}
+
+.navbar-dark .navbar-text a.btn-light {
+  color: #000;
+}
+
+// Shared among multiple components
 .stop-name {
   text-align: center;
   font-weight: bold;
@@ -12,12 +23,17 @@
   }
 }
 
-.navbar-dark.bg-dark {
+// Shared between BCycle controller and BCycleMarker component
+.bcycle-station-name {
+  text-align: center;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  background-color: rgb(51, 51, 51);
+  color: white;
+  padding: 1rem;
   a:any-link {
+    color: white;
     text-decoration: none;
   }
-}
-
-.navbar-dark .navbar-text a.btn-light {
-  color: #000;
 }

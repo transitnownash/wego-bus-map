@@ -173,7 +173,7 @@ TransitMap.propTypes = {
   map: PropTypes.any.isRequired,
   bCycleStations: PropTypes.array,
   mapControls: PropTypes.object,
-  center: PropTypes.array,
+  center: PropTypes.any,
   zoom: PropTypes.number
 };
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { faRoute, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faRoute, faInfoCircle, faBicycle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../resources/logo.svg';
 
@@ -19,9 +18,8 @@ function TitleBar({hide}) {
         <nav className="my-2 my-md-0 mr-md-3">
           <Link className="p-2 text-light" to="/about"><FontAwesomeIcon icon={faInfoCircle} fixedWidth={true} /> About</Link>
           <Link className="p-2 text-light" to="/routes"><FontAwesomeIcon icon={faRoute} fixedWidth={true} /> Routes</Link>
-          <a className="p-2 text-light" href="https://github.com/transitnownash/wego-bus-map" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} fixedWidth={true} /> GitHub</a>
+          <Link className="p-2 text-light" to="/bcycle"><FontAwesomeIcon icon={faBicycle} fixedWidth={true} /> BCycle</Link>
         </nav>
-        <Link className="btn btn-outline-light" to="/">Return to App</Link>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { Marker, Popup, Tooltip } from "react-leaflet";
 import { renderTimestamp } from "../util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBicycle, faClock, faExchangeAlt, faExclamationTriangle, faInbox, faMapMarkedAlt, faMobile } from "@fortawesome/free-solid-svg-icons";
+import { faBicycle, faClock, faExclamationTriangle, faMapMarkedAlt, faMobile } from "@fortawesome/free-solid-svg-icons";
 import bCycleIconImage from '../resources/bcycle.svg';
 import './BCycleMarker.scss';
 
@@ -79,10 +79,6 @@ function BCycleMarker({station}) {
           <dl className="row">
             <dt className="col-5"><FontAwesomeIcon icon={faMapMarkedAlt} fixedWidth={true}></FontAwesomeIcon> Address</dt>
             <dd className="col-7"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + station.lat + '%2C' + station.lon} rel='noreferrer' target="_blank">{station.address}</a></dd>
-            <dt className="col-5"><FontAwesomeIcon icon={faExchangeAlt} fixedWidth={true}></FontAwesomeIcon> Renting?</dt>
-            <dd className="col-7">{station.status.is_renting ? 'Yes' : 'No'}</dd>
-            <dt className="col-5"><FontAwesomeIcon icon={faInbox} fixedWidth={true}></FontAwesomeIcon> Returning?</dt>
-            <dd className="col-7">{station.status.is_returning ? 'Yes' : 'No'}</dd>
             <dt className="col-5"><FontAwesomeIcon icon={faMobile} fixedWidth={true}></FontAwesomeIcon> Rental Link</dt>
             <dd className="col-7">
               <div className="btn-group" role="group">
