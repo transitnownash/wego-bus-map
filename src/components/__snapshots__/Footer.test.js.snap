@@ -42,6 +42,16 @@ exports[`renders Footer 1`] = `
         </a>
       </li>
       <li
+        class="nav-item"
+      >
+        <a
+          class="nav-link"
+          href="/bcycle"
+        >
+          BCycle
+        </a>
+      </li>
+      <li
         class="vr"
       />
       <li
@@ -68,7 +78,6 @@ exports[`renders Footer 1`] = `
               fill="currentColor"
             />
           </svg>
-           GitHub
         </a>
       </li>
     </ul>

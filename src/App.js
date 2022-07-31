@@ -9,6 +9,7 @@ import Stops from './controllers/Stops';
 import Stop from './controllers/Stop';
 import NoMatch from './controllers/NoMatch';
 import ErrorBoundary from './components/ErrorBoundary';
+import BCycle from './controllers/BCycle';
 import './resources/bootstrap-with-mixins.scss';
 import './App.scss';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/trips/:trip_id" element={<Trip />} />
           <Route path="/stops" element={<Stops />} />
           <Route path="/stops/:stop_code" element={<Stop />} />
+          <Route path="/bcycle" element={<BCycle />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </BrowserRouter>

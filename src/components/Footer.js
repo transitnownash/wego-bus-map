@@ -17,9 +17,12 @@ function Footer() {
         <li className="nav-item">
           <Link className="nav-link" to='/routes'>Routes</Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to='/bcycle'>BCycle</Link>
+        </li>
         <li className="vr"></li>
         <li className="nav-item">
-          <a className="nav-link" target="_blank" href="https://github.com/transitnownash/wego-bus-map" rel="noreferrer"><FontAwesomeIcon icon={faGithub} fixedWidth={true}></FontAwesomeIcon> GitHub</a>
+          <a className="nav-link" target="_blank" href="https://github.com/transitnownash/wego-bus-map" rel="noreferrer"><FontAwesomeIcon icon={faGithub} fixedWidth={true}></FontAwesomeIcon></a>
         </li>
       </ul>
     </div>
