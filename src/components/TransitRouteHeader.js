@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import trainIcon from '../resources/train.svg';
+import L from 'leaflet';
+import busIcon from '../resources/bus.svg';
+import AlertModal from './AlertModal';
+import { Tooltip } from 'react-bootstrap';
+import { OverlayTrigger } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import busIcon from '../resources/bus.svg';
-import trainIcon from '../resources/train.svg';
-import { OverlayTrigger } from 'react-bootstrap';
-import { Tooltip } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import './TransitRouteHeader.scss';
-import AlertModal from './AlertModal';
 
 function TransitRouteHeader({route, alerts, showRouteType}) {
   const [alertModalShow, setAlertModalShow] = useState(false);
@@ -27,6 +28,12 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
     vehicleIcon = trainIcon;
   }
 
+  const routeAlertIcon = (
+    <span className="transit-route-header-alert-trigger" onClick={() => setAlertModalShow(true)}>
+      <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true}></FontAwesomeIcon>
+    </span>
+  );
+
   return(
     <div className="transit-route-header d-flex" style={routeStyle} title={route.route_desc}>
       {showRouteType && (
@@ -40,9 +47,13 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
       <div>
         {alerts.length > 0 && (
           <div className="ms-2">
-            <OverlayTrigger placement={'top'} overlay={<Tooltip>{alerts.length > 1 ? alerts.length + ' alerts' : '1 alert'}</Tooltip>}>
-              <span className="transit-route-header-alert-trigger" onClick={() => setAlertModalShow(true)}><FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true}></FontAwesomeIcon></span>
-            </OverlayTrigger>
+            {L.Browser.mobile === false ? (
+              <OverlayTrigger placement={'top'} overlay={<Tooltip>{alerts.length > 1 ? alerts.length + ' alerts' : '1 alert'}</Tooltip>}>
+                {routeAlertIcon}
+              </OverlayTrigger>
+            ) : (
+              <>{routeAlertIcon}</>
+            )}
             <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={[route]}></AlertModal>
           </div>
         )}
