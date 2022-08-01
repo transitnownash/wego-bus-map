@@ -14,6 +14,7 @@ import { useState, useCallback } from 'react';
 import LocationMarker from './LocationMarker';
 import BCycleMarker from './BCycleMarker';
 import StopMarker from './StopMarker';
+import LocateButton from './LocateButton';
 
 // Fix paths for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -87,6 +88,12 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
     }
   };
 
+  const locateUserOnMap = function(map) {
+    if (typeof map.current !== 'undefined' && map.current) {
+      map.current.locate();
+    }
+  };
+
   return(
     <MapContainer ref={map} className="map-container" center={center} zoom={zoom} scrollWheelZoom={true} maxBounds={cityMaxBounds} doubleClickZoom={false}>
       <TileLayer
@@ -153,9 +160,13 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
         }
       </LayersControl>
       <LocationMarker map={map}></LocationMarker>
-      {(typeof mapControls.bottomLeft !== 'undefined') &&
+      {(typeof mapControls.bottomLeft !== 'undefined') ?
         (
           <>{mapControls.bottomLeft}</>
+        ) : (
+          <div className="d-flex map-bottom-left-container">
+            <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
+          </div>
         )
       }
     </MapContainer>

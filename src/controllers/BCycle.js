@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import TransitMap from '../components/TransitMap';
-import LocateButton from '../components/LocateButton';
 import LoadingScreen from '../components/LoadingScreen';
 import { getJSON, renderTimestamp } from '../util';
 import DataFetchError from '../components/DataFetchError';
@@ -59,12 +58,6 @@ function BCycle() {
     return(<LoadingScreen />);
   }
 
-  const locateUserOnMap = function(map) {
-    if (typeof map.current !== 'undefined' && map.current) {
-      map.current.locate();
-    }
-  };
-
   // Combine BCycle data into one hash
   if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
     bCycleStations.forEach((station, index) => {
@@ -83,19 +76,11 @@ function BCycle() {
     setMapRendered(true);
   }
 
-  const mapControls = {
-    bottomLeft: (
-      <div className="d-flex map-bottom-left-container">
-        <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
-      </div>
-    )
-  };
-
   return(
     <div>
       <TitleBar />
       <div className="container">
-        <TransitMap map={map} bCycleStations={bCycleStations} mapControls={mapControls} center={center}></TransitMap>
+        <TransitMap map={map} bCycleStations={bCycleStations} center={center}></TransitMap>
         <div className="">
           {bCycleStations.map((station) => {
 

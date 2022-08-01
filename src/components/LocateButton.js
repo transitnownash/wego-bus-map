@@ -8,7 +8,7 @@ function LocateButton({buttonAction}) {
     return null;
   }
   return(
-    <button className="btn btn-sm bg-dark text-light ms-2"><FontAwesomeIcon icon={faLocationArrow} fixedWidth={true} onClick={buttonAction}></FontAwesomeIcon></button>
+    <button className="btn btn-sm bg-dark text-light ms-2" onClick={buttonAction}><FontAwesomeIcon icon={faLocationArrow} fixedWidth={true}></FontAwesomeIcon></button>
   );
 }
 
