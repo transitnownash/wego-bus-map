@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import { useParams } from 'react-router-dom';
@@ -13,6 +11,8 @@ import { getJSON, formatShapePoints } from './../util.js';
 import AlertList from '../components/AlertList';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
+import { useCookies } from 'react-cookie';
+import dayjs from 'dayjs';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 10 * 1000;
@@ -20,13 +20,13 @@ const REFRESH_ALERTS_TTL = 120 * 1000;
 const REFRESH_TRIP_UPDATES_TTL = 120 * 1000;
 
 function TransitRoute() {
-  const [route, setRouteData] = useState({});
-  const [routeTrips, setRouteTripsData] = useState([]);
+  const [route, setRoute] = useState({});
+  const [routeTrips, setRouteTrips] = useState([]);
   const [routeStops, setRouteStops] = useState([]);
   const [routeShapes, setRouteShapes] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [tripUpdates, setTripUpdates] = useState([]);
-  const [agencies, setAgencyData] = useState([]);
+  const [agencies, setAgencies] = useState([]);
   const [vehicleMarkers, setVehicleMarkers] = useState([]);
   const [isRouteLoaded, setRouteLoaded] = useState(false);
   const [isRouteStopsLoaded, setRouteStopsLoaded] = useState(false);
@@ -36,8 +36,9 @@ function TransitRoute() {
   const [isTripUpdateLoaded, setTripUpdateLoaded] = useState(false);
   const [isAgencyLoaded, setAgencyLoaded] = useState(false);
   const [isVehiclePositionLoaded, setVehiclePositionLoaded] = useState(false);
-  const [isMapRendered, setMapRendered] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
+  const [cookies, setCookie] = useCookies(['gtfs-schedule-date']);
+  const [scheduleDate, setScheduleDate] = useState(cookies['gtfs-schedule-date'] || dayjs().format('YYYY-MM-DD'));
   const params = useParams();
   const map = useRef(null);
 
@@ -49,11 +50,11 @@ function TransitRoute() {
 
   useEffect(() => {
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
-      .then((r) => setRouteData(r))
+      .then((r) => setRoute(r))
       .then(() => setRouteLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json?per_page=200')
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json', { params: {per_page: 200} })
       .then((rs) => setRouteStops(rs.data))
       .then(() => setRouteStopsLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -63,13 +64,13 @@ function TransitRoute() {
       .then(() => setRouteShapesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json?per_page=500')
-      .then((r) => setRouteTripsData(r.data))
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json', { params: { date: scheduleDate, per_page: 500 } })
+      .then((r) => setRouteTrips(r.data))
       .then(() => setRouteTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
     getJSON(GTFS_BASE_URL + '/agencies.json')
-      .then((a) => setAgencyData(a.data))
+      .then((a) => setAgencies(a.data))
       .then(() => setAgencyLoaded(true))
       .catch((error) => setDataFetchError(error));
 
@@ -120,7 +121,6 @@ function TransitRoute() {
 
     // Run on unmount
     return () => {
-      setRouteLoaded(false);
       clearInterval(refreshPositionsInterval);
       clearInterval(refreshAlertsInterval);
       clearInterval(refreshTripUpdatesInterval);
@@ -158,10 +158,20 @@ function TransitRoute() {
   });
   const getPolyLineBounds = L.latLngBounds(formatShapePoints(allPoints));
   const center = getPolyLineBounds.getCenter();
-  if (map.current && !isMapRendered) {
+  if (map.current) {
     map.current.fitBounds(getPolyLineBounds, { padding: [25, 25]});
-    setMapRendered(true);
   }
+
+  // Load in selected date
+  const handleDateFieldChange = (event) => {
+    if (!event.target.value) {
+      return;
+    }
+    setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
+    setScheduleDate(event.target.value);
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
+      .then((rt) => setRouteTrips(rt.data));
+  };
 
   return(
     <div>
@@ -170,7 +180,7 @@ function TransitRoute() {
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
         <TransitMap vehicleMarkers={filteredVehiclePositions} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
-        <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates}></TripTable>
+        <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates} scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange}></TripTable>
       </div>
       <Footer />
     </div>

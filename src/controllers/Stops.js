@@ -31,7 +31,7 @@ function Stops() {
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops.json?per_page=2000')
+    getJSON(GTFS_BASE_URL + '/stops.json', { params: { per_page: 2000 } })
       .then((s) => setStops(s.data))
       .then(() => setStopsLoaded(true))
       .catch((error) => setDataFetchError(error));
