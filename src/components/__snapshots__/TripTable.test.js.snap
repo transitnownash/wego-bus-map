@@ -3,24 +3,33 @@
 exports[`renders TripTable 1`] = `
 <div>
   <div
-    class="my-2"
+    class="d-flex align-items-center mb-2"
   >
     <div
-      class="form-check form-switch"
+      class="flex-grow-1"
     >
-      <input
-        checked=""
-        class="form-check-input"
-        id="hidePastTrips"
-        type="checkbox"
-      />
-      <label
-        class="form-check-label"
-        for="hidePastTrips"
+      <div
+        class="my-2"
       >
-        Hide Past Trips
-      </label>
+        <div
+          class="form-check form-switch"
+        >
+          <input
+            checked=""
+            class="form-check-input"
+            id="hidePastTrips"
+            type="checkbox"
+          />
+          <label
+            class="form-check-label"
+            for="hidePastTrips"
+          >
+            Hide Past Trips
+          </label>
+        </div>
+      </div>
     </div>
+    <div />
   </div>
   <div
     class="row"
@@ -2282,24 +2291,33 @@ exports[`renders TripTable 1`] = `
 exports[`renders TripTable with past trips 1`] = `
 <div>
   <div
-    class="my-2"
+    class="d-flex align-items-center mb-2"
   >
     <div
-      class="form-check form-switch"
+      class="flex-grow-1"
     >
-      <input
-        checked=""
-        class="form-check-input"
-        id="hidePastTrips"
-        type="checkbox"
-      />
-      <label
-        class="form-check-label"
-        for="hidePastTrips"
+      <div
+        class="my-2"
       >
-        Hide Past Trips
-      </label>
+        <div
+          class="form-check form-switch"
+        >
+          <input
+            checked=""
+            class="form-check-input"
+            id="hidePastTrips"
+            type="checkbox"
+          />
+          <label
+            class="form-check-label"
+            for="hidePastTrips"
+          >
+            Hide Past Trips
+          </label>
+        </div>
+      </div>
     </div>
+    <div />
   </div>
   <div
     class="row"

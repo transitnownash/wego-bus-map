@@ -17,6 +17,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
 import TimePointLegend from '../components/TimePointLegend';
 import StopCode from '../components/StopCode';
+import DateSelector from '../components/DateSelector';
+import { useCookies } from 'react-cookie';
+import dayjs from 'dayjs';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -40,8 +43,11 @@ function Stops() {
   const [isTripUpdatesLoaded, setTripUpdatesLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
   const [hidePastTrips, setHidePastTrips] = useState(true);
+  const [cookies, setCookie] = useCookies(['gtfs-schedule-date']);
+  const [scheduleDate, setScheduleDate] = useState(cookies['gtfs-schedule-date'] || dayjs().format('YYYY-MM-DD'));
   const map = useRef(null);
   const params = useParams();
+
 
   // Consolidated check that things are ready to go
   const isUIReady = [
@@ -59,7 +65,7 @@ function Stops() {
       .then(() => setStopLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json?per_page=2000')
+    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { per_page: 2000 } })
       .then((t) => setTrips(t.data))
       .then(() => setTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -182,6 +188,17 @@ function Stops() {
     return { id: item.id, stop: item };
   });
 
+  // Load in selected date
+  const handleDateFieldChange = (event) => {
+    if (!event.target.value) {
+      return;
+    }
+    setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
+    setScheduleDate(event.target.value);
+    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
+      .then((st) => setTrips(st.data));
+  };
+
   return(
     <div>
       <TitleBar></TitleBar>
@@ -231,7 +248,16 @@ function Stops() {
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
           <>
-            <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange} />
+            <div className="d-flex align-items-center mb-2">
+              <div className="flex-grow-1">
+                <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange} />
+              </div>
+              <div>
+                {typeof handleDateFieldChange === 'function' && (
+                  <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} />
+                )}
+              </div>
+            </div>
             <div className="table-responsive-md">
               <table className="table table-sm small">
                 <thead>
