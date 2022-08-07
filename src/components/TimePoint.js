@@ -66,7 +66,7 @@ function TimePoint({scheduleData, updateData}) {
         </div>
       )}
       <div>
-        <strong className="text-primary">
+        <strong className="text-dark">
           {renderNextDayIcon(isNextDay)}
           {updateTime}
         </strong>
