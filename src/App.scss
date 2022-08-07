@@ -37,3 +37,9 @@
     text-decoration: none;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  body, .modal-dialog > .modal-content {
+    background-color: #b9b9b9;
+  }
+}

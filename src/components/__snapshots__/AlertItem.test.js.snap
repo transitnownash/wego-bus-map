@@ -4,10 +4,10 @@ exports[`renders AlertItem 1`] = `
 <div>
   <div
     class="card mb-3"
-    style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
   >
     <div
       class="card-header alert-item-header"
+      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
     >
       <strong>
         <a
@@ -20,7 +20,7 @@ exports[`renders AlertItem 1`] = `
       </strong>
     </div>
     <div
-      class="card-body bg-white text-black alert-item-text"
+      class="card-body alert-item-text"
     >
       <p>
         <strong>
@@ -40,6 +40,7 @@ R-Dickerson to regular route.
     </div>
     <div
       class="card-footer alert-item-footer"
+      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
     >
       Construction
        - 
@@ -63,10 +64,10 @@ exports[`renders AlertItem with informed stops 1`] = `
 <div>
   <div
     class="card mb-3"
-    style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
   >
     <div
       class="card-header alert-item-header"
+      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <strong>
         <a
@@ -79,7 +80,7 @@ exports[`renders AlertItem with informed stops 1`] = `
       </strong>
     </div>
     <div
-      class="card-body bg-white text-black alert-item-text"
+      class="card-body alert-item-text"
     >
       <p>
         <strong>
@@ -124,6 +125,7 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
     </div>
     <div
       class="card-footer alert-item-footer"
+      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       Other Cause
        - 

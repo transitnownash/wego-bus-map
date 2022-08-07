@@ -21,11 +21,11 @@ function AlertItem({alert, route}) {
     : (<></>);
 
   return(
-    <div className="card mb-3" style={alertStyle}>
-      <div className="card-header alert-item-header">
+    <div className="card mb-3">
+      <div className="card-header alert-item-header" style={alertStyle}>
         <strong><Link to={'/routes/' + route.route_short_name}>{route.route_short_name} - {route.route_long_name}</Link></strong>
       </div>
-      <div className="card-body bg-white text-black alert-item-text">
+      <div className="card-body alert-item-text">
         <p>
           <strong>{alert.header_text.translation[0].text}</strong>
         </p>
@@ -42,7 +42,7 @@ function AlertItem({alert, route}) {
           </>
         )}
       </div>
-      <div className="card-footer alert-item-footer">
+      <div className="card-footer alert-item-footer" style={alertStyle}>
         {alert_cause}
         {alert_effect}
         <strong>Start:</strong> {renderTimestamp(alert.active_period[0].start)}

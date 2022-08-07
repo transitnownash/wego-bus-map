@@ -102,6 +102,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
         subdomains='abcd'
         minZoom={10}
         maxZoom={19}
+        className='map-tiles'
       />
       <LayersControl position="topright">
         {vehicleMarkers.length > 0 && (

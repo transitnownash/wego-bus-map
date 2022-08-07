@@ -5,10 +5,10 @@ exports[`renders AlertList 1`] = `
   <div>
     <div
       class="card mb-3"
-      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -21,7 +21,7 @@ exports[`renders AlertList 1`] = `
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -69,6 +69,7 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         Other Cause
          - 
@@ -85,10 +86,10 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
     </div>
     <div
       class="card mb-3"
-      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -101,7 +102,7 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -146,6 +147,7 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         Other Cause
          - 
@@ -162,10 +164,10 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
     </div>
     <div
       class="card mb-3"
-      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -178,7 +180,7 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -225,6 +227,7 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         <strong>
           Start:
@@ -249,10 +252,10 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
     </div>
     <div
       class="card mb-3"
-      style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -265,7 +268,7 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -311,6 +314,7 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
       >
         <strong>
           Start:
@@ -335,10 +339,10 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
     </div>
     <div
       class="card mb-3"
-      style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -351,7 +355,7 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -423,6 +427,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
       >
         <strong>
           Start:
@@ -437,10 +442,10 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
     </div>
     <div
       class="card mb-3"
-      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -453,7 +458,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -535,6 +540,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
       >
         <strong>
           Start:
@@ -549,10 +555,10 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
     </div>
     <div
       class="card mb-3"
-      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -565,7 +571,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -585,6 +591,7 @@ R-Dickerson to regular route.
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
       >
         Construction
          - 
@@ -603,10 +610,10 @@ R-Dickerson to regular route.
     </div>
     <div
       class="card mb-3"
-      style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
     >
       <div
         class="card-header alert-item-header"
+        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
       >
         <strong>
           <a
@@ -619,7 +626,7 @@ R-Dickerson to regular route.
         </strong>
       </div>
       <div
-        class="card-body bg-white text-black alert-item-text"
+        class="card-body alert-item-text"
       >
         <p>
           <strong>
@@ -639,6 +646,7 @@ Continue regular route to Walmart
       </div>
       <div
         class="card-footer alert-item-footer"
+        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
       >
         Construction
          - 

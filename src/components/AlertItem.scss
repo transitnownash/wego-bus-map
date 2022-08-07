@@ -14,3 +14,9 @@
   text-align: right;
   font-size: 0.75rem;
 }
+
+@media (prefers-color-scheme: dark) {
+  .card-body {
+    background-color: #b9b9b9;
+  }
+}
