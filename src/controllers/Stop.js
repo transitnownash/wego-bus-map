@@ -14,7 +14,7 @@ import AlertList from '../components/AlertList';
 import { Link, useParams } from 'react-router-dom';
 import { getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faDirections, faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
 import TimePointLegend from '../components/TimePointLegend';
 import StopCode from '../components/StopCode';
 import DateSelector from '../components/DateSelector';
@@ -216,6 +216,7 @@ function Stops() {
         <div className="text-center p-2 mb-2">
           <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
+        <div className="text-center my-2"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + stop.stop_lat + '%2C' + stop.stop_lon} className="btn btn-secondary btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
         {stop.child_stops.length > 0 && (
           <div className="card mb-3 small">
             <div className="card-header">Station Stops</div>
@@ -314,7 +315,18 @@ function Stops() {
           </>
         )}
         {trips.length == 0 && (
-          <div className="alert alert-info">No active trips use this stop.</div>
+          <div className="alert alert-info">
+            <div className="d-flex align-items-center">
+              <div className="flex-grow-1">
+                No trips scheduled use <strong>{stop.stop_name}</strong> for selected date.
+              </div>
+              <div>
+                {typeof handleDateFieldChange === 'function' && (
+                  <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} />
+                )}
+              </div>
+            </div>
+          </div>
         )}
       </div>
       <Footer></Footer>

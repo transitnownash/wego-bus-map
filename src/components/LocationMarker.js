@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react";
 import { Marker, Popup, Circle, useMapEvents } from "react-leaflet";
 import L from 'leaflet';
 import userLocationIcon from '../resources/user-location.svg';
+import { getJSON } from '../util';
+import StopMarker from './StopMarker';
+
+const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
+const SEARCH_DISTANCE_IN_METERS = 1609;
 
 function LocationMarker() {
   const [position, setPosition] = useState(null);
   const [accuracy, setAccuracy] = useState(null);
+  const [stops, setStops] = useState([]);
+
+  useEffect(() => {
+    if (position === null) {
+      return;
+    }
+    console.log(position);
+    getJSON(GTFS_BASE_URL + '/stops/near/' + position.lat.toFixed(4) + ',' + position.lng.toFixed(4) + '/' + SEARCH_DISTANCE_IN_METERS + '.json')
+      .then((s) => setStops(s.data));
+  }, [position]);
 
   const LocationMarkerIcon = L.Icon.extend({
     options: {
@@ -39,7 +54,13 @@ function LocationMarker() {
       <Marker position={position} icon={icon}>
         <Popup><strong>Your location.</strong><br />Accuracy: {accuracy.toFixed(1)} meters</Popup>
       </Marker>
+      {stops.map((item) => {
+        return(
+          <StopMarker key={item.id} stop={item} />
+        );
+      })}
       <Circle center={position} radius={accuracy}></Circle>
+      <Circle center={position} radius={SEARCH_DISTANCE_IN_METERS} pathOptions={{fill: false, color: '#666', weight: '3', dashArray: '20, 20', dashOffset: '20'}}></Circle>
     </>
   );
 }

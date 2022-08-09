@@ -8,7 +8,7 @@ import L from 'leaflet';
 import { Link } from 'react-router-dom';
 import { isStopTimeUpdateLaterThanNow } from '../util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faWarning, faLandmark } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faWarning, faLandmark, faDirections } from '@fortawesome/free-solid-svg-icons';
 import { Circle, Marker, Popup, Tooltip } from "react-leaflet";
 import './StopMarker.scss';
 import StopCode from './StopCode';
@@ -30,7 +30,7 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
   const icon = new stopMarkerIcon();
 
   const content = (
-    <div>
+    <div style={{minWidth: '300px', maxWidth:'500px', overflow: 'hidden'}}>
       <div className="stop-name d-flex">
         <div className="flex-grow-1">
           {stopTime.stop_sequence &&
@@ -51,19 +51,19 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
       <div className="p-2 mb-2 text-center">
         <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
       </div>
-      <dl>
+      <dl className="row">
         {typeof stopTime.arrival_time !== 'undefined' &&
           (<>
-            <dt>Time</dt>
-            <dd><TimePoint scheduleData={stopTime} updateData={stopUpdate}></TimePoint></dd>
+            <dt className="col-4">Time</dt>
+            <dd className="col-8"><TimePoint scheduleData={stopTime} updateData={stopUpdate}></TimePoint></dd>
           </>)
         }
-        <dt>Code</dt>
-        <dd><StopCode stop={stop}/></dd>
+        <dt className="col-4">Code</dt>
+        <dd className="col-8"><StopCode stop={stop}/></dd>
         {stop.stop_desc != null &&
         <>
-          <dt>Description</dt>
-          <dd>{stop.stop_desc ? stop.stop_desc : 'N/A'}</dd>
+          <dt className="col-4">Description</dt>
+          <dd className="col-8">{stop.stop_desc ? stop.stop_desc : 'N/A'}</dd>
         </>
         }
       </dl>
@@ -76,7 +76,10 @@ function StopMarker({stop, stopTime, stopUpdate, stopAlerts}) {
         {!L.Browser.mobile && (
           <Tooltip>{content}</Tooltip>
         )}
-        <Popup>{content}</Popup>
+        <Popup>
+          {content}
+          <div className="text-center my-2"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + stop.stop_lat + '%2C' + stop.stop_lon} className="btn bg-secondary text-light btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
+        </Popup>
       </Marker>
       {stopTime.timepoint === "1" &&
         (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
