@@ -1,6 +1,6 @@
 # WeGo Transit Map
 
-[![Node CI](https://github.com/transitnownash/wego-bus-map/actions/workflows/nodejs.yml/badge.svg)](https://github.com/transitnownash/wego-bus-map/actions/workflows/nodejs.yml)
+[![Node CI](https://github.com/transitnownash/wego-bus-map/actions/workflows/nodejs.yml/badge.svg)](https://github.com/transitnownash/wego-bus-map/actions/workflows/nodejs.yml) [![CodeQL](https://github.com/transitnownash/wego-bus-map/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/transitnownash/wego-bus-map/actions/workflows/codeql-analysis.yml)
 
 ![screenshot](screenshot.png)
 
