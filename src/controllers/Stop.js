@@ -45,6 +45,7 @@ function Stops() {
   const [hidePastTrips, setHidePastTrips] = useState(true);
   const [cookies, setCookie] = useCookies(['gtfs-schedule-date']);
   const [scheduleDate, setScheduleDate] = useState(cookies['gtfs-schedule-date'] || dayjs().format('YYYY-MM-DD'));
+  const [isLoadingTripDate, setIsLoadingTripDate] = useState(false);
   const map = useRef(null);
   const params = useParams();
 
@@ -65,7 +66,7 @@ function Stops() {
       .then(() => setStopLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { per_page: 2000 } })
+    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { date: scheduleDate, per_page: 2000 } })
       .then((t) => setTrips(t.data))
       .then(() => setTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -193,10 +194,12 @@ function Stops() {
     if (!event.target.value) {
       return;
     }
+    setIsLoadingTripDate(true);
     setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
     setScheduleDate(event.target.value);
     getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
-      .then((st) => setTrips(st.data));
+      .then((st) => setTrips(st.data))
+      .then(() => setIsLoadingTripDate(false));
   };
 
   return(
@@ -255,7 +258,7 @@ function Stops() {
               </div>
               <div>
                 {typeof handleDateFieldChange === 'function' && (
-                  <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} />
+                  <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoading={isLoadingTripDate} />
                 )}
               </div>
             </div>
@@ -322,7 +325,7 @@ function Stops() {
               </div>
               <div>
                 {typeof handleDateFieldChange === 'function' && (
-                  <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} />
+                  <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoading={isLoadingTripDate} />
                 )}
               </div>
             </div>

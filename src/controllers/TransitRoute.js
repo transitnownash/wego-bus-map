@@ -39,6 +39,7 @@ function TransitRoute() {
   const [dataFetchError, setDataFetchError] = useState(false);
   const [cookies, setCookie] = useCookies(['gtfs-schedule-date']);
   const [scheduleDate, setScheduleDate] = useState(cookies['gtfs-schedule-date'] || dayjs().format('YYYY-MM-DD'));
+  const [isLoadingTripDate, setIsLoadingTripDate] = useState(false);
   const params = useParams();
   const map = useRef(null);
 
@@ -167,10 +168,12 @@ function TransitRoute() {
     if (!event.target.value) {
       return;
     }
+    setIsLoadingTripDate(true);
     setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
     setScheduleDate(event.target.value);
     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
-      .then((rt) => setRouteTrips(rt.data));
+      .then((rt) => setRouteTrips(rt.data))
+      .then(() => setIsLoadingTripDate(false));
   };
 
   return(
@@ -180,7 +183,7 @@ function TransitRoute() {
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
         <TransitMap vehicleMarkers={filteredVehiclePositions} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
-        <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates} scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange}></TripTable>
+        <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates} scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoadingTripDate={isLoadingTripDate}></TripTable>
       </div>
       <Footer />
     </div>

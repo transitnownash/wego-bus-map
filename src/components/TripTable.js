@@ -6,7 +6,7 @@ import HidePastTripsToggle from './HidePastTripsToggle';
 import TimePointLegend from './TimePointLegend';
 import DateSelector from './DateSelector';
 
-function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFieldChange}) {
+function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFieldChange, isLoadingTripDate}) {
   const [hidePastTrips, setHidePastTrips] = useState(true);
 
   if (routeTrips.length === 0) {
@@ -19,7 +19,7 @@ function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFiel
             </div>
             <div>
               {typeof handleDateFieldChange === 'function' && (
-                <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} />
+                <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoading={isLoadingTripDate} />
               )}
             </div>
           </div>
@@ -40,7 +40,7 @@ function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFiel
         </div>
         <div>
           {typeof handleDateFieldChange === 'function' && (
-            <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} />
+            <DateSelector scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoading={isLoadingTripDate} />
           )}
         </div>
       </div>
@@ -103,10 +103,12 @@ TripTable.propTypes = {
   tripUpdates: PropTypes.array,
   scheduleDate: PropTypes.any,
   handleDateFieldChange: PropTypes.any,
+  isLoadingTripDate: PropTypes.bool
 };
 
 TripTable.defaultProps = {
-  tripUpdates: []
+  tripUpdates: [],
+  isLoadingTripDate: false
 };
 
 export default TripTable;
