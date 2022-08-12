@@ -2,5 +2,5 @@ production:
   domain: "user@hostname"
   deploy_to: "/path/to/wego-bus-map"
   repository: "git@github.com:/transitnownash/wego-bus-map.git"
-  branch: "master"
+  branch: "main"
   post_deploy_script: "config/deploy/post_deploy.sh"
