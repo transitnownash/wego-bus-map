@@ -7,7 +7,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
 import { getJSON, formatShapePoints, formatDistanceTraveled } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglassEnd, faHourglassStart, faMap, faMapSigns, faBus, faRuler } from '@fortawesome/free-solid-svg-icons';
+import { faMap, faMapSigns, faBus, faRuler, faFlag, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import StopTimeTableRow from '../components/StopTimeTableRow';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
@@ -190,7 +190,7 @@ function Trip() {
               <td>{formatDistanceTraveled(totalTripDistance)}</td>
             </tr>
             <tr>
-              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassStart} fixedWidth={true}></FontAwesomeIcon> Starts</th>
+              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faFlag} fixedWidth={true}></FontAwesomeIcon> Starts</th>
               <td>
                 <div className="d-flex align-items-center">
                   <div className="pe-2 text-center text-nowrap">
@@ -203,7 +203,7 @@ function Trip() {
               </td>
             </tr>
             <tr>
-              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faHourglassEnd} fixedWidth={true}></FontAwesomeIcon> Ends</th>
+              <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faFlagCheckered} fixedWidth={true}></FontAwesomeIcon> Ends</th>
               <td>
                 <div className="d-flex align-items-center">
                   <div className="pe-2 text-center text-nowrap">

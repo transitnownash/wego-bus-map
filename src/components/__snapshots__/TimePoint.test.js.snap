@@ -2,27 +2,35 @@
 
 exports[`renders TimePoint 1`] = `
 <div>
-  9:55 PM
+  <div
+    class="time-point"
+  >
+    9:55 PM
+  </div>
 </div>
 `;
 
 exports[`renders TimePoint with trip update 1`] = `
 <div>
   <div
-    class="small"
+    class="time-point"
   >
-    <strike
-      class="text-muted"
+    <div
+      class="small"
     >
-      9:55 PM
-    </strike>
-  </div>
-  <div>
-    <strong
-      class="text-dark"
-    >
-      9:59 PM
-    </strong>
+      <strike
+        class="text-muted"
+      >
+        9:55 PM
+      </strike>
+    </div>
+    <div>
+      <strong
+        class="text-dark"
+      >
+        9:59 PM
+      </strong>
+    </div>
   </div>
 </div>
 `;

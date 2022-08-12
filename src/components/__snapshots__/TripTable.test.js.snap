@@ -82,12 +82,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:09 PM
+              <div
+                class="time-point"
+              >
+                12:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              12:46 PM
+              <div
+                class="time-point"
+              >
+                12:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -146,12 +154,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:49 PM
+              <div
+                class="time-point"
+              >
+                12:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              1:26 PM
+              <div
+                class="time-point"
+              >
+                1:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -210,12 +226,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              1:29 PM
+              <div
+                class="time-point"
+              >
+                1:29 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:06 PM
+              <div
+                class="time-point"
+              >
+                2:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -274,12 +298,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:09 PM
+              <div
+                class="time-point"
+              >
+                2:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:46 PM
+              <div
+                class="time-point"
+              >
+                2:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -338,12 +370,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:49 PM
+              <div
+                class="time-point"
+              >
+                2:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              3:26 PM
+              <div
+                class="time-point"
+              >
+                3:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -402,12 +442,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              3:29 PM
+              <div
+                class="time-point"
+              >
+                3:29 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:06 PM
+              <div
+                class="time-point"
+              >
+                4:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -466,12 +514,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:09 PM
+              <div
+                class="time-point"
+              >
+                4:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:46 PM
+              <div
+                class="time-point"
+              >
+                4:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -530,12 +586,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:49 PM
+              <div
+                class="time-point"
+              >
+                4:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              5:26 PM
+              <div
+                class="time-point"
+              >
+                5:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -594,12 +658,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              5:29 PM
+              <div
+                class="time-point"
+              >
+                5:29 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:06 PM
+              <div
+                class="time-point"
+              >
+                6:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -658,12 +730,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:09 PM
+              <div
+                class="time-point"
+              >
+                6:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:46 PM
+              <div
+                class="time-point"
+              >
+                6:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -722,12 +802,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:49 PM
+              <div
+                class="time-point"
+              >
+                6:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              7:26 PM
+              <div
+                class="time-point"
+              >
+                7:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -786,12 +874,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              7:28 PM
+              <div
+                class="time-point"
+              >
+                7:28 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:02 PM
+              <div
+                class="time-point"
+              >
+                8:02 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -850,12 +946,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:05 PM
+              <div
+                class="time-point"
+              >
+                8:05 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:38 PM
+              <div
+                class="time-point"
+              >
+                8:38 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -914,12 +1018,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:41 PM
+              <div
+                class="time-point"
+              >
+                8:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              9:11 PM
+              <div
+                class="time-point"
+              >
+                9:11 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -978,12 +1090,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              9:41 PM
+              <div
+                class="time-point"
+              >
+                9:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:11 PM
+              <div
+                class="time-point"
+              >
+                10:11 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -1042,12 +1162,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:41 PM
+              <div
+                class="time-point"
+              >
+                10:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:11 PM
+              <div
+                class="time-point"
+              >
+                11:11 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -1106,12 +1234,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              11:41 PM
+              <div
+                class="time-point"
+              >
+                11:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:58 PM
+              <div
+                class="time-point"
+              >
+                11:58 PM
+              </div>
             </td>
             <td>
               SHELBY PARK
@@ -1208,12 +1344,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:15 PM
+              <div
+                class="time-point"
+              >
+                12:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              12:43 PM
+              <div
+                class="time-point"
+              >
+                12:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1272,12 +1416,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:55 PM
+              <div
+                class="time-point"
+              >
+                12:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              1:23 PM
+              <div
+                class="time-point"
+              >
+                1:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1336,12 +1488,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              1:35 PM
+              <div
+                class="time-point"
+              >
+                1:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:03 PM
+              <div
+                class="time-point"
+              >
+                2:03 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1400,12 +1560,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:15 PM
+              <div
+                class="time-point"
+              >
+                2:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:43 PM
+              <div
+                class="time-point"
+              >
+                2:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1464,12 +1632,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:55 PM
+              <div
+                class="time-point"
+              >
+                2:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              3:23 PM
+              <div
+                class="time-point"
+              >
+                3:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1528,12 +1704,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              3:35 PM
+              <div
+                class="time-point"
+              >
+                3:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:03 PM
+              <div
+                class="time-point"
+              >
+                4:03 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1592,12 +1776,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:15 PM
+              <div
+                class="time-point"
+              >
+                4:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:43 PM
+              <div
+                class="time-point"
+              >
+                4:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1656,12 +1848,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:55 PM
+              <div
+                class="time-point"
+              >
+                4:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              5:23 PM
+              <div
+                class="time-point"
+              >
+                5:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1720,12 +1920,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              5:35 PM
+              <div
+                class="time-point"
+              >
+                5:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:03 PM
+              <div
+                class="time-point"
+              >
+                6:03 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1784,12 +1992,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:15 PM
+              <div
+                class="time-point"
+              >
+                6:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:43 PM
+              <div
+                class="time-point"
+              >
+                6:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1848,12 +2064,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:55 PM
+              <div
+                class="time-point"
+              >
+                6:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              7:23 PM
+              <div
+                class="time-point"
+              >
+                7:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1912,12 +2136,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              7:35 PM
+              <div
+                class="time-point"
+              >
+                7:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:01 PM
+              <div
+                class="time-point"
+              >
+                8:01 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -1976,12 +2208,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:15 PM
+              <div
+                class="time-point"
+              >
+                8:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:41 PM
+              <div
+                class="time-point"
+              >
+                8:41 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -2040,12 +2280,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              9:15 PM
+              <div
+                class="time-point"
+              >
+                9:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              9:41 PM
+              <div
+                class="time-point"
+              >
+                9:41 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -2104,12 +2352,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:15 PM
+              <div
+                class="time-point"
+              >
+                10:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:41 PM
+              <div
+                class="time-point"
+              >
+                10:41 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -2168,12 +2424,20 @@ exports[`renders TripTable 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              11:15 PM
+              <div
+                class="time-point"
+              >
+                11:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:40 PM
+              <div
+                class="time-point"
+              >
+                11:40 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -2370,12 +2634,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              5:35 AM
+              <div
+                class="time-point"
+              >
+                5:35 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:06 AM
+              <div
+                class="time-point"
+              >
+                6:06 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2434,12 +2706,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:15 AM
+              <div
+                class="time-point"
+              >
+                6:15 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:46 AM
+              <div
+                class="time-point"
+              >
+                6:46 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2498,12 +2778,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:49 AM
+              <div
+                class="time-point"
+              >
+                6:49 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              7:26 AM
+              <div
+                class="time-point"
+              >
+                7:26 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2562,12 +2850,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              7:29 AM
+              <div
+                class="time-point"
+              >
+                7:29 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:06 AM
+              <div
+                class="time-point"
+              >
+                8:06 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2626,12 +2922,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:09 AM
+              <div
+                class="time-point"
+              >
+                8:09 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:46 AM
+              <div
+                class="time-point"
+              >
+                8:46 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2690,12 +2994,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:49 AM
+              <div
+                class="time-point"
+              >
+                8:49 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              9:26 AM
+              <div
+                class="time-point"
+              >
+                9:26 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2754,12 +3066,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              9:29 AM
+              <div
+                class="time-point"
+              >
+                9:29 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:06 AM
+              <div
+                class="time-point"
+              >
+                10:06 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2818,12 +3138,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:09 AM
+              <div
+                class="time-point"
+              >
+                10:09 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:46 AM
+              <div
+                class="time-point"
+              >
+                10:46 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2882,12 +3210,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:49 AM
+              <div
+                class="time-point"
+              >
+                10:49 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:26 AM
+              <div
+                class="time-point"
+              >
+                11:26 AM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -2946,12 +3282,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              11:29 AM
+              <div
+                class="time-point"
+              >
+                11:29 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              12:06 PM
+              <div
+                class="time-point"
+              >
+                12:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3010,12 +3354,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:09 PM
+              <div
+                class="time-point"
+              >
+                12:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              12:46 PM
+              <div
+                class="time-point"
+              >
+                12:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3074,12 +3426,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:49 PM
+              <div
+                class="time-point"
+              >
+                12:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              1:26 PM
+              <div
+                class="time-point"
+              >
+                1:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3138,12 +3498,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              1:29 PM
+              <div
+                class="time-point"
+              >
+                1:29 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:06 PM
+              <div
+                class="time-point"
+              >
+                2:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3202,12 +3570,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:09 PM
+              <div
+                class="time-point"
+              >
+                2:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:46 PM
+              <div
+                class="time-point"
+              >
+                2:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3266,12 +3642,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:49 PM
+              <div
+                class="time-point"
+              >
+                2:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              3:26 PM
+              <div
+                class="time-point"
+              >
+                3:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3330,12 +3714,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              3:29 PM
+              <div
+                class="time-point"
+              >
+                3:29 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:06 PM
+              <div
+                class="time-point"
+              >
+                4:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3394,12 +3786,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:09 PM
+              <div
+                class="time-point"
+              >
+                4:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:46 PM
+              <div
+                class="time-point"
+              >
+                4:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3458,12 +3858,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:49 PM
+              <div
+                class="time-point"
+              >
+                4:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              5:26 PM
+              <div
+                class="time-point"
+              >
+                5:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3522,12 +3930,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              5:29 PM
+              <div
+                class="time-point"
+              >
+                5:29 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:06 PM
+              <div
+                class="time-point"
+              >
+                6:06 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3586,12 +4002,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:09 PM
+              <div
+                class="time-point"
+              >
+                6:09 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:46 PM
+              <div
+                class="time-point"
+              >
+                6:46 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3650,12 +4074,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:49 PM
+              <div
+                class="time-point"
+              >
+                6:49 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              7:26 PM
+              <div
+                class="time-point"
+              >
+                7:26 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3714,12 +4146,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              7:28 PM
+              <div
+                class="time-point"
+              >
+                7:28 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:02 PM
+              <div
+                class="time-point"
+              >
+                8:02 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3778,12 +4218,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:05 PM
+              <div
+                class="time-point"
+              >
+                8:05 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:38 PM
+              <div
+                class="time-point"
+              >
+                8:38 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3842,12 +4290,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:41 PM
+              <div
+                class="time-point"
+              >
+                8:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              9:11 PM
+              <div
+                class="time-point"
+              >
+                9:11 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3906,12 +4362,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              9:41 PM
+              <div
+                class="time-point"
+              >
+                9:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:11 PM
+              <div
+                class="time-point"
+              >
+                10:11 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -3970,12 +4434,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:41 PM
+              <div
+                class="time-point"
+              >
+                10:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:11 PM
+              <div
+                class="time-point"
+              >
+                11:11 PM
+              </div>
             </td>
             <td>
               DOWNTOWN
@@ -4034,12 +4506,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              11:41 PM
+              <div
+                class="time-point"
+              >
+                11:41 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:58 PM
+              <div
+                class="time-point"
+              >
+                11:58 PM
+              </div>
             </td>
             <td>
               SHELBY PARK
@@ -4136,12 +4616,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:15 AM
+              <div
+                class="time-point"
+              >
+                6:15 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:38 AM
+              <div
+                class="time-point"
+              >
+                6:38 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4200,12 +4688,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:55 AM
+              <div
+                class="time-point"
+              >
+                6:55 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              7:20 AM
+              <div
+                class="time-point"
+              >
+                7:20 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4264,12 +4760,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              7:35 AM
+              <div
+                class="time-point"
+              >
+                7:35 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:00 AM
+              <div
+                class="time-point"
+              >
+                8:00 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4328,12 +4832,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:15 AM
+              <div
+                class="time-point"
+              >
+                8:15 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:42 AM
+              <div
+                class="time-point"
+              >
+                8:42 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4392,12 +4904,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:55 AM
+              <div
+                class="time-point"
+              >
+                8:55 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              9:22 AM
+              <div
+                class="time-point"
+              >
+                9:22 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4456,12 +4976,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              9:35 AM
+              <div
+                class="time-point"
+              >
+                9:35 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:02 AM
+              <div
+                class="time-point"
+              >
+                10:02 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4520,12 +5048,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:15 AM
+              <div
+                class="time-point"
+              >
+                10:15 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:42 AM
+              <div
+                class="time-point"
+              >
+                10:42 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4584,12 +5120,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:55 AM
+              <div
+                class="time-point"
+              >
+                10:55 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:22 AM
+              <div
+                class="time-point"
+              >
+                11:22 AM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4648,12 +5192,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              11:35 AM
+              <div
+                class="time-point"
+              >
+                11:35 AM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              12:02 PM
+              <div
+                class="time-point"
+              >
+                12:02 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4712,12 +5264,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:15 PM
+              <div
+                class="time-point"
+              >
+                12:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              12:43 PM
+              <div
+                class="time-point"
+              >
+                12:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4776,12 +5336,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              12:55 PM
+              <div
+                class="time-point"
+              >
+                12:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              1:23 PM
+              <div
+                class="time-point"
+              >
+                1:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4840,12 +5408,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              1:35 PM
+              <div
+                class="time-point"
+              >
+                1:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:03 PM
+              <div
+                class="time-point"
+              >
+                2:03 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4904,12 +5480,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:15 PM
+              <div
+                class="time-point"
+              >
+                2:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              2:43 PM
+              <div
+                class="time-point"
+              >
+                2:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -4968,12 +5552,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              2:55 PM
+              <div
+                class="time-point"
+              >
+                2:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              3:23 PM
+              <div
+                class="time-point"
+              >
+                3:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5032,12 +5624,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              3:35 PM
+              <div
+                class="time-point"
+              >
+                3:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:03 PM
+              <div
+                class="time-point"
+              >
+                4:03 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5096,12 +5696,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:15 PM
+              <div
+                class="time-point"
+              >
+                4:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              4:43 PM
+              <div
+                class="time-point"
+              >
+                4:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5160,12 +5768,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              4:55 PM
+              <div
+                class="time-point"
+              >
+                4:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              5:23 PM
+              <div
+                class="time-point"
+              >
+                5:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5224,12 +5840,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              5:35 PM
+              <div
+                class="time-point"
+              >
+                5:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:03 PM
+              <div
+                class="time-point"
+              >
+                6:03 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5288,12 +5912,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:15 PM
+              <div
+                class="time-point"
+              >
+                6:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              6:43 PM
+              <div
+                class="time-point"
+              >
+                6:43 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5352,12 +5984,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              6:55 PM
+              <div
+                class="time-point"
+              >
+                6:55 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              7:23 PM
+              <div
+                class="time-point"
+              >
+                7:23 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5416,12 +6056,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              7:35 PM
+              <div
+                class="time-point"
+              >
+                7:35 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:01 PM
+              <div
+                class="time-point"
+              >
+                8:01 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5480,12 +6128,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              8:15 PM
+              <div
+                class="time-point"
+              >
+                8:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              8:41 PM
+              <div
+                class="time-point"
+              >
+                8:41 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5544,12 +6200,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              9:15 PM
+              <div
+                class="time-point"
+              >
+                9:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              9:41 PM
+              <div
+                class="time-point"
+              >
+                9:41 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5608,12 +6272,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              10:15 PM
+              <div
+                class="time-point"
+              >
+                10:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              10:41 PM
+              <div
+                class="time-point"
+              >
+                10:41 PM
+              </div>
             </td>
             <td>
               INGLEWOOD
@@ -5672,12 +6344,20 @@ exports[`renders TripTable with past trips 1`] = `
             <td
               class="text-center text-nowrap"
             >
-              11:15 PM
+              <div
+                class="time-point"
+              >
+                11:15 PM
+              </div>
             </td>
             <td
               class="text-center text-nowrap"
             >
-              11:40 PM
+              <div
+                class="time-point"
+              >
+                11:40 PM
+              </div>
             </td>
             <td>
               INGLEWOOD

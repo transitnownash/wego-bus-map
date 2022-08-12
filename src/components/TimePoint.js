@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import './TimePoint.scss';
 
 function TimePoint({scheduleData, updateData}) {
   function formatTripTime(time) {
@@ -47,15 +48,17 @@ function TimePoint({scheduleData, updateData}) {
 
   // If no update provided (e.g. past or far-future trip), return scheduled
   if (!updateTime) {
-    return(<>
-      {renderNextDayIcon(isNextDay)}
-      {scheduleTime}{scheduleDepartNote}
-    </>);
+    return(
+      <div className="time-point">
+        {renderNextDayIcon(isNextDay)}
+        {scheduleTime}{scheduleDepartNote}
+      </div>
+    );
   }
   updateTime = formatStopTimeUpdate(updateData);
 
   return(
-    <>
+    <div className="time-point">
       {scheduleTime !== updateTime && (
         <div className="small">
           <strike className="text-muted">
@@ -76,7 +79,7 @@ function TimePoint({scheduleData, updateData}) {
           (On Time)
         </div>
       )}
-    </>
+    </div>
   );
 }
 
