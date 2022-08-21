@@ -4,6 +4,7 @@ exports[`renders TimePoint 1`] = `
 <div>
   <div
     class="time-point"
+    title="Scheduled Time"
   >
     9:55 PM
   </div>
@@ -15,21 +16,23 @@ exports[`renders TimePoint with trip update 1`] = `
   <div
     class="time-point"
   >
+    <div>
+      <strong
+        class="text-dark"
+        title="Updated Time"
+      >
+        9:59 PM
+      </strong>
+    </div>
     <div
       class="small"
     >
       <strike
         class="text-muted"
+        title="Scheduled Time"
       >
         9:55 PM
       </strike>
-    </div>
-    <div>
-      <strong
-        class="text-dark"
-      >
-        9:59 PM
-      </strong>
     </div>
   </div>
 </div>

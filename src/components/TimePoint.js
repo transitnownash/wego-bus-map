@@ -49,7 +49,7 @@ function TimePoint({scheduleData, updateData}) {
   // If no update provided (e.g. past or far-future trip), return scheduled
   if (!updateTime) {
     return(
-      <div className="time-point">
+      <div className="time-point" title="Scheduled Time">
         {renderNextDayIcon(isNextDay)}
         {scheduleTime}{scheduleDepartNote}
       </div>
@@ -59,21 +59,21 @@ function TimePoint({scheduleData, updateData}) {
 
   return(
     <div className="time-point">
+      <div>
+        <strong className="text-dark" title="Updated Time">
+          {renderNextDayIcon(isNextDay)}
+          {updateTime}
+        </strong>
+      </div>
       {scheduleTime !== updateTime && (
         <div className="small">
-          <strike className="text-muted">
+          <strike className="text-muted" title="Scheduled Time">
             {renderNextDayIcon(isNextDay)}
             {scheduleTime}
             {scheduleDepartNote}
           </strike>
         </div>
       )}
-      <div>
-        <strong className="text-dark">
-          {renderNextDayIcon(isNextDay)}
-          {updateTime}
-        </strong>
-      </div>
       {scheduleTime === updateTime && (
         <div className="small">
           (On Time)
