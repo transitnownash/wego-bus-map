@@ -13,7 +13,7 @@ function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFiel
     return(
       <>
         <div className="alert alert-info">
-          <div className="d-flex align-items-center">
+          <div className="d-flex flex-wrap align-items-center">
             <div className="flex-grow-1">
               No trips scheduled for <strong>{route.route_short_name} - {route.route_long_name}</strong> for selected date.
             </div>
