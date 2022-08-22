@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MapContainer, TileLayer, LayersControl, LayerGroup, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup } from 'react-leaflet';
 import VehicleMarker from './VehicleMarker';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -126,7 +126,10 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
             <LayerGroup>
               {shapes.map((item, _index) => {
                 return(
-                  <Polyline key={item.shape_gid} opacity={0.6} weight={5} positions={formatShapePoints(item.points)} color={'#' + item.route_color} eventHandlers={shapeEventHandlers}></Polyline>
+                  <FeatureGroup key={item.shape_gid} eventHandlers={shapeEventHandlers}>
+                    <Polyline weight={12} positions={formatShapePoints(item.points)} color='#ffffff'></Polyline>
+                    <Polyline weight={8} positions={formatShapePoints(item.points)} color={'#' + item.route_color}></Polyline>
+                  </FeatureGroup>
                 );
               })}
             </LayerGroup>
