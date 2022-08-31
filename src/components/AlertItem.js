@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {renderTimestamp} from './../util.js';
+import {renderUnixTimestamp} from './../util.js';
+import dayjs from 'dayjs';
 import './AlertItem.scss';
 import { Link } from 'react-router-dom';
 import StopCode from './StopCode.js';
@@ -27,6 +28,9 @@ function AlertItem({alert, route}) {
       </div>
       <div className="card-body alert-item-text">
         <p>
+          {dayjs().isBefore(dayjs.unix(alert.active_period[0].start)) && (
+            <span><span className="badge bg-secondary">Future</span>&nbsp;</span>
+          )}
           <strong>{alert.header_text.translation[0].text}</strong>
         </p>
         {alert.description_text.translation[0].text}
@@ -45,9 +49,9 @@ function AlertItem({alert, route}) {
       <div className="card-footer alert-item-footer" style={alertStyle}>
         {alert_cause}
         {alert_effect}
-        <strong>Start:</strong> {renderTimestamp(alert.active_period[0].start)}
+        <strong>Start:</strong> {renderUnixTimestamp(alert.active_period[0].start)}
         {(alert.active_period[0].end && alert.active_period[0].end < 32503701600)&&
-          <>&nbsp;-&nbsp;<strong>End:</strong> {renderTimestamp(alert.active_period[0].end)}</>
+          <>&nbsp;-&nbsp;<strong>End:</strong> {renderUnixTimestamp(alert.active_period[0].end)}</>
         }
       </div>
     </div>

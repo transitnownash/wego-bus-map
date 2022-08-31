@@ -3,7 +3,7 @@
 import React from 'react';
 import nock from 'nock';
 import './util';
-import { renderBearing, formatDistanceTraveled, renderSpeed, renderTimestamp, getJSON } from './util';
+import { renderBearing, formatDistanceTraveled, renderSpeed, renderUnixTimestamp, getJSON } from './util';
 import httpAdapter from 'axios/lib/adapters/http';
 
 beforeAll(() => {
@@ -27,9 +27,9 @@ test('test getJSON', () => {
     });
 });
 
-test('test renderTimestamp', () => {
-  expect(renderTimestamp(1658680814)).toEqual(<span title={1658680814}>7/24/22, 11:40 AM</span>);
-  expect(renderTimestamp(1658680814, {hour: '2-digit', minute: '2-digit'})).toEqual(<span title={1658680814}>11:40 AM</span>);
+test('test renderUnixTimestamp', () => {
+  expect(renderUnixTimestamp(1658680814)).toEqual(<span title={1658680814}>7/24/22, 11:40 AM</span>);
+  expect(renderUnixTimestamp(1658680814, {hour: '2-digit', minute: '2-digit'})).toEqual(<span title={1658680814}>11:40 AM</span>);
 });
 
 

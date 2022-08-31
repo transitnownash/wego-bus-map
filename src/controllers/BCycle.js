@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import TransitMap from '../components/TransitMap';
 import LoadingScreen from '../components/LoadingScreen';
-import { getJSON, renderTimestamp } from '../util';
+import { getJSON, renderUnixTimestamp } from '../util';
 import DataFetchError from '../components/DataFetchError';
 import TitleBar from '../components/TitleBar';
 import Footer from '../components/Footer';
@@ -137,7 +137,7 @@ function BCycle() {
                           </div>
                         </dd>
                         <dt className="col-5"><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Updated</dt>
-                        <dd className="col-7">{renderTimestamp(station.status.last_reported)}</dd>
+                        <dd className="col-7">{renderUnixTimestamp(station.status.last_reported)}</dd>
                       </dl>
                     </div>
                   </div>

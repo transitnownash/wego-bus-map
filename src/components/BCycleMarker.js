@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
 import { Marker, Popup, Tooltip } from "react-leaflet";
-import { renderTimestamp } from "../util";
+import { renderUnixTimestamp } from "../util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBicycle, faClock, faExclamationTriangle, faMapMarkedAlt, faMobile } from "@fortawesome/free-solid-svg-icons";
 import bCycleIconImage from '../resources/bcycle.svg';
@@ -87,7 +87,7 @@ function BCycleMarker({station}) {
               </div>
             </dd>
             <dt className="col-5"><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Updated</dt>
-            <dd className="col-7">{renderTimestamp(station.status.last_reported)}</dd>
+            <dd className="col-7">{renderUnixTimestamp(station.status.last_reported)}</dd>
           </dl>
         </div>
         <div className="text-end"><a href="https://nashville.bcycle.com" className="text-muted" target={'_blank'} rel={'noreferrer'}>BCycle Nashville</a></div>

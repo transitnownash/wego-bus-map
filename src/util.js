@@ -12,7 +12,7 @@ export async function getJSON(url, options={}) {
 }
 
 // Format a timestamp to human readable
-export function renderTimestamp(timestamp, format) {
+export function renderUnixTimestamp(timestamp, format) {
   if (!timestamp || typeof timestamp === 'undefined') {
     return(<>N/A</>);
   }
