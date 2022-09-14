@@ -12,7 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.0",
+    "bootstrap": "^5.2.1",
     "dayjs": "^1.11.5",
     "install": "^0.13.0",
     "leaflet": "^1.8.0",
@@ -22,9 +22,9 @@
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.0.2",
     "react-leaflet-drift-marker": "^3.0.0",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
-    "sass": "^1.54.8",
+    "sass": "^1.54.9",
     "web-vitals": "^3.0.1"
   },
   "overrides": {
@@ -66,8 +66,8 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.23.0",
-    "eslint-plugin-react": "^7.31.7",
+    "eslint": "^8.23.1",
+    "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
     "mockdate": "^3.0.5",
     "nock": "^13.2.9"
