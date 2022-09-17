@@ -141,6 +141,11 @@ function TransitRoute() {
     return(<NoMatch></NoMatch>);
   }
 
+  // Shape did not load
+  if (routeShapes.length === 0) {
+    throw new Error('A data error has ocurred. Unable to load route shapes for map.');
+  }
+
   // Filter data to only those relevant to this route
   const filteredVehiclePositions = vehicleMarkers.filter(v => v.vehicle.trip.route_id === params.route_id);
   const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
