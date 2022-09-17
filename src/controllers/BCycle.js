@@ -65,7 +65,26 @@ function BCycle() {
     });
   }
 
-  // Set the map to center on the trip route
+  // Calculate system stats
+  const initialValue = 0;
+  const totalStations = bCycleStations.reduce(
+    (previousValue, currentValue) => previousValue + (currentValue.status.is_installed),
+    initialValue,
+  );
+  const bikesAvailable = bCycleStations.reduce(
+    (previousValue, currentValue) => previousValue + (currentValue.status.is_renting ? currentValue.status.num_bikes_available : 0),
+    initialValue,
+  );
+  const docksAvailable = bCycleStations.reduce(
+    (previousValue, currentValue) => previousValue + (currentValue.status.is_returning ? currentValue.status.num_docks_available : 0),
+    initialValue,
+  );
+  const offlineStations = bCycleStations.reduce(
+    (previousValue, currentValue) => previousValue + (currentValue.status.is_renting == 0 || currentValue.status.is_returning == 0 ? 1 : 0),
+    initialValue,
+  );
+
+  // Set the map to center on the available stations
   const allPoints = [];
   bCycleStations.map((s) => allPoints.push([s.lat, s.lon]));
   const getStationBounds = L.latLngBounds(allPoints);
@@ -81,6 +100,32 @@ function BCycle() {
       <TitleBar />
       <div className="container">
         <TransitMap map={map} bCycleStations={bCycleStations} center={center}></TransitMap>
+        <div className="row mb-3">
+          <div className="col-sm-3 text-center">
+            <div>
+              <div className="h1 my-2">{totalStations}</div>
+              <div>Total Stations</div>
+            </div>
+          </div>
+          <div className="col-sm-3 text-center">
+            <div>
+              <div className="h1 my-2">{offlineStations}</div>
+              <div>Offline Stations</div>
+            </div>
+          </div>
+          <div className="col-sm-3 text-center">
+            <div>
+              <div className="h1 my-2">{bikesAvailable}</div>
+              <div>Bikes Available</div>
+            </div>
+          </div>
+          <div className="col-sm-3 text-center">
+            <div>
+              <div className="h1 my-2">{docksAvailable}</div>
+              <div>Docks Available</div>
+            </div>
+          </div>
+        </div>
         <div className="">
           {bCycleStations.map((station) => {
 
