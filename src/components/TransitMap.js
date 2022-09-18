@@ -36,7 +36,7 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
   }, [setStops]);
 
   const getRouteDataById = function (routeId) {
-    return routes.find(r => r.route_gid === routeId);
+    return routes.find(r => r.route_gid === routeId || r.route_short_name === routeId);
   };
 
   const getAgencyDataById = function (agencyId) {
