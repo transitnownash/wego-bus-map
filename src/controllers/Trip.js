@@ -143,7 +143,7 @@ function Trip() {
   // Get single route from routes set
   const route = routes.find((r) => r.route_gid === trip.route_gid);
 
-  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
+  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_gid);
 
   // Filter vehicle markers
   const filteredVehicleMarkers = vehicleMarkers.filter(v => v.vehicle.trip.trip_id === trip.trip_gid);

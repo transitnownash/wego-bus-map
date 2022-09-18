@@ -24,7 +24,7 @@ function AlertItem({alert, route}) {
   return(
     <div className="card mb-3">
       <div className="card-header alert-item-header" style={alertStyle}>
-        <strong><Link to={'/routes/' + route.route_short_name}>{route.route_short_name} - {route.route_long_name}</Link></strong>
+        <strong><Link to={'/routes/' + route.route_gid}>{route.route_short_name} - {route.route_long_name}</Link></strong>
       </div>
       <div className="card-body alert-item-text">
         <p>

@@ -14,7 +14,7 @@ import './TransitRouteHeader.scss';
 function TransitRouteHeader({route, alerts, showRouteType}) {
   const [alertModalShow, setAlertModalShow] = useState(false);
 
-  if (typeof route !== 'object' || !route.route_short_name) {
+  if (typeof route !== 'object' || !route.route_gid) {
     return(<div className="transit-route-header">Invalid route!</div>);
   }
 
@@ -42,7 +42,7 @@ function TransitRouteHeader({route, alerts, showRouteType}) {
         </div>
       )}
       <div className="flex-grow-1 align-bottom">
-        <Link to={'/routes/' + route.route_short_name}><span className="badge text-bg-light">{route.route_short_name}</span> {route.route_long_name}</Link>
+        <Link to={'/routes/' + route.route_gid}><span className="badge text-bg-light">{route.route_short_name}</span> {route.route_long_name}</Link>
       </div>
       <div>
         {alerts.length > 0 && (
