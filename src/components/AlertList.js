@@ -12,7 +12,7 @@ function AlertList({alerts, routes}) {
   return(
     <div>
       {alerts.map((item, _index) => {
-        let route = routes.find(r => r.route_gid === item.alert.informed_entity[0].route_id);
+        let route = routes.find(r => r.route_gid === item.alert.informed_entity[0].route_id || r.route_short_name === item.alert.informed_entity[0].route_id);
         return(
           <AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>
         );
