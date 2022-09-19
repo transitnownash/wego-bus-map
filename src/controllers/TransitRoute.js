@@ -96,10 +96,6 @@ function TransitRoute() {
         return;
       }
       getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-        .then(function (data) {
-          const filteredPositions = data.filter(v => v.vehicle.trip.route_id === params.route_id);
-          return filteredPositions;
-        })
         .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
@@ -146,9 +142,9 @@ function TransitRoute() {
     throw new Error('A data error has ocurred. Unable to load route shapes for map.');
   }
 
-  // Filter data to only those relevant to this route
-  const filteredVehiclePositions = vehicleMarkers.filter(v => v.vehicle.trip.route_id === params.route_id);
-  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_short_name);
+  // Filter vehicle positions to only those relevant to this route
+  const filteredVehiclePositions = vehicleMarkers.filter(v => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
+  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_gid || a.alert.informed_entity[0].route_id === route.route_short_name);
 
   // Nest stops for map compatibility
   const mapStops = [];
@@ -176,7 +172,7 @@ function TransitRoute() {
     setIsLoadingTripDate(true);
     setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
     setScheduleDate(event.target.value);
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
+    getJSON(GTFS_BASE_URL + '/routes/' + route.route_gid + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
       .then((rt) => setRouteTrips(rt.data))
       .then(() => setIsLoadingTripDate(false));
   };
