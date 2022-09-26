@@ -15,16 +15,16 @@
     "bootstrap": "^5.2.1",
     "dayjs": "^1.11.5",
     "install": "^0.13.0",
-    "leaflet": "^1.8.0",
+    "leaflet": "^1.9.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
-    "react-leaflet": "^4.0.2",
+    "react-leaflet": "^4.1.0",
     "react-leaflet-drift-marker": "^3.0.0",
-    "react-router-dom": "^6.4.0",
+    "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
-    "sass": "^1.54.9",
+    "sass": "^1.55.0",
     "web-vitals": "^3.0.2"
   },
   "overrides": {
@@ -66,7 +66,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.23.1",
+    "eslint": "^8.24.0",
     "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
     "mockdate": "^3.0.5",
