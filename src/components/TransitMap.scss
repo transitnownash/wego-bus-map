@@ -45,14 +45,17 @@
   }
 }
 
-
 :root {
-  --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  --dark-map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  --dark-marker-shadow-filter: invert(1);
 }
 
 @media (prefers-color-scheme: dark) {
   .map-tiles {
-      filter:var(--map-tiles-filter, none);
+      filter:var(--dark-map-tiles-filter, none);
+  }
+  img[src*="bus-shadow"], img[src*="train-shadow"] {
+    filter:var(--dark-marker-shadow-filter, none);
   }
   .leaflet-tooltip,
   .leaflet-popup-content-wrapper,
