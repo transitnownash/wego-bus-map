@@ -10,6 +10,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import StopCode from './StopCode.js';
 import StopTimeSequence from './StopTimeSequence.js';
 import TimePoint from './TimePoint.js';
+import TripProgressBar from './TripProgressBar.js';
 
 function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdate, alerts}) {
   let isTripTabActive = false;
@@ -69,6 +70,9 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
                 </tr>
               </tbody>
             </table>
+            {trip.stop_times && tripUpdate && (
+              <TripProgressBar trip={trip} tripUpdates={[tripUpdate]} />
+            )}
           </Tab>
           <Tab eventKey="trip" title="Stop Times" disabled={!isTripTabActive} className='overflow-auto mb-2' style={{maxHeight: '200px'}}>
             {isTripTabActive && (
