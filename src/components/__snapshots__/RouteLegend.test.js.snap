@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders RouteLegend 1`] = `
+<div>
+  <div
+    class="d-flex mb-3 justify-content-md-center"
+  >
+    <div
+      class="me-3 p-2 px-3 rounded fw-bold"
+      style="background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
+    >
+      Frequent
+    </div>
+    <div
+      class="me-3 p-2 px-3 rounded fw-bold"
+      style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+    >
+      Local
+    </div>
+    <div
+      class="me-3 p-2 px-3 rounded fw-bold"
+      style="background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+    >
+      Connector
+    </div>
+    <div
+      class="me-3 p-2 px-3 rounded fw-bold"
+      style="background-color: rgb(0, 170, 231); color: rgb(255, 255, 255);"
+    >
+      Express
+    </div>
+    <div
+      class="me-3 p-2 px-3 rounded fw-bold"
+      style="background-color: rgb(0, 30, 97); color: rgb(255, 255, 255);"
+    >
+      Train Shuttles
+    </div>
+  </div>
+</div>
+`;

@@ -7,6 +7,7 @@ import {getJSON} from './../util.js';
 import Footer from '../components/Footer';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
+import RouteLegend from '../components/RouteLegend';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_ALERTS_TTL = 60 * 1000;
@@ -61,6 +62,7 @@ function TransitRoutes() {
     <div>
       <TitleBar></TitleBar>
       <div className="container transit-routes">
+        <RouteLegend />
         {sortedRoutes.map((item, _index) => {
           const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name);
           return(<TransitRouteHeader key={item.id} route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>);
