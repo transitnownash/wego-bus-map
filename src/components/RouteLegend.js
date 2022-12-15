@@ -31,10 +31,10 @@ const routeFrequency = [
 
 function RouteLegend() {
   return (
-    <div className="d-flex mb-3 justify-content-md-center">
+    <div className="d-flex mb-3 justify-content-center flex-wrap">
       {routeFrequency.map(frequency => {
         return (
-          <div key={frequency.name} className="me-3 p-2 px-3 rounded fw-bold" style={{backgroundColor: frequency.color, color: frequency.textColor}}>{frequency.name}</div>
+          <div key={frequency.name} className="mb-1 ms-1 me-1 p-2 px-3 rounded fw-bold" style={{backgroundColor: frequency.color, color: frequency.textColor}}>{frequency.name}</div>
         );
       })}
     </div>
