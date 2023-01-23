@@ -64,7 +64,7 @@ function TransitRoutes() {
       <div className="container transit-routes">
         <RouteLegend />
         {sortedRoutes.map((item, _index) => {
-          const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_short_name);
+          const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && a.alert.informed_entity[0].route_id === item.route_short_name);
           return(<TransitRouteHeader key={item.id} route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>);
         })}
       </div>

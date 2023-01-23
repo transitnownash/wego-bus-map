@@ -148,6 +148,9 @@ function Stops() {
   // Filter alerts to single stop
   let stopAlerts = [];
   alerts.forEach(a => {
+    if (typeof a.alert.informed_entity === 'undefined') {
+      return;
+    }
     a.alert.informed_entity.forEach(e => {
       if (e.stop_id === stop.stop_code) {
         stopAlerts.push(a);
@@ -238,7 +241,7 @@ function Stops() {
           <>
             <div className="row mb-2">
               {routes.sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10)).map((item) => {
-                const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_gid);
+                const routeAlerts = alerts.filter((a) => a.alert.informed_entity && a.alert.informed_entity[0].route_id === item.route_gid);
                 return(
                   <div key={item.id} className="col-md-4">
                     <TransitRouteHeader route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
@@ -248,7 +251,7 @@ function Stops() {
             </div>
           </>
         )}
-        <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} vehicleMarkers={filteredVehiclePositions} routes={routes} agencies={agencies} routeStops={routeStops} alerts={alerts}></TransitMap>
+        <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} vehicleMarkers={filteredVehiclePositions} routes={routes} agencies={agencies} routeStops={routeStops} alerts={stopAlerts}></TransitMap>
         <AlertList alerts={stopAlerts} routes={routes}></AlertList>
         {trips.length > 0 && (
           <>
@@ -275,7 +278,7 @@ function Stops() {
                 <tbody>
                   {trips.map((item, _index) => {
                     const route = routes.find((r) => r.route_gid === item.route_gid);
-                    const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === item.route_gid);
+                    const routeAlerts = alerts.filter((a) => a.alert.informed_entity && a.alert.informed_entity[0].route_id === item.route_gid);
                     // Find stop time update relevant to this trip and this stop
                     let stopTimeUpdate = {};
                     if (stopTripUpdates.length > 0) {

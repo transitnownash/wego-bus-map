@@ -143,7 +143,10 @@ function Trip() {
   // Get single route from routes set
   const route = routes.find((r) => r.route_gid === trip.route_gid);
 
-  const routeAlerts = alerts.filter((a) => a.alert.informed_entity[0].route_id === route.route_gid);
+  // Remove invalid alerts (no informed entity)
+  const allAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined');
+
+  const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && a.alert.informed_entity[0].route_id === route.route_gid);
 
   // Filter vehicle markers
   const filteredVehicleMarkers = vehicleMarkers.filter(v => v.vehicle.trip.trip_id === trip.trip_gid);
@@ -220,7 +223,7 @@ function Trip() {
 
         <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
 
-        <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={alerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
+        <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={allAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
         <table className="table table-sm small">
           <thead>

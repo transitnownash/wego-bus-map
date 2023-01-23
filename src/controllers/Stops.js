@@ -65,6 +65,9 @@ function Stops() {
     return(<LoadingScreen hideTitleBar={true}></LoadingScreen>);
   }
 
+  // Remove invalid alerts (no informed entity)
+  const allAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined');
+
   const mapControls = {
     topRight: (
       <div className="map-top-right-container">
@@ -73,7 +76,7 @@ function Stops() {
     ),
     bottomLeft: (
       <div className="d-flex map-bottom-left-container">
-        <AlertButton alerts={alerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
+        <AlertButton alerts={allAlerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
         <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
       </div>
     )
@@ -91,8 +94,8 @@ function Stops() {
 
   return(
     <div className="stops">
-      <TransitMap map={map} routeStops={routeStops} alerts={alerts} mapControls={mapControls}></TransitMap>
-      <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
+      <TransitMap map={map} routeStops={routeStops} alerts={allAlerts} mapControls={mapControls}></TransitMap>
+      <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
     </div>
   );
 }

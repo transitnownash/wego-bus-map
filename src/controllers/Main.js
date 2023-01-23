@@ -124,6 +124,9 @@ function Main() {
     }
   };
 
+  // Remove invalid alerts (no informed entity)
+  const allAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined');
+
   // Combine BCycle data into one hash
   if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
     bCycleStations.forEach((station, index) => {
@@ -139,7 +142,7 @@ function Main() {
     ),
     bottomLeft: (
       <div className="d-flex map-bottom-left-container">
-        <AlertButton alerts={alerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
+        <AlertButton alerts={allAlerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
         <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
       </div>
     )
@@ -150,8 +153,8 @@ function Main() {
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (
       <div className="main">
-        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={alerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStations} mapControls={mapControls}></TransitMap>
-        <AlertModal alerts={alerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
+        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={allAlerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStations} mapControls={mapControls}></TransitMap>
+        <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
       </div>
     )
   );
