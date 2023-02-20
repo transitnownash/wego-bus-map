@@ -55,12 +55,12 @@ function TransitRoute() {
       .then(() => setRouteLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json', { params: {per_page: 200} })
+    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json', { params: { date: scheduleDate, per_page: 200 } })
       .then((rs) => setRouteStops(rs.data))
       .then(() => setRouteStopsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/shapes.json')
+     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/shapes.json', { params: { date: scheduleDate, per_page: 200 } })
       .then((rs) => setRouteShapes(rs.data))
       .then(() => setRouteShapesLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -137,14 +137,37 @@ function TransitRoute() {
     return(<NoMatch></NoMatch>);
   }
 
-  // Shape did not load
-  if (routeShapes.length === 0) {
-    throw new Error('A data error has ocurred. Unable to load route shapes for map.');
-  }
-
   // Filter vehicle positions to only those relevant to this route
   const filteredVehiclePositions = vehicleMarkers.filter(v => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
   const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && (a.alert.informed_entity[0].route_id === route.route_gid || a.alert.informed_entity[0].route_id === route.route_short_name));
+
+  // Load in selected date
+  const handleDateFieldChange = (event) => {
+    if (!event.target.value) {
+      return;
+    }
+    setIsLoadingTripDate(true);
+    setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
+    setScheduleDate(event.target.value);
+    getJSON(GTFS_BASE_URL + '/routes/' + route.route_gid + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
+      .then((rt) => setRouteTrips(rt.data))
+      .then(() => setIsLoadingTripDate(false));
+  };
+
+  // Missing data (no service on date)
+  if (routeTrips.length === 0 || routeShapes.length === 0) {
+    return (
+      <div>
+        <TitleBar />
+        <div className="container transit-route">
+          <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
+          <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
+          <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates} scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoadingTripDate={isLoadingTripDate}></TripTable>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   // Nest stops for map compatibility
   const mapStops = [];
@@ -163,19 +186,6 @@ function TransitRoute() {
   if (map.current) {
     map.current.fitBounds(getPolyLineBounds, { padding: [25, 25]});
   }
-
-  // Load in selected date
-  const handleDateFieldChange = (event) => {
-    if (!event.target.value) {
-      return;
-    }
-    setIsLoadingTripDate(true);
-    setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
-    setScheduleDate(event.target.value);
-    getJSON(GTFS_BASE_URL + '/routes/' + route.route_gid + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
-      .then((rt) => setRouteTrips(rt.data))
-      .then(() => setIsLoadingTripDate(false));
-  };
 
   return(
     <div>
