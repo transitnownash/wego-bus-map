@@ -24,7 +24,7 @@ function TripProgressBar({trip, tripUpdates}) {
   let totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
 
   // If no updates provided, render either empty or completed bar based on static schedule
-  if (tripUpdates.length === 0) {
+  if (tripUpdates.length === 0 || typeof tripUpdates[0].trip_update === 'undefined') {
     if (!isTimeLaterThanNow(trip.stop_times[trip.stop_times.length - 1].arrival_time)) {
       return renderCompleteProgressBar();
     }

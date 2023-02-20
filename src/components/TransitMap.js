@@ -36,11 +36,19 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
   }, [setStops]);
 
   const getRouteDataById = function (routeId) {
-    return routes.find(r => r.route_gid === routeId || r.route_short_name === routeId);
+    const routeData = routes.find(r => r.route_gid === routeId || r.route_short_name === routeId);
+    if (!routeData) {
+      return {};
+    }
+    return routeData;
   };
 
   const getAgencyDataById = function (agencyId) {
-    return agencies.find(a => a.agency_gid === agencyId);
+    const agencyData = agencies.find(a => a.agency_gid === agencyId);
+    if (!agencyData) {
+      return {};
+    }
+    return agencyData;
   };
 
   const getRouteAlertsById = function (routeId) {
