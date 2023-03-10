@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Popup } from 'react-leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { isStopTimeUpdateLaterThanNow, renderBearing, renderSpeed, renderUnixTimestamp } from './../util.js';
 import { Link } from 'react-router-dom';
 import TransitRouteHeader from './TransitRouteHeader.js';
@@ -64,6 +64,12 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
                   <th><FontAwesomeIcon icon={faTachometer} fixedWidth/> Speed</th>
                   <td>{renderSpeed(vehiclePositionData.vehicle.position.speed)}</td>
                 </tr>
+                {vehiclePositionData.vehicle.occupancy_status && (
+                  <tr>
+                    <th><FontAwesomeIcon icon={faPeopleGroup} fixedWidth/> Occupancy</th>
+                    <td>{vehiclePositionData.vehicle.occupancy_status}</td>
+                  </tr>
+                )}
                 <tr>
                   <th><FontAwesomeIcon icon={faClock} fixedWidth/> Updated</th>
                   <td>{renderUnixTimestamp(vehiclePositionData.vehicle.timestamp)}</td>

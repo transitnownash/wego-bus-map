@@ -20,11 +20,11 @@
     "react-bootstrap": "^2.7.2",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
-    "react-leaflet": "^4.2.0",
+    "react-leaflet": "^4.2.1",
     "react-leaflet-drift-marker": "^4.0.0",
-    "react-router-dom": "^6.8.1",
+    "react-router-dom": "^6.8.2",
     "sass": "^1.58.3",
-    "web-vitals": "^3.1.1"
+    "web-vitals": "^3.3.0"
   },
   "overrides": {
     "autoprefixer": "10.4.5"
@@ -65,7 +65,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.34.0",
+    "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
     "mockdate": "^3.0.5",
