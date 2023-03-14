@@ -11,12 +11,13 @@ import StopCode from './StopCode.js';
 import StopTimeSequence from './StopTimeSequence.js';
 import TimePoint from './TimePoint.js';
 import TripProgressBar from './TripProgressBar.js';
+import Headsign from './Headsign.js';
 
 function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdate, alerts}) {
   let isTripTabActive = false;
 
   const trip_headsign = (trip.trip_headsign)
-    ? trip.trip_headsign
+    ? (<Headsign headsign={trip.trip_headsign} />)
     : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>)
   ;
 

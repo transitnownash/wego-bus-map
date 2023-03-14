@@ -18,6 +18,7 @@ import DataFetchError from '../components/DataFetchError';
 import TimePointLegend from '../components/TimePointLegend';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import TimePoint from '../components/TimePoint';
+import Headsign from '../components/Headsign';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
@@ -186,7 +187,7 @@ function Trip() {
             </tr>
             <tr>
               <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faMapSigns} fixedWidth={true}></FontAwesomeIcon> Headsign</th>
-              <td>{trip.trip_headsign}</td>
+              <td><Headsign headsign={trip.trip_headsign} /></td>
             </tr>
             <tr>
               <th><FontAwesomeIcon icon={faRuler} fixedWidth={true}></FontAwesomeIcon> Distance</th>

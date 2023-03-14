@@ -14,12 +14,13 @@ import AlertList from '../components/AlertList';
 import { Link, useParams } from 'react-router-dom';
 import { getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDirections, faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faDirections, faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
 import TimePointLegend from '../components/TimePointLegend';
 import StopCode from '../components/StopCode';
 import DateSelector from '../components/DateSelector';
 import { useCookies } from 'react-cookie';
 import dayjs from 'dayjs';
+import Headsign from '../components/Headsign';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -305,8 +306,11 @@ function Stops() {
                         <td className="align-middle"><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
                         <td className="align-middle"><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
                         <td className="align-middle">
-                          <strong>{item.trip_headsign}</strong><br />
-                          {item.direction_id === "1" ? 'Inbound' : 'Outbound'}
+                          <strong><Headsign headsign={item.trip_headsign} /></strong><br />
+                          {item.direction_id === "1"
+                            ? (<><FontAwesomeIcon icon={faArrowLeft} /> Inbound</>)
+                            : (<><FontAwesomeIcon icon={faArrowRight} /> Outbound</>)
+                          }
                         </td>
                         <td className="align-middle text-center text-nowrap ">
                           <TimePoint scheduleData={item.stop_times[0]} updateData={stopTimeUpdate}></TimePoint>

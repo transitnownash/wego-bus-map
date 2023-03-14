@@ -5,6 +5,7 @@ import { faBicycle, faWheelchair, faBan } from "@fortawesome/free-solid-svg-icon
 import { isTimeRangeIncludesNow, isStopTimeUpdateLaterThanNow } from "../util";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import TimePoint from './TimePoint';
+import Headsign from './Headsign';
 
 function TripTableRow({trip, route, tripUpdate, hidePastTrips}) {
   const bikes_allowed_icon = (trip.bikes_allowed !== "1")
@@ -52,7 +53,7 @@ function TripTableRow({trip, route, tripUpdate, hidePastTrips}) {
         {trip.route_gid !== route.route_gid && (
           <span className="badge bg-secondary me-1">{trip.route_gid}</span>
         )}
-        {trip.trip_headsign}
+        <Headsign headsign={trip.trip_headsign} />
       </td>
       <td>
         <OverlayTrigger placement='top' overlay={<Tooltip>{wheelchair_accessible_tooltip}</Tooltip>}>

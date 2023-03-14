@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Headsign 1`] = `
+<div>
+  <span
+    class="trip-headsign"
+  >
+    DOWNTOWN
+  </span>
+</div>
+`;
+
+exports[`renders Headsign with Letter 1`] = `
+<div>
+  <span
+    class="trip-headsign"
+  >
+    <span
+      class="badge text-bg-secondary"
+    >
+      A
+    </span>
+     
+    DOWNTOWN
+  </span>
+</div>
+`;
