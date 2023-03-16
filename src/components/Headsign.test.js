@@ -22,7 +22,7 @@ test('renders Headsign with Letter', () => {
   expect(container).toMatchSnapshot();
 });
 
-test('renders Headsign with Letter', () => {
+test('renders Headsign with Letter if missing trailing space', () => {
   const {container} = render(
     <Headsign headsign="A -WHITE BRIDGE" />
   );

@@ -26,7 +26,7 @@ exports[`renders Headsign with Letter 1`] = `
 </div>
 `;
 
-exports[`renders Headsign with Letter 2`] = `
+exports[`renders Headsign with Letter if missing trailing space 1`] = `
 <div>
   <span
     class="trip-headsign"
