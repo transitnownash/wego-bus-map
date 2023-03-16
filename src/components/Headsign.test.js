@@ -21,3 +21,14 @@ test('renders Headsign with Letter', () => {
   expect(container.firstChild.firstChild.classList.contains('badge')).toBe(true);
   expect(container).toMatchSnapshot();
 });
+
+test('renders Headsign with Letter', () => {
+  const {container} = render(
+    <Headsign headsign="A -WHITE BRIDGE" />
+  );
+  expect(screen.getByText('A')).toBeInTheDocument();
+  expect(screen.getByText('WHITE BRIDGE')).toBeInTheDocument();
+  expect(container.firstChild.firstChild.classList.contains('badge')).toBe(true);
+  expect(container).toMatchSnapshot();
+});
+

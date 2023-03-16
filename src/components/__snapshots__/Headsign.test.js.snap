@@ -25,3 +25,19 @@ exports[`renders Headsign with Letter 1`] = `
   </span>
 </div>
 `;
+
+exports[`renders Headsign with Letter 2`] = `
+<div>
+  <span
+    class="trip-headsign"
+  >
+    <span
+      class="badge text-bg-secondary"
+    >
+      A
+    </span>
+     
+    WHITE BRIDGE
+  </span>
+</div>
+`;
