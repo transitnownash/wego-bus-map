@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Wrapper for fetch
 export async function getJSON(url, options={}) {
-  const { timeout = 60000 } = options;
+  const { timeout = 60000 * 2 } = options;
   const response = await axios.get(url, {
     ...options,
     timeout: timeout

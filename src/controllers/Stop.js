@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useRef, useState } from 'react';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import TransitMap from '../components/TransitMap';
@@ -49,7 +47,6 @@ function Stops() {
   const [isLoadingTripDate, setIsLoadingTripDate] = useState(false);
   const map = useRef(null);
   const params = useParams();
-
 
   // Consolidated check that things are ready to go
   const isUIReady = [
@@ -226,15 +223,28 @@ function Stops() {
         <div className="text-center my-2"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + stop.stop_lat + '%2C' + stop.stop_lon} className="btn btn-secondary btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
         {stop.child_stops.length > 0 && (
           <div className="card mb-3 small">
-            <div className="card-header">Station Stops</div>
+            <div className="card-header"><strong>Station Stops</strong></div>
             <div className="card-body">
-              <div className="row">
-                {stop.child_stops.map((item) => {
-                  return(
-                    <div key={item.id} className="col-sm-6 col-md-4 col-lg-3"><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></div>
-                  );
-                })}
-              </div>
+              <table className="table table-sm small">
+                <thead>
+                  <tr>
+                    <th>Stop Code</th>
+                    <th>Stop Name</th>
+                    <th>Stop Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stop.child_stops.map((item) => {
+                    return(
+                      <tr key={item.id}>
+                        <td><Link to={'/stops/' + item.stop_code}><span className='stop-code badge bg-white text-black border border-secondary'>{item.stop_code}</span></Link></td>
+                        <td><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></td>
+                        <td>{item.stop_desc}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
