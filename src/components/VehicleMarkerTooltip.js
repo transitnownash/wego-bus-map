@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tooltip } from 'react-leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBus, faMap } from '@fortawesome/free-solid-svg-icons';
+import { faBus, faClock, faCompass, faMap, faPeopleGroup, faTachometer } from '@fortawesome/free-solid-svg-icons';
+import { renderBearing, renderSpeed, renderUnixTimestamp } from './../util.js';
 import L from 'leaflet';
 import TransitRouteHeader from './TransitRouteHeader';
 
@@ -24,6 +25,24 @@ function VehicleMarkerTooltip({vehiclePositionData, route, alerts}) {
             <tr>
               <th><FontAwesomeIcon icon={faMap}/> Trip</th>
               <td>{vehiclePositionData.vehicle.trip.trip_id}</td>
+            </tr>
+            <tr>
+              <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
+              <td>{renderBearing(vehiclePositionData.vehicle.position.bearing)}</td>
+            </tr>
+            <tr>
+              <th><FontAwesomeIcon icon={faTachometer} fixedWidth/> Speed</th>
+              <td>{renderSpeed(vehiclePositionData.vehicle.position.speed)}</td>
+            </tr>
+            {vehiclePositionData.vehicle.occupancy_status && (
+              <tr>
+                <th><FontAwesomeIcon icon={faPeopleGroup} fixedWidth/> Occupancy</th>
+                <td>{vehiclePositionData.vehicle.occupancy_status}</td>
+              </tr>
+            )}
+            <tr>
+              <th><FontAwesomeIcon icon={faClock} fixedWidth/> Updated</th>
+              <td>{renderUnixTimestamp(vehiclePositionData.vehicle.timestamp)}</td>
             </tr>
           </tbody>
         </table>
