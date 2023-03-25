@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup, GeoJSON } from 'react-leaflet';
 import VehicleMarker from './VehicleMarker';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -15,6 +15,7 @@ import LocationMarker from './LocationMarker';
 import BCycleMarker from './BCycleMarker';
 import StopMarker from './StopMarker';
 import LocateButton from './LocateButton';
+import countyBorders from '../lib/davidson_county_borders.json';
 
 // Fix paths for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -165,6 +166,11 @@ function TransitMap({routes, agencies, vehicleMarkers, routeShapes, routeStops, 
              </LayerGroup>
           </LayersControl.Overlay>
         }
+
+        <LayersControl.Overlay checked={true} name="City Border">
+          <GeoJSON data={countyBorders} style={{fillColor: 'transparent', opacity: 0.5, color: 'gray', dashArray: 4 }}></GeoJSON>
+        </LayersControl.Overlay>
+
         {(typeof mapControls.topRight !== 'undefined') &&
           (
             <>{mapControls.topRight}</>
