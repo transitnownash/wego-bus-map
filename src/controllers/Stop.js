@@ -159,11 +159,13 @@ function Stops() {
   // Filter trip updates to a single stop
   let stopTripUpdates = [];
   tripUpdates.forEach(tu => {
-    tu.trip_update.stop_time_update.forEach(u => {
-      if (u.stop_id === stop.stop_code) {
-        stopTripUpdates.push(tu);
-      }
-    });
+    if (tu.trip_update.stop_time_update) {
+      tu.trip_update.stop_time_update.forEach(u => {
+        if (u.stop_id === stop.stop_code) {
+          stopTripUpdates.push(tu);
+        }
+      });
+    }
   });
 
   // Sort trips by time at stop
