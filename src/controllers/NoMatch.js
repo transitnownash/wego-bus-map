@@ -1,9 +1,9 @@
 import React from 'react';
-import TitleBar from "../components/TitleBar";
-import Footer from '../components/Footer';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/Footer';
+import TitleBar from '../components/TitleBar';
 
 function NoMatch() {
   return (

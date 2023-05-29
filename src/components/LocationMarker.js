@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { useState } from "react";
-import { Marker, Popup, Circle, useMapEvents } from "react-leaflet";
+import React, { useEffect, useState } from 'react';
+import {
+  Marker, Popup, Circle, useMapEvents,
+} from 'react-leaflet';
 import L from 'leaflet';
 import userLocationIcon from '../resources/user-location.svg';
 import { getJSON } from '../util';
@@ -19,7 +20,7 @@ function LocationMarker() {
       return;
     }
     console.log(position);
-    getJSON(GTFS_BASE_URL + '/stops/near/' + position.lat.toFixed(4) + ',' + position.lng.toFixed(4) + '/' + SEARCH_DISTANCE_IN_METERS + '.json')
+    getJSON(`${GTFS_BASE_URL}/stops/near/${position.lat.toFixed(4)},${position.lng.toFixed(4)}/${SEARCH_DISTANCE_IN_METERS}.json`)
       .then((s) => setStops(s.data));
   }, [position]);
 
@@ -28,8 +29,8 @@ function LocationMarker() {
       iconUrl: userLocationIcon,
       iconSize: [32, 32],
       popupAnchor: [0, -14],
-      shadowUrl: null
-    }
+      shadowUrl: null,
+    },
   });
   const icon = new LocationMarkerIcon();
 
@@ -45,8 +46,8 @@ function LocationMarker() {
     },
     locationerror(e) {
       console.error(e);
-      window.alert('Unable to find your location. (' + e.message + ')');
-    }
+      window.alert(`Unable to find your location. (${e.message})`);
+    },
   });
 
   return position === null ? null : (
@@ -54,13 +55,13 @@ function LocationMarker() {
       <Marker position={position} icon={icon}>
         <Popup><strong>Your location.</strong><br />Accuracy: {accuracy.toFixed(1)} meters</Popup>
       </Marker>
-      {stops.map((item) => {
-        return(
+      {stops.map((item) => (
           <StopMarker key={item.id} stop={item} />
-        );
-      })}
+      ))}
       <Circle center={position} radius={accuracy}></Circle>
-      <Circle center={position} radius={SEARCH_DISTANCE_IN_METERS} pathOptions={{fill: false, color: '#666', weight: '3', dashArray: '20, 20', dashOffset: '20'}}></Circle>
+      <Circle center={position} radius={SEARCH_DISTANCE_IN_METERS} pathOptions={{
+        fill: false, color: '#666', weight: '3', dashArray: '20, 20', dashOffset: '20',
+      }}></Circle>
     </>
   );
 }

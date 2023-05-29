@@ -1,8 +1,8 @@
 /* globals test */
 
 import React from 'react';
-import LocateButton from './LocateButton';
 import { createRoot } from 'react-dom/client';
+import LocateButton from './LocateButton';
 
 test('renders LocateButton', () => {
   const div = document.createElement('div');

@@ -1,15 +1,15 @@
 /* globals test, expect */
 
 import React from 'react';
-import Footer from './Footer';
 import { render } from '@testing-library/react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Footer from './Footer';
 
 test('renders Footer', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <Footer />
-    </Router>
+    </Router>,
   );
   expect(container).toMatchSnapshot();
 });

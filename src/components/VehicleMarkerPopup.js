@@ -2,25 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Popup } from 'react-leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
-import { isStopTimeUpdateLaterThanNow, renderBearing, renderSpeed, renderUnixTimestamp } from './../util.js';
+import {
+  faBus, faMap, faMapSigns, faCompass, faTachometer, faClock, faSpinner, faPeopleGroup,
+} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import TransitRouteHeader from './TransitRouteHeader.js';
 import { Tab, Tabs } from 'react-bootstrap';
+import {
+  isStopTimeUpdateLaterThanNow, renderBearing, renderSpeed, renderUnixTimestamp,
+} from '../util';
+import TransitRouteHeader from './TransitRouteHeader.js';
 import StopCode from './StopCode.js';
 import StopTimeSequence from './StopTimeSequence.js';
 import TimePoint from './TimePoint.js';
 import TripProgressBar from './TripProgressBar.js';
 import Headsign from './Headsign.js';
 
-function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdate, alerts}) {
+function VehicleMarkerPopup({
+  vehiclePositionData, trip, route, agency, tripUpdate, alerts,
+}) {
   let isTripTabActive = false;
 
   const trip_headsign = (trip.trip_headsign)
     ? (<Headsign headsign={trip.trip_headsign} />)
-    : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>)
-  ;
-
+    : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>);
   let tripStopTimes = [];
   if (trip.trip_gid && tripUpdate.trip_update && tripUpdate.trip_update.stop_time_update.length > 0) {
     isTripTabActive = true;
@@ -33,9 +37,9 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
     });
   }
 
-  return(
+  return (
     <Popup>
-      <div className="popup-content" style={{minWidth: '300px'}}>
+      <div className="popup-content" style={{ minWidth: '300px' }}>
         <TransitRouteHeader route={route} alerts={alerts} showRouteType={false}></TransitRouteHeader>
         <Tabs
           id="controlled-tab-example"
@@ -43,7 +47,7 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
           fill={true}
         >
           <Tab eventKey="home" title="Vehicle">
-            <table className="table table-borderless table table-sm small" style={{minWidth: '250px'}}>
+            <table className="table table-borderless table table-sm small" style={{ minWidth: '250px' }}>
               <tbody>
                 <tr>
                   <th className="text-nowrap"><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>
@@ -55,7 +59,7 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
                 </tr>
                 <tr>
                   <th><FontAwesomeIcon icon={faMap} fixedWidth/> Trip</th>
-                  <td><Link to={'/trips/' + trip.trip_gid}>{trip.trip_gid}</Link></td>
+                  <td><Link to={`/trips/${trip.trip_gid}`}>{trip.trip_gid}</Link></td>
                 </tr>
                 <tr>
                   <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
@@ -81,17 +85,17 @@ function VehicleMarkerPopup({vehiclePositionData, trip, route, agency, tripUpdat
               <TripProgressBar trip={trip} tripUpdates={[tripUpdate]} />
             )}
           </Tab>
-          <Tab eventKey="trip" title="Stop Times" disabled={!isTripTabActive} className='overflow-auto mb-2' style={{maxHeight: '200px'}}>
+          <Tab eventKey="trip" title="Stop Times" disabled={!isTripTabActive} className='overflow-auto mb-2' style={{ maxHeight: '200px' }}>
             {isTripTabActive && (
               <table className="table table-sm table-striped small">
                 <tbody>
                   {tripStopTimes.map((item) => {
                     const updateTime = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === item.stop_sequence) || {};
-                    return(
+                    return (
                       <tr key={item.id}>
                         <td><StopTimeSequence stopTime={item} /></td>
                         <td>
-                          <div className="mb-1"><Link to={'/stops/' + item.stop.stop_code}><strong>{item.stop.stop_name}</strong></Link></div>
+                          <div className="mb-1"><Link to={`/stops/${item.stop.stop_code}`}><strong>{item.stop.stop_name}</strong></Link></div>
                           <div className="small"><StopCode stop={item.stop} /> {item.stop.stop_desc}</div>
                         </td>
                         <td className="text-center text-nowrap"><TimePoint scheduleData={item} updateData={updateTime} /></td>
@@ -118,12 +122,12 @@ VehicleMarkerPopup.propTypes = {
   trip: PropTypes.object.isRequired,
   agency: PropTypes.object.isRequired,
   tripUpdate: PropTypes.object,
-  alerts: PropTypes.array
+  alerts: PropTypes.array,
 };
 
 VehicleMarkerPopup.defaultProps = {
   tripUpdate: {},
-  alerts: []
+  alerts: [],
 };
 
 export default VehicleMarkerPopup;

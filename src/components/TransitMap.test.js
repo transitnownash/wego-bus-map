@@ -1,8 +1,8 @@
 /* globals test */
 
 import React, { createRef } from 'react';
-import TransitMap from './TransitMap';
 import { createRoot } from 'react-dom/client';
+import TransitMap from './TransitMap';
 
 test('renders TransitMap', () => {
   const div = document.createElement('div');

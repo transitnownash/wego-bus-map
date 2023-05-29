@@ -1,15 +1,15 @@
 /* globals test, expect */
 
 import React from 'react';
-import MapLinks from './MapLinks';
 import { render } from '@testing-library/react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import MapLinks from './MapLinks';
 
 test('renders MapLinks', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <MapLinks />
-    </Router>
+    </Router>,
   );
   expect(container).toMatchSnapshot();
 });

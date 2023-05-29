@@ -1,8 +1,9 @@
 /* globals test */
 
 import React from 'react';
-import BCycleMarker from './BCycleMarker';
 import { createRoot } from 'react-dom/client';
+import BCycleMarker from './BCycleMarker';
+
 const stationInformationFixture = require('../fixtures/bcycle-station_information.json');
 const stationStatusFixture = require('../fixtures/bcycle-station_status.json');
 

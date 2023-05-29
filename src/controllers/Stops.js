@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LoadingScreen from '../components/LoadingScreen';
-import { getJSON } from './../util.js';
+import { getJSON } from '../util';
 import DataFetchError from '../components/DataFetchError';
 import LocateButton from '../components/LocateButton';
 import MapLinks from '../components/MapLinks';
@@ -26,17 +26,17 @@ function Stops() {
   const isUIReady = [isRoutesLoaded, isStopsLoaded, isAlertsLoaded].every((a) => a === true);
 
   useEffect(() => {
-    getJSON(GTFS_BASE_URL + '/routes.json')
+    getJSON(`${GTFS_BASE_URL}/routes.json`)
       .then((r) => setRouteData(r.data))
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops.json', { params: { per_page: 2000 } })
+    getJSON(`${GTFS_BASE_URL}/stops.json`, { params: { per_page: 2000 } })
       .then((s) => setStops(s.data))
       .then(() => setStopsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
       .then((data) => setAlerts(data))
       .then(() => setAlertsLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -46,7 +46,7 @@ function Stops() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
         .then((data) => setAlerts(data))
         .catch((error) => setDataFetchError(error));
     }, REFRESH_ALERTS_TTL);
@@ -58,11 +58,11 @@ function Stops() {
   }, [isUIReady]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+    return (<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
   if (!isUIReady) {
-    return(<LoadingScreen hideTitleBar={true}></LoadingScreen>);
+    return (<LoadingScreen hideTitleBar={true}></LoadingScreen>);
   }
 
   // Remove invalid alerts (no informed entity)
@@ -79,20 +79,18 @@ function Stops() {
         <AlertButton alerts={allAlerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
         <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
       </div>
-    )
+    ),
   };
 
-  const locateUserOnMap = function(map) {
+  const locateUserOnMap = function (map) {
     if (typeof map.current !== 'undefined' && map.current) {
       map.current.locate();
     }
   };
 
-  const routeStops = stops.map((item) => {
-    return { id: item.id, stop: item };
-  });
+  const routeStops = stops.map((item) => ({ id: item.id, stop: item }));
 
-  return(
+  return (
     <div className="stops">
       <TransitMap map={map} routeStops={routeStops} alerts={allAlerts} mapControls={mapControls}></TransitMap>
       <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>

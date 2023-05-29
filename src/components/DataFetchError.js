@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import NoMatch from '../controllers/NoMatch';
 import TitleBar from './TitleBar';
 import Footer from './Footer';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 
-function DataFetchError({error}) {
+function DataFetchError({ error }) {
   const navigate = useNavigate();
 
   // Send error context to browser
@@ -24,10 +24,10 @@ function DataFetchError({error}) {
 
   // Error returned was a 404, switch to that instead
   if (typeof error.response !== 'undefined' && error.response.status === 404) {
-    return(<NoMatch></NoMatch>);
+    return (<NoMatch></NoMatch>);
   }
 
-  return(
+  return (
     <>
       <TitleBar></TitleBar>
       <div className="container">
@@ -50,7 +50,7 @@ function DataFetchError({error}) {
 }
 
 DataFetchError.propTypes = {
-  error: PropTypes.any.isRequired
+  error: PropTypes.any.isRequired,
 };
 
 export default DataFetchError;

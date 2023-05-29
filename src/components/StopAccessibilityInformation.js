@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { faWheelchair, faQuestionCircle, faBan } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWheelchair, faQuestionCircle, faBan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export function StopAccessibilityInformation({stop}) {
+export function StopAccessibilityInformation({ stop }) {
   let wheelchair_boarding = '';
   switch (stop.wheelchair_boarding) {
-    case "1":
+    case '1':
       wheelchair_boarding = (
         <span className="me-2">
           <FontAwesomeIcon icon={faWheelchair} fixedWidth={true}></FontAwesomeIcon> Some vehicles at this stop can be boarded by a rider in a wheelchair.
@@ -14,7 +14,7 @@ export function StopAccessibilityInformation({stop}) {
       );
       break;
 
-    case "2":
+    case '2':
       wheelchair_boarding = (
         <>
           <span className="fa-layers fa-fw me-1">
@@ -26,7 +26,7 @@ export function StopAccessibilityInformation({stop}) {
       );
       break;
 
-    case "0":
+    case '0':
     default:
       wheelchair_boarding = (
         <>
@@ -43,7 +43,7 @@ export function StopAccessibilityInformation({stop}) {
 }
 
 StopAccessibilityInformation.propTypes = {
- stop: PropTypes.object.isRequired
+  stop: PropTypes.object.isRequired,
 };
 
 export default StopAccessibilityInformation;

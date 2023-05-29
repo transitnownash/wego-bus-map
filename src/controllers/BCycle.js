@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBicycle, faClock, faExclamationTriangle, faMapMarkedAlt, faMobile,
+} from '@fortawesome/free-solid-svg-icons';
 import TransitMap from '../components/TransitMap';
 import LoadingScreen from '../components/LoadingScreen';
 import { getJSON, renderUnixTimestamp } from '../util';
 import DataFetchError from '../components/DataFetchError';
 import TitleBar from '../components/TitleBar';
 import Footer from '../components/Footer';
-import L from 'leaflet';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBicycle, faClock, faExclamationTriangle, faMapMarkedAlt, faMobile } from '@fortawesome/free-solid-svg-icons';
 
 const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville';
 const REFRESH_GBFS_TTL = 60 * 1000;
@@ -25,12 +27,12 @@ function BCycle() {
   const isUIReady = [isBCycleStationsLoaded, isBCycleStationsStatusLoaded].every((a) => a === true);
 
   useEffect(() => {
-    getJSON(GBFS_BASE_URL + '/station_information.json')
+    getJSON(`${GBFS_BASE_URL}/station_information.json`)
       .then((s) => setBCycleStations(s.data.stations))
       .then(() => setBCycleStationsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GBFS_BASE_URL + '/station_status.json')
+    getJSON(`${GBFS_BASE_URL}/station_status.json`)
       .then((s) => setBCycleStationStatus(s.data.stations))
       .then(() => setBCycleStationsStatusLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -40,7 +42,7 @@ function BCycle() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GBFS_BASE_URL + '/station_status.json')
+      getJSON(`${GBFS_BASE_URL}/station_status.json`)
         .then((s) => setBCycleStationStatus(s.data.stations));
     }, REFRESH_GBFS_TTL);
 
@@ -51,17 +53,17 @@ function BCycle() {
   }, [isUIReady]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+    return (<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
   if (!isUIReady) {
-    return(<LoadingScreen />);
+    return (<LoadingScreen />);
   }
 
   // Combine BCycle data into one hash
   if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
     bCycleStations.forEach((station, index) => {
-      bCycleStations[index].status = bCycleStationsStatus.find(s => station.station_id === s.station_id);
+      bCycleStations[index].status = bCycleStationsStatus.find((s) => station.station_id === s.station_id);
     });
   }
 
@@ -91,11 +93,11 @@ function BCycle() {
   const center = getStationBounds.getCenter();
 
   if (map.current && !isMapRendered) {
-    map.current.fitBounds(getStationBounds, { padding: [25, 25]});
+    map.current.fitBounds(getStationBounds, { padding: [25, 25] });
     setMapRendered(true);
   }
 
-  return(
+  return (
     <div>
       <TitleBar />
       <div className="container">
@@ -128,7 +130,6 @@ function BCycle() {
         </div>
         <div className="">
           {bCycleStations.map((station) => {
-
             // Ignore if stations doesn't have status, or if it isn't "installed"
             if (typeof station.status === 'undefined' || !station.status.is_installed) {
               return;
@@ -148,7 +149,7 @@ function BCycle() {
               );
             }
 
-            return(
+            return (
               <div key={station.station_id} className="card mb-3">
                 <div className="card-header bcycle-station-name">{station.name}</div>
                 {warning}
@@ -173,7 +174,7 @@ function BCycle() {
                     <div className="col-sm-6 small">
                       <dl className="row mb-0">
                         <dt className="col-5"><FontAwesomeIcon icon={faMapMarkedAlt} fixedWidth={true}></FontAwesomeIcon> Address</dt>
-                        <dd className="col-7"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + station.lat + '%2C' + station.lon} rel='noreferrer' target="_blank">{station.address}</a></dd>
+                        <dd className="col-7"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${station.lat}%2C${station.lon}`} rel='noreferrer' target="_blank">{station.address}</a></dd>
                         <dt className="col-5"><FontAwesomeIcon icon={faMobile} fixedWidth={true}></FontAwesomeIcon> Rental Link</dt>
                         <dd className="col-7">
                           <div className="btn-group" role="group">

@@ -1,16 +1,16 @@
 /* globals test, expect */
 
 import React from 'react';
-import StopCode from './StopCode';
 import { render, screen } from '@testing-library/react';
-import stopFixture from '../fixtures/stop-10AHERNN.json';
 import { BrowserRouter as Router } from 'react-router-dom';
+import StopCode from './StopCode';
+import stopFixture from '../fixtures/stop-10AHERNN.json';
 
 test('renders StopCode', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <StopCode stop={stopFixture} />
-    </Router>
+    </Router>,
   );
   expect(screen.getByText('10AHERNN')).toBeInTheDocument();
   expect(container).toMatchSnapshot();

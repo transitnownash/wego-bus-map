@@ -1,9 +1,7 @@
-
-
 import React, { useEffect, useState } from 'react';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
-import {getJSON} from './../util.js';
+import { getJSON } from '../util';
 import Footer from '../components/Footer';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
@@ -23,12 +21,12 @@ function TransitRoutes() {
   const isUIReady = [isRoutesLoaded, isAlertLoaded].every((a) => a === true);
 
   useEffect(() => {
-    getJSON(GTFS_BASE_URL + '/routes.json')
+    getJSON(`${GTFS_BASE_URL}/routes.json`)
       .then((r) => setRouteData(r.data))
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -37,7 +35,7 @@ function TransitRoutes() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
@@ -47,25 +45,23 @@ function TransitRoutes() {
   }, [isUIReady]);
 
   if (!isUIReady) {
-    return(<LoadingScreen />);
+    return (<LoadingScreen />);
   }
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError} />);
+    return (<DataFetchError error={dataFetchError} />);
   }
 
-  const sortedRoutes = routes.sort((a, b) => {
-    return parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10);
-  });
+  const sortedRoutes = routes.sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10));
 
-  return(
+  return (
     <div>
       <TitleBar></TitleBar>
       <div className="container transit-routes">
         <RouteLegend />
         {sortedRoutes.map((item, _index) => {
           const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && a.alert.informed_entity[0].route_id === item.route_short_name);
-          return(<TransitRouteHeader key={item.id} route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>);
+          return (<TransitRouteHeader key={item.id} route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>);
         })}
       </div>
       <Footer></Footer>

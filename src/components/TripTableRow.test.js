@@ -1,8 +1,8 @@
 /* globals test */
 
 import React from 'react';
-import TripTableRow from './TripTableRow';
 import { createRoot } from 'react-dom/client';
+import TripTableRow from './TripTableRow';
 
 test('renders TripTableRow', () => {
   const div = document.createElement('div');

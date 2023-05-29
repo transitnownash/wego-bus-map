@@ -4,8 +4,8 @@ import TitleBar from './TitleBar';
 import logo from '../resources/logo.svg';
 import './LoadingScreen.scss';
 
-function LoadingScreen({hideTitleBar}) {
-  return(
+function LoadingScreen({ hideTitleBar }) {
+  return (
     <div>
       <TitleBar hide={hideTitleBar}></TitleBar>
       <div className="loading-screen">
@@ -17,11 +17,11 @@ function LoadingScreen({hideTitleBar}) {
 }
 
 LoadingScreen.propTypes = {
-  hideTitleBar: PropTypes.bool
+  hideTitleBar: PropTypes.bool,
 };
 
 LoadingScreen.defaultProps = {
-  hideTitleBar: false
+  hideTitleBar: false,
 };
 
 export default LoadingScreen;

@@ -6,11 +6,13 @@ import HidePastTripsToggle from './HidePastTripsToggle';
 import TimePointLegend from './TimePointLegend';
 import DateSelector from './DateSelector';
 
-function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFieldChange, isLoadingTripDate}) {
+function TripTable({
+  routeTrips, route, tripUpdates, scheduleDate, handleDateFieldChange, isLoadingTripDate,
+}) {
   const [hidePastTrips, setHidePastTrips] = useState(true);
 
   if (routeTrips.length === 0) {
-    return(
+    return (
       <>
         <div className="alert alert-info">
           <div className="d-flex flex-wrap align-items-center">
@@ -28,11 +30,11 @@ function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFiel
     );
   }
 
-  const handleCheckboxChange = function(e) {
+  const handleCheckboxChange = function (e) {
     setHidePastTrips(e.target.checked === true);
   };
 
-  return(
+  return (
     <>
       <div className="d-flex align-items-center mb-2">
         <div className="flex-grow-1">
@@ -60,10 +62,10 @@ function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFiel
             <tbody>
               {routeTrips.filter((t) => t.direction_id === '1').map((item, _index) => {
                 const tripUpdate = tripUpdates.find((i) => item.trip_gid === i.trip_update.trip.trip_id) || {};
-                return(<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={hidePastTrips} tripUpdate={tripUpdate}></TripTableRow>);
+                return (<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={hidePastTrips} tripUpdate={tripUpdate}></TripTableRow>);
               })}
-              {routeTrips.filter((t) => t.direction_id === '1').length === 0 &&
-                (<TripTableRowEmpty/>)
+              {routeTrips.filter((t) => t.direction_id === '1').length === 0
+                && (<TripTableRowEmpty/>)
               }
             </tbody>
           </table>
@@ -83,7 +85,7 @@ function TripTable({routeTrips, route, tripUpdates, scheduleDate, handleDateFiel
             <tbody>
               {routeTrips.filter((t) => t.direction_id !== '1').map((item, _index) => {
                 const tripUpdate = tripUpdates.find((i) => item.trip_gid === i.trip_update.trip.trip_id) || {};
-                return(<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={hidePastTrips} tripUpdate={tripUpdate}></TripTableRow>);
+                return (<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={hidePastTrips} tripUpdate={tripUpdate}></TripTableRow>);
               })}
               {routeTrips.filter((t) => t.direction_id !== '1').length === 0 && (
                 <TripTableRowEmpty />
@@ -103,12 +105,12 @@ TripTable.propTypes = {
   tripUpdates: PropTypes.array,
   scheduleDate: PropTypes.any,
   handleDateFieldChange: PropTypes.any,
-  isLoadingTripDate: PropTypes.bool
+  isLoadingTripDate: PropTypes.bool,
 };
 
 TripTable.defaultProps = {
   tripUpdates: [],
-  isLoadingTripDate: false
+  isLoadingTripDate: false,
 };
 
 export default TripTable;

@@ -1,9 +1,10 @@
 /* globals test */
 
 import React from 'react';
-import VehicleMarker from './VehicleMarker';
 import { createRoot } from 'react-dom/client';
 import { MapContainer } from 'react-leaflet';
+import VehicleMarker from './VehicleMarker';
+
 const vehiclePositionsFixture = require('../fixtures/vehicle_positions.json');
 const tripFixture = require('../fixtures/trips-270708.json');
 const agenciesFixture = require('../fixtures/agencies.json');
@@ -19,6 +20,6 @@ test('renders VehicleMarker', () => {
   root.render(
     <MapContainer>
       <VehicleMarker vehiclePositionData={vehiclePositionData} route={routeFixture} trip={tripFixture} agency={agency} stopSetter={stopSetterFunc} shapeSetter={shapeSetterFunc}/>
-    </MapContainer>
+    </MapContainer>,
   );
 });

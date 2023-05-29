@@ -1,9 +1,10 @@
 /* globals test */
 
 import React from 'react';
-import VehicleMarkerPopup from './VehicleMarkerPopup';
 import { createRoot } from 'react-dom/client';
 import { MapContainer } from 'react-leaflet';
+import VehicleMarkerPopup from './VehicleMarkerPopup';
+
 const vehiclePositionsFixture = require('../fixtures/vehicle_positions.json');
 const tripFixture = require('../fixtures/trips-270708.json');
 const agenciesFixture = require('../fixtures/agencies.json');
@@ -17,6 +18,6 @@ test('renders VehicleMarkerPopup', () => {
   root.render(
     <MapContainer>
       <VehicleMarkerPopup vehiclePositionData={vehiclePositionData} route={routeFixture} trip={tripFixture} agency={agency} />
-    </MapContainer>
+    </MapContainer>,
   );
 });

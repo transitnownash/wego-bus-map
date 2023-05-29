@@ -1,19 +1,19 @@
 import React from 'react';
-import { formatStopTimeUpdate } from '../util';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { formatStopTimeUpdate } from '../util';
 import './TimePoint.scss';
 
-function TimePoint({scheduleData, updateData}) {
+function TimePoint({ scheduleData, updateData }) {
   function formatTripTime(time) {
     const date = new Date();
     const [hour, minute, second] = time.split(':');
     date.setHours(hour);
     date.setMinutes(minute);
     date.setSeconds(second);
-    return date.toLocaleTimeString([], {hour: 'numeric', minute:'2-digit'});
+    return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
   }
 
   function renderNextDayIcon(isNextDay) {
@@ -48,7 +48,7 @@ function TimePoint({scheduleData, updateData}) {
 
   // If no update provided (e.g. past or far-future trip), return scheduled
   if (!updateTime) {
-    return(
+    return (
       <div className="time-point" title="Scheduled Time">
         {renderNextDayIcon(isNextDay)}
         {scheduleTime}{scheduleDepartNote}
@@ -57,7 +57,7 @@ function TimePoint({scheduleData, updateData}) {
   }
   updateTime = formatStopTimeUpdate(updateData);
 
-  return(
+  return (
     <div className="time-point">
       <div>
         <strong className="text-dark" title="Updated Time">
@@ -85,11 +85,11 @@ function TimePoint({scheduleData, updateData}) {
 
 TimePoint.propTypes = {
   scheduleData: PropTypes.object.isRequired,
-  updateData: PropTypes.object
+  updateData: PropTypes.object,
 };
 
 TimePoint.defaultProps = {
-  updateData: {}
+  updateData: {},
 };
 
 export default TimePoint;

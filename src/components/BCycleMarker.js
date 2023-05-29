@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
-import { Marker, Popup, Tooltip } from "react-leaflet";
-import { renderUnixTimestamp } from "../util";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBicycle, faClock, faExclamationTriangle, faMapMarkedAlt, faMobile } from "@fortawesome/free-solid-svg-icons";
+import { Marker, Popup, Tooltip } from 'react-leaflet';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBicycle, faClock, faExclamationTriangle, faMapMarkedAlt, faMobile,
+} from '@fortawesome/free-solid-svg-icons';
+import { renderUnixTimestamp } from '../util';
 import bCycleIconImage from '../resources/bcycle.svg';
 import './BCycleMarker.scss';
 
-function BCycleMarker({station}) {
+function BCycleMarker({ station }) {
   // Ignore if stations doesn't have status, or if it isn't "installed"
   if (typeof station.status === 'undefined' || !station.status.is_installed) {
     return;
@@ -34,14 +36,14 @@ function BCycleMarker({station}) {
     options: {
       iconUrl: bCycleIconImage,
       iconSize: [24, 24],
-      shadowUrl: null
-    }
+      shadowUrl: null,
+    },
   });
   const bCycleIcon = new bCycleMarkerIcon();
 
   // Shared between popup and tooltip
   function renderStationHeader() {
-    return(
+    return (
       <>
         <div className="bcycle-station-name">{station.name}</div>
         {warning}
@@ -63,22 +65,22 @@ function BCycleMarker({station}) {
     );
   }
 
-  return(
+  return (
     <Marker icon={bCycleIcon} position={[station.lat, station.lon]} opacity={opacity}>
-      {L.Browser.mobile === false &&
-        <Tooltip>
-          <div style={{width: '300px'}}>
+      {L.Browser.mobile === false
+        && <Tooltip>
+          <div style={{ width: '300px' }}>
             {renderStationHeader()}
           </div>
         </Tooltip>
       }
       <Popup>
-        <div style={{width: '300px'}}>
+        <div style={{ width: '300px' }}>
           {renderStationHeader()}
           <hr />
           <dl className="row">
             <dt className="col-5"><FontAwesomeIcon icon={faMapMarkedAlt} fixedWidth={true}></FontAwesomeIcon> Address</dt>
-            <dd className="col-7"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + station.lat + '%2C' + station.lon} rel='noreferrer' target="_blank">{station.address}</a></dd>
+            <dd className="col-7"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${station.lat}%2C${station.lon}`} rel='noreferrer' target="_blank">{station.address}</a></dd>
             <dt className="col-5"><FontAwesomeIcon icon={faMobile} fixedWidth={true}></FontAwesomeIcon> Rental Link</dt>
             <dd className="col-7">
               <div className="btn-group" role="group">
@@ -97,7 +99,7 @@ function BCycleMarker({station}) {
 }
 
 BCycleMarker.propTypes = {
-  station: PropTypes.object.isRequired
+  station: PropTypes.object.isRequired,
 };
 
 export default BCycleMarker;

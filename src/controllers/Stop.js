@@ -1,4 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft, faArrowRight, faDirections, faLandmark, faWarning,
+} from '@fortawesome/free-solid-svg-icons';
+import { useCookies } from 'react-cookie';
+import dayjs from 'dayjs';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import TransitMap from '../components/TransitMap';
 import TitleBar from '../components/TitleBar';
@@ -9,15 +16,10 @@ import HidePastTripsToggle from '../components/HidePastTripsToggle';
 import Footer from '../components/Footer';
 import DataFetchError from '../components/DataFetchError';
 import AlertList from '../components/AlertList';
-import { Link, useParams } from 'react-router-dom';
-import { getJSON, isStopTimeUpdateLaterThanNow } from './../util.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faDirections, faLandmark, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { getJSON, isStopTimeUpdateLaterThanNow } from '../util';
 import TimePointLegend from '../components/TimePointLegend';
 import StopCode from '../components/StopCode';
 import DateSelector from '../components/DateSelector';
-import { useCookies } from 'react-cookie';
-import dayjs from 'dayjs';
 import Headsign from '../components/Headsign';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
@@ -51,62 +53,62 @@ function Stops() {
   // Consolidated check that things are ready to go
   const isUIReady = [
     isStopLoaded, isTripsLoaded, isRoutesLoaded, isAgenciesLoaded,
-    isVehiclePositionLoaded, isAlertsLoaded, isTripUpdatesLoaded
+    isVehiclePositionLoaded, isAlertsLoaded, isTripUpdatesLoaded,
   ].every((a) => a === true);
 
-  const handleCheckboxChange = function(e) {
+  const handleCheckboxChange = function (e) {
     setHidePastTrips(e.target.checked === true);
   };
 
   useEffect(() => {
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '.json')
+    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}.json`)
       .then((s) => setStop(s))
       .then(() => setStopLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { date: scheduleDate, per_page: 2000 } })
+    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/trips.json`, { params: { date: scheduleDate, per_page: 2000 } })
       .then((t) => setTrips(t.data))
       .then(() => setTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/routes.json')
+    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/routes.json`)
       .then((r) => setRoutes(r.data))
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/agencies.json')
+    getJSON(`${GTFS_BASE_URL}/agencies.json`)
       .then((a) => setAgencies(a.data))
       .then(() => setAgenciesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
       .then((data) => setVehiclePositions(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
       .then((data) => setAlerts(data))
       .then(() => setAlertsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdatesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
     const refreshPositionsInterval = setInterval(() => {
-        if (!isUIReady) {
-          return;
-        }
-        getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
-          .then((data) => setVehiclePositions(data));
-      }, REFRESH_VEHICLE_POSITIONS_TTL);
+      if (!isUIReady) {
+        return;
+      }
+      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
+        .then((data) => setVehiclePositions(data));
+    }, REFRESH_VEHICLE_POSITIONS_TTL);
 
     const refreshAlertsInterval = setInterval(() => {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
@@ -114,7 +116,7 @@ function Stops() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
         .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
@@ -127,29 +129,29 @@ function Stops() {
   }, [isUIReady, params.stop_code]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+    return (<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
   if (!isUIReady) {
-    return(<LoadingScreen></LoadingScreen>);
+    return (<LoadingScreen></LoadingScreen>);
   }
 
   // Filter vehicle positions to relevant trips
   const filteredVehiclePositions = [];
   const tripsAtStop = trips.map((t) => t.trip_gid);
-  vehiclePositions.forEach(vp => {
+  vehiclePositions.forEach((vp) => {
     if (tripsAtStop.includes(vp.vehicle.trip.trip_id)) {
       filteredVehiclePositions.push(vp);
     }
   });
 
   // Filter alerts to single stop
-  let stopAlerts = [];
-  alerts.forEach(a => {
+  const stopAlerts = [];
+  alerts.forEach((a) => {
     if (typeof a.alert.informed_entity === 'undefined') {
       return;
     }
-    a.alert.informed_entity.forEach(e => {
+    a.alert.informed_entity.forEach((e) => {
       if (e.stop_id === stop.stop_code) {
         stopAlerts.push(a);
       }
@@ -157,10 +159,10 @@ function Stops() {
   });
 
   // Filter trip updates to a single stop
-  let stopTripUpdates = [];
-  tripUpdates.forEach(tu => {
+  const stopTripUpdates = [];
+  tripUpdates.forEach((tu) => {
     if (tu.trip_update.stop_time_update) {
-      tu.trip_update.stop_time_update.forEach(u => {
+      tu.trip_update.stop_time_update.forEach((u) => {
         if (u.stop_id === stop.stop_code) {
           stopTripUpdates.push(tu);
         }
@@ -188,41 +190,41 @@ function Stops() {
   }
 
   // Nest stops inside an object
-  const routeStops = stops.map((item) => {
-    return { id: item.id, stop: item };
-  });
+  const routeStops = stops.map((item) => ({ id: item.id, stop: item }));
 
   // Load in selected date
   const handleDateFieldChange = (event) => {
     if (!event.target.value) {
-      return;
+      return <></>;
     }
     setIsLoadingTripDate(true);
-    setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
+    setCookie('gtfs-schedule-date', event.target.value, {
+      path: '/', maxAge: 90, sameSite: 'none', secure: true,
+    });
     setScheduleDate(event.target.value);
-    getJSON(GTFS_BASE_URL + '/stops/' + params.stop_code + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
+    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/trips.json`, { params: { date: event.target.value, per_page: 500 } })
       .then((st) => setTrips(st.data))
       .then(() => setIsLoadingTripDate(false));
   };
 
-  return(
+  return (
     <div>
       <TitleBar></TitleBar>
       <div className="container">
         <div className="stop-name">{stop.stop_name}</div>
-        {stopAlerts.length > 0 &&
-          (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{marginTop: '-1em'}}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
+        {stopAlerts.length > 0
+          && (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
         }
         <div className="text-center p-2 mb-2">
           <div><StopCode stop={stop}/> {stop.stop_desc}</div>
           {stop.parent_station_gid && (
-            <div className="p-2 mb-2"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <strong>Inside <Link to={'/stops/' + stop.parent_station_gid}>{stop.parent_station.stop_name}</Link></strong></div>
+            <div className="p-2 mb-2"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> <strong>Inside <Link to={`/stops/${stop.parent_station_gid}`}>{stop.parent_station.stop_name}</Link></strong></div>
           )}
         </div>
         <div className="text-center p-2 mb-2">
           <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
-        <div className="text-center my-2"><a href={'https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=' + stop.stop_lat + '%2C' + stop.stop_lon} className="btn btn-secondary btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
+        <div className="text-center my-2"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${stop.stop_lat}%2C${stop.stop_lon}`} className="btn btn-secondary btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
         {stop.child_stops.length > 0 && (
           <div className="card mb-3 small">
             <div className="card-header"><strong>Station Stops</strong></div>
@@ -236,15 +238,13 @@ function Stops() {
                   </tr>
                 </thead>
                 <tbody>
-                  {stop.child_stops.map((item) => {
-                    return(
+                  {stop.child_stops.map((item) => (
                       <tr key={item.id}>
-                        <td><Link to={'/stops/' + item.stop_code}><span className='stop-code badge bg-white text-black border border-secondary'>{item.stop_code}</span></Link></td>
-                        <td><Link to={'/stops/' + item.stop_code}>{item.stop_name}</Link></td>
+                        <td><Link to={`/stops/${item.stop_code}`}><span className='stop-code badge bg-white text-black border border-secondary'>{item.stop_code}</span></Link></td>
+                        <td><Link to={`/stops/${item.stop_code}`}>{item.stop_name}</Link></td>
                         <td>{item.stop_desc}</td>
                       </tr>
-                    );
-                  })}
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -255,7 +255,7 @@ function Stops() {
             <div className="row mb-2">
               {routes.sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10)).map((item) => {
                 const routeAlerts = alerts.filter((a) => a.alert.informed_entity && a.alert.informed_entity[0].route_id === item.route_gid);
-                return(
+                return (
                   <div key={item.id} className="col-md-4">
                     <TransitRouteHeader route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
                   </div>
@@ -308,18 +308,18 @@ function Stops() {
                     let rowClasses = '';
                     if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate)) {
                       if (hidePastTrips) {
-                        return;
+                        return <></>;
                       }
                       rowClasses = 'border-start border-gray border-5';
                     }
 
-                    return(
+                    return (
                       <tr key={item.id} className={rowClasses}>
                         <td className="align-middle"><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
-                        <td className="align-middle"><Link to={'/trips/' + item.trip_gid}>{item.trip_gid}</Link></td>
+                        <td className="align-middle"><Link to={`/trips/${item.trip_gid}`}>{item.trip_gid}</Link></td>
                         <td className="align-middle">
                           <strong><Headsign headsign={item.trip_headsign} /></strong><br />
-                          {item.direction_id === "1"
+                          {item.direction_id === '1'
                             ? (<><FontAwesomeIcon icon={faArrowLeft} /> Inbound</>)
                             : (<><FontAwesomeIcon icon={faArrowRight} /> Outbound</>)
                           }
@@ -336,7 +336,7 @@ function Stops() {
             </div>
           </>
         )}
-        {trips.length == 0 && (
+        {trips.length === 0 && (
           <div className="alert alert-info">
             <div className="d-flex flex-wrap align-items-center">
               <div className="flex-grow-1">

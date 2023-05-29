@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import { useParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import dayjs from 'dayjs';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
-import { getJSON, formatShapePoints } from './../util.js';
+import { getJSON, formatShapePoints } from '../util';
 import AlertList from '../components/AlertList';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
-import { useCookies } from 'react-cookie';
-import dayjs from 'dayjs';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 10 * 1000;
@@ -46,46 +46,46 @@ function TransitRoute() {
   // Consolidated check that things are ready to go
   const isUIReady = [
     isRouteLoaded, isRouteTripsLoaded, isRouteStopsLoaded, isRouteShapesLoaded,
-    isAlertLoaded, isTripUpdateLoaded, isAgencyLoaded, isVehiclePositionLoaded
+    isAlertLoaded, isTripUpdateLoaded, isAgencyLoaded, isVehiclePositionLoaded,
   ].every((a) => a === true);
 
   useEffect(() => {
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '.json')
+    getJSON(`${GTFS_BASE_URL}/routes/${params.route_id}.json`)
       .then((r) => setRoute(r))
       .then(() => setRouteLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/stops.json', { params: { date: scheduleDate, per_page: 200 } })
+    getJSON(`${GTFS_BASE_URL}/routes/${params.route_id}/stops.json`, { params: { date: scheduleDate, per_page: 200 } })
       .then((rs) => setRouteStops(rs.data))
       .then(() => setRouteStopsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-     getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/shapes.json', { params: { date: scheduleDate, per_page: 200 } })
+    getJSON(`${GTFS_BASE_URL}/routes/${params.route_id}/shapes.json`, { params: { date: scheduleDate, per_page: 200 } })
       .then((rs) => setRouteShapes(rs.data))
       .then(() => setRouteShapesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes/' + params.route_id + '/trips.json', { params: { date: scheduleDate, per_page: 500 } })
+    getJSON(`${GTFS_BASE_URL}/routes/${params.route_id}/trips.json`, { params: { date: scheduleDate, per_page: 500 } })
       .then((r) => setRouteTrips(r.data))
       .then(() => setRouteTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/agencies.json')
+    getJSON(`${GTFS_BASE_URL}/agencies.json`)
       .then((a) => setAgencies(a.data))
       .then(() => setAgencyLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdateLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -95,7 +95,7 @@ function TransitRoute() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
         .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
@@ -104,7 +104,7 @@ function TransitRoute() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
@@ -112,7 +112,7 @@ function TransitRoute() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
         .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
@@ -125,20 +125,20 @@ function TransitRoute() {
   }, [params.route_id, isUIReady]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+    return (<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
   if (!isUIReady) {
-    return(<LoadingScreen></LoadingScreen>);
+    return (<LoadingScreen></LoadingScreen>);
   }
 
   // No matching route
   if (!route || route.status === 404) {
-    return(<NoMatch></NoMatch>);
+    return (<NoMatch></NoMatch>);
   }
 
   // Filter vehicle positions to only those relevant to this route
-  const filteredVehiclePositions = vehicleMarkers.filter(v => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
+  const filteredVehiclePositions = vehicleMarkers.filter((v) => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
   const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && (a.alert.informed_entity[0].route_id === route.route_gid || a.alert.informed_entity[0].route_id === route.route_short_name));
 
   // Load in selected date
@@ -147,9 +147,11 @@ function TransitRoute() {
       return;
     }
     setIsLoadingTripDate(true);
-    setCookie('gtfs-schedule-date', event.target.value, { path: '/', maxAge: 90, sameSite: 'none', secure: true });
+    setCookie('gtfs-schedule-date', event.target.value, {
+      path: '/', maxAge: 90, sameSite: 'none', secure: true,
+    });
     setScheduleDate(event.target.value);
-    getJSON(GTFS_BASE_URL + '/routes/' + route.route_gid + '/trips.json', { params: { date: event.target.value, per_page: 500 } })
+    getJSON(`${GTFS_BASE_URL}/routes/${route.route_gid}/trips.json`, { params: { date: event.target.value, per_page: 500 } })
       .then((rt) => setRouteTrips(rt.data))
       .then(() => setIsLoadingTripDate(false));
   };
@@ -171,7 +173,7 @@ function TransitRoute() {
 
   // Nest stops for map compatibility
   const mapStops = [];
-  routeStops.map((s) => mapStops.push({id: s.id, stop: s}));
+  routeStops.map((s) => mapStops.push({ id: s.id, stop: s }));
 
   // Add route color to shapes
   routeShapes.map((s) => s.route_color = route.route_color);
@@ -184,10 +186,10 @@ function TransitRoute() {
   const getPolyLineBounds = L.latLngBounds(formatShapePoints(allPoints));
   const center = getPolyLineBounds.getCenter();
   if (map.current) {
-    map.current.fitBounds(getPolyLineBounds, { padding: [25, 25]});
+    map.current.fitBounds(getPolyLineBounds, { padding: [25, 25] });
   }
 
-  return(
+  return (
     <div>
       <TitleBar />
       <div className="container transit-route">

@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tooltip } from 'react-leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBus, faClock, faCompass, faMap, faPeopleGroup, faTachometer } from '@fortawesome/free-solid-svg-icons';
-import { renderBearing, renderSpeed, renderUnixTimestamp } from './../util.js';
+import {
+  faBus, faClock, faCompass, faMap, faPeopleGroup, faTachometer,
+} from '@fortawesome/free-solid-svg-icons';
 import L from 'leaflet';
+import { renderBearing, renderSpeed, renderUnixTimestamp } from '../util';
 import TransitRouteHeader from './TransitRouteHeader';
 
-function VehicleMarkerTooltip({vehiclePositionData, route, alerts}) {
+function VehicleMarkerTooltip({ vehiclePositionData, route, alerts }) {
   if (L.Browser.mobile) {
     return;
   }
 
-  return(
+  return (
     <Tooltip>
       <div className="tooltip-content">
         <TransitRouteHeader route={route} alerts={alerts} showRouteType={false}></TransitRouteHeader>
@@ -54,11 +56,11 @@ function VehicleMarkerTooltip({vehiclePositionData, route, alerts}) {
 VehicleMarkerTooltip.propTypes = {
   vehiclePositionData: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
-  alerts: PropTypes.array
+  alerts: PropTypes.array,
 };
 
 VehicleMarkerTooltip.defaultProps = {
-  alerts: []
+  alerts: [],
 };
 
 export default VehicleMarkerTooltip;

@@ -5,11 +5,11 @@ import { faRoute, faInfoCircle, faBicycle } from '@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../resources/logo.svg';
 
-function TitleBar({hide}) {
+function TitleBar({ hide }) {
   if (hide) {
     return;
   }
-  return(
+  return (
     <div>
       <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 navbar-dark bg-dark border-bottom shadow-sm">
           <Link to="/" className="text-light h3 mb-0"><img src={logo} width="30" height="30" className="d-inline-block align-top me-2" alt="Bus" /> WeGo Transit Map</Link>
@@ -26,11 +26,11 @@ function TitleBar({hide}) {
 }
 
 TitleBar.propTypes = {
-  hide: PropTypes.bool
+  hide: PropTypes.bool,
 };
 
 TitleBar.defaultProps = {
-  hide: false
+  hide: false,
 };
 
 export default TitleBar;

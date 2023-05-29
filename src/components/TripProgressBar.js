@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
 import { formatDistanceTraveled, isTimeLaterThanNow } from '../util';
 
-function TripProgressBar({trip, tripUpdates}) {
+function TripProgressBar({ trip, tripUpdates }) {
   function renderEmptyProgressBar() {
-    return(
+    return (
       <div className="trip-progress-bar trip-progress-bar-empty my-4">
         <ProgressBar min={0} max={100} label={''} now={0}></ProgressBar>
       </div>
@@ -13,7 +13,7 @@ function TripProgressBar({trip, tripUpdates}) {
   }
 
   function renderCompleteProgressBar() {
-    return(
+    return (
       <div className="trip-progress-bar trip-progress-bar-completed my-4">
         <ProgressBar min={0} max={totalTripDistance} label={formatDistanceTraveled(totalTripDistance)} now={totalTripDistance}></ProgressBar>
       </div>
@@ -44,7 +44,7 @@ function TripProgressBar({trip, tripUpdates}) {
   if (typeof currentStopUpdate === 'undefined') {
     return renderCompleteProgressBar();
   }
-  const currentStop = trip.stop_times.find(i => i.stop_sequence == currentStopUpdate.stop_sequence);
+  const currentStop = trip.stop_times.find((i) => i.stop_sequence == currentStopUpdate.stop_sequence);
 
   // Start of trip
   if (!currentStop.shape_dist_traveled) {
@@ -53,7 +53,7 @@ function TripProgressBar({trip, tripUpdates}) {
 
   currentStopDistance = parseFloat(currentStop.shape_dist_traveled);
 
-  return(
+  return (
     <div className="trip-progress-bar my-4">
       <ProgressBar min={0} max={totalTripDistance} label={formatDistanceTraveled(currentStopDistance)} now={currentStopDistance}></ProgressBar>
     </div>
@@ -62,12 +62,11 @@ function TripProgressBar({trip, tripUpdates}) {
 
 TripProgressBar.propTypes = {
   trip: PropTypes.object.isRequired,
-  tripUpdates: PropTypes.any
+  tripUpdates: PropTypes.any,
 };
 
 TripProgressBar.defaultProps = {
-  tripUpdates: []
+  tripUpdates: [],
 };
 
 export default TripProgressBar;
-

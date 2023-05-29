@@ -1,7 +1,7 @@
 import React from 'react';
-import TitleBar from "../components/TitleBar";
+import TitleBar from '../components/TitleBar';
 import Footer from '../components/Footer';
-import logo from "../resources/logo.svg";
+import logo from '../resources/logo.svg';
 
 function About() {
   return (

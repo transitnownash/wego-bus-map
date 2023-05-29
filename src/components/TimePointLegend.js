@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 function TimePointLegend() {
-  return(
+  return (
     <div className="small">
       <ul className="list-inline">
         <li className="list-inline-item mb-2"><span className="px-1 border">0:00 AM</span> Scheduled time.</li>

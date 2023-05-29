@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "eslint": "^8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
     "mockdate": "^3.0.5",

@@ -1,15 +1,15 @@
 /* globals test, expect */
 
 import React from 'react';
-import RouteLegend from './RouteLegend';
 import { render } from '@testing-library/react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import RouteLegend from './RouteLegend';
 
 test('renders RouteLegend', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <RouteLegend />
-    </Router>
+    </Router>,
   );
   expect(container).toMatchSnapshot();
 });

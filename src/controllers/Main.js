@@ -36,36 +36,36 @@ function Main() {
   const isUIReady = [isRoutesLoaded, isAlertLoaded, isTripUpdateLoaded, isAgencyLoaded, isVehiclePositionLoaded].every((a) => a === true);
 
   useEffect(() => {
-    getJSON(GTFS_BASE_URL + '/routes.json')
+    getJSON(`${GTFS_BASE_URL}/routes.json`)
       .then((r) => setRouteData(r.data))
       .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/agencies.json')
+    getJSON(`${GTFS_BASE_URL}/agencies.json`)
       .then((a) => setAgencyData(a.data))
       .then(() => setAgencyLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdateLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GBFS_BASE_URL + '/station_information.json')
+    getJSON(`${GBFS_BASE_URL}/station_information.json`)
       .then((s) => setBCycleStationData(s.data.stations))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GBFS_BASE_URL + '/station_status.json')
+    getJSON(`${GBFS_BASE_URL}/station_status.json`)
       .then((s) => setBCycleStationStatusData(s.data.stations))
       .catch((error) => setDataFetchError(error));
 
@@ -74,7 +74,7 @@ function Main() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
         .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
@@ -83,7 +83,7 @@ function Main() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
         .then((data) => setAlerts(data));
     }, REFRESH_ALERTS_TTL);
 
@@ -92,7 +92,7 @@ function Main() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
         .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
@@ -101,7 +101,7 @@ function Main() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GBFS_BASE_URL + '/station_status.json')
+      getJSON(`${GBFS_BASE_URL}/station_status.json`)
         .then((s) => setBCycleStationStatusData(s.data.stations));
     }, REFRESH_GBFS_TTL);
 
@@ -115,10 +115,10 @@ function Main() {
   }, [isUIReady]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+    return (<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
-  const locateUserOnMap = function(map) {
+  const locateUserOnMap = function (map) {
     if (typeof map.current !== 'undefined' && map.current) {
       map.current.locate();
     }
@@ -130,7 +130,7 @@ function Main() {
   // Combine BCycle data into one hash
   if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
     bCycleStations.forEach((station, index) => {
-      bCycleStations[index].status = bCycleStationsStatus.find(s => station.station_id === s.station_id);
+      bCycleStations[index].status = bCycleStationsStatus.find((s) => station.station_id === s.station_id);
     });
   }
 
@@ -145,10 +145,10 @@ function Main() {
         <AlertButton alerts={allAlerts} buttonAction={() => setAlertModalShow(true)}></AlertButton>
         <LocateButton buttonAction={() => locateUserOnMap(map)}></LocateButton>
       </div>
-    )
+    ),
   };
 
-  return(
+  return (
     (!isUIReady) ? (
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (

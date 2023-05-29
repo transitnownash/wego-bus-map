@@ -1,9 +1,9 @@
 /* globals test */
 
 import React from 'react';
-import DataFetchError from './DataFetchError';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import DataFetchError from './DataFetchError';
 
 test('renders DataFetchError', () => {
   const div = document.createElement('div');
@@ -11,6 +11,6 @@ test('renders DataFetchError', () => {
   root.render(
     <Router>
       <DataFetchError error={'An error ocurred!'} />
-    </Router>
+    </Router>,
   );
 });

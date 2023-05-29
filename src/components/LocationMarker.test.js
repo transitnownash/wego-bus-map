@@ -1,8 +1,8 @@
 /* globals test */
 
 import React from 'react';
-import LocationMarker from './LocationMarker';
 import { createRoot } from 'react-dom/client';
+import LocationMarker from './LocationMarker';
 
 test('renders LocationMarker', () => {
   const div = document.createElement('div');

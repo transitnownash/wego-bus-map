@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {renderUnixTimestamp} from './../util.js';
+import { renderUnixTimestamp } from '../util';
 import dayjs from 'dayjs';
 import './AlertItem.scss';
 import { Link } from 'react-router-dom';
 import StopCode from './StopCode.js';
 
-function AlertItem({alert, route}) {
+function AlertItem({ alert, route }) {
   const alertStyle = {
-    borderColor: (route.route_color) ? '#' + route.route_color : '#eee',
-    backgroundColor: (route.route_color) ? '#' + route.route_color : '#eee',
-    color: (route.route_text_color) ? '#' + route.route_text_color : '#000'
+    borderColor: (route.route_color) ? `#${route.route_color}` : '#eee',
+    backgroundColor: (route.route_color) ? `#${route.route_color}` : '#eee',
+    color: (route.route_text_color) ? `#${route.route_text_color}` : '#000',
   };
 
   const alert_cause = (typeof alert.cause !== 'undefined')
@@ -21,10 +21,10 @@ function AlertItem({alert, route}) {
     ? (<>{alert.effect} - </>)
     : (<></>);
 
-  return(
+  return (
     <div className="card mb-3">
       <div className="card-header alert-item-header" style={alertStyle}>
-        <strong><Link to={'/routes/' + route.route_gid}>{route.route_short_name} - {route.route_long_name}</Link></strong>
+        <strong><Link to={`/routes/${route.route_gid}`}>{route.route_short_name} - {route.route_long_name}</Link></strong>
       </div>
       <div className="card-body alert-item-text">
         <p>
@@ -39,9 +39,7 @@ function AlertItem({alert, route}) {
             <hr />
               <ul className="list-inline">
                 <li className="list-inline-item"><strong>Stops:</strong></li>
-                {alert.informed_entity.map((item, key) => {
-                  return(<li key={key} className="list-inline-item"><StopCode stop={{stop_code: item.stop_id}}/></li>);
-                })}
+                {alert.informed_entity.map((item, key) => (<li key={key} className="list-inline-item"><StopCode stop={{ stop_code: item.stop_id }}/></li>))}
             </ul>
           </>
         )}
@@ -50,8 +48,8 @@ function AlertItem({alert, route}) {
         {alert_cause}
         {alert_effect}
         <strong>Start:</strong> {renderUnixTimestamp(alert.active_period[0].start)}
-        {(alert.active_period[0].end && alert.active_period[0].end < 32503701600)&&
-          <>&nbsp;-&nbsp;<strong>End:</strong> {renderUnixTimestamp(alert.active_period[0].end)}</>
+        {(alert.active_period[0].end && alert.active_period[0].end < 32503701600)
+          && <>&nbsp;-&nbsp;<strong>End:</strong> {renderUnixTimestamp(alert.active_period[0].end)}</>
         }
       </div>
     </div>
@@ -60,15 +58,15 @@ function AlertItem({alert, route}) {
 
 AlertItem.propTypes = {
   alert: PropTypes.object.isRequired,
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 AlertItem.defaultProps = {
   route: {
     route_color: '#999',
     route_long_name: 'Route Unavailable',
-    route_short_name: '00'
-  }
+    route_short_name: '00',
+  },
 };
 
 export default AlertItem;

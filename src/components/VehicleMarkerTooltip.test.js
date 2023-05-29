@@ -4,6 +4,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { MapContainer } from 'react-leaflet';
 import VehicleMarkerTooltip from './VehicleMarkerTooltip';
+
 const vehiclePositionsFixture = require('../fixtures/vehicle_positions.json');
 const tripFixture = require('../fixtures/trips-270708.json');
 const agenciesFixture = require('../fixtures/agencies.json');
@@ -17,6 +18,6 @@ test('renders VehicleMarkerTooltip', () => {
   root.render(
     <MapContainer>
       <VehicleMarkerTooltip vehiclePositionData={vehiclePositionData} route={routeFixture} trip={tripFixture} agency={agency} />
-    </MapContainer>
+    </MapContainer>,
   );
 });

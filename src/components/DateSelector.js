@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-function DateSelector({scheduleDate, handleDateFieldChange, isLoading}) {
-  return(
+function DateSelector({ scheduleDate, handleDateFieldChange, isLoading }) {
+  return (
     <div className="input-group">
       <span className="input-group-text">
         {isLoading ? (
@@ -22,12 +22,12 @@ function DateSelector({scheduleDate, handleDateFieldChange, isLoading}) {
 DateSelector.propTypes = {
   scheduleDate: PropTypes.string,
   handleDateFieldChange: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 DateSelector.defaultProps = {
   scheduleDate: dayjs().format('YYYY-MM-DD'),
-  isLoading: false
+  isLoading: false,
 };
 
 export default DateSelector;

@@ -1,52 +1,53 @@
 /* globals test, expect */
 
 import React from 'react';
-import TransitRouteHeader from './TransitRouteHeader';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import TransitRouteHeader from './TransitRouteHeader';
+
 const routeFixture = require('../fixtures/routes-4.json');
 
 test('renders TransitRouteHeader', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <TransitRouteHeader route={routeFixture} />
-    </Router>
+    </Router>,
   );
   expect(screen.getByText('SHELBY')).toBeInTheDocument();
-  expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
+  expect(container.querySelector('.transit-route-header')).toHaveStyle({ backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)' });
   expect(container).toMatchSnapshot();
 });
 
 test('renders TransitRouteHeader', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <TransitRouteHeader route={routeFixture} />
-    </Router>
+    </Router>,
   );
   expect(screen.getByText('SHELBY')).toBeInTheDocument();
-  expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
+  expect(container.querySelector('.transit-route-header')).toHaveStyle({ backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)' });
   expect(screen.queryByAltText('Icon')).toBeNull();
   expect(container).toMatchSnapshot();
 });
 
 test('renders TransitRouteHeader with icon', () => {
-  const {container} = render(
+  const { container } = render(
     <Router>
       <TransitRouteHeader route={routeFixture} showRouteType={true} />
-    </Router>
+    </Router>,
   );
   expect(screen.getByText('SHELBY')).toBeInTheDocument();
-  expect(container.querySelector('.transit-route-header')).toHaveStyle({backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)'});
+  expect(container.querySelector('.transit-route-header')).toHaveStyle({ backgroundColor: 'rgb(117, 60, 190)', color: 'rgb(255, 255, 255)' });
   expect(screen.getByAltText('Icon')).toBeInTheDocument();
   expect(container).toMatchSnapshot();
 });
 
 test('renders TransitRouteHeader with invalid route.', () => {
   const route = {};
-  const {container} = render(
+  const { container } = render(
     <Router>
       <TransitRouteHeader route={route} />
-    </Router>
+    </Router>,
   );
   expect(screen.getByText('Invalid route!')).toBeInTheDocument();
   expect(container).toMatchSnapshot();

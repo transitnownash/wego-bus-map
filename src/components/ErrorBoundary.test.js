@@ -1,8 +1,8 @@
 /* globals test */
 
 import React from 'react';
-import ErrorBoundary from './ErrorBoundary';
 import { createRoot } from 'react-dom/client';
+import ErrorBoundary from './ErrorBoundary';
 
 test('renders ErrorBoundary', () => {
   const div = document.createElement('div');

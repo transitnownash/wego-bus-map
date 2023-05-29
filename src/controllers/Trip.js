@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faMap, faMapSigns, faBus, faRuler, faFlag, faFlagCheckered,
+} from '@fortawesome/free-solid-svg-icons';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
-import { getJSON, formatShapePoints, formatDistanceTraveled } from './../util.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMap, faMapSigns, faBus, faRuler, faFlag, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
+import { getJSON, formatShapePoints, formatDistanceTraveled } from '../util';
 import StopTimeTableRow from '../components/StopTimeTableRow';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
@@ -16,7 +19,6 @@ import TransitRouteHeader from '../components/TransitRouteHeader';
 import TripProgressBar from '../components/TripProgressBar';
 import DataFetchError from '../components/DataFetchError';
 import TimePointLegend from '../components/TimePointLegend';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import TimePoint from '../components/TimePoint';
 import Headsign from '../components/Headsign';
 
@@ -53,44 +55,44 @@ function Trip() {
     isTripUpdateLoaded,
     isAgencyLoaded,
     isVehiclePositionLoaded,
-    isTripBlockLoaded
+    isTripBlockLoaded,
   ].every((a) => a === true);
 
   useEffect(() => {
     // On intra-page navigation, scroll to top and restore lading screen
     window.scrollTo(0, 0);
 
-    getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '.json')
+    getJSON(`${GTFS_BASE_URL}/trips/${params.trip_id}.json`)
       .then((t) => setRouteTripData(t))
       .then(() => setRouteTripLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/routes.json')
+    getJSON(`${GTFS_BASE_URL}/routes.json`)
       .then((r) => setRoutes(r.data))
-      .then(()=> setRoutesLoaded(true))
+      .then(() => setRoutesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/trips/' + params.trip_id + '/block.json')
+    getJSON(`${GTFS_BASE_URL}/trips/${params.trip_id}/block.json`)
       .then((r) => setTripBlockData(r))
-      .then(()=> setTripBlockLoaded(true))
+      .then(() => setTripBlockLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/agencies.json')
+    getJSON(`${GTFS_BASE_URL}/agencies.json`)
       .then((a) => setAgencyData(a.data))
       .then(() => setAgencyLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/alerts.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+    getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdateLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -100,7 +102,7 @@ function Trip() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/vehicle_positions.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
         .then((data) => setVehicleMarkers(data));
     }, REFRESH_VEHICLE_POSITIONS_TTL);
 
@@ -108,7 +110,7 @@ function Trip() {
       if (!isUIReady) {
         return;
       }
-      getJSON(GTFS_BASE_URL + '/realtime/trip_updates.json')
+      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
         .then((data) => setTripUpdates(data));
     }, REFRESH_TRIP_UPDATES_TTL);
 
@@ -117,27 +119,26 @@ function Trip() {
       clearInterval(refreshPositionsInterval);
       clearInterval(refreshTripUpdatesInterval);
     };
-
   }, [params.trip_id, pathname, isUIReady]);
 
   if (dataFetchError) {
-    return(<DataFetchError error={dataFetchError}></DataFetchError>);
+    return (<DataFetchError error={dataFetchError}></DataFetchError>);
   }
 
   if (!isUIReady || !trip.shape) {
-    return(<LoadingScreen></LoadingScreen>);
+    return (<LoadingScreen></LoadingScreen>);
   }
 
   // No matching route
   if (!trip || trip.status === 404) {
-    return(<NoMatch></NoMatch>);
+    return (<NoMatch></NoMatch>);
   }
 
   // Set the map to center on the trip route
   const getPolyLineBounds = L.latLngBounds(formatShapePoints(trip.shape.points));
   const center = getPolyLineBounds.getCenter();
   if (map.current && !isMapRendered) {
-    map.current.fitBounds(getPolyLineBounds, { padding: [50, 50]});
+    map.current.fitBounds(getPolyLineBounds, { padding: [50, 50] });
     setMapRendered(true);
   }
 
@@ -150,12 +151,12 @@ function Trip() {
   const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && a.alert.informed_entity[0].route_id === route.route_gid);
 
   // Filter vehicle markers
-  const filteredVehicleMarkers = vehicleMarkers.filter(v => v.vehicle.trip.trip_id === trip.trip_gid);
+  const filteredVehicleMarkers = vehicleMarkers.filter((v) => v.vehicle.trip.trip_id === trip.trip_gid);
 
   // Filter updates to this trip, key stop time updates by sequence
   const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid);
-  let filteredTripUpdatesBySequence = {};
-  let totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
+  const filteredTripUpdatesBySequence = {};
+  const totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
   if (filteredTripUpdates.length > 0 && typeof filteredTripUpdates[0].trip_update.stop_time_update !== 'undefined') {
     filteredTripUpdates[0].trip_update.stop_time_update.forEach((item, _i) => {
       filteredTripUpdatesBySequence[item.stop_sequence] = item;
@@ -163,9 +164,9 @@ function Trip() {
   }
 
   // Add route color to shape
-  trip.shape['route_color'] = route.route_color;
+  trip.shape.route_color = route.route_color;
 
-  return(
+  return (
     <div>
       <TitleBar></TitleBar>
       <div className="container trip">
@@ -173,7 +174,7 @@ function Trip() {
         <table className="table table-vertical">
           <tbody>
             <tr>
-              <th className="text-nowrap align-middle" style={{width: '130px'}}><FontAwesomeIcon icon={faMap} fixedWidth={true}></FontAwesomeIcon> Trip</th>
+              <th className="text-nowrap align-middle" style={{ width: '130px' }}><FontAwesomeIcon icon={faMap} fixedWidth={true}></FontAwesomeIcon> Trip</th>
               <td>{trip.trip_gid}</td>
             </tr>
             <tr>
@@ -201,7 +202,7 @@ function Trip() {
                     <TimePoint scheduleData={trip.stop_times[0]} updateData={filteredTripUpdatesBySequence[1]} />
                   </div>
                   <div className="ps-2 border-start border-gray border-5">
-                    <Link to={'/stops/' + trip.stop_times[0].stop.stop_code} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link>
+                    <Link to={`/stops/${trip.stop_times[0].stop.stop_code}`} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link>
                   </div>
                 </div>
               </td>
@@ -214,7 +215,7 @@ function Trip() {
                     <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={filteredTripUpdatesBySequence[trip.stop_times.length]} />
                   </div>
                   <div className="ps-2 border-start border-gray border-5">
-                    <Link to={'/stops/' + trip.stop_times[trip.stop_times.length - 1].stop.stop_code} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link>
+                    <Link to={`/stops/${trip.stop_times[trip.stop_times.length - 1].stop.stop_code}`} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link>
                   </div>
                 </div>
               </td>
@@ -237,14 +238,14 @@ function Trip() {
           </thead>
           <tbody>
             {trip.stop_times.map((item, _index) => {
-              let stopTimeUpdate = (typeof filteredTripUpdatesBySequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdatesBySequence[item.stop_sequence] : {};
-              return(<StopTimeTableRow key={item.id + '-' + item.stop_sequence} stopTime={item} stopTimeUpdate={stopTimeUpdate}></StopTimeTableRow>);
+              const stopTimeUpdate = (typeof filteredTripUpdatesBySequence[item.stop_sequence] !== 'undefined') ? filteredTripUpdatesBySequence[item.stop_sequence] : {};
+              return (<StopTimeTableRow key={`${item.id}-${item.stop_sequence}`} stopTime={item} stopTimeUpdate={stopTimeUpdate}></StopTimeTableRow>);
             })}
           </tbody>
         </table>
         <TimePointLegend></TimePointLegend>
-        {isTripBlockLoaded &&
-          <>
+        {isTripBlockLoaded
+          && <>
             <div className="d-flex">
               <div className="h2">Related Trips</div>
               <div className="align-self-center">

@@ -1,8 +1,8 @@
 /* globals test */
 
 import React from 'react';
-import StopMarker from './StopMarker';
 import { createRoot } from 'react-dom/client';
+import StopMarker from './StopMarker';
 import stopFixture from '../fixtures/stop-DOVDICWF.json';
 
 test('renders StopMarker', () => {
