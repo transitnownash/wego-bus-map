@@ -2,16 +2,19 @@ import React from 'react';
 import TitleBar from "../components/TitleBar";
 import Footer from '../components/Footer';
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 function NoMatch() {
   return (
     <div>
       <TitleBar></TitleBar>
-      <div className="container my-4">
-        <h2>Detour in Effect.</h2>
-        <p>You seem to have wandered off the route. The content you were are looking for is not here.</p>
+      <div className="container my-5 p-5 text-center">
+        <h1><FontAwesomeIcon icon={faExclamationTriangle} /> Detour in Effect</h1>
+        <p className="lead my-3">(You seem to have wandered off the route.)</p>
+        <p>The content you were are looking for is not here.</p>
         <p>
-          <Link to="/">Go to the home page</Link>
+          <Link to="/">Go to the Main Map</Link>
         </p>
       </div>
       <Footer></Footer>
