@@ -72,7 +72,7 @@ function VehicleMarker({vehiclePositionData, route, agency, tripUpdate, shapeSet
   }
 
   return(
-    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={[vehiclePositionData.vehicle.position.latitude, vehiclePositionData.vehicle.position.longitude]} icon={icon} rotationShadowAngle={vehiclePositionData.vehicle.position.bearing} opacity={opacity}>
+    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{click: showTripDetails}} position={[vehiclePositionData.vehicle.position.latitude, vehiclePositionData.vehicle.position.longitude]} icon={icon} rotationShadowAngle={vehiclePositionData.vehicle.position.bearing} opacity={opacity} zIndexOffset={100}>
       <VehicleMarkerPopup vehiclePositionData={vehiclePositionData} route={route} agency={agency} trip={trip} tripUpdate={tripUpdate} alerts={alerts}></VehicleMarkerPopup>
       <VehicleMarkerTooltip vehiclePositionData={vehiclePositionData} route={route} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
