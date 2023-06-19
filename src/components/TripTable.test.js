@@ -35,7 +35,7 @@ test('renders TripTable with past trips', async () => {
     <TripTable routeTrips={routeTripsFixture.data} route={routeFixture} hidePastTrips={false} />,
   );
 
-  await user.click(screen.getByRole('checkbox', { name: /Hide Past Trips/i }));
+  await user.click(screen.getByRole('checkbox', { name: /Hide past trips/i }));
 
   expect(screen.getAllByText('DOWNTOWN')).toHaveLength(26);
   expect(screen.getAllByText('INGLEWOOD')).toHaveLength(25);

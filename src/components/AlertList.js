@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import AlertItem from './AlertItem';
+import dayjs from 'dayjs';
 
 function AlertList({ alerts, routes }) {
+  const [hideFuture, setHideFuture] = useState(false);
+
+  const handleHideFutureAlertsOnChange = (event) => {
+    setHideFuture(event.target.checked);
+  };
+
+  const futureAlerts = alerts.filter((item) => {
+    return dayjs().isBefore(dayjs.unix(item.alert.active_period[0].start));
+  });
+
   alerts = alerts.sort((a, b) => {
     if (a.alert.informed_entity[0].route_id === b.alert.informed_entity[0].route_id) {
       return a.id > b.id;
@@ -11,8 +23,22 @@ function AlertList({ alerts, routes }) {
   });
   return (
     <div>
+      {futureAlerts.length > 0 && (
+        <div className="my-2">
+          <Form.Check
+            type="switch"
+            id="hide-future-alerts"
+            label={`Hide future alerts (${futureAlerts.length})`}
+            onChange={handleHideFutureAlertsOnChange}
+          />
+        </div>
+      )}
       {alerts.map((item, _index) => {
         const route = routes.find((r) => r.route_gid === item.alert.informed_entity[0].route_id || r.route_short_name === item.alert.informed_entity[0].route_id);
+        if (hideFuture && dayjs().isBefore(dayjs.unix(item.alert.active_period[0].start))) {
+          return <></>;
+        }
+
         return (
           <AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>
         );

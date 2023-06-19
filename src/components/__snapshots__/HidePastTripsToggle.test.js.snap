@@ -18,7 +18,7 @@ exports[`renders HidePastTripsToggle 1`] = `
         class="form-check-label"
         for="hidePastTrips"
       >
-        Hide Past Trips
+        Hide past trips
       </label>
     </div>
   </div>
@@ -42,7 +42,7 @@ exports[`renders HidePastTripsToggle unchecked 1`] = `
         class="form-check-label"
         for="hidePastTrips"
       >
-        Hide Past Trips
+        Hide past trips
       </label>
     </div>
   </div>

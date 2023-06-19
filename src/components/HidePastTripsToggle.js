@@ -6,7 +6,7 @@ function HidePastTripsToggle({ hidePastTrips, onChange }) {
     <div className="my-2">
       <div className="form-check form-switch">
         <input className="form-check-input" type="checkbox" id="hidePastTrips" checked={hidePastTrips} onChange={onChange} />
-        <label className="form-check-label" htmlFor="hidePastTrips">Hide Past Trips</label>
+        <label className="form-check-label" htmlFor="hidePastTrips">Hide past trips</label>
       </div>
     </div>
   );

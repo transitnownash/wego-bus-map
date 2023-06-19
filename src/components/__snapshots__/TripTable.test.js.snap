@@ -24,7 +24,7 @@ exports[`renders TripTable 1`] = `
             class="form-check-label"
             for="hidePastTrips"
           >
-            Hide Past Trips
+            Hide past trips
           </label>
         </div>
       </div>
@@ -2774,7 +2774,7 @@ exports[`renders TripTable with past trips 1`] = `
             class="form-check-label"
             for="hidePastTrips"
           >
-            Hide Past Trips
+            Hide past trips
           </label>
         </div>
       </div>
