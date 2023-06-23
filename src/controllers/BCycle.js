@@ -63,8 +63,11 @@ function BCycle() {
   // Combine BCycle data into one hash
   if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
     bCycleStations.forEach((station, index) => {
-      const stationStatus = bCycleStationsStatus.find((s) => station.station_id === s.station_id);
-      bCycleStations[index].status = stationStatus || { is_installed: 0, is_renting: 0, is_returning: 0, num_bikes_available: 0, num_docks_available: 0 };
+      bCycleStations[index].status = bCycleStationsStatus.find((s) => station.station_id === s.station_id);
+      // Remove if no status available
+      if (!bCycleStations[index].status) {
+        delete bCycleStations[index];
+      }
     });
   }
 
@@ -131,14 +134,13 @@ function BCycle() {
         </div>
         <div className="">
           {bCycleStations.map((station) => {
+            // Ignore if stations doesn't have status, or if it isn't "installed"
+            if (typeof station.status === 'undefined' || !station.status.is_installed) {
+              return;
+            }
+
             let warning = '';
-            if (!station.status.is_installed) {
-              warning = (
-                <div className="p-2 bg-info text-center">
-                  <div><FontAwesomeIcon icon={faBicycle} fixedWidth={true}></FontAwesomeIcon> Coming soon!</div>
-                </div>
-              );
-            } else if (!station.status.is_renting || !station.status.is_returning) {
+            if (!station.status.is_renting || !station.status.is_returning) {
               warning = (
                 <div className="p-2 bg-warning text-center">
                   {!station.status.is_renting && (

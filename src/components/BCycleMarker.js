@@ -11,16 +11,14 @@ import bCycleIconImage from '../resources/bcycle.svg';
 import './BCycleMarker.scss';
 
 function BCycleMarker({ station }) {
+  // Ignore if stations doesn't have status, or if it isn't "installed"
+  if (typeof station.status === 'undefined' || !station.status.is_installed) {
+    return;
+  }
+
   let warning = '';
   let opacity = 1.0;
-  if (!station.status.is_installed) {
-    opacity = 0.3;
-    warning = (
-      <div className="p-2 bg-info text-center">
-        <div><FontAwesomeIcon icon={faBicycle} fixedWidth={true}></FontAwesomeIcon> Coming soon!</div>
-      </div>
-    );
-  } else if (!station.status.is_renting || !station.status.is_returning) {
+  if (!station.status.is_renting || !station.status.is_returning) {
     opacity = 0.3;
     warning = (
       <div className="p-2 mb-2 bg-warning text-center">
