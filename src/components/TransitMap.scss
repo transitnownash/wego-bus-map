@@ -64,6 +64,6 @@
   .leaflet-tooltip,
   .leaflet-popup-content-wrapper,
   .leaflet-popup-tip {
-    background-color: #b9b9b9;
+    background-color: var(--bs-body-bg);
   }
 }
