@@ -46,10 +46,10 @@ function StopMarker({
         </div>
       </div>
       {stopTime.timepoint === '1'
-        && (<div className="p-2 mb-2 text-center bg-info rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
+        && (<div className="p-2 mb-2 text-center bg-info text-bg-info rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Timing Stop</div>)
       }
       {stopAlerts.length > 0
-        && (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
+        && (<div className="p-2 mb-2 text-center bg-warning text-bg-warning  rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
       }
       {stop.parent_station_gid != null
         && (<div className="p-2 mb-2 text-center"><FontAwesomeIcon icon={faLandmark} fixedWidth={true}></FontAwesomeIcon> Inside <Link to={`/stops/${stop.parent_station_gid}`}>{stop.parent_station_gid}</Link></div>)

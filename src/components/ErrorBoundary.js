@@ -27,7 +27,7 @@ class ErrorBoundary extends React.Component {
         <>
           <div className="container">
           <div className="card border-danger my-3">
-            <div className="card-header bg-danger text-light">Site Error</div>
+            <div className="card-header bg-danger text-bg-danger">Site Error</div>
               <div className="card-body text-center">
                 <p>An unexpected error has ocurred. Try reloading the page or wait a few moments before trying again.</p>
                 {this.state.error

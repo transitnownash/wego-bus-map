@@ -213,7 +213,7 @@ function Stops() {
       <div className="container">
         <div className="stop-name">{stop.stop_name}</div>
         {stopAlerts.length > 0
-          && (<div className="p-2 mb-2 text-center bg-warning rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
+          && (<div className="p-2 mb-2 text-center bg-warning text-bg-warning rounded-bottom" style={{ marginTop: '-1em' }}><FontAwesomeIcon icon={faWarning} fixedWidth={true}></FontAwesomeIcon> System Alert at Stop</div>)
         }
         <div className="text-center p-2 mb-2">
           <div><StopCode stop={stop}/> {stop.stop_desc}</div>

@@ -5,7 +5,7 @@ exports[`renders TripTableRowEmpty 1`] = `
   <table>
     <tbody>
       <tr
-        class="bg-info"
+        class="bg-info text-bg-info"
       >
         <td
           class="text-center p-2"

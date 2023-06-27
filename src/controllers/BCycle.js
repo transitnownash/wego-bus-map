@@ -142,7 +142,7 @@ function BCycle() {
             let warning = '';
             if (!station.status.is_renting || !station.status.is_returning) {
               warning = (
-                <div className="p-2 bg-warning text-center">
+                <div className="p-2 bg-warning text-bg-warning text-center">
                   {!station.status.is_renting && (
                     <div><FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true}></FontAwesomeIcon> Not Renting Bikes</div>
                   )}

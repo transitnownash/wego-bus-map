@@ -29,7 +29,7 @@ function AlertItem({ alert, route }) {
       <div className="card-body alert-item-text">
         <p>
           {dayjs().isBefore(dayjs.unix(alert.active_period[0].start)) && (
-            <span><span className="badge bg-secondary">Future</span>&nbsp;</span>
+            <span><span className="badge bg-secondary text-bg-secondary">Future</span>&nbsp;</span>
           )}
           <strong>{alert.header_text.translation[0].text}</strong>
         </p>

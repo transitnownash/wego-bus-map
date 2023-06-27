@@ -21,7 +21,7 @@ function BCycleMarker({ station }) {
   if (!station.status.is_renting || !station.status.is_returning) {
     opacity = 0.3;
     warning = (
-      <div className="p-2 mb-2 bg-warning text-center">
+      <div className="p-2 mb-2 bg-warning text-bg-warning text-center">
         {!station.status.is_renting && (
           <div><FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true}></FontAwesomeIcon> Not Renting Bikes</div>
         )}

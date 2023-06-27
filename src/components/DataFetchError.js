@@ -32,7 +32,7 @@ function DataFetchError({ error }) {
       <TitleBar></TitleBar>
       <div className="container">
         <div className="card border-danger my-3">
-          <div className="card-header bg-danger text-light">Site Error</div>
+          <div className="card-header bg-danger text-bg-danger">Site Error</div>
           <div className="card-body text-center">
             <p>{errorMessage}</p>
             <p>Try reloading the page or wait a few moments before trying again.</p>

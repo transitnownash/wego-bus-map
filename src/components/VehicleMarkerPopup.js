@@ -103,7 +103,7 @@ function VehicleMarkerPopup({
                     );
                   })}
                   {tripStopTimes.length === 0 && (
-                    <div className="alert bg-info">No upcoming stops for this trip.</div>
+                    <div className="alert bg-info text-bg-info">No upcoming stops for this trip.</div>
                   )}
                 </tbody>
               </table>
