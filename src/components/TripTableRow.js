@@ -6,6 +6,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { isTimeRangeIncludesNow, isStopTimeUpdateLaterThanNow } from '../util';
 import TimePoint from './TimePoint';
 import Headsign from './Headsign';
+import './TripTableRow.scss';
 
 function TripTableRow({
   trip, route, tripUpdate, hidePastTrips,
@@ -34,12 +35,12 @@ function TripTableRow({
 
   let rowClasses = '';
   if (isTimeRangeIncludesNow(trip.start_time, trip.end_time)) {
-    rowClasses = 'border-start border-primary border-5';
+    rowClasses = 'tr-active-trip';
   } else if (!isStopTimeUpdateLaterThanNow(trip.stop_times[trip.stop_times.length - 1], updateEnd)) {
     if (hidePastTrips) {
       return;
     }
-    rowClasses = 'border-start border-gray border-5';
+    rowClasses = 'tr-past-trip';
   }
 
   return (

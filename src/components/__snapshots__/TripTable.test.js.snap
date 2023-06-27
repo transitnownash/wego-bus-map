@@ -70,7 +70,7 @@ exports[`renders TripTable 1`] = `
         </thead>
         <tbody>
           <tr
-            class="border-start border-primary border-5"
+            class="tr-active-trip"
           >
             <td>
               <a
@@ -2820,7 +2820,7 @@ exports[`renders TripTable with past trips 1`] = `
         </thead>
         <tbody>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -2898,7 +2898,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -2976,7 +2976,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3054,7 +3054,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3132,7 +3132,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3210,7 +3210,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3288,7 +3288,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3366,7 +3366,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3444,7 +3444,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3522,7 +3522,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -3600,7 +3600,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-primary border-5"
+            class="tr-active-trip"
           >
             <td>
               <a
@@ -4964,7 +4964,7 @@ exports[`renders TripTable with past trips 1`] = `
         </thead>
         <tbody>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5042,7 +5042,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5120,7 +5120,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5198,7 +5198,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5276,7 +5276,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5354,7 +5354,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5432,7 +5432,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5510,7 +5510,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a
@@ -5588,7 +5588,7 @@ exports[`renders TripTable with past trips 1`] = `
             </td>
           </tr>
           <tr
-            class="border-start border-gray border-5"
+            class="tr-past-trip"
           >
             <td>
               <a

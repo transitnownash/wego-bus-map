@@ -1,0 +1,7 @@
+.tr-active-trip {
+  border-left: 5px rgba(var(--bs-dark-rgb), 1) solid;
+}
+
+.tr-past-trip {
+  border-left: 5px var(--bs-secondary-bg) solid;
+}
