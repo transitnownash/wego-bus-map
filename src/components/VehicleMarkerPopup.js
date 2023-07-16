@@ -24,7 +24,10 @@ function VehicleMarkerPopup({
 
   const trip_headsign = (trip.trip_headsign)
     ? (<Headsign headsign={trip.trip_headsign} />)
-    : (<FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon>);
+    : (<>{route.route_long_name} <FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon></>);
+  const trip_gid = (trip.trip_gid)
+    ? (<Link to={`/trips/${trip.trip_gid}`}>{trip.trip_gid}</Link>)
+    : (<>{vehiclePositionData.vehicle.trip.trip_id}</>);
   let tripStopTimes = [];
   if (trip.trip_gid && tripUpdate.trip_update && tripUpdate.trip_update.stop_time_update.length > 0) {
     isTripTabActive = true;
@@ -59,7 +62,7 @@ function VehicleMarkerPopup({
                 </tr>
                 <tr>
                   <th><FontAwesomeIcon icon={faMap} fixedWidth/> Trip</th>
-                  <td><Link to={`/trips/${trip.trip_gid}`}>{trip.trip_gid}</Link></td>
+                  <td>{trip_gid}</td>
                 </tr>
                 <tr>
                   <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
