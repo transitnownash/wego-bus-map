@@ -21,6 +21,12 @@ function AlertList({ alerts, routes }) {
     }
     return parseInt(a.alert.informed_entity[0].route_id, 10) - parseInt(b.alert.informed_entity[0].route_id, 10);
   });
+
+  if (hideFuture) {
+    alerts = alerts.filter((item) => dayjs().isAfter(dayjs.unix(item.alert.active_period[0].start)));
+    console.log(alerts);
+  }
+
   return (
     <div>
       {futureAlerts.length > 0 && (
@@ -33,12 +39,11 @@ function AlertList({ alerts, routes }) {
           />
         </div>
       )}
+      {alerts.length === 0 && (
+        <div className='alert alert-info'>No active alerts.</div>
+      )}
       {alerts.map((item, _index) => {
         const route = routes.find((r) => r.route_gid === item.alert.informed_entity[0].route_id || r.route_short_name === item.alert.informed_entity[0].route_id);
-        if (hideFuture && dayjs().isBefore(dayjs.unix(item.alert.active_period[0].start))) {
-          return <></>;
-        }
-
         return (
           <AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>
         );

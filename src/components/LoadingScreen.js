@@ -12,7 +12,7 @@ function LoadingScreen({ hideTitleBar }) {
       <TitleBar hide={hideTitleBar}></TitleBar>
       <div className="loading-screen">
         <div className="m-4"><img src={logo} className="loading-screen-logo" alt="Logo"/></div>
-        <div className="h3 mb-3"><FontAwesomeIcon icon={faMusic} /> The wheels on the bus go ... <FontAwesomeIcon icon={faMusic} /></div>
+        <div className="h3 mb-3"><FontAwesomeIcon icon={faMusic} bounce className='text-dark' /> The wheels on the bus go ... <FontAwesomeIcon icon={faMusic} bounce className='text-dark' /></div>
       </div>
     </div>
   );

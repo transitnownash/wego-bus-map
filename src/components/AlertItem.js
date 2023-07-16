@@ -13,6 +13,8 @@ function AlertItem({ alert, route }) {
     color: (route.route_text_color) ? `#${route.route_text_color}` : '#000',
   };
 
+  const htmlCleanupRegex = /(<([^>]+)>)/gi;
+
   const alert_cause = (typeof alert.cause !== 'undefined')
     ? (<>{alert.cause} - </>)
     : (<></>);
@@ -31,9 +33,9 @@ function AlertItem({ alert, route }) {
           {dayjs().isBefore(dayjs.unix(alert.active_period[0].start)) && (
             <span><span className="badge bg-secondary text-bg-secondary">Future</span>&nbsp;</span>
           )}
-          <strong>{alert.header_text.translation[0].text}</strong>
+          <strong>{alert.header_text.translation[0].text.replace(htmlCleanupRegex, '')}</strong>
         </p>
-        {alert.description_text.translation[0].text}
+        {alert.description_text.translation[0].text.replace(htmlCleanupRegex, '')}
         {alert.informed_entity.filter((ie) => typeof ie.stop_id !== 'undefined').length > 0 && (
           <>
             <hr />
