@@ -17,9 +17,11 @@ function DataFetchError({ error }) {
     case 'AbortError':
       errorMessage = 'The API request took too long and was canceled.';
       break;
-    default:
-      errorMessage = 'An unexpected error has ocurred.';
+    case 'AxiosError':
+      errorMessage = `${error.code}: ${error.message}`;
       break;
+    default:
+      errorMessage = `An unexpected error has ocurred: ${error.message}]`;
   }
 
   // Error returned was a 404, switch to that instead
@@ -40,8 +42,13 @@ function DataFetchError({ error }) {
           </div>
         </div>
         <details className="text-muted">
-          <summary>Details</summary>
-          {error.name} - {error.message}
+          <summary>{error.name} - {error.message}</summary>
+          {error.response && (
+            <span>
+              <br />
+              <pre>{JSON.stringify(error.response, null, 2)}</pre>
+            </span>
+          )}
         </details>
       </div>
       <Footer></Footer>

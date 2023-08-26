@@ -84,7 +84,8 @@ function Main() {
         return;
       }
       getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
-        .then((data) => setAlerts(data));
+        .then((data) => setAlerts(data))
+        .catch((error) => setDataFetchError(error));
     }, REFRESH_ALERTS_TTL);
 
     // Refresh trip updates at a set interval
@@ -93,7 +94,8 @@ function Main() {
         return;
       }
       getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
-        .then((data) => setTripUpdates(data));
+        .then((data) => setTripUpdates(data))
+        .catch((error) => setDataFetchError(error));
     }, REFRESH_TRIP_UPDATES_TTL);
 
     // Refresh BCycle station status at a set interval
