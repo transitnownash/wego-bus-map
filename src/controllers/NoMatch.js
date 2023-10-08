@@ -14,7 +14,7 @@ function NoMatch() {
         <p className="lead my-3">(You seem to have wandered off the route.)</p>
         <p>The content you were are looking for is not here.</p>
         <p>
-          <Link to="/">Go to the Main Map</Link>
+          <Link to="/">Go to the Map</Link>
         </p>
       </div>
       <Footer></Footer>

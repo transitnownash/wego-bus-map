@@ -8,7 +8,7 @@ function Footer() {
     <div className="my-4">
       <ul className="nav justify-content-center">
         <li className="nav-item">
-          <Link className="nav-link" to='/'>Main Map</Link>
+          <Link className="nav-link" to='/'>Map</Link>
         </li>
         <li className="vr"></li>
         <li className="nav-item">

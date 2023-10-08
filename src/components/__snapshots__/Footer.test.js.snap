@@ -15,7 +15,7 @@ exports[`renders Footer 1`] = `
           class="nav-link"
           href="/"
         >
-          Main Map
+          Map
         </a>
       </li>
       <li
