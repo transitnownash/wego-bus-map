@@ -15,15 +15,17 @@ function Stops() {
   const [alerts, setAlerts] = useState([]);
   const [routes, setRouteData] = useState([]);
   const [stops, setStops] = useState([]);
+  const [routeShapes, setRouteShapes] = useState([]);
   const [isRoutesLoaded, setRoutesLoaded] = useState(false);
   const [isStopsLoaded, setStopsLoaded] = useState(false);
+  const [isRouteShapesLoaded, setRouteShapesLoaded] = useState(false);
   const [isAlertsLoaded, setAlertsLoaded] = useState(false);
   const [dataFetchError, setDataFetchError] = useState(false);
   const [alertModalShow, setAlertModalShow] = useState(false);
   const map = useRef(null);
 
   // Consolidated check that things are ready to go
-  const isUIReady = [isRoutesLoaded, isStopsLoaded, isAlertsLoaded].every((a) => a === true);
+  const isUIReady = [isRoutesLoaded, isStopsLoaded, isRouteShapesLoaded, isAlertsLoaded].every((a) => a === true);
 
   useEffect(() => {
     getJSON(`${GTFS_BASE_URL}/routes.json`)
@@ -34,6 +36,11 @@ function Stops() {
     getJSON(`${GTFS_BASE_URL}/stops.json`, { params: { per_page: 2000 } })
       .then((s) => setStops(s.data))
       .then(() => setStopsLoaded(true))
+      .catch((error) => setDataFetchError(error));
+
+    getJSON(`${GTFS_BASE_URL}/shapes.json`, { params: { per_page: 2000 } })
+      .then((s) => setRouteShapes(s.data))
+      .then(() => setRouteShapesLoaded(true))
       .catch((error) => setDataFetchError(error));
 
     getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
@@ -88,11 +95,21 @@ function Stops() {
     }
   };
 
+  const shapeEventHandlers = {
+    onClick: (_e) => {
+      // noop
+    },
+  };
+
   const routeStops = stops.map((item) => ({ id: item.id, stop: item }));
+  routeShapes.map((s) => {
+    s.route_color = '753cbe'; // default purple
+    s.shapeEventHandlers = shapeEventHandlers;
+  });
 
   return (
     <div className="stops">
-      <TransitMap map={map} routeStops={routeStops} alerts={allAlerts} mapControls={mapControls}></TransitMap>
+      <TransitMap map={map} routeStops={routeStops} routeShapes={routeShapes} alerts={allAlerts} mapControls={mapControls}></TransitMap>
       <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
     </div>
   );

@@ -175,8 +175,17 @@ function TransitRoute() {
   const mapStops = [];
   routeStops.map((s) => mapStops.push({ id: s.id, stop: s }));
 
+  const shapeEventHandlers = {
+    click: (_e) => {
+      // noop
+    },
+  };
+
   // Add route color to shapes
-  routeShapes.map((s) => s.route_color = route.route_color);
+  routeShapes.map((s) => {
+    s.route_color = route.route_color;
+    s.shapeEventHandlers = shapeEventHandlers;
+  });
 
   // Set the map to center on the trip route
   const allPoints = [];

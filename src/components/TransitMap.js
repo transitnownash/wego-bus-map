@@ -134,7 +134,7 @@ function TransitMap({
           && <LayersControl.Overlay checked={true} name="Routes">
             <LayerGroup>
               {shapes.map((item, _index) => (
-                  <FeatureGroup key={item.shape_gid} eventHandlers={shapeEventHandlers}>
+                  <FeatureGroup key={item.shape_gid} eventHandlers={item.shapeEventHandlers ?? shapeEventHandlers}>
                     <Polyline weight={12} positions={formatShapePoints(item.points)} color='#ffffff'></Polyline>
                     <Polyline weight={8} positions={formatShapePoints(item.points)} color={`#${item.route_color}`}></Polyline>
                   </FeatureGroup>
