@@ -40,6 +40,7 @@ function TransitRoute() {
   const [cookies, setCookie] = useCookies(['gtfs-schedule-date']);
   const [scheduleDate, setScheduleDate] = useState(cookies['gtfs-schedule-date'] || dayjs().format('YYYY-MM-DD'));
   const [isLoadingTripDate, setIsLoadingTripDate] = useState(false);
+  const [isMapCentered, setIsMapCentered] = useState(false);
   const params = useParams();
   const map = useRef(null);
 
@@ -175,6 +176,7 @@ function TransitRoute() {
   const mapStops = [];
   routeStops.map((s) => mapStops.push({ id: s.id, stop: s }));
 
+  // Leave shapes on map when clicked
   const shapeEventHandlers = {
     click: (_e) => {
       // noop
@@ -194,8 +196,9 @@ function TransitRoute() {
   });
   const getPolyLineBounds = L.latLngBounds(formatShapePoints(allPoints));
   const center = getPolyLineBounds.getCenter();
-  if (map.current) {
+  if (map.current && isMapCentered == false) {
     map.current.fitBounds(getPolyLineBounds, { padding: [25, 25] });
+    setIsMapCentered(true);
   }
 
   return (

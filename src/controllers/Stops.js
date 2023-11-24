@@ -95,6 +95,7 @@ function Stops() {
     }
   };
 
+  // Leave shapes on map when clicked
   const shapeEventHandlers = {
     onClick: (_e) => {
       // noop
