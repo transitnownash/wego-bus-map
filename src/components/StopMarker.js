@@ -22,7 +22,7 @@ function StopMarker({
 }) {
   const stopMarkerIconOptions = {
     iconUrl: stopIconImage,
-    iconSize: [24, 24],
+    iconSize: [20, 20],
     shadowUrl: null,
   };
 
@@ -30,6 +30,11 @@ function StopMarker({
   if (typeof stopTime.departure_time !== 'undefined' && !isStopTimeUpdateLaterThanNow(stopTime, stopUpdate)) {
     stopMarkerIconOptions.className = 'stop-marker-stale';
     stopMarkerIconOptions.iconSize = [16, 16];
+  }
+
+  // Make icon larger when a timing stop
+  if (stopTime.timepoint === '1') {
+    stopMarkerIconOptions.iconSize = [24, 24];
   }
 
   const stopMarkerIcon = L.Icon.extend({ options: stopMarkerIconOptions });
