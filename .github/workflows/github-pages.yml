@@ -38,6 +38,8 @@ jobs:
         run: npm install
       - name: Build static app
         run: npm run build
+        env:
+          PUBLIC_URL: ${{ vars.PUBLIC_URL }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
