@@ -23,6 +23,7 @@ function Main() {
   const [tripUpdates, setTripUpdates] = useState([]);
   const [bCycleStations, setBCycleStationData] = useState([]);
   const [bCycleStationsStatus, setBCycleStationStatusData] = useState([]);
+  const [retailLocations, setRetailLocationsData] = useState([]);
   const [isRoutesLoaded, setRoutesLoaded] = useState(false);
   const [isAlertLoaded, setAlertLoaded] = useState(false);
   const [isTripUpdateLoaded, setTripUpdateLoaded] = useState(false);
@@ -67,6 +68,11 @@ function Main() {
 
     getJSON(`${GBFS_BASE_URL}/station_status.json`)
       .then((s) => setBCycleStationStatusData(s.data.stations))
+      .catch((error) => setDataFetchError(error));
+
+    getJSON(`${GTFS_BASE_URL}/retail_locations.json`, { params: { per_page: 2000 } })
+      .then((r) => r.data.filter((i) => i.is_active))
+      .then((r) => setRetailLocationsData(r))
       .catch((error) => setDataFetchError(error));
 
     // Refresh position data at set interval
@@ -155,7 +161,7 @@ function Main() {
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (
       <div className="main">
-        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={allAlerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStations} mapControls={mapControls}></TransitMap>
+        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={allAlerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStations} retailLocations={retailLocations} mapControls={mapControls}></TransitMap>
         <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
       </div>
     )
