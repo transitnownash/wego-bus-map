@@ -16,6 +16,7 @@ import LocationMarker from './LocationMarker';
 import BCycleMarker from './BCycleMarker';
 import LocateButton from './LocateButton';
 import countyBorders from '../lib/davidson_county_borders.json';
+import RetailLocationMarker from './RetailLocationMarker';
 
 // Fix paths for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -26,7 +27,7 @@ L.Icon.Default.mergeOptions({
 });
 
 function TransitMap({
-  routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, tripUpdates, map, bCycleStations, mapControls, center, zoom,
+  routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, tripUpdates, map, bCycleStations, retailLocations, mapControls, center, zoom,
 }) {
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback((val) => {
@@ -162,6 +163,15 @@ function TransitMap({
              </LayerGroup>
           </LayersControl.Overlay>
         }
+        {retailLocations.length > 0
+          && <LayersControl.Overlay checked={false} name="QuickTicket Retailers">
+            <LayerGroup>
+              {retailLocations.map((item, _index) => (
+                  <RetailLocationMarker key={item.location_code} retailLocation={item}></RetailLocationMarker>
+              ))}
+             </LayerGroup>
+          </LayersControl.Overlay>
+        }
 
         <LayersControl.Overlay checked={true} name="City Border">
           <GeoJSON data={countyBorders} style={{
@@ -199,6 +209,7 @@ TransitMap.propTypes = {
   tripUpdates: PropTypes.array,
   map: PropTypes.any.isRequired,
   bCycleStations: PropTypes.array,
+  retailLocations: PropTypes.array,
   mapControls: PropTypes.object,
   center: PropTypes.any,
   zoom: PropTypes.number,
@@ -213,6 +224,7 @@ TransitMap.defaultProps = {
   alerts: [],
   tripUpdates: [],
   bCycleStations: [],
+  retailLocations: [],
   mapControls: {},
   center: [36.166512, -86.781581],
   zoom: 12,
