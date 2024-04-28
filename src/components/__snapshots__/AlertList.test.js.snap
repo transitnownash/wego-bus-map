@@ -4,31 +4,37 @@ exports[`renders AlertList 1`] = `
 <div>
   <div>
     <div
-      class="card mb-3"
+      class="row"
     >
       <div
-        class="card-header alert-item-header"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+        class="col-12"
       >
-        <strong>
-          <a
-            href="/routes/3"
+        <div
+          class="card mb-3"
+        >
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
           >
-            3
-             - 
-            WEST END
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 3 WEST END FROM DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 3 WEST END
+            <strong>
+              <a
+                href="/routes/3"
+              >
+                3
+                 - 
+                WEST END
+              </a>
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
+          >
+            <p>
+              <strong>
+                Detour in effect on route 3 WEST END FROM DOWNTOWN
+              </strong>
+            </p>
+            Detour in effect on route 3 WEST END
 
 Route 3 FROM DOWNTOWN will detour 
 
@@ -41,75 +47,79 @@ R-BRILEY PKWY
 Back to Regular Route
 
 Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOTTE SHONE will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
+            <hr />
+            <ul
+              class="list-inline"
+            >
+              <li
+                class="list-inline-item"
+              >
+                <strong>
+                  Stops:
+                </strong>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/CXIWTBRG"
+                  >
+                    CXIWTBRG
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+          >
+            Other Cause
+             - 
+            <strong>
+              Start:
+            </strong>
+             
+            <span
+              title="1655145660"
+            >
+              6/13/22, 1:41 PM
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-12"
+      >
+        <div
+          class="card mb-3"
         >
-          <li
-            class="list-inline-item"
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
           >
             <strong>
-              Stops:
-            </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
               <a
-                href="/stops/CXIWTBRG"
+                href="/routes/14"
               >
-                CXIWTBRG
+                14
+                 - 
+                WHITES CREEK
               </a>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
-      >
-        Other Cause
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1655145660"
-        >
-          6/13/22, 1:41 PM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/14"
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
           >
-            14
-             - 
-            WHITES CREEK
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 14 WHITES CREEK TO DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 14 WHITES CREEK
+            <p>
+              <strong>
+                Detour in effect on route 14 WHITES CREEK TO DOWNTOWN
+              </strong>
+            </p>
+            Detour in effect on route 14 WHITES CREEK
 
 Route 14 TO DOWNTOWN will detour 
 
@@ -119,75 +129,79 @@ R-DICKERSON PIKE
 Back to regular route.
 
 Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND ST SB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
+            <hr />
+            <ul
+              class="list-inline"
+            >
+              <li
+                class="list-inline-item"
+              >
+                <strong>
+                  Stops:
+                </strong>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/WHIDICSN"
+                  >
+                    WHIDICSN
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+          >
+            Other Cause
+             - 
+            <strong>
+              Start:
+            </strong>
+             
+            <span
+              title="1654988700"
+            >
+              6/11/22, 6:05 PM
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-12"
+      >
+        <div
+          class="card mb-3"
         >
-          <li
-            class="list-inline-item"
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
           >
             <strong>
-              Stops:
-            </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
               <a
-                href="/stops/WHIDICSN"
+                href="/routes/19"
               >
-                WHIDICSN
+                19
+                 - 
+                HERMAN
               </a>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
-      >
-        Other Cause
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1654988700"
-        >
-          6/11/22, 6:05 PM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/19"
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
           >
-            19
-             - 
-            HERMAN
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 19 HERMAN FROM DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 19 HERMAN FROM DOWNTOWN will detour 
+            <p>
+              <strong>
+                Detour in effect on route 19 HERMAN FROM DOWNTOWN
+              </strong>
+            </p>
+            Detour in effect on route 19 HERMAN FROM DOWNTOWN will detour 
 
 7/23, 8:00am-11:00pm
 From Downtown
@@ -199,83 +213,87 @@ L-DB Todd
 L-Albion to regular route
 
 Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
-        >
-          <li
-            class="list-inline-item"
+            <hr />
+            <ul
+              class="list-inline"
+            >
+              <li
+                class="list-inline-item"
+              >
+                <strong>
+                  Stops:
+                </strong>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/17AJACNN"
+                  >
+                    17AJACNN
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
           >
             <strong>
-              Stops:
+              Start:
             </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
+             
             <span
-              class="stop-code badge bg-white text-black border border-secondary"
+              title="1658581200"
             >
-              <a
-                href="/stops/17AJACNN"
-              >
-                17AJACNN
-              </a>
+              7/23/22, 8:00 AM
             </span>
-          </li>
-        </ul>
+             - 
+            <strong>
+              End:
+            </strong>
+             
+            <span
+              title="1658635200"
+            >
+              7/23/22, 11:00 PM
+            </span>
+          </div>
+        </div>
       </div>
       <div
-        class="card-footer alert-item-footer"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+        class="col-12"
       >
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1658581200"
+        <div
+          class="card mb-3"
         >
-          7/23/22, 8:00 AM
-        </span>
-         - 
-        <strong>
-          End:
-        </strong>
-         
-        <span
-          title="1658635200"
-        >
-          7/23/22, 11:00 PM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/19"
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
           >
-            19
-             - 
-            HERMAN
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 19 HERMAN TO DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 19 HERMAN TO DOWNTOWN will detour 
+            <strong>
+              <a
+                href="/routes/19"
+              >
+                19
+                 - 
+                HERMAN
+              </a>
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
+          >
+            <p>
+              <strong>
+                Detour in effect on route 19 HERMAN TO DOWNTOWN
+              </strong>
+            </p>
+            Detour in effect on route 19 HERMAN TO DOWNTOWN will detour 
 
 7/23, 8:00am-11:00pm
 To Downtown
@@ -286,83 +304,87 @@ L-19th Ave N
 L-Herman to regular route
 
 Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
-        >
-          <li
-            class="list-inline-item"
+            <hr />
+            <ul
+              class="list-inline"
+            >
+              <li
+                class="list-inline-item"
+              >
+                <strong>
+                  Stops:
+                </strong>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/JAC17AEN"
+                  >
+                    JAC17AEN
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
           >
             <strong>
-              Stops:
+              Start:
             </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
+             
             <span
-              class="stop-code badge bg-white text-black border border-secondary"
+              title="1658581200"
             >
-              <a
-                href="/stops/JAC17AEN"
-              >
-                JAC17AEN
-              </a>
+              7/23/22, 8:00 AM
             </span>
-          </li>
-        </ul>
+             - 
+            <strong>
+              End:
+            </strong>
+             
+            <span
+              title="1658635200"
+            >
+              7/23/22, 11:00 PM
+            </span>
+          </div>
+        </div>
       </div>
       <div
-        class="card-footer alert-item-footer"
-        style="border-color: #753cbe; background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+        class="col-12"
       >
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1658581200"
+        <div
+          class="card mb-3"
         >
-          7/23/22, 8:00 AM
-        </span>
-         - 
-        <strong>
-          End:
-        </strong>
-         
-        <span
-          title="1658635200"
-        >
-          7/23/22, 11:00 PM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/22"
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
           >
-            22
-             - 
-            BORDEAUX
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 22 BORDEAUX FROM DOWNTOWN
-          </strong>
-        </p>
-        Detour in effect on route 22 BORDEAUX
+            <strong>
+              <a
+                href="/routes/22"
+              >
+                22
+                 - 
+                BORDEAUX
+              </a>
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
+          >
+            <p>
+              <strong>
+                Detour in effect on route 22 BORDEAUX FROM DOWNTOWN
+              </strong>
+            </p>
+            Detour in effect on route 22 BORDEAUX
 
 Route 22 FROM DOWNTOWN will detour 
 
@@ -373,99 +395,103 @@ R- Clarksville Hwy to regular route.
 
 
 Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
-        >
-          <li
-            class="list-inline-item"
+            <hr />
+            <ul
+              class="list-inline"
+            >
+              <li
+                class="list-inline-item"
+              >
+                <strong>
+                  Stops:
+                </strong>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/FAICLAEN"
+                  >
+                    FAICLAEN
+                  </a>
+                </span>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/CLAFAISF"
+                  >
+                    CLAFAISF
+                  </a>
+                </span>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/CLAWHASN"
+                  >
+                    CLAWHASN
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
           >
             <strong>
-              Stops:
+              Start:
             </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
+             
             <span
-              class="stop-code badge bg-white text-black border border-secondary"
+              title="1654090200"
             >
-              <a
-                href="/stops/FAICLAEN"
-              >
-                FAICLAEN
-              </a>
+              6/1/22, 8:30 AM
             </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/CLAFAISF"
-              >
-                CLAFAISF
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/CLAWHASN"
-              >
-                CLAWHASN
-              </a>
-            </span>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
       <div
-        class="card-footer alert-item-footer"
-        style="border-color: #f32735; background-color: rgb(243, 39, 53); color: rgb(255, 255, 255);"
+        class="col-12"
       >
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1654090200"
+        <div
+          class="card mb-3"
         >
-          6/1/22, 8:30 AM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/75"
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
           >
-            75
-             - 
-            MIDTOWN
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 75 MIDTOWN NORTHBOUND
-          </strong>
-        </p>
-        Detour in effect on route 75 MIDTOWN NORTHBOUND will detour 
+            <strong>
+              <a
+                href="/routes/75"
+              >
+                75
+                 - 
+                MIDTOWN
+              </a>
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
+          >
+            <p>
+              <strong>
+                Detour in effect on route 75 MIDTOWN NORTHBOUND
+              </strong>
+            </p>
+            Detour in effect on route 75 MIDTOWN NORTHBOUND will detour 
 
 BROADWAY AVE (NE)
 L-19TH AVE
@@ -473,112 +499,116 @@ L-WEST END AVE
 R-20TH AVE
 
 Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not be served while this detour is in effect.
-        <hr />
-        <ul
-          class="list-inline"
-        >
-          <li
-            class="list-inline-item"
+            <hr />
+            <ul
+              class="list-inline"
+            >
+              <li
+                class="list-inline-item"
+              >
+                <strong>
+                  Stops:
+                </strong>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/20ABRONF"
+                  >
+                    20ABRONF
+                  </a>
+                </span>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/20AWESNN"
+                  >
+                    20AWESNN
+                  </a>
+                </span>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/21AGRANN"
+                  >
+                    21AGRANN
+                  </a>
+                </span>
+              </li>
+              <li
+                class="list-inline-item"
+              >
+                <span
+                  class="stop-code badge bg-white text-black border border-secondary"
+                >
+                  <a
+                    href="/stops/20ACHUNN"
+                  >
+                    20ACHUNN
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
           >
             <strong>
-              Stops:
+              Start:
             </strong>
-          </li>
-          <li
-            class="list-inline-item"
-          >
+             
             <span
-              class="stop-code badge bg-white text-black border border-secondary"
+              title="1657679040"
             >
-              <a
-                href="/stops/20ABRONF"
-              >
-                20ABRONF
-              </a>
+              7/12/22, 9:24 PM
             </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/20AWESNN"
-              >
-                20AWESNN
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/21AGRANN"
-              >
-                21AGRANN
-              </a>
-            </span>
-          </li>
-          <li
-            class="list-inline-item"
-          >
-            <span
-              class="stop-code badge bg-white text-black border border-secondary"
-            >
-              <a
-                href="/stops/20ACHUNN"
-              >
-                20ACHUNN
-              </a>
-            </span>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
       <div
-        class="card-footer alert-item-footer"
-        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+        class="col-12"
       >
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1657679040"
+        <div
+          class="card mb-3"
         >
-          7/12/22, 9:24 PM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/79"
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
           >
-            79
-             - 
-            SKYLINE
-          </a>
-        </strong>
-      </div>
-      <div
-        class="card-body alert-item-text"
-      >
-        <p>
-          <strong>
-            Detour in effect on route 79 SKYLINE NORTHBOUND
-          </strong>
-        </p>
-        Detour in effect on route 79 SKYLINE
+            <strong>
+              <a
+                href="/routes/79"
+              >
+                79
+                 - 
+                SKYLINE
+              </a>
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
+          >
+            <p>
+              <strong>
+                Detour in effect on route 79 SKYLINE NORTHBOUND
+              </strong>
+            </p>
+            Detour in effect on route 79 SKYLINE
 
 Route 79 NORTHBOUND will detour 
 
@@ -588,52 +618,56 @@ No service on Skyline Ridge due to construction
 From Skyline Hospital, continue Doverside 
 back to Dickerson
 R-Dickerson to regular route. 
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-      >
-        Construction
-         - 
-        Detour
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1649057040"
-        >
-          4/4/22, 2:24 AM
-        </span>
-      </div>
-    </div>
-    <div
-      class="card mb-3"
-    >
-      <div
-        class="card-header alert-item-header"
-        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-      >
-        <strong>
-          <a
-            href="/routes/79"
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
           >
-            79
+            Construction
              - 
-            SKYLINE
-          </a>
-        </strong>
+            Detour
+             - 
+            <strong>
+              Start:
+            </strong>
+             
+            <span
+              title="1649057040"
+            >
+              4/4/22, 2:24 AM
+            </span>
+          </div>
+        </div>
       </div>
       <div
-        class="card-body alert-item-text"
+        class="col-12"
       >
-        <p>
-          <strong>
-            Detour in effect on route 79 SKYLINE EASTBOUND
-          </strong>
-        </p>
-        Detour in effect on route 79 SKYLINE
+        <div
+          class="card mb-3"
+        >
+          <div
+            class="card-header alert-item-header"
+            style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+          >
+            <strong>
+              <a
+                href="/routes/79"
+              >
+                79
+                 - 
+                SKYLINE
+              </a>
+            </strong>
+          </div>
+          <div
+            class="card-body alert-item-text"
+          >
+            <p>
+              <strong>
+                Detour in effect on route 79 SKYLINE EASTBOUND
+              </strong>
+            </p>
+            Detour in effect on route 79 SKYLINE
 
 Route 79 EASTBOUND will detour 
 
@@ -643,24 +677,26 @@ On Dickerson at Skyline Ridge Dr,
 Continue Dickerson
 L-Doverside to Skyline Hospital
 Continue regular route to Walmart
-      </div>
-      <div
-        class="card-footer alert-item-footer"
-        style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
-      >
-        Construction
-         - 
-        Detour
-         - 
-        <strong>
-          Start:
-        </strong>
-         
-        <span
-          title="1649057040"
-        >
-          4/4/22, 2:24 AM
-        </span>
+          </div>
+          <div
+            class="card-footer alert-item-footer"
+            style="border-color: #5d5f62; background-color: rgb(93, 95, 98); color: rgb(255, 255, 255);"
+          >
+            Construction
+             - 
+            Detour
+             - 
+            <strong>
+              Start:
+            </strong>
+             
+            <span
+              title="1649057040"
+            >
+              4/4/22, 2:24 AM
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

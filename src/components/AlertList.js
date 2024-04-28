@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import AlertItem from './AlertItem';
 import dayjs from 'dayjs';
 
-function AlertList({ alerts, routes }) {
+function AlertList({ alerts, routes, showHorizontal }) {
   const [hideFuture, setHideFuture] = useState(false);
 
   const handleHideFutureAlertsOnChange = (event) => {
@@ -42,12 +42,17 @@ function AlertList({ alerts, routes }) {
       {alerts.length === 0 && (
         <div className='alert alert-info'>No active alerts.</div>
       )}
-      {alerts.map((item, _index) => {
-        const route = routes.find((r) => r.route_gid === item.alert.informed_entity[0].route_id || r.route_short_name === item.alert.informed_entity[0].route_id);
-        return (
-          <AlertItem key={item.id} alert={item.alert} route={route}></AlertItem>
-        );
-      })}
+      <div className="row">
+        {alerts.map((item, _index) => {
+          const columnWrapperClass = showHorizontal ? `col-md-6 col-xl-4` : `col-12`;
+          const route = routes.find((r) => r.route_gid === item.alert.informed_entity[0].route_id || r.route_short_name === item.alert.informed_entity[0].route_id);
+          return (
+            <div key={item.id} className={columnWrapperClass}>
+              <AlertItem alert={item.alert} route={route}></AlertItem>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -55,10 +60,13 @@ function AlertList({ alerts, routes }) {
 AlertList.propTypes = {
   alerts: PropTypes.array.isRequired,
   routes: PropTypes.array,
+  showHorizontal: PropTypes.bool
 };
 
 AlertList.defaultProps = {
+  alerts: [],
   routes: [],
+  showHorizontal: false,
 };
 
 export default AlertList;

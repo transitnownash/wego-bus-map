@@ -265,7 +265,7 @@ function Stops() {
           </>
         )}
         <TransitMap center={[stop.stop_lat, stop.stop_lon]} zoom={19} map={map} vehicleMarkers={filteredVehiclePositions} routes={routes} agencies={agencies} routeStops={routeStops} alerts={stopAlerts}></TransitMap>
-        <AlertList alerts={stopAlerts} routes={routes}></AlertList>
+        <AlertList alerts={stopAlerts} routes={routes} showHorizontal></AlertList>
         {trips.length > 0 && (
           <>
             <div className="d-flex align-items-center mb-2">

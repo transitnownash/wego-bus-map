@@ -207,7 +207,7 @@ function TransitRoute() {
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
         <TransitMap vehicleMarkers={filteredVehiclePositions} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
-        <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
+        <AlertList alerts={routeAlerts} routes={[route]} showHorizontal></AlertList>
         <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates} scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoadingTripDate={isLoadingTripDate}></TripTable>
       </div>
       <Footer />

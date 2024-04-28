@@ -226,7 +226,7 @@ function Trip() {
         <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
 
         <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={allAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
-        <AlertList alerts={routeAlerts} routes={[route]}></AlertList>
+        <AlertList alerts={routeAlerts} routes={[route]} showHorizontal></AlertList>
         <table className="table table-sm small">
           <thead>
             <tr>
