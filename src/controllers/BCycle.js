@@ -106,33 +106,33 @@ function BCycle() {
       <TitleBar />
       <div className="container">
         <TransitMap map={map} bCycleStations={bCycleStations} center={center}></TransitMap>
-        <div className="row mb-3">
+        <div className="row my-5">
           <div className="col-sm-3 text-center">
             <div>
-              <div className="h1 my-2">{totalStations}</div>
-              <div>Total Stations</div>
+              <div className="display-1 my-2">{totalStations}</div>
+              <div className="badge text-bg-info">Total Stations</div>
             </div>
           </div>
           <div className="col-sm-3 text-center">
             <div>
-              <div className="h1 my-2">{offlineStations}</div>
-              <div>Offline Stations</div>
+              <div className="display-1 my-2">{offlineStations}</div>
+              <div className="badge text-bg-warning">Offline Stations</div>
             </div>
           </div>
           <div className="col-sm-3 text-center">
             <div>
-              <div className="h1 my-2">{bikesAvailable}</div>
-              <div>Bikes Available</div>
+              <div className="display-1 my-2">{bikesAvailable}</div>
+              <div className="badge text-bg-primary">Bikes Available</div>
             </div>
           </div>
           <div className="col-sm-3 text-center">
             <div>
-              <div className="h1 my-2">{docksAvailable}</div>
-              <div>Docks Available</div>
+              <div className="display-1 my-2">{docksAvailable}</div>
+              <div className="badge text-bg-secondary">Docks Available</div>
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="row">
           {bCycleStations.map((station) => {
             // Ignore if stations doesn't have status, or if it isn't "installed"
             if (typeof station.status === 'undefined' || !station.status.is_installed) {
@@ -154,41 +154,43 @@ function BCycle() {
             }
 
             return (
-              <div key={station.station_id} className="card mb-3">
-                <div className="card-header bcycle-station-name">{station.name}</div>
-                {warning}
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-6 text-center">
-                          <div className={(!station.status.is_renting || station.status.num_bikes_available === 0) ? 'bcycle-inactive' : ''}>
-                            <div className="h1 my-2"><FontAwesomeIcon icon={faBicycle} fixedWidth={true}></FontAwesomeIcon> {station.status.num_bikes_available}</div>
-                            <div>Bikes Available</div>
+              <div key={station.station_id} className="col-md-6">
+                <div className="card mb-3">
+                  <div className="card-header bcycle-station-name">{station.name}</div>
+                  {warning}
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-12 mb-3">
+                        <div className="row">
+                          <div className="col-sm-6 text-center">
+                            <div className={(!station.status.is_renting || station.status.num_bikes_available === 0) ? 'bcycle-inactive' : ''}>
+                              <div className="h1 my-2"><FontAwesomeIcon icon={faBicycle} fixedWidth={true}></FontAwesomeIcon> {station.status.num_bikes_available}</div>
+                              <div className="badge text-bg-primary">Bikes Available</div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-sm-6 text-center">
-                          <div className={(!station.status.is_returning || station.status.num_docks_available === 0) ? 'bcycle-inactive' : ''}>
-                            <div className="h1 my-2">{station.status.num_docks_available}</div>
-                            <div>Docks Available</div>
+                          <div className="col-sm-6 text-center">
+                            <div className={(!station.status.is_returning || station.status.num_docks_available === 0) ? 'bcycle-inactive' : ''}>
+                              <div className="h1 my-2">{station.status.num_docks_available}</div>
+                              <div className="badge text-bg-secondary">Docks Available</div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-sm-6 small">
-                      <dl className="row mb-0">
-                        <dt className="col-5"><FontAwesomeIcon icon={faMapMarkedAlt} fixedWidth={true}></FontAwesomeIcon> Address</dt>
-                        <dd className="col-7"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${station.lat}%2C${station.lon}`} rel='noreferrer' target="_blank">{station.address}</a></dd>
-                        <dt className="col-5"><FontAwesomeIcon icon={faMobile} fixedWidth={true}></FontAwesomeIcon> Rental Link</dt>
-                        <dd className="col-7">
-                          <div className="btn-group" role="group">
-                            <a href={station.rental_uris.ios} className="btn btn-sm border border-secondary" target={'_blank'} rel={'noreferrer'}>iOS</a>
-                            <a href={station.rental_uris.android} className="btn btn-sm border border-secondary" target={'_blank'} rel={'noreferrer'}>Android</a>
-                          </div>
-                        </dd>
-                        <dt className="col-5"><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Updated</dt>
-                        <dd className="col-7">{renderUnixTimestamp(station.status.last_reported)}</dd>
-                      </dl>
+                      <div className="col-12 small">
+                        <dl className="row mb-0">
+                          <dt className="col-5"><FontAwesomeIcon icon={faMapMarkedAlt} fixedWidth={true}></FontAwesomeIcon> Address</dt>
+                          <dd className="col-7"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${station.lat}%2C${station.lon}`} rel='noreferrer' target="_blank">{station.address}</a></dd>
+                          <dt className="col-5"><FontAwesomeIcon icon={faMobile} fixedWidth={true}></FontAwesomeIcon> Rental Link</dt>
+                          <dd className="col-7">
+                            <div className="btn-group" role="group">
+                              <a href={station.rental_uris.ios} className="btn btn-sm btn-outline-secondary" target={'_blank'} rel={'noreferrer'}>iOS</a>
+                              <a href={station.rental_uris.android} className="btn btn-sm btn-outline-secondary" target={'_blank'} rel={'noreferrer'}>Android</a>
+                            </div>
+                          </dd>
+                          <dt className="col-5"><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Updated</dt>
+                          <dd className="col-7">{renderUnixTimestamp(station.status.last_reported)}</dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,3 +1,9 @@
-.bcycle-inactive {
-  opacity: 0.3;
+.bcycle-marker {
+  .bcycle-inactive {
+    opacity: 0.3;
+  }
+
+  .leaflet-container a {
+    color: inherit;
+  }
 }

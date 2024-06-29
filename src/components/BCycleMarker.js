@@ -51,13 +51,13 @@ function BCycleMarker({ station }) {
           <div className="col-sm-6 text-center">
             <div className={(!station.status.is_renting || station.status.num_bikes_available === 0) ? 'bcycle-inactive' : ''}>
               <div className="h1"><FontAwesomeIcon icon={faBicycle} fixedWidth={true}></FontAwesomeIcon> {station.status.num_bikes_available}</div>
-              <div>Bikes Available</div>
+              <div className="badge text-bg-primary">Bikes Available</div>
             </div>
           </div>
           <div className="col-sm-6 text-center">
             <div className={(!station.status.is_returning || station.status.num_docks_available === 0) ? 'bcycle-inactive' : ''}>
               <div className="h1">{station.status.num_docks_available}</div>
-              <div>Docks Available</div>
+              <div className="badge text-bg-secondary">Docks Available</div>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ function BCycleMarker({ station }) {
         </Tooltip>
       }
       <Popup>
-        <div style={{ width: '300px' }}>
+        <div style={{ width: '300px' }} className="bcycle-marker">
           {renderStationHeader()}
           <hr />
           <dl className="row">
@@ -84,8 +84,8 @@ function BCycleMarker({ station }) {
             <dt className="col-5"><FontAwesomeIcon icon={faMobile} fixedWidth={true}></FontAwesomeIcon> Rental Link</dt>
             <dd className="col-7">
               <div className="btn-group" role="group">
-                <a href={station.rental_uris.ios} className="btn btn-sm border border-secondary" target={'_blank'} rel={'noreferrer'}>iOS</a>
-                <a href={station.rental_uris.android} className="btn btn-sm border border-secondary" target={'_blank'} rel={'noreferrer'}>Android</a>
+                <a href={station.rental_uris.ios} className="btn btn-sm btn-outline-secondary" target={'_blank'} rel={'noreferrer'}>iOS</a>
+                <a href={station.rental_uris.android} className="btn btn-sm btn-outline-secondary" target={'_blank'} rel={'noreferrer'}>Android</a>
               </div>
             </dd>
             <dt className="col-5"><FontAwesomeIcon icon={faClock} fixedWidth={true}></FontAwesomeIcon> Updated</dt>
