@@ -290,6 +290,7 @@ function Stops() {
                 </thead>
                 <tbody>
                   {trips.map((item, _index) => {
+                    const key = `${item.route_gid}-${item.trip_gid}`;
                     const route = routes.find((r) => r.route_gid === item.route_gid);
                     const routeAlerts = alerts.filter((a) => a.alert.informed_entity && a.alert.informed_entity[0].route_id === item.route_gid);
                     // Find stop time update relevant to this trip and this stop
@@ -305,17 +306,20 @@ function Stops() {
                       }
                     }
 
-                    let rowClasses = '';
+                    let cellClasses = '';
                     if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate)) {
                       if (hidePastTrips) {
                         return <></>;
                       }
-                      rowClasses = 'border-start border-gray border-5';
+                      cellClasses = 'ps-1 border-start border-gray border-5';
                     }
-
                     return (
-                      <tr key={item.id} className={rowClasses}>
-                        <td className="align-middle"><TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader></td>
+                      <tr key={key}>
+                        <td style={{ maxWidth: '200px' }}>
+                          <div className={cellClasses}>
+                            <TransitRouteHeader route={route} alerts={routeAlerts}></TransitRouteHeader>
+                          </div>
+                        </td>
                         <td className="align-middle"><Link to={`/trips/${item.trip_gid}`}>{item.trip_gid}</Link></td>
                         <td className="align-middle">
                           <strong><Headsign headsign={item.trip_headsign} /></strong><br />

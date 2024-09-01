@@ -12,9 +12,14 @@
   .transit-route-header-alert-trigger {
     cursor: pointer;
   }
+  a {
+    display: block;
+  }
 }
 
-td > .transit-route-header {
-  padding: 0.5rem;
-  margin: 0 0.5rem;
+td .transit-route-header {
+  padding: 0.6rem;
+  margin: 0rem;
+  border-radius: 0;
+  max-width: 350px;
 }
