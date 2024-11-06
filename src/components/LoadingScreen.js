@@ -10,9 +10,6 @@ function LoadingScreen({ hideTitleBar }) {
     <div>
       <TitleBar hide={hideTitleBar}></TitleBar>
       <div className="loading-screen">
-        <a href="https://transit.nashville.gov/">
-          <img src="/campaigns/2024-choose-how-you-move.png" alt="Choose How You Move Campaign" className="img-fluid rounded" />
-        </a>
         <div className="h3 my-3">
           <FontAwesomeIcon icon={faSpinner} spin opacity={0.5} /> Loading ...
         </div>
