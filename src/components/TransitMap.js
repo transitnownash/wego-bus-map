@@ -119,6 +119,10 @@ function TransitMap({
           <LayersControl.Overlay checked={true} name="Vehicles">
             <LayerGroup>
               {vehicleMarkers.map((item, _index) => {
+                if (!item.vehicle.trip) {
+                  return;
+                }
+
                 const route = getRouteDataById(item.vehicle.trip.route_id);
                 const routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
                 const agency = getAgencyDataById(route ? route.agency_gid : {});
