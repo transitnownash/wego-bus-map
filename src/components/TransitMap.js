@@ -120,6 +120,7 @@ function TransitMap({
             <LayerGroup>
               {vehicleMarkers.map((item, _index) => {
                 if (!item.vehicle.trip) {
+                  console.warn('Vehicle without trip', item);
                   return;
                 }
 
