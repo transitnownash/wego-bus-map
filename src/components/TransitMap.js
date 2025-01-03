@@ -118,12 +118,7 @@ function TransitMap({
         {vehicleMarkers.length > 0 && (
           <LayersControl.Overlay checked={true} name="Vehicles">
             <LayerGroup>
-              {vehicleMarkers.map((item, _index) => {
-                if (!item.vehicle.trip) {
-                  console.warn('Vehicle without trip', item);
-                  return;
-                }
-
+              {vehicleMarkers.filter((i) => i.vehicle.trip).map((item, _index) => {
                 const route = getRouteDataById(item.vehicle.trip.route_id);
                 const routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
                 const agency = getAgencyDataById(route ? route.agency_gid : {});

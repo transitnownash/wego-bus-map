@@ -151,7 +151,7 @@ function Trip() {
   const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && a.alert.informed_entity[0].route_id === route.route_gid);
 
   // Filter vehicle markers
-  const filteredVehicleMarkers = vehicleMarkers.filter((v) => v.vehicle.trip.trip_id === trip.trip_gid);
+  const filteredVehicleMarkers = vehicleMarkers.filter((v) => v.vehicle.trip?.trip_id === trip.trip_gid);
 
   // Filter updates to this trip, key stop time updates by sequence
   const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid);

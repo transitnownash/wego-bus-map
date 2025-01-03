@@ -139,7 +139,7 @@ function TransitRoute() {
   }
 
   // Filter vehicle positions to only those relevant to this route
-  const filteredVehiclePositions = vehicleMarkers.filter((v) => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
+  const filteredVehiclePositions = vehicleMarkers.filter((v) => v.vehicle.trip).filter((v) => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
   const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && (a.alert.informed_entity[0].route_id === route.route_gid || a.alert.informed_entity[0].route_id === route.route_short_name));
 
   // Load in selected date

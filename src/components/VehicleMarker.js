@@ -21,7 +21,7 @@ function VehicleMarker({
   const marker = useRef(null);
 
   if (typeof route === 'undefined' || typeof route.route_gid === 'undefined') {
-    console.warn(`No matching route found for Trip #${vehiclePositionData.vehicle.trip.trip_id}`);
+    console.warn(`No matching route found for Trip #${vehiclePositionData.vehicle.trip?.trip_id}`);
     return (<></>);
   }
 

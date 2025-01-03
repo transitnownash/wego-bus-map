@@ -139,7 +139,7 @@ function Stops() {
   // Filter vehicle positions to relevant trips
   const filteredVehiclePositions = [];
   const tripsAtStop = trips.map((t) => t.trip_gid);
-  vehiclePositions.forEach((vp) => {
+  vehiclePositions.filter((v) => v.vehicle.trip).forEach((vp) => {
     if (tripsAtStop.includes(vp.vehicle.trip.trip_id)) {
       filteredVehiclePositions.push(vp);
     }
