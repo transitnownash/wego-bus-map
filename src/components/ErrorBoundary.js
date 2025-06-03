@@ -26,6 +26,13 @@ class ErrorBoundary extends React.Component {
         span.recordException(error);
         span.setAttribute('component', 'ErrorBoundary');
         span.setAttribute('react.error.info', JSON.stringify(info));
+        if (typeof window !== 'undefined') {
+          span.setAttribute('window.location', window.location.href);
+          span.setAttribute('window.pathname', window.location.pathname);
+          span.setAttribute('window.hash', window.location.hash);
+          span.setAttribute('window.search', window.location.search);
+          span.setAttribute('user_agent', window.navigator.userAgent);
+        }
         span.setStatus({ code: 2, message: error.message }); // 2 = ERROR
         span.end();
       });
