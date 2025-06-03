@@ -81,25 +81,24 @@ function StopMarker({
     </div>
   );
 
-  return (
-    <>
-      <Marker position={[stop.stop_lat, stop.stop_lon]} icon={icon}>
-        {!L.Browser.mobile && (
-          <Tooltip>{content}</Tooltip>
-        )}
-        <Popup>
-          {content}
-          <div className="text-center my-2"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${stop.stop_lat}%2C${stop.stop_lon}`} className="btn bg-secondary text-light btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
-        </Popup>
-      </Marker>
-      {stopTime.timepoint === '1'
-        && (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>)
-      }
-      {stopAlerts.length > 0
-        && (<Circle center={[stop.stop_lat, stop.stop_lon]} radius={80} pathOptions={{ color: 'orange' }}></Circle>)
-      }
-    </>
-  );
+  // Instead of returning a fragment, return an array with explicit keys for each element
+  return [
+    <Marker key="marker" position={[stop.stop_lat, stop.stop_lon]} icon={icon}>
+      {!L.Browser.mobile && (
+        <Tooltip>{content}</Tooltip>
+      )}
+      <Popup>
+        {content}
+        <div className="text-center my-2"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${stop.stop_lat}%2C${stop.stop_lon}`} className="btn bg-secondary text-light btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
+      </Popup>
+    </Marker>,
+    stopTime.timepoint === '1' && (
+      <Circle key="timing-circle" center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>
+    ),
+    stopAlerts.length > 0 && (
+      <Circle key="alert-circle" center={[stop.stop_lat, stop.stop_lon]} radius={80} pathOptions={{ color: 'orange' }}></Circle>
+    )
+  ].filter(Boolean);
 }
 
 StopMarker.propTypes = {

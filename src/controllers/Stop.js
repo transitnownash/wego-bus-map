@@ -189,8 +189,13 @@ function Stops() {
     stop.child_stops.map((item) => stops.push(item));
   }
 
-  // Nest stops inside an object
-  const routeStops = stops.map((item) => ({ id: item.id, stop: item }));
+  // Nest stops inside an object with unique IDs for React keys
+  const routeStops = stops.map((item) => {
+    // Always prefix child stops, and include trip_gid if present
+    const isChild = stop.child_stops && stop.child_stops.some((child) => child.id === item.id);
+    const tripGid = item.trip_gid ? `-${item.trip_gid}` : '';
+    return { id: isChild ? `child-${item.id}${tripGid}` : `${item.id}${tripGid}`, stop: item, trip_gid: item.trip_gid };
+  });
 
   // Load in selected date
   const handleDateFieldChange = (event) => {
@@ -239,7 +244,7 @@ function Stops() {
                 </thead>
                 <tbody>
                   {stop.child_stops.map((item) => (
-                      <tr key={item.id}>
+                      <tr key={`child-${item.id}`}>
                         <td><Link to={`/stops/${item.stop_code}`}><span className='stop-code badge bg-white text-black border border-secondary'>{item.stop_code}</span></Link></td>
                         <td><Link to={`/stops/${item.stop_code}`}>{item.stop_name}</Link></td>
                         <td>{item.stop_desc}</td>
@@ -309,7 +314,7 @@ function Stops() {
                     let cellClasses = '';
                     if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate)) {
                       if (hidePastTrips) {
-                        return <></>;
+                        return null;
                       }
                       cellClasses = 'ps-1 border-start border-gray border-5';
                     }
