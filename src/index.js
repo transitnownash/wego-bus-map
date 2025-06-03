@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './otel';
 
 // Manages color mode changes
 require('./lib/color-mode');

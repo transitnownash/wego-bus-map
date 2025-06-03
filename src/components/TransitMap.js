@@ -146,11 +146,13 @@ function TransitMap({
         {stops.length > 0
           && <LayersControl.Overlay checked={true} name="Stops">
             <LayerGroup>
-              {stops.map((item, _index) => {
-                const stopAlerts = getStopAlertsById(item.stop.stop_code);
-                const stopUpdate = getStopUpdateByTripAndId(item.trip_gid, item.stop.stop_code);
-                return (<StopMarker key={item.id} stop={item.stop} stopTime={item} stopUpdate={stopUpdate} stopAlerts={stopAlerts}></StopMarker>);
-              })}
+              {(() => {
+                return stops.map((item, _index) => {
+                  const stopAlerts = getStopAlertsById(item.stop.stop_code);
+                  const stopUpdate = getStopUpdateByTripAndId(item.trip_gid, item.stop.stop_code);
+                  return (<StopMarker key={item.id} stop={item.stop} stopTime={item} stopUpdate={stopUpdate} stopAlerts={stopAlerts}></StopMarker>);
+                });
+              })()}
              </LayerGroup>
           </LayersControl.Overlay>
         }

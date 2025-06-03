@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { trace } from '@opentelemetry/api';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -15,10 +16,29 @@ class ErrorBoundary extends React.Component {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error, info) {
     this.setState({ error });
     // You can also log the error to an error reporting service
-    console.error(error, errorInfo);
+    console.error(error, info);
+    try {
+      const tracer = trace.getTracer('react-error-boundary');
+      tracer.startActiveSpan('React ErrorBoundary', span => {
+        span.recordException(error);
+        span.setAttribute('component', 'ErrorBoundary');
+        span.setAttribute('react.error.info', JSON.stringify(info));
+        if (typeof window !== 'undefined') {
+          span.setAttribute('window.location', window.location.href);
+          span.setAttribute('window.pathname', window.location.pathname);
+          span.setAttribute('window.hash', window.location.hash);
+          span.setAttribute('window.search', window.location.search);
+          span.setAttribute('user_agent', window.navigator.userAgent);
+        }
+        span.setStatus({ code: 2, message: error.message }); // 2 = ERROR
+        span.end();
+      });
+    } catch (e) {
+      // fail silently if telemetry is not available
+    }
   }
 
   render() {

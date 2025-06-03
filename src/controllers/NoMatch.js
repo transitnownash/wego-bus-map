@@ -4,8 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../components/Footer';
 import TitleBar from '../components/TitleBar';
+import { trace } from '@opentelemetry/api';
 
 function NoMatch() {
+  React.useEffect(() => {
+    try {
+      const tracer = trace.getTracer('react-404');
+      tracer.startActiveSpan('404 Not Found', span => {
+        span.recordException({
+          name: 'NotFound',
+          message: '404 page rendered (NoMatch component)'
+        });
+        span.setAttribute('component', 'NoMatch');
+        span.setStatus({ code: 2, message: '404 Not Found' });
+        span.end();
+      });
+    } catch (e) {
+      // fail silently if telemetry is not available
+    }
+  }, []);
+
   return (
     <div>
       <TitleBar></TitleBar>
