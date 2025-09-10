@@ -23,7 +23,7 @@ function TransitRouteHeader({ route, alerts, showRouteType }) {
   };
 
   let vehicleIcon = busIcon;
-  if (route.route_type === '2') {
+  if (route?.route_type === '2') {
     vehicleIcon = trainIcon;
   }
 
@@ -37,7 +37,7 @@ function TransitRouteHeader({ route, alerts, showRouteType }) {
     <div className="transit-route-header d-flex" style={routeStyle} title={route.route_desc}>
       {showRouteType && (
         <div>
-          <img className="me-2" style={{ height: '1.5rem' }} src={vehicleIcon} alt="Icon" title={`Route Type: ${route.route_type}` } />
+          <img className="me-2" style={{ height: '1.5rem' }} src={vehicleIcon} alt="Icon" title={`Route Type: ${route?.route_type}` } />
         </div>
       )}
       <div className="flex-grow-1 align-bottom">

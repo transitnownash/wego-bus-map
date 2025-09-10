@@ -24,10 +24,10 @@ function VehicleMarkerPopup({
 
   const trip_headsign = (trip.trip_headsign)
     ? (<Headsign headsign={trip.trip_headsign} />)
-    : (<>{route.route_long_name} <FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon></>);
+    : (<>{route?.route_long_name} <FontAwesomeIcon icon={faSpinner} spin={true}></FontAwesomeIcon></>);
   const trip_gid = (trip.trip_gid)
     ? (<Link to={`/trips/${trip.trip_gid}`}>{trip.trip_gid}</Link>)
-    : (<>{vehiclePositionData.vehicle.trip.trip_id}</>);
+    : (<>{vehiclePositionData.vehicle.trip?.trip_id}</>);
   let tripStopTimes = [];
   if (trip.trip_gid && tripUpdate.trip_update && tripUpdate.trip_update.stop_time_update.length > 0) {
     isTripTabActive = true;
@@ -52,18 +52,22 @@ function VehicleMarkerPopup({
           <Tab eventKey="home" title="Vehicle">
             <table className="table table-borderless table table-sm small" style={{ minWidth: '250px' }}>
               <tbody>
-                <tr>
-                  <th className="text-nowrap"><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>
-                  <td>{trip_headsign}</td>
-                </tr>
+                {route && (
+                  <tr>
+                    <th className="text-nowrap"><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>
+                    <td>{trip_headsign}</td>
+                  </tr>
+                )}
                 <tr>
                   <th><FontAwesomeIcon icon={faBus} fixedWidth/> Vehicle</th>
                   <td>{vehiclePositionData.vehicle.vehicle.label}</td>
                 </tr>
-                <tr>
-                  <th><FontAwesomeIcon icon={faMap} fixedWidth/> Trip</th>
-                  <td>{trip_gid}</td>
-                </tr>
+                {vehiclePositionData.vehicle.trip && (
+                  <tr>
+                    <th><FontAwesomeIcon icon={faMap} fixedWidth/> Trip</th>
+                    <td>{trip_gid}</td>
+                  </tr>
+                )}
                 <tr>
                   <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
                   <td>{renderBearing(vehiclePositionData.vehicle.position.bearing)}</td>
@@ -117,7 +121,9 @@ function VehicleMarkerPopup({
             )}
           </Tab>
         </Tabs>
-        <div className="text-end"><a href={agency.agency_url} className="text-muted" target="_blank" rel="noreferrer">{agency.agency_name}</a></div>
+        {agency && (
+          <div className="text-end"><a href={agency?.agency_url} className="text-muted" target="_blank" rel="noreferrer">{agency?.agency_name}</a></div>
+        )}
       </div>
     </Popup>
   );

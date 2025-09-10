@@ -301,7 +301,7 @@ function Stops() {
                     // Find stop time update relevant to this trip and this stop
                     let stopTimeUpdate = {};
                     if (stopTripUpdates.length > 0) {
-                      const stopTimeTripUpdate = stopTripUpdates.filter((s) => s.trip_update.trip.trip_id === item.trip_gid);
+                      const stopTimeTripUpdate = stopTripUpdates.filter((s) => s.trip_update.trip?.trip_id === item.trip_gid);
                       if (stopTimeTripUpdate.length > 0) {
                         stopTimeTripUpdate[0].trip_update.stop_time_update.map((stu) => {
                           if (stu.stop_id === stop.stop_code) {

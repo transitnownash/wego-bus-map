@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup, GeoJSON,
+  // CircleMarker, Tooltip, Popup,
 } from 'react-leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -125,6 +126,26 @@ function TransitMap({
                 const tripUpdate = getTripUpdateById(item.vehicle.trip.trip_id);
                 return (
                   <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                );
+              })}
+              {vehicleMarkers.filter((i) => !i.vehicle.trip).map((item, _index) => {
+                // const lat = item.vehicle?.position?.latitude || 0;
+                // const lon = item.vehicle?.position?.longitude || 0;
+                return (
+                  // <CircleMarker
+                  //   key={item.id}
+                  //   center={[lat, lon]}
+                  //   radius={6}
+                  //   pathOptions={{ color: '#777', fillColor: '#777', fillOpacity: 0.5, weight: 0 }}
+                  // >
+                  //   <Tooltip direction="top" offset={[0, -4]} opacity={1} sticky={false}>
+                  //     Vehicle #{item.vehicle?.vehicle?.label} not assigned to route.
+                  //   </Tooltip>
+                  //   <Popup>
+                  //     Vehicle #{item.vehicle?.vehicle?.label} not assigned to route.
+                  //   </Popup>
+                  // </CircleMarker>
+                  <VehicleMarker key={item.id} vehiclePositionData={item} shapeSetter={doSetShapes} stopSetter={doSetStops}></VehicleMarker>
                 );
               })}
             </LayerGroup>

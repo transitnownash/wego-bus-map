@@ -24,10 +24,12 @@ function VehicleMarkerTooltip({ vehiclePositionData, route, alerts }) {
               <th><FontAwesomeIcon icon={faBus}/> Vehicle</th>
               <td>{vehiclePositionData.vehicle.vehicle.label}</td>
             </tr>
-            <tr>
-              <th><FontAwesomeIcon icon={faMap}/> Trip</th>
-              <td>{vehiclePositionData.vehicle.trip.trip_id}</td>
-            </tr>
+            {vehiclePositionData.vehicle.trip && (
+              <tr>
+                <th><FontAwesomeIcon icon={faMap}/> Trip</th>
+                <td>{vehiclePositionData.vehicle.trip?.trip_id}</td>
+              </tr>
+            )}
             <tr>
               <th><FontAwesomeIcon icon={faCompass} fixedWidth/> Heading</th>
               <td>{renderBearing(vehiclePositionData.vehicle.position.bearing)}</td>

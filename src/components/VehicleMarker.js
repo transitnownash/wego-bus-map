@@ -20,10 +20,10 @@ function VehicleMarker({
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
 
-  if (typeof route === 'undefined' || typeof route.route_gid === 'undefined') {
-    console.warn(`No matching route found for Trip #${vehiclePositionData.vehicle.trip?.trip_id}`);
-    return (<></>);
-  }
+  // if (typeof route === 'undefined' || typeof route.route_gid === 'undefined') {
+  //   console.warn(`No matching route found for Trip #${vehiclePositionData.vehicle.trip?.trip_id}`);
+  //   return (<></>);
+  // }
 
   const iconOptions = {
     iconUrl: busMarkerImage,
@@ -37,7 +37,7 @@ function VehicleMarker({
   if (typeof vehiclePositionData.vehicle.position.bearing === 'number') {
     iconOptions.shadowUrl = busMarkerImageShadow;
     // Swap out images if vehicle is a train
-    if (route.route_type === '2') {
+    if (route?.route_type === '2') {
       iconOptions.iconUrl = trainMarkerImage;
       iconOptions.shadowUrl = trainMarkerImageShadow;
     }
@@ -53,7 +53,10 @@ function VehicleMarker({
 
   // Handle click on marker
   const showTripDetails = function () {
-    getJSON(`${GTFS_BASE_URL}/trips/${vehiclePositionData.vehicle.trip.trip_id}.json`)
+    if (!vehiclePositionData.vehicle.trip) {
+      return;
+    }
+    getJSON(`${GTFS_BASE_URL}/trips/${vehiclePositionData.vehicle.trip?.trip_id}.json`)
       .then((trip) => {
         // Add shape to map
         trip.shape.route_color = route.route_color;
