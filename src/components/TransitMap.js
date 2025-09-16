@@ -119,33 +119,18 @@ function TransitMap({
         {vehicleMarkers.length > 0 && (
           <LayersControl.Overlay checked={true} name="Vehicles">
             <LayerGroup>
-              {vehicleMarkers.filter((i) => i.vehicle.trip).map((item, _index) => {
+              {vehicleMarkers.filter((i) => i.vehicle.trip).map((item, index) => {
                 const route = getRouteDataById(item.vehicle.trip.route_id);
                 const routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
                 const agency = getAgencyDataById(route ? route.agency_gid : {});
                 const tripUpdate = getTripUpdateById(item.vehicle.trip.trip_id);
                 return (
-                  <VehicleMarker key={item.id} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                  <VehicleMarker key={`${item.id}-${index}`} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
                 );
               })}
-              {vehicleMarkers.filter((i) => !i.vehicle.trip).map((item, _index) => {
-                // const lat = item.vehicle?.position?.latitude || 0;
-                // const lon = item.vehicle?.position?.longitude || 0;
+              {vehicleMarkers.filter((i) => !i.vehicle.trip).map((item, index) => {
                 return (
-                  // <CircleMarker
-                  //   key={item.id}
-                  //   center={[lat, lon]}
-                  //   radius={6}
-                  //   pathOptions={{ color: '#777', fillColor: '#777', fillOpacity: 0.5, weight: 0 }}
-                  // >
-                  //   <Tooltip direction="top" offset={[0, -4]} opacity={1} sticky={false}>
-                  //     Vehicle #{item.vehicle?.vehicle?.label} not assigned to route.
-                  //   </Tooltip>
-                  //   <Popup>
-                  //     Vehicle #{item.vehicle?.vehicle?.label} not assigned to route.
-                  //   </Popup>
-                  // </CircleMarker>
-                  <VehicleMarker key={item.id} vehiclePositionData={item} shapeSetter={doSetShapes} stopSetter={doSetStops}></VehicleMarker>
+                  <VehicleMarker key={`${item.id}-${index}`}  vehiclePositionData={item} agency={{}} shapeSetter={doSetShapes} stopSetter={doSetStops} route={{}}></VehicleMarker>
                 );
               })}
             </LayerGroup>
@@ -171,7 +156,9 @@ function TransitMap({
                 return stops.map((item, _index) => {
                   const stopAlerts = getStopAlertsById(item.stop.stop_code);
                   const stopUpdate = getStopUpdateByTripAndId(item.trip_gid, item.stop.stop_code);
-                  return (<StopMarker key={item.id} stop={item.stop} stopTime={item} stopUpdate={stopUpdate} stopAlerts={stopAlerts}></StopMarker>);
+                  // Use a composite key to guarantee uniqueness even for repeated stops within a trip
+                  const stopKey = `${item.trip_gid}-${item.stop_sequence}`;
+                  return (<StopMarker key={stopKey} stop={item.stop} stopTime={item} stopUpdate={stopUpdate} stopAlerts={stopAlerts}></StopMarker>);
                 });
               })()}
              </LayerGroup>

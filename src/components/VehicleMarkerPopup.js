@@ -52,7 +52,7 @@ function VehicleMarkerPopup({
           <Tab eventKey="home" title="Vehicle">
             <table className="table table-borderless table table-sm small" style={{ minWidth: '250px' }}>
               <tbody>
-                {route && (
+                {route?.route_gid && (
                   <tr>
                     <th className="text-nowrap"><FontAwesomeIcon icon={faMapSigns} fixedWidth/> Headsign</th>
                     <td>{trip_headsign}</td>
@@ -99,7 +99,7 @@ function VehicleMarkerPopup({
                   {tripStopTimes.map((item) => {
                     const updateTime = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === item.stop_sequence) || {};
                     return (
-                      <tr key={item.id}>
+                      <tr key={`popup-${item.id}-${item.stop_sequence}`}>
                         <td><StopTimeSequence stopTime={item} /></td>
                         <td>
                           <div className="mb-1"><Link to={`/stops/${item.stop.stop_code}`}><strong>{item.stop.stop_name}</strong></Link></div>
@@ -121,7 +121,7 @@ function VehicleMarkerPopup({
             )}
           </Tab>
         </Tabs>
-        {agency && (
+        {agency?.agency_name && (
           <div className="text-end"><a href={agency?.agency_url} className="text-muted" target="_blank" rel="noreferrer">{agency?.agency_name}</a></div>
         )}
       </div>

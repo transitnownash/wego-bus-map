@@ -82,8 +82,9 @@ function StopMarker({
   );
 
   // Instead of returning a fragment, return an array with explicit keys for each element
+  const baseKey = `stop-${stop.stop_code || stop.stop_gid || stop.id || 'unknown'}`;
   return [
-    <Marker key="marker" position={[stop.stop_lat, stop.stop_lon]} icon={icon}>
+    <Marker key={`${baseKey}-marker`} position={[stop.stop_lat, stop.stop_lon]} icon={icon}>
       {!L.Browser.mobile && (
         <Tooltip>{content}</Tooltip>
       )}
@@ -93,10 +94,10 @@ function StopMarker({
       </Popup>
     </Marker>,
     stopTime.timepoint === '1' && (
-      <Circle key="timing-circle" center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>
+      <Circle key={`${baseKey}-timing-circle`} center={[stop.stop_lat, stop.stop_lon]} radius={40} pathOptions={{ color: 'purple' }}></Circle>
     ),
     stopAlerts.length > 0 && (
-      <Circle key="alert-circle" center={[stop.stop_lat, stop.stop_lon]} radius={80} pathOptions={{ color: 'orange' }}></Circle>
+      <Circle key={`${baseKey}-alert-circle`} center={[stop.stop_lat, stop.stop_lon]} radius={80} pathOptions={{ color: 'orange' }}></Circle>
     )
   ].filter(Boolean);
 }

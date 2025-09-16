@@ -5,8 +5,10 @@ import L from 'leaflet';
 import VehicleMarkerPopup from './VehicleMarkerPopup';
 import '../lib/leaflet-rotated-marker';
 import busMarkerImage from '../resources/bus.svg';
+import busOfflineMarkerImage from '../resources/bus-offline.svg';
 import busMarkerImageShadow from '../resources/bus-shadow.svg';
 import trainMarkerImage from '../resources/train.svg';
+import trainOfflineMarkerImage from '../resources/train-offline.svg';
 import trainMarkerImageShadow from '../resources/train-shadow.svg';
 import './VehicleMarker.scss';
 import VehicleMarkerTooltip from './VehicleMarkerTooltip';
@@ -20,13 +22,10 @@ function VehicleMarker({
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
 
-  // if (typeof route === 'undefined' || typeof route.route_gid === 'undefined') {
-  //   console.warn(`No matching route found for Trip #${vehiclePositionData.vehicle.trip?.trip_id}`);
-  //   return (<></>);
-  // }
+  const isOffline = route === undefined || !route.route_gid;
 
   const iconOptions = {
-    iconUrl: busMarkerImage,
+    iconUrl: isOffline ? busOfflineMarkerImage : busMarkerImage,
     iconSize: [32, 32],
     popupAnchor: [0, -14],
     shadowSize: [32, 50],
@@ -38,7 +37,7 @@ function VehicleMarker({
     iconOptions.shadowUrl = busMarkerImageShadow;
     // Swap out images if vehicle is a train
     if (route?.route_type === '2') {
-      iconOptions.iconUrl = trainMarkerImage;
+      iconOptions.iconUrl = isOffline ? trainOfflineMarkerImage : trainMarkerImage;
       iconOptions.shadowUrl = trainMarkerImageShadow;
     }
   }
