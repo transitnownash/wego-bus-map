@@ -49,6 +49,6 @@ test('renders TransitRouteHeader with invalid route.', () => {
       <TransitRouteHeader route={route} />
     </Router>,
   );
-  expect(screen.getByText('Invalid route!')).toBeInTheDocument();
+  expect(screen.getByText('Not Assigned to Route')).toBeInTheDocument();
   expect(container).toMatchSnapshot();
 });

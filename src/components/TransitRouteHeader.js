@@ -14,7 +14,7 @@ function TransitRouteHeader({ route, alerts, showRouteType }) {
   const [alertModalShow, setAlertModalShow] = useState(false);
 
   if (typeof route !== 'object' || !route.route_gid) {
-    return (<div className="transit-route-header">Invalid route!</div>);
+    return (<div className="transit-route-header">Not Assigned to Route</div>);
   }
 
   const routeStyle = {

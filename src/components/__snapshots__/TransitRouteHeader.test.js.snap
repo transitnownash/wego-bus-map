@@ -92,7 +92,7 @@ exports[`renders TransitRouteHeader with invalid route. 1`] = `
   <div
     class="transit-route-header"
   >
-    Invalid route!
+    Not Assigned to Route
   </div>
 </div>
 `;

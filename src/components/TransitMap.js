@@ -117,26 +117,31 @@ function TransitMap({
       />
       <LayersControl position="topright">
         {vehicleMarkers.length > 0 && (
-          <LayersControl.Overlay checked={true} name="Vehicles">
-            <LayerGroup>
-              {vehicleMarkers.filter((i) => i.vehicle.trip).map((item, index) => {
-                const route = getRouteDataById(item.vehicle.trip.route_id);
-                const routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
-                const agency = getAgencyDataById(route ? route.agency_gid : {});
-                const tripUpdate = getTripUpdateById(item.vehicle.trip.trip_id);
-                return (
-                  <VehicleMarker key={`${item.id}-${index}`} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
-                );
-              })}
-              {vehicleMarkers.filter((i) => !i.vehicle.trip).map((item, index) => {
-                return (
-                  <VehicleMarker key={`${item.id}-${index}`}  vehiclePositionData={item} agency={{}} shapeSetter={doSetShapes} stopSetter={doSetStops} route={{}}></VehicleMarker>
-                );
-              })}
-            </LayerGroup>
-          </LayersControl.Overlay>
+          <>
+            <LayersControl.Overlay checked={true} name="Vehicles">
+              <LayerGroup>
+                {vehicleMarkers.filter((i) => i.vehicle.trip).map((item, index) => {
+                  const route = getRouteDataById(item.vehicle.trip.route_id);
+                  const routeAlerts = getRouteAlertsById(item.vehicle.trip.route_id);
+                  const agency = getAgencyDataById(route ? route.agency_gid : {});
+                  const tripUpdate = getTripUpdateById(item.vehicle.trip.trip_id);
+                  return (
+                    <VehicleMarker key={`${item.id}-${index}`} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                  );
+                })}
+              </LayerGroup>
+            </LayersControl.Overlay>
+            <LayersControl.Overlay checked={false} name="Vehicles (No Route)">
+              <LayerGroup>
+                {vehicleMarkers.filter((i) => !i.vehicle.trip).map((item, index) => {
+                  return (
+                    <VehicleMarker key={`${item.id}-${index}`}  vehiclePositionData={item} agency={{}} shapeSetter={doSetShapes} stopSetter={doSetStops} route={{}}></VehicleMarker>
+                  );
+                })}
+              </LayerGroup>
+            </LayersControl.Overlay>
+          </>
         )}
-
         {shapes.length > 0
           && <LayersControl.Overlay checked={true} name="Routes">
             <LayerGroup>
