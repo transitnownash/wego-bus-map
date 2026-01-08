@@ -29,7 +29,7 @@
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "react-leaflet-drift-marker": "^4.0.0",
-    "react-router-dom": "^6.22.3",
+    "react-router-dom": "^6.30.3",
     "sass": "^1.72.0",
     "web-vitals": "^3.5.2"
   },
