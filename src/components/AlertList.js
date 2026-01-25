@@ -45,7 +45,12 @@ function AlertList({ alerts, routes, showHorizontal }) {
       <div className="row">
         {alerts.map((item, _index) => {
           const columnWrapperClass = showHorizontal ? `col-md-6 col-xl-4` : `col-12`;
-          const route = routes.find((r) => r.route_gid === item.alert.informed_entity[0].route_id || r.route_short_name === item.alert.informed_entity[0].route_id);
+          const entityRouteIds = Array.isArray(item.alert.informed_entity)
+            ? item.alert.informed_entity
+              .filter((ie) => typeof ie.route_id !== 'undefined')
+              .map((ie) => String(ie.route_id))
+            : [];
+          const route = routes.find((r) => entityRouteIds.some((rid) => rid === String(r.route_gid) || rid === String(r.route_short_name)));
           return (
             <div key={item.id} className={columnWrapperClass}>
               <AlertItem alert={item.alert} route={route}></AlertItem>

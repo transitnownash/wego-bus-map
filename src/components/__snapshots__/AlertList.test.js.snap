@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders AlertList 1`] = `
+exports[`AlertList renders AlertList with existing fixtures 1`] = `
 <div>
   <div>
     <div

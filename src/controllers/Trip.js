@@ -148,7 +148,10 @@ function Trip() {
   // Remove invalid alerts (no informed entity)
   const allAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined');
 
-  const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && a.alert.informed_entity[0].route_id === route.route_gid);
+  const routeAlerts = alerts.filter((a) => Array.isArray(a.alert?.informed_entity)
+    && a.alert.informed_entity
+      .filter((ie) => typeof ie.route_id !== 'undefined')
+      .some((ie) => String(ie.route_id) === String(route.route_gid) || String(ie.route_id) === String(route.route_short_name)));
 
   // Filter vehicle markers
   const filteredVehicleMarkers = vehicleMarkers.filter((v) => v.vehicle.trip?.trip_id === trip.trip_gid);

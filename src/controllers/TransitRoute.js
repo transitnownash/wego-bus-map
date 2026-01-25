@@ -139,8 +139,14 @@ function TransitRoute() {
   }
 
   // Filter vehicle positions to only those relevant to this route
-  const filteredVehiclePositions = vehicleMarkers.filter((v) => v.vehicle.trip).filter((v) => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
-  const routeAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined' && (a.alert.informed_entity[0].route_id === route.route_gid || a.alert.informed_entity[0].route_id === route.route_short_name));
+  const filteredVehiclePositions = vehicleMarkers
+    .filter((v) => v.vehicle.trip)
+    .filter((v) => v.vehicle.trip.route_id === route.route_gid || v.vehicle.trip.route_id === route.route_short_name);
+
+  const routeAlerts = alerts.filter((a) => Array.isArray(a.alert?.informed_entity)
+    && a.alert.informed_entity
+      .filter((ie) => typeof ie.route_id !== 'undefined')
+      .some((ie) => String(ie.route_id) === String(route.route_gid) || String(ie.route_id) === String(route.route_short_name)));
 
   // Load in selected date
   const handleDateFieldChange = (event) => {
