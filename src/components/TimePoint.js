@@ -27,6 +27,11 @@ function TimePoint({ scheduleData, updateData }) {
     );
   }
 
+  // Guard against undefined scheduleData or missing time properties
+  if (!scheduleData || (!scheduleData.departure_time && !scheduleData.arrival_time)) {
+    return null;
+  }
+
   // Determine which time point to use for trip update, or none.
   let updateTime = false;
   if (updateData && typeof updateData.departure !== 'undefined' && typeof updateData.departure.time === 'number') {
@@ -36,12 +41,12 @@ function TimePoint({ scheduleData, updateData }) {
   }
 
   // Grab the relevant pieces for the scheduled time
-  let scheduleTime = formatTripTime(scheduleData.departure_time);
-  const isNextDay = /^2[4-9]:/.test(scheduleData.departure_time);
+  let scheduleTime = formatTripTime(scheduleData.departure_time || scheduleData.arrival_time);
+  const isNextDay = /^2[4-9]:/.test(scheduleData.departure_time || scheduleData.arrival_time);
 
   // Handle case where departure and arrival time are mismatched
   let scheduleDepartNote = '';
-  if (scheduleData.arrival_time !== scheduleData.departure_time) {
+  if (scheduleData.arrival_time && scheduleData.departure_time && scheduleData.arrival_time !== scheduleData.departure_time) {
     scheduleTime = formatTripTime(scheduleData.arrival_time);
     scheduleDepartNote = (<> (Departs {formatTripTime(scheduleData.departure_time)})</>);
   }

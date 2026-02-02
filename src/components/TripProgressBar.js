@@ -4,6 +4,16 @@ import { ProgressBar } from 'react-bootstrap';
 import { formatDistanceTraveled, isTimeLaterThanNow } from '../util';
 
 function TripProgressBar({ trip, tripUpdates }) {
+  // Guard against missing or empty stop_times
+  if (!trip.stop_times || !Array.isArray(trip.stop_times) || trip.stop_times.length === 0) {
+    return null;
+  }
+
+  const lastStopTime = trip.stop_times[trip.stop_times.length - 1];
+  if (!lastStopTime || !lastStopTime.shape_dist_traveled) {
+    return null;
+  }
+
   function renderEmptyProgressBar() {
     return (
       <div className="trip-progress-bar trip-progress-bar-empty my-4">
@@ -21,11 +31,11 @@ function TripProgressBar({ trip, tripUpdates }) {
   }
 
   let currentStopDistance = 0;
-  let totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
+  let totalTripDistance = lastStopTime.shape_dist_traveled;
 
   // If no updates provided, render either empty or completed bar based on static schedule
   if (tripUpdates.length === 0 || typeof tripUpdates[0].trip_update === 'undefined') {
-    if (!isTimeLaterThanNow(trip.stop_times[trip.stop_times.length - 1].arrival_time)) {
+    if (lastStopTime.arrival_time && !isTimeLaterThanNow(lastStopTime.arrival_time)) {
       return renderCompleteProgressBar();
     }
     // Trip hasn't completed and there's no updates; Assume it's before tracking picks it up

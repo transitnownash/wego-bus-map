@@ -88,6 +88,10 @@ export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {
   }
 
   // Fall back to scheduled time
+  // Guard against undefined stopTime or departure_time
+  if (!stopTime || !stopTime.departure_time) {
+    return false;
+  }
   return isTimeLaterThanNow(stopTime.departure_time);
 }
 

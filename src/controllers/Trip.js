@@ -156,10 +156,26 @@ function Trip() {
   // Filter vehicle markers
   const filteredVehicleMarkers = vehicleMarkers.filter((v) => v.vehicle.trip?.trip_id === trip.trip_gid);
 
+  // Guard against missing or empty stop_times
+  if (!trip.stop_times || !Array.isArray(trip.stop_times) || trip.stop_times.length === 0) {
+    const error = new Error('Trip data is incomplete or missing stop times');
+    error.name = 'DataError';
+    return <DataFetchError error={error} />;
+  }
+
+  const firstStopTime = trip.stop_times[0];
+  const lastStopTime = trip.stop_times[trip.stop_times.length - 1];
+
+  if (!firstStopTime || !lastStopTime || !lastStopTime.shape_dist_traveled) {
+    const error = new Error('Trip stop time data is incomplete');
+    error.name = 'DataError';
+    return <DataFetchError error={error} />;
+  }
+
   // Filter updates to this trip, key stop time updates by sequence
   const filteredTripUpdates = tripUpdates.filter((i) => i.id === trip.trip_gid);
   const filteredTripUpdatesBySequence = {};
-  const totalTripDistance = trip.stop_times[trip.stop_times.length - 1].shape_dist_traveled;
+  const totalTripDistance = lastStopTime.shape_dist_traveled;
   if (filteredTripUpdates.length > 0 && typeof filteredTripUpdates[0].trip_update.stop_time_update !== 'undefined') {
     filteredTripUpdates[0].trip_update.stop_time_update.forEach((item, _i) => {
       filteredTripUpdatesBySequence[item.stop_sequence] = item;
@@ -202,10 +218,10 @@ function Trip() {
               <td>
                 <div className="d-flex align-items-center">
                   <div className="pe-2 text-center text-nowrap">
-                    <TimePoint scheduleData={trip.stop_times[0]} updateData={filteredTripUpdatesBySequence[1]} />
+                    <TimePoint scheduleData={firstStopTime} updateData={filteredTripUpdatesBySequence[1]} />
                   </div>
                   <div className="ps-2 border-start border-gray border-5">
-                    <Link to={`/stops/${trip.stop_times[0].stop.stop_code}`} className={'fw-bold'}>{trip.stop_times[0].stop.stop_name}</Link>
+                    <Link to={`/stops/${firstStopTime.stop.stop_code}`} className={'fw-bold'}>{firstStopTime.stop.stop_name}</Link>
                   </div>
                 </div>
               </td>
@@ -215,10 +231,10 @@ function Trip() {
               <td>
                 <div className="d-flex align-items-center">
                   <div className="pe-2 text-center text-nowrap">
-                    <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={filteredTripUpdatesBySequence[trip.stop_times.length]} />
+                    <TimePoint scheduleData={lastStopTime} updateData={filteredTripUpdatesBySequence[trip.stop_times.length]} />
                   </div>
                   <div className="ps-2 border-start border-gray border-5">
-                    <Link to={`/stops/${trip.stop_times[trip.stop_times.length - 1].stop.stop_code}`} className={'fw-bold'}>{trip.stop_times[trip.stop_times.length - 1].stop.stop_name}</Link>
+                    <Link to={`/stops/${lastStopTime.stop.stop_code}`} className={'fw-bold'}>{lastStopTime.stop.stop_name}</Link>
                   </div>
                 </div>
               </td>

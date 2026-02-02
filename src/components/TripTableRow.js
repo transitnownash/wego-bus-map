@@ -30,9 +30,20 @@ function TripTableRow({
   let updateEnd = {};
   let scheduleStatus = null; // Will store: 'canceled', 'unscheduled', 'skipped', 'no-data', or null
 
+  // Guard against missing or empty stop_times
+  if (!trip.stop_times || !Array.isArray(trip.stop_times) || trip.stop_times.length === 0) {
+    return null;
+  }
+
+  const firstStopTime = trip.stop_times[0];
+  const lastStopTime = trip.stop_times[trip.stop_times.length - 1];
+  if (!firstStopTime || !lastStopTime) {
+    return null;
+  }
+
   if (typeof tripUpdate.trip_update !== 'undefined' && Array.isArray(tripUpdate.trip_update.stop_time_update)) {
     updateStart = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === 1) || {};
-    updateEnd = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === trip.stop_times[trip.stop_times.length - 1].stop_sequence) || {};
+    updateEnd = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === lastStopTime.stop_sequence) || {};
 
     // Check trip-level schedule_relationship first (takes precedence)
     const tripScheduleRel = tripUpdate.trip_update.trip?.schedule_relationship;
@@ -65,7 +76,7 @@ function TripTableRow({
 
   let rowClasses = '';
   const isActive = trip.start_time && trip.end_time && isTimeRangeIncludesNow(trip.start_time, trip.end_time);
-  const hasFutureEnd = isStopTimeUpdateLaterThanNow(trip.stop_times[trip.stop_times.length - 1], updateEnd);
+  const hasFutureEnd = isStopTimeUpdateLaterThanNow(lastStopTime, updateEnd);
   const hasFutureStart = trip.start_time ? isTimeLaterThanNow(trip.start_time) : false;
 
   if (isActive) {
@@ -111,10 +122,10 @@ function TripTableRow({
         )}
       </td>
       <td className="text-center text-nowrap">
-        <TimePoint scheduleData={trip.stop_times[0]} updateData={updateStart}></TimePoint>
+        <TimePoint scheduleData={firstStopTime} updateData={updateStart}></TimePoint>
       </td>
       <td className="text-center text-nowrap">
-        <TimePoint scheduleData={trip.stop_times[trip.stop_times.length - 1]} updateData={updateEnd}></TimePoint>
+        <TimePoint scheduleData={lastStopTime} updateData={updateEnd}></TimePoint>
       </td>
       <td>
         {trip.route_gid !== route.route_gid && (
