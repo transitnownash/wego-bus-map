@@ -42,35 +42,22 @@ function TripTableRow({
   }
 
   if (typeof tripUpdate.trip_update !== 'undefined' && Array.isArray(tripUpdate.trip_update.stop_time_update)) {
-    updateStart = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === 1) || {};
-    updateEnd = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === lastStopTime.stop_sequence) || {};
+    const foundStart = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === 1) || {};
+    const foundEnd = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === lastStopTime.stop_sequence) || {};
 
-    // Check trip-level schedule_relationship first (takes precedence)
+    // Strip out schedule_relationship from stop updates since we only show trip-level status in trip table
+    updateStart = foundStart;
+    delete updateStart.schedule_relationship;
+    updateEnd = foundEnd;
+    delete updateEnd.schedule_relationship;
+
+    // Check trip-level schedule_relationship only
+    // TripDescriptor.schedule_relationship: SCHEDULED, ADDED, UNSCHEDULED, CANCELED, DUPLICATED, DELETED
     const tripScheduleRel = tripUpdate.trip_update.trip?.schedule_relationship;
-    if (tripScheduleRel === 4 || tripScheduleRel === "Canceled" || tripScheduleRel === "Cancelled") {
+    if (tripScheduleRel === "Canceled" || tripScheduleRel === "Cancelled" || tripScheduleRel === "Deleted") {
       scheduleStatus = 'canceled';
-    } else if (tripScheduleRel === 3 || tripScheduleRel === "Unscheduled") {
+    } else if (tripScheduleRel === "Added" || tripScheduleRel === "Unscheduled" || tripScheduleRel === "Duplicated") {
       scheduleStatus = 'unscheduled';
-    } else if (tripScheduleRel === 1 || tripScheduleRel === "Skipped") {
-      scheduleStatus = 'skipped';
-    } else if (tripScheduleRel === 2 || tripScheduleRel === "No Data") {
-      scheduleStatus = 'no-data';
-    } else {
-      // Check stop-level schedule_relationship values
-      const hasCanceled = tripUpdate.trip_update.stop_time_update.some((i) => i.schedule_relationship === 4 || i.schedule_relationship === "Canceled" || i.schedule_relationship === "Cancelled");
-      const hasUnscheduled = tripUpdate.trip_update.stop_time_update.some((i) => i.schedule_relationship === 3 || i.schedule_relationship === "Unscheduled");
-      const hasSkipped = tripUpdate.trip_update.stop_time_update.some((i) => i.schedule_relationship === 1 || i.schedule_relationship === "Skipped");
-      const allNoData = tripUpdate.trip_update.stop_time_update.every((i) => i.schedule_relationship === 2 || i.schedule_relationship === "No Data");
-
-      if (hasCanceled) {
-        scheduleStatus = 'canceled';
-      } else if (hasUnscheduled) {
-        scheduleStatus = 'unscheduled';
-      } else if (hasSkipped) {
-        scheduleStatus = 'skipped';
-      } else if (allNoData) {
-        scheduleStatus = 'no-data';
-      }
     }
   }
 
@@ -103,20 +90,6 @@ function TripTableRow({
           <OverlayTrigger placement='top' overlay={<Tooltip>This trip was not in the original schedule - it&apos;s an extra trip added</Tooltip>}>
             <span className="badge bg-warning text-dark ms-1">
               <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Unscheduled
-            </span>
-          </OverlayTrigger>
-        )}
-        {scheduleStatus === 'skipped' && (
-          <OverlayTrigger placement='top' overlay={<Tooltip>This trip has been canceled or skipped</Tooltip>}>
-            <span className="badge bg-danger text-white ms-1">
-              <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Skipped
-            </span>
-          </OverlayTrigger>
-        )}
-        {scheduleStatus === 'no-data' && (
-          <OverlayTrigger placement='top' overlay={<Tooltip>No real-time tracking data available for this trip</Tooltip>}>
-            <span className="badge bg-secondary text-white ms-1">
-              <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> No Data
             </span>
           </OverlayTrigger>
         )}

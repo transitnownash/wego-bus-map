@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { formatStopTimeUpdate } from '../util';
 import './TimePoint.scss';
@@ -33,6 +33,9 @@ function TimePoint({ scheduleData, updateData }) {
   }
 
   // Determine which time point to use for trip update, or none.
+  // StopTimeUpdate.schedule_relationship: SCHEDULED, SKIPPED, NO_DATA, UNSCHEDULED
+  const stopScheduleRel = updateData?.schedule_relationship;
+
   let updateTime = false;
   if (updateData && typeof updateData.departure !== 'undefined' && typeof updateData.departure.time === 'number') {
     updateTime = updateData.departure.time;
@@ -49,6 +52,25 @@ function TimePoint({ scheduleData, updateData }) {
   if (scheduleData.arrival_time && scheduleData.departure_time && scheduleData.arrival_time !== scheduleData.departure_time) {
     scheduleTime = formatTripTime(scheduleData.arrival_time);
     scheduleDepartNote = (<> (Departs {formatTripTime(scheduleData.departure_time)})</>);
+  }
+
+  if (stopScheduleRel === 'Skipped') {
+    return (
+      <div className="time-point">
+        <div>
+          <span className="badge bg-danger text-white" title="Skipped Stop">
+            <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Skipped
+          </span>
+        </div>
+        <div className="small">
+          <strike className="text-muted" title="Scheduled Time">
+            {renderNextDayIcon(isNextDay)}
+            {scheduleTime}
+            {scheduleDepartNote}
+          </strike>
+        </div>
+      </div>
+    );
   }
 
   // If no update provided (e.g. past or far-future trip), return scheduled

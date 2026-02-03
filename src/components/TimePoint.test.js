@@ -25,3 +25,15 @@ test('renders TimePoint with trip update', () => {
   expect(screen.getByText('9:59 PM')).toBeInTheDocument();
   expect(container).toMatchSnapshot();
 });
+
+test('renders TimePoint with skipped stop status', () => {
+  const { container } = render(
+    <TimePoint
+      scheduleData={tripFixture.stop_times[0]}
+      updateData={{ schedule_relationship: 'Skipped' }}
+    />,
+  );
+  expect(screen.getByText('Skipped')).toBeInTheDocument();
+  expect(screen.getByText('9:55 PM')).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
+});

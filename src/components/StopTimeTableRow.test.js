@@ -1,13 +1,11 @@
-/* globals test */
+/* globals test, expect */
 
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import StopTimeTableRow from './StopTimeTableRow';
 
-test('renders StopTimeTableRow', () => {
-  const div = document.createElement('div');
-  const root = createRoot(div);
-  const stopTime = {
+const stopTime = {
     id: 5039953,
     trip_gid: '266834',
     trip_id: 153785,
@@ -37,5 +35,34 @@ test('renders StopTimeTableRow', () => {
       wheelchair_boarding: '1',
     },
   };
-  root.render(<StopTimeTableRow stopTime={stopTime}/>);
+
+test('renders StopTimeTableRow', () => {
+  render(
+    <MemoryRouter>
+      <table>
+        <tbody>
+          <StopTimeTableRow stopTime={stopTime} />
+        </tbody>
+      </table>
+    </MemoryRouter>,
+  );
+  expect(screen.getByText('GREENFIELD STATION OUTBOUND')).toBeInTheDocument();
+});
+
+test('shows skipped badge for stop-level skipped status', () => {
+  const stopTimeUpdate = {
+    stop_sequence: 4,
+    schedule_relationship: 'Skipped',
+  };
+  render(
+    <MemoryRouter>
+      <table>
+        <tbody>
+          <StopTimeTableRow stopTime={stopTime} stopTimeUpdate={stopTimeUpdate} />
+        </tbody>
+      </table>
+    </MemoryRouter>,
+  );
+
+  expect(screen.getByText('Skipped')).toBeInTheDocument();
 });

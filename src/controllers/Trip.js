@@ -3,7 +3,7 @@ import L from 'leaflet';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faMap, faMapSigns, faBus, faRuler, faFlag, faFlagCheckered,
+  faMap, faMapSigns, faBus, faRuler, faFlag, faFlagCheckered, faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import NoMatch from './NoMatch';
@@ -182,6 +182,18 @@ function Trip() {
     });
   }
 
+  // Check trip-level schedule_relationship for status badge
+  // TripDescriptor.schedule_relationship: SCHEDULED, ADDED, UNSCHEDULED, CANCELED, DUPLICATED, DELETED
+  let tripScheduleStatus = null;
+  if (filteredTripUpdates.length > 0 && filteredTripUpdates[0].trip_update?.trip) {
+    const tripScheduleRel = filteredTripUpdates[0].trip_update.trip.schedule_relationship;
+    if (tripScheduleRel === "Canceled" || tripScheduleRel === "Cancelled" || tripScheduleRel === "Deleted") {
+      tripScheduleStatus = 'canceled';
+    } else if (tripScheduleRel === "Added" || tripScheduleRel === "Unscheduled" || tripScheduleRel === "Duplicated") {
+      tripScheduleStatus = 'unscheduled';
+    }
+  }
+
   // Add route color to shape
   trip.shape.route_color = route.route_color;
 
@@ -194,7 +206,23 @@ function Trip() {
           <tbody>
             <tr>
               <th className="text-nowrap align-middle" style={{ width: '130px' }}><FontAwesomeIcon icon={faMap} fixedWidth={true}></FontAwesomeIcon> Trip</th>
-              <td>{trip.trip_gid}</td>
+              <td>
+                {trip.trip_gid}
+                {tripScheduleStatus === 'canceled' && (
+                  <OverlayTrigger placement='top' overlay={<Tooltip>This trip has been canceled</Tooltip>}>
+                    <span className="badge bg-danger text-white ms-1">
+                      <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Canceled
+                    </span>
+                  </OverlayTrigger>
+                )}
+                {tripScheduleStatus === 'unscheduled' && (
+                  <OverlayTrigger placement='top' overlay={<Tooltip>This trip was not in the original schedule - it&apos;s an extra trip added</Tooltip>}>
+                    <span className="badge bg-warning text-dark ms-1">
+                      <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Unscheduled
+                    </span>
+                  </OverlayTrigger>
+                )}
+              </td>
             </tr>
             <tr>
               <th className="text-nowrap align-middle"><FontAwesomeIcon icon={faBus} fixedWidth={true}></FontAwesomeIcon> Vehicle</th>
