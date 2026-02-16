@@ -1,8 +1,8 @@
-/* globals test */
-
 import React from 'react';
+jest.mock('./controllers/Main', () => () => null);
 import { render } from '@testing-library/react';
-import App from './App';
+
+const App = require('./App').default;
 
 test('renders App', () => {
   // Fix for Matomo issue in tests

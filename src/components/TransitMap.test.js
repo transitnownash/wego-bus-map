@@ -1,5 +1,3 @@
-/* globals test */
-
 import React, { createRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import TransitMap from './TransitMap';

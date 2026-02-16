@@ -129,3 +129,62 @@ export function formatStopTimeUpdate(stopTimeUpdate) {
   }
   return '--';
 }
+
+export function getTripScheduleStatus(tripUpdate, stopTimesLength) {
+  const tripScheduleRel = tripUpdate?.trip_update?.trip?.schedule_relationship;
+  if (tripScheduleRel === 'Canceled' || tripScheduleRel === 'Cancelled' || tripScheduleRel === 'Deleted') {
+    return 'canceled';
+  }
+  if (tripScheduleRel === 'Added' || tripScheduleRel === 'Unscheduled' || tripScheduleRel === 'Duplicated') {
+    return 'unscheduled';
+  }
+
+  const stopUpdates = tripUpdate?.trip_update?.stop_time_update;
+  if (!Array.isArray(stopUpdates) || stopUpdates.length === 0) {
+    return null;
+  }
+  if (typeof stopTimesLength === 'number' && stopTimesLength > 0 && stopUpdates.length !== stopTimesLength) {
+    return null;
+  }
+
+  const firstRel = stopUpdates[0]?.schedule_relationship;
+  if (!firstRel) {
+    return null;
+  }
+  const allSame = stopUpdates.every((item) => item.schedule_relationship === firstRel);
+  if (!allSame) {
+    return null;
+  }
+
+  if (firstRel === 'Skipped') {
+    return 'skipped';
+  }
+  if (firstRel === 'No Data') {
+    return 'no-data';
+  }
+  if (firstRel === 'Unscheduled' || firstRel === 'Added' || firstRel === 'Duplicated') {
+    return 'unscheduled';
+  }
+  if (firstRel === 'Canceled' || firstRel === 'Cancelled' || firstRel === 'Deleted') {
+    return 'canceled';
+  }
+
+  return null;
+}
+
+export function getStopScheduleStatus(stopTimeUpdate) {
+  const stopScheduleRel = stopTimeUpdate?.schedule_relationship;
+  if (stopScheduleRel === 'Canceled' || stopScheduleRel === 'Cancelled' || stopScheduleRel === 'Deleted') {
+    return 'canceled';
+  }
+  if (stopScheduleRel === 'Unscheduled' || stopScheduleRel === 'Added' || stopScheduleRel === 'Duplicated') {
+    return 'unscheduled';
+  }
+  if (stopScheduleRel === 'Skipped') {
+    return 'skipped';
+  }
+  if (stopScheduleRel === 'No Data') {
+    return 'no-data';
+  }
+  return null;
+}

@@ -16,7 +16,7 @@ import HidePastTripsToggle from '../components/HidePastTripsToggle';
 import Footer from '../components/Footer';
 import DataFetchError from '../components/DataFetchError';
 import AlertList from '../components/AlertList';
-import { getJSON, isStopTimeUpdateLaterThanNow } from '../util';
+import { getJSON, isStopTimeUpdateLaterThanNow, isTimeLaterThanNow } from '../util';
 import TimePointLegend from '../components/TimePointLegend';
 import StopCode from '../components/StopCode';
 import DateSelector from '../components/DateSelector';
@@ -312,10 +312,17 @@ function Stops() {
                     }
 
                     let cellClasses = '';
-                    if (!isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate)) {
-                      if (hidePastTrips) {
-                        return null;
-                      }
+                    const isUpdateInFuture = isStopTimeUpdateLaterThanNow(item.stop_times[0], stopTimeUpdate);
+                    const isScheduledInFuture = item.stop_times[0].departure_time
+                      ? isTimeLaterThanNow(item.stop_times[0].departure_time)
+                      : isTimeLaterThanNow(item.stop_times[0].arrival_time);
+                    const isStoppedSkipped = stopTimeUpdate?.schedule_relationship === 'Skipped';
+
+                    // Always show if skipped, or if scheduled time is in future, or if not hiding past trips
+                    if (!isUpdateInFuture && !isScheduledInFuture && !isStoppedSkipped && hidePastTrips) {
+                      return null;
+                    }
+                    if (!isUpdateInFuture && !isScheduledInFuture) {
                       cellClasses = 'ps-1 border-start border-gray border-5';
                     }
                     return (

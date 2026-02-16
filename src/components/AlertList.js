@@ -24,7 +24,6 @@ function AlertList({ alerts, routes, showHorizontal }) {
 
   if (hideFuture) {
     alerts = alerts.filter((item) => dayjs().isAfter(dayjs.unix(item.alert.active_period[0].start)));
-    console.log(alerts);
   }
 
   return (

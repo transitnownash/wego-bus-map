@@ -1,5 +1,3 @@
-/* globals test, expect, describe */
-
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TripTableRow from './TripTableRow';
@@ -130,5 +128,25 @@ describe('TripTableRow', () => {
     );
     expect(screen.queryByText('Canceled')).not.toBeInTheDocument();
     expect(screen.queryByText('Unscheduled')).not.toBeInTheDocument();
+  });
+
+  test('displays skipped badge when all stops are skipped', () => {
+    const tripUpdate = {
+      trip_update: {
+        trip: { schedule_relationship: 'Scheduled' },
+        stop_time_update: [
+          { stop_sequence: 1, schedule_relationship: 'Skipped' },
+          { stop_sequence: 2, schedule_relationship: 'Skipped' },
+        ],
+      },
+    };
+    render(
+      <table>
+        <tbody>
+          <TripTableRow trip={mockTrip} route={mockRoute} tripUpdate={tripUpdate} hidePastTrips={false} />
+        </tbody>
+      </table>,
+    );
+    expect(screen.getByText('Skipped')).toBeInTheDocument();
   });
 });

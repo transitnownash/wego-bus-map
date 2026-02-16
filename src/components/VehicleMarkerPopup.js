@@ -33,10 +33,12 @@ function VehicleMarkerPopup({
     isTripTabActive = true;
     tripStopTimes = trip.stop_times.filter((item) => {
       const updateTime = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === item.stop_sequence) || {};
-      if (!isStopTimeUpdateLaterThanNow(item, updateTime)) {
-        return false;
+      // Always show stops that are skipped, even if they're in the past
+      if (updateTime.schedule_relationship === 'Skipped') {
+        return true;
       }
-      return true;
+      // For other stops, only show future ones
+      return isStopTimeUpdateLaterThanNow(item, updateTime);
     });
   }
 

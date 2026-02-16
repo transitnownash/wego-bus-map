@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBicycle, faWheelchair, faBan, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { isTimeRangeIncludesNow, isStopTimeUpdateLaterThanNow, isTimeLaterThanNow } from '../util';
+import {
+  isTimeRangeIncludesNow,
+  isStopTimeUpdateLaterThanNow,
+  isTimeLaterThanNow,
+  getTripScheduleStatus,
+} from '../util';
 import TimePoint from './TimePoint';
 import Headsign from './Headsign';
 import './TripTableRow.scss';
@@ -46,20 +51,13 @@ function TripTableRow({
     const foundEnd = tripUpdate.trip_update.stop_time_update.find((i) => i.stop_sequence === lastStopTime.stop_sequence) || {};
 
     // Strip out schedule_relationship from stop updates since we only show trip-level status in trip table
-    updateStart = foundStart;
+    updateStart = { ...foundStart };
     delete updateStart.schedule_relationship;
-    updateEnd = foundEnd;
+    updateEnd = { ...foundEnd };
     delete updateEnd.schedule_relationship;
-
-    // Check trip-level schedule_relationship only
-    // TripDescriptor.schedule_relationship: SCHEDULED, ADDED, UNSCHEDULED, CANCELED, DUPLICATED, DELETED
-    const tripScheduleRel = tripUpdate.trip_update.trip?.schedule_relationship;
-    if (tripScheduleRel === "Canceled" || tripScheduleRel === "Cancelled" || tripScheduleRel === "Deleted") {
-      scheduleStatus = 'canceled';
-    } else if (tripScheduleRel === "Added" || tripScheduleRel === "Unscheduled" || tripScheduleRel === "Duplicated") {
-      scheduleStatus = 'unscheduled';
-    }
   }
+
+  scheduleStatus = getTripScheduleStatus(tripUpdate, trip.stop_times.length);
 
   let rowClasses = '';
   const isActive = trip.start_time && trip.end_time && isTimeRangeIncludesNow(trip.start_time, trip.end_time);
@@ -90,6 +88,20 @@ function TripTableRow({
           <OverlayTrigger placement='top' overlay={<Tooltip>This trip was not in the original schedule - it&apos;s an extra trip added</Tooltip>}>
             <span className="badge bg-warning text-dark ms-1">
               <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Unscheduled
+            </span>
+          </OverlayTrigger>
+        )}
+        {scheduleStatus === 'skipped' && (
+          <OverlayTrigger placement='top' overlay={<Tooltip>This trip was skipped</Tooltip>}>
+            <span className="badge bg-danger text-white ms-1">
+              <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Skipped
+            </span>
+          </OverlayTrigger>
+        )}
+        {scheduleStatus === 'no-data' && (
+          <OverlayTrigger placement='top' overlay={<Tooltip>No real-time data for this trip</Tooltip>}>
+            <span className="badge bg-secondary text-white ms-1">
+              <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> No Data
             </span>
           </OverlayTrigger>
         )}

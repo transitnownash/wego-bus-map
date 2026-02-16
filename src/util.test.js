@@ -1,10 +1,8 @@
-/* globals beforeAll, afterAll, test, expect */
-
 import React from 'react';
 import nock from 'nock';
 import httpAdapter from 'axios/lib/adapters/http';
 import {
-  renderBearing, formatDistanceTraveled, renderSpeed, renderUnixTimestamp, getJSON, formatShapePoints, isStopTimeUpdateLaterThanNow, formatStopTimeUpdate, isTimeRangeIncludesNow, isTimeLaterThanNow,
+  renderBearing, formatDistanceTraveled, renderSpeed, renderUnixTimestamp, getJSON, formatShapePoints, isStopTimeUpdateLaterThanNow, formatStopTimeUpdate, isTimeRangeIncludesNow, isTimeLaterThanNow, getTripScheduleStatus, getStopScheduleStatus,
 } from './util';
 
 const originalDate = Date.now;
@@ -94,4 +92,88 @@ test('test formatStopTimeUpdate', () => {
     },
   };
   expect(formatStopTimeUpdate(stopTimeUpdate)).toEqual('12:08 PM');
+});
+
+test('getTripScheduleStatus with trip-level canceled', () => {
+  const tripUpdate = {
+    trip_update: {
+      trip: { schedule_relationship: 'Canceled' },
+      stop_time_update: [{ stop_sequence: 1, schedule_relationship: 'Scheduled' }],
+    },
+  };
+  expect(getTripScheduleStatus(tripUpdate, 1)).toEqual('canceled');
+});
+
+test('getTripScheduleStatus with trip-level unscheduled', () => {
+  const tripUpdate = {
+    trip_update: {
+      trip: { schedule_relationship: 'Unscheduled' },
+      stop_time_update: [{ stop_sequence: 1, schedule_relationship: 'Scheduled' }],
+    },
+  };
+  expect(getTripScheduleStatus(tripUpdate, 1)).toEqual('unscheduled');
+});
+
+test('getTripScheduleStatus with all stops skipped', () => {
+  const tripUpdate = {
+    trip_update: {
+      trip: { schedule_relationship: 'Scheduled' },
+      stop_time_update: [
+        { stop_sequence: 1, schedule_relationship: 'Skipped' },
+        { stop_sequence: 2, schedule_relationship: 'Skipped' },
+      ],
+    },
+  };
+  expect(getTripScheduleStatus(tripUpdate, 2)).toEqual('skipped');
+});
+
+test('getTripScheduleStatus with all stops no-data', () => {
+  const tripUpdate = {
+    trip_update: {
+      trip: { schedule_relationship: 'Scheduled' },
+      stop_time_update: [
+        { stop_sequence: 1, schedule_relationship: 'No Data' },
+        { stop_sequence: 2, schedule_relationship: 'No Data' },
+      ],
+    },
+  };
+  expect(getTripScheduleStatus(tripUpdate, 2)).toEqual('no-data');
+});
+
+test('getTripScheduleStatus with mixed stop statuses returns null', () => {
+  const tripUpdate = {
+    trip_update: {
+      trip: { schedule_relationship: 'Scheduled' },
+      stop_time_update: [
+        { stop_sequence: 1, schedule_relationship: 'Skipped' },
+        { stop_sequence: 2, schedule_relationship: 'Scheduled' },
+      ],
+    },
+  };
+  expect(getTripScheduleStatus(tripUpdate, 2)).toEqual(null);
+});
+
+test('getStopScheduleStatus with skipped', () => {
+  const stopTimeUpdate = { schedule_relationship: 'Skipped' };
+  expect(getStopScheduleStatus(stopTimeUpdate)).toEqual('skipped');
+});
+
+test('getStopScheduleStatus with canceled', () => {
+  const stopTimeUpdate = { schedule_relationship: 'Canceled' };
+  expect(getStopScheduleStatus(stopTimeUpdate)).toEqual('canceled');
+});
+
+test('getStopScheduleStatus with unscheduled', () => {
+  const stopTimeUpdate = { schedule_relationship: 'Unscheduled' };
+  expect(getStopScheduleStatus(stopTimeUpdate)).toEqual('unscheduled');
+});
+
+test('getStopScheduleStatus with no-data', () => {
+  const stopTimeUpdate = { schedule_relationship: 'No Data' };
+  expect(getStopScheduleStatus(stopTimeUpdate)).toEqual('no-data');
+});
+
+test('getStopScheduleStatus with no status returns null', () => {
+  const stopTimeUpdate = { schedule_relationship: 'Scheduled' };
+  expect(getStopScheduleStatus(stopTimeUpdate)).toEqual(null);
 });

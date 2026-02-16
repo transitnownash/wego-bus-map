@@ -1,5 +1,3 @@
-/* globals test, expect, afterEach */
-
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MockDate from 'mockdate';

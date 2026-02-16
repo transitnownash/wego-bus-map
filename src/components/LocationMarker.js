@@ -19,7 +19,6 @@ function LocationMarker() {
     if (position === null) {
       return;
     }
-    console.log(position);
     getJSON(`${GTFS_BASE_URL}/stops/near/${position.lat.toFixed(4)},${position.lng.toFixed(4)}/${SEARCH_DISTANCE_IN_METERS}.json`)
       .then((s) => setStops(s.data));
   }, [position]);

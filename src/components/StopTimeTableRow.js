@@ -6,22 +6,11 @@ import { Link } from 'react-router-dom';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import StopTimeSequence from './StopTimeSequence';
 import TimePoint from './TimePoint';
-import { formatDistanceTraveled } from '../util';
+import { formatDistanceTraveled, getStopScheduleStatus } from '../util';
 import StopCode from './StopCode';
 
 function StopTimeTableRow({ stopTime, stopTimeUpdate }) {
-  let stopStatus = null;
-  // StopTimeUpdate.schedule_relationship: SCHEDULED, SKIPPED, NO_DATA, UNSCHEDULED
-  const stopScheduleRel = stopTimeUpdate?.schedule_relationship;
-  if (stopScheduleRel === 'Canceled' || stopScheduleRel === 'Cancelled') {
-    stopStatus = 'canceled';
-  } else if (stopScheduleRel === 'Unscheduled') {
-    stopStatus = 'unscheduled';
-  } else if (stopScheduleRel === 'Skipped') {
-    stopStatus = 'skipped';
-  } else if (stopScheduleRel === 'No Data') {
-    stopStatus = 'no-data';
-  }
+  const stopStatus = getStopScheduleStatus(stopTimeUpdate);
 
   return (
     <tr>

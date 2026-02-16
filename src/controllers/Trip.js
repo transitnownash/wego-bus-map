@@ -10,7 +10,12 @@ import NoMatch from './NoMatch';
 import TitleBar from '../components/TitleBar';
 import LoadingScreen from '../components/LoadingScreen';
 import TransitMap from '../components/TransitMap';
-import { getJSON, formatShapePoints, formatDistanceTraveled } from '../util';
+import {
+  getJSON,
+  formatShapePoints,
+  formatDistanceTraveled,
+  getTripScheduleStatus,
+} from '../util';
 import StopTimeTableRow from '../components/StopTimeTableRow';
 import TripTable from '../components/TripTable';
 import Footer from '../components/Footer';
@@ -185,13 +190,8 @@ function Trip() {
   // Check trip-level schedule_relationship for status badge
   // TripDescriptor.schedule_relationship: SCHEDULED, ADDED, UNSCHEDULED, CANCELED, DUPLICATED, DELETED
   let tripScheduleStatus = null;
-  if (filteredTripUpdates.length > 0 && filteredTripUpdates[0].trip_update?.trip) {
-    const tripScheduleRel = filteredTripUpdates[0].trip_update.trip.schedule_relationship;
-    if (tripScheduleRel === "Canceled" || tripScheduleRel === "Cancelled" || tripScheduleRel === "Deleted") {
-      tripScheduleStatus = 'canceled';
-    } else if (tripScheduleRel === "Added" || tripScheduleRel === "Unscheduled" || tripScheduleRel === "Duplicated") {
-      tripScheduleStatus = 'unscheduled';
-    }
+  if (filteredTripUpdates.length > 0) {
+    tripScheduleStatus = getTripScheduleStatus(filteredTripUpdates[0], trip.stop_times.length);
   }
 
   // Add route color to shape
@@ -219,6 +219,20 @@ function Trip() {
                   <OverlayTrigger placement='top' overlay={<Tooltip>This trip was not in the original schedule - it&apos;s an extra trip added</Tooltip>}>
                     <span className="badge bg-warning text-dark ms-1">
                       <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Unscheduled
+                    </span>
+                  </OverlayTrigger>
+                )}
+                {tripScheduleStatus === 'skipped' && (
+                  <OverlayTrigger placement='top' overlay={<Tooltip>This trip was skipped</Tooltip>}>
+                    <span className="badge bg-danger text-white ms-1">
+                      <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Skipped
+                    </span>
+                  </OverlayTrigger>
+                )}
+                {tripScheduleStatus === 'no-data' && (
+                  <OverlayTrigger placement='top' overlay={<Tooltip>No real-time data for this trip</Tooltip>}>
+                    <span className="badge bg-secondary text-white ms-1">
+                      <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> No Data
                     </span>
                   </OverlayTrigger>
                 )}
