@@ -182,7 +182,7 @@ function TransitMap({
           && <LayersControl.Overlay checked={false} name="QuickTicket Retailers">
             <LayerGroup>
               {retailLocations.map((item, _index) => (
-                  <RetailLocationMarker key={item.location_code} retailLocation={item}></RetailLocationMarker>
+                  <RetailLocationMarker key={`${item.location_code || item.id || `${item.latitude}-${item.longitude}`}-${_index}`} retailLocation={item}></RetailLocationMarker>
               ))}
              </LayerGroup>
           </LayersControl.Overlay>

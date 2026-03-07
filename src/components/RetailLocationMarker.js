@@ -4,7 +4,9 @@ import L from 'leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowsRotate,
-  faDirections, faMapMarkedAlt, faTicket,
+  faDirections, faMapMarkedAlt,
+  faStore, faCreditCard,
+  faConciergeBell,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   Marker, Popup, Tooltip,
@@ -35,9 +37,21 @@ function RetailLocationMarker({
       </div>
       <div>
         <dl className={'row'}>
+          {retailLocation.merchant && retailLocation.merchant !== retailLocation.name && (
+            <>
+              <dt className={'col-5'}><FontAwesomeIcon icon={faStore} fixedWidth={true}></FontAwesomeIcon> Merchant</dt>
+              <dd className={'col-7'}>{retailLocation.merchant}</dd>
+            </>
+          )}
           <dt className={'col-5'}><FontAwesomeIcon icon={faMapMarkedAlt} fixedWidth={true}></FontAwesomeIcon> Address</dt>
-          <dd className={'col-7'}>{retailLocation.address}</dd>
-          <dt className={'col-5'}><FontAwesomeIcon icon={faTicket} fixedWidth={true}></FontAwesomeIcon> Buy Card?</dt>
+          <dd className={'col-7'}>{[retailLocation.address, retailLocation.zip].filter(Boolean).join(' ')}</dd>
+          {retailLocation.service_type && (
+            <>
+              <dt className={'col-5'}><FontAwesomeIcon icon={faConciergeBell} fixedWidth={true}></FontAwesomeIcon>Service</dt>
+              <dd className={'col-7'}>{retailLocation.service_type}</dd>
+            </>
+          )}
+          <dt className={'col-5'}><FontAwesomeIcon icon={faCreditCard} fixedWidth={true}></FontAwesomeIcon> Buy Card?</dt>
           <dd className={'col-7'}>{retailLocation.can_buy_media ? 'Yes' : 'No'}</dd>
           <dt className={'col-5'}><FontAwesomeIcon icon={faArrowsRotate} fixedWidth={true}></FontAwesomeIcon> Reload?</dt>
           <dd className={'col-7'}>{retailLocation.can_reload_media ? 'Yes' : 'No'}</dd>

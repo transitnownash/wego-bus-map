@@ -5,7 +5,7 @@ jest.mock('../util', () => {
   return {
     ...actual,
     getJSON: jest.fn((url) => {
-      if (url.includes('/routes.json') || url.includes('/agencies.json') || url.includes('/retail_locations.json')) {
+      if (url.includes('/routes.json') || url.includes('/agencies.json') || url.includes('services7.arcgis.com')) {
         return Promise.resolve({ data: [] });
       }
       if (url.includes('/realtime/alerts.json') || url.includes('/realtime/trip_updates.json') || url.includes('/realtime/vehicle_positions.json')) {

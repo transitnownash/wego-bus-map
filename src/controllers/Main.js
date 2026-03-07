@@ -10,10 +10,52 @@ import DataFetchError from '../components/DataFetchError';
 
 const GTFS_BASE_URL = process.env.REACT_APP_GTFS_BASE_URL;
 const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville';
+const RETAIL_LOCATIONS_ARCGIS_URL = 'https://services7.arcgis.com/EGmB20G57rbr4fjI/arcgis/rest/services/Master_Retailer_List_May_2022_-_For_Website/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson';
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
 const REFRESH_ALERTS_TTL = 60 * 1000;
 const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
 const REFRESH_GBFS_TTL = 60 * 1000;
+
+function parseRetailLocationServiceType(serviceType) {
+  const normalized = String(serviceType || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  return {
+    canBuyMedia: normalized.includes('buy quickticket') || normalized.includes('buy quick ticket'),
+    canReloadMedia: normalized.includes('reload'),
+  };
+}
+
+function normalizeRetailLocations(geoJson) {
+  const features = Array.isArray(geoJson?.features) ? geoJson.features : [];
+
+  return features.map((feature, index) => {
+    const coordinates = feature?.geometry?.coordinates || [];
+    const [longitude, latitude] = coordinates;
+    const properties = feature?.properties || {};
+    const serviceType = properties.Trns_Typ;
+    const service = parseRetailLocationServiceType(serviceType);
+    const status = String(properties.Status || '').toLowerCase();
+    const id = properties.ObjectId2 || feature.id || properties.GlobalID_2 || String(index);
+    const zip = properties.ShipZip ? String(properties.ShipZip) : '';
+
+    return {
+      id,
+      location_code: String(id),
+      name: properties.BannerName || properties.Merchant || 'QuickTicket Retailer',
+      merchant: properties.Merchant || '',
+      address: properties.ShipAddr || '',
+      zip,
+      service_type: serviceType || '',
+      status: properties.Status || '',
+      can_buy_media: service.canBuyMedia,
+      can_reload_media: service.canReloadMedia,
+      is_active: status.includes('transaction ready'),
+      latitude,
+      longitude,
+    };
+  }).filter((location) => {
+    return location.is_active && Number.isFinite(location.latitude) && Number.isFinite(location.longitude);
+  });
+}
 
 function Main() {
   const [routes, setRouteData] = useState([]);
@@ -70,8 +112,8 @@ function Main() {
       .then((s) => setBCycleStationStatusData(s.data.stations))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(`${GTFS_BASE_URL}/retail_locations.json`, { params: { per_page: 2000 } })
-      .then((r) => r.data.filter((i) => i.is_active))
+    getJSON(RETAIL_LOCATIONS_ARCGIS_URL)
+      .then((r) => normalizeRetailLocations(r))
       .then((r) => setRetailLocationsData(r))
       .catch((error) => setDataFetchError(error));
 
