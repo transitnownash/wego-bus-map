@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders Headsign 1`] = `
+<div>
+  <span
+    class="trip-headsign"
+  >
+    DOWNTOWN
+  </span>
+</div>
+`;
+
+exports[`renders Headsign with Letter 1`] = `
+<div>
+  <span
+    class="trip-headsign"
+  >
+    <span
+      class="badge text-bg-secondary"
+    >
+      A
+    </span>
+     
+    DOWNTOWN
+  </span>
+</div>
+`;
+
+exports[`renders Headsign with Letter if missing trailing space 1`] = `
+<div>
+  <span
+    class="trip-headsign"
+  >
+    <span
+      class="badge text-bg-secondary"
+    >
+      A
+    </span>
+     
+    WHITE BRIDGE
+  </span>
+</div>
+`;

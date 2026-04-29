@@ -2,7 +2,7 @@
 import { HoneycombWebSDK } from '@honeycombio/opentelemetry-web';
 import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
 
-const honeycombApiKey = process.env.REACT_APP_HONEYCOMB_API_KEY;
+const honeycombApiKey = import.meta.env.VITE_HONEYCOMB_API_KEY;
 if (!honeycombApiKey) {
   // Skip tracing setup if no API key is present
   console.warn('Honeycomb API key not set; OpenTelemetry tracing is disabled.');
@@ -10,7 +10,7 @@ if (!honeycombApiKey) {
   const sdk = new HoneycombWebSDK({
     debug: true, // Set to false for production
     apiKey: honeycombApiKey,
-    serviceName: process.env.REACT_APP_OTEL_SERVICE_NAME,
+    serviceName: import.meta.env.VITE_OTEL_SERVICE_NAME,
     instrumentations: [getWebAutoInstrumentations({
       '@opentelemetry/instrumentation-xml-http-request': { ignoreNetworkEvents: true },
       '@opentelemetry/instrumentation-fetch': { ignoreNetworkEvents: true },
