@@ -1,0 +1,240 @@
+import React from 'react';
+
+function buildRequestUrl(url, params) {
+  if (!params) {
+    return url;
+  }
+
+  const requestUrl = new URL(url, window.location.origin);
+  Object.entries(params).forEach(([key, value]) => {
+    if (typeof value !== 'undefined' && value !== null) {
+      requestUrl.searchParams.set(key, value);
+    }
+  });
+
+  return requestUrl.toString();
+}
+
+// Wrapper for fetch
+export async function getJSON(url, options = {}) {
+  const {
+    timeout = 60000 * 2,
+    params,
+    headers,
+    ...fetchOptions
+  } = options;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(buildRequestUrl(url, params), {
+      ...fetchOptions,
+      headers: {
+        Accept: 'application/json',
+        ...headers,
+      },
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const error = new Error(`${response.status} ${response.statusText}`);
+      error.name = 'HttpError';
+      error.code = `HTTP_${response.status}`;
+      error.response = {
+        status: response.status,
+        statusText: response.statusText,
+        url: response.url,
+      };
+      throw error;
+    }
+
+    return response.json();
+  } catch (error) {
+    if (error.name === 'AbortError' || error.name === 'HttpError') {
+      throw error;
+    }
+
+    error.name = 'FetchError';
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+// Format a timestamp to human readable
+export function renderUnixTimestamp(timestamp, format) {
+  if (!timestamp || typeof timestamp === 'undefined') {
+    return (<>N/A</>);
+  }
+  if (!format || typeof format === 'undefined') {
+    format = {
+      year: '2-digit', day: 'numeric', month: 'numeric', hour: 'numeric', minute: '2-digit',
+    };
+  }
+  const displayTimestamp = new Date(timestamp * 1000).toLocaleString([], format);
+  return (
+    <span title={timestamp}>{displayTimestamp}</span>
+  );
+}
+
+// Convert degrees to ordinal direction
+export function renderBearing(bearing) {
+  if (!bearing || typeof bearing === 'undefined') {
+    return (<>N/A</>);
+  }
+  const val = Math.floor((bearing / 22.5) + 0.5);
+  const arr = [
+    'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE',
+    'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW',
+    'NW', 'NNW',
+  ];
+  const bearingDisplay = arr[(val % 16)];
+  return (
+    <span title={bearing}>{bearingDisplay}</span>
+  );
+}
+
+// Convert meters per second into miles per hour
+export function renderSpeed(speed) {
+  if (!speed || typeof speed === 'undefined') {
+    return (<>N/A</>);
+  }
+  const displaySpeed = `${Math.round(speed * 2.2369)} mph`;
+  return (
+    <span title={speed}>{displaySpeed}</span>
+  );
+}
+
+// Format shape points for Polyline
+export function formatShapePoints(points) {
+  return (points.map((p, _i) => [p.lat, p.lon]));
+}
+
+// Check if HH:MM:SS is after now
+export function isTimeLaterThanNow(time) {
+  const now = new Date(Date.now());
+  const t1 = new Date(Date.now());
+  const [hour, minute, second] = time.split(':');
+  t1.setHours(hour);
+  t1.setMinutes(minute);
+  t1.setSeconds(second);
+  return t1 > now;
+}
+
+export function isStopTimeUpdateLaterThanNow(stopTime, stopUpdate) {
+  let time = 0;
+
+  // Calculate with stopUpdate, if available
+  if (JSON.stringify(stopUpdate) !== '{}') {
+    if (typeof stopUpdate.departure !== 'undefined') {
+      time = stopUpdate.departure.time;
+    } else if (typeof stopUpdate.arrival !== 'undefined') {
+      time = stopUpdate.arrival.time;
+    }
+    if (time * 1000 > Date.now()) {
+      return true;
+    }
+    return false;
+  }
+
+  // Fall back to scheduled time
+  // Guard against undefined stopTime or departure_time
+  if (!stopTime || !stopTime.departure_time) {
+    return false;
+  }
+  return isTimeLaterThanNow(stopTime.departure_time);
+}
+
+// Check if a start and end time in HH:MM contains now
+export function isTimeRangeIncludesNow(start_time, end_time) {
+  const now = new Date(Date.now());
+  const t1 = new Date(Date.now());
+  const t2 = new Date(Date.now());
+  const [start_hour, start_minute, start_second] = start_time.split(':');
+  t1.setHours(start_hour);
+  t1.setMinutes(start_minute);
+  t1.setSeconds(start_second);
+  const [end_hour, end_minute, end_second] = end_time.split(':');
+  t2.setHours(end_hour);
+  t2.setMinutes(end_minute);
+  t2.setSeconds(end_second);
+  return (t1 < now && now < t2);
+}
+
+// Convert kilometers to miles
+export function formatDistanceTraveled(kilometers) {
+  if (!kilometers) {
+    return 'Start';
+  }
+  return `${(kilometers * 0.62137).toFixed(2)} mi`;
+}
+
+// Format stop time update time
+export function formatStopTimeUpdate(stopTimeUpdate) {
+  if (typeof stopTimeUpdate.departure !== 'undefined' && typeof stopTimeUpdate.departure.time === 'number') {
+    return new Date(stopTimeUpdate.departure.time * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  if (typeof stopTimeUpdate.arrival !== 'undefined' && typeof stopTimeUpdate.arrival.time === 'number') {
+    return new Date(stopTimeUpdate.arrival.time * 1000).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  return '--';
+}
+
+export function getTripScheduleStatus(tripUpdate, stopTimesLength) {
+  const tripScheduleRel = tripUpdate?.trip_update?.trip?.schedule_relationship;
+  if (tripScheduleRel === 'Canceled' || tripScheduleRel === 'Cancelled' || tripScheduleRel === 'Deleted') {
+    return 'canceled';
+  }
+  if (tripScheduleRel === 'Added' || tripScheduleRel === 'Unscheduled' || tripScheduleRel === 'Duplicated') {
+    return 'unscheduled';
+  }
+
+  const stopUpdates = tripUpdate?.trip_update?.stop_time_update;
+  if (!Array.isArray(stopUpdates) || stopUpdates.length === 0) {
+    return null;
+  }
+  if (typeof stopTimesLength === 'number' && stopTimesLength > 0 && stopUpdates.length !== stopTimesLength) {
+    return null;
+  }
+
+  const firstRel = stopUpdates[0]?.schedule_relationship;
+  if (!firstRel) {
+    return null;
+  }
+  const allSame = stopUpdates.every((item) => item.schedule_relationship === firstRel);
+  if (!allSame) {
+    return null;
+  }
+
+  if (firstRel === 'Skipped') {
+    return 'skipped';
+  }
+  if (firstRel === 'No Data') {
+    return 'no-data';
+  }
+  if (firstRel === 'Unscheduled' || firstRel === 'Added' || firstRel === 'Duplicated') {
+    return 'unscheduled';
+  }
+  if (firstRel === 'Canceled' || firstRel === 'Cancelled' || firstRel === 'Deleted') {
+    return 'canceled';
+  }
+
+  return null;
+}
+
+export function getStopScheduleStatus(stopTimeUpdate) {
+  const stopScheduleRel = stopTimeUpdate?.schedule_relationship;
+  if (stopScheduleRel === 'Canceled' || stopScheduleRel === 'Cancelled' || stopScheduleRel === 'Deleted') {
+    return 'canceled';
+  }
+  if (stopScheduleRel === 'Unscheduled' || stopScheduleRel === 'Added' || stopScheduleRel === 'Duplicated') {
+    return 'unscheduled';
+  }
+  if (stopScheduleRel === 'Skipped') {
+    return 'skipped';
+  }
+  if (stopScheduleRel === 'No Data') {
+    return 'no-data';
+  }
+  return null;
+}

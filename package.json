@@ -1,6 +1,5 @@
 {
   "name": "wego-bus-map",
-  "homepage": "https://map.transitnownash.org/",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -18,7 +17,6 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
     "@testing-library/user-event": "^14.5.2",
-    "axios": "^1.15.0",
     "bootstrap": "^5.3.3",
     "dayjs": "^1.11.10",
     "install": "^0.13.0",
@@ -33,51 +31,30 @@
     "sass": "^1.72.0",
     "web-vitals": "^3.5.2"
   },
-  "overrides": {
-    "autoprefixer": "10.4.5"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=true react-scripts build",
-    "test": "TZ=America/Chicago react-scripts test",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:debug": "vitest run --reporter=verbose",
     "lint": "eslint \"src/**/*.{js,jsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
-    "eject": "react-scripts eject",
     "prepare": "husky || true"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!react-leaflet)/"
-    ]
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.5",
+    "@vitest/ui": "^4.1.5",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-react": "^7.34.1",
     "husky": "^9.0.11",
+    "jsdom": "^29.1.0",
     "mockdate": "^3.0.5",
-    "nock": "^13.5.4",
-    "react-scripts": "5.0.1"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
   },
   "volta": {
     "node": "22.22.0"

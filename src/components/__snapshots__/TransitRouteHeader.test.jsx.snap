@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders TransitRouteHeader 1`] = `
+<div>
+  <div
+    class="transit-route-header d-flex"
+    style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div
+      class="flex-grow-1 align-bottom"
+    >
+      <a
+        href="/routes/4"
+      >
+        <span
+          class="badge text-bg-light"
+        >
+          4
+        </span>
+         
+        SHELBY
+      </a>
+    </div>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`renders TransitRouteHeader 2`] = `
+<div>
+  <div
+    class="transit-route-header d-flex"
+    style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div
+      class="flex-grow-1 align-bottom"
+    >
+      <a
+        href="/routes/4"
+      >
+        <span
+          class="badge text-bg-light"
+        >
+          4
+        </span>
+         
+        SHELBY
+      </a>
+    </div>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`renders TransitRouteHeader with icon 1`] = `
+<div>
+  <div
+    class="transit-route-header d-flex"
+    style="background-color: rgb(117, 60, 190); color: rgb(255, 255, 255);"
+  >
+    <div>
+      <img
+        alt="Icon"
+        class="me-2"
+        src="data:image/svg+xml,%3csvg%20width='100%25'%20height='100%25'%20viewBox='0%200%2024%2024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M4,16C4,16.88%204.39,17.67%205,18.22L5,20C5,20.55%205.45,21%206,21L7,21C7.55,21%208,20.55%208,20L8,19L16,19L16,20C16,20.55%2016.45,21%2017,21L18,21C18.55,21%2019,20.55%2019,20L19,18.22C19.61,17.67%2020,16.88%2020,16L20,6C20,2.5%2016.42,2%2012,2C7.58,2%204,2.5%204,6L4,16Z'%20style='fill:rgb(255,255,255);fill-rule:nonzero;stroke:white;stroke-width:3px;'/%3e%3cpath%20d='M4,16C4,16.88%204.39,17.67%205,18.22L5,20C5,20.55%205.45,21%206,21L7,21C7.55,21%208,20.55%208,20L8,19L16,19L16,20C16,20.55%2016.45,21%2017,21L18,21C18.55,21%2019,20.55%2019,20L19,18.22C19.61,17.67%2020,16.88%2020,16L20,6C20,2.5%2016.42,2%2012,2C7.58,2%204,2.5%204,6L4,16ZM7.5,17C6.67,17%206,16.33%206,15.5C6,14.67%206.67,14%207.5,14C8.33,14%209,14.67%209,15.5C9,16.33%208.33,17%207.5,17ZM16.5,17C15.67,17%2015,16.33%2015,15.5C15,14.67%2015.67,14%2016.5,14C17.33,14%2018,14.67%2018,15.5C18,16.33%2017.33,17%2016.5,17ZM18,11L6,11L6,6L18,6L18,11Z'%20style='fill:rgb(128,0,128);fill-rule:nonzero;'%20class='vehicle-fill'/%3e%3cg%3e%3crect%20x='9.609'%20y='12.157'%20width='1.364'%20height='1.378'%20style='fill:white;fill-rule:nonzero;'/%3e%3crect%20x='11.442'%20y='12.157'%20width='1.364'%20height='1.378'%20style='fill:white;fill-rule:nonzero;'/%3e%3crect%20x='13.246'%20y='12.157'%20width='1.364'%20height='1.378'%20style='fill:white;fill-rule:nonzero;'/%3e%3ccircle%20cx='11.157'%20cy='14.613'%20r='0.741'%20style='fill:white;'/%3e%3ccircle%20cx='13.092'%20cy='14.613'%20r='0.741'%20style='fill:white;'/%3e%3c/g%3e%3c/svg%3e"
+        style="height: 1.5rem;"
+        title="Route Type: 3"
+      />
+    </div>
+    <div
+      class="flex-grow-1 align-bottom"
+    >
+      <a
+        href="/routes/4"
+      >
+        <span
+          class="badge text-bg-light"
+        >
+          4
+        </span>
+         
+        SHELBY
+      </a>
+    </div>
+    <div />
+  </div>
+</div>
+`;
+
+exports[`renders TransitRouteHeader with invalid route. 1`] = `
+<div>
+  <div
+    class="transit-route-header"
+  >
+    Not Assigned to Route
+  </div>
+</div>
+`;
