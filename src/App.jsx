@@ -10,6 +10,7 @@ import Stop from './controllers/Stop';
 import NoMatch from './controllers/NoMatch';
 import ErrorBoundary from './components/ErrorBoundary';
 import BCycle from './controllers/BCycle';
+import RealtimeDataStatusBanner from './components/RealtimeDataStatusBanner';
 import './resources/bootstrap-with-mixins.scss';
 import './App.scss';
 
@@ -26,6 +27,7 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <RealtimeDataStatusBanner />
         <Routes>
           <Route index={true} path="/" element={<Main />} />
           <Route path="/about" element={<About />} />

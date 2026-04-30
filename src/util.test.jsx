@@ -1,7 +1,7 @@
 import React from 'react';
 import { afterEach, beforeAll, afterAll, expect, test, vi } from 'vitest';
 import {
-  renderBearing, formatDistanceTraveled, renderSpeed, renderUnixTimestamp, getJSON, formatShapePoints, isStopTimeUpdateLaterThanNow, formatStopTimeUpdate, isTimeRangeIncludesNow, isTimeLaterThanNow, getTripScheduleStatus, getStopScheduleStatus,
+  renderBearing, formatDistanceTraveled, renderSpeed, renderUnixTimestamp, getJSON, formatShapePoints, isStopTimeUpdateLaterThanNow, formatStopTimeUpdate, isTimeRangeIncludesNow, isTimeLaterThanNow, getTripScheduleStatus, getStopScheduleStatus, getIsRealtimeDataAvailable, resetRealtimeStatusForTests, REALTIME_DATA_STATUS_CHANGE_EVENT,
 } from './util';
 import agenciesFixture from './fixtures/agencies.json';
 
@@ -17,6 +17,7 @@ afterAll(() => {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  resetRealtimeStatusForTests();
 });
 
 test('test getJSON', () => {
@@ -65,6 +66,103 @@ test('test getJSON with params', async () => {
     'https://gtfs.transitnownash.org/routes.json?date=2026-04-28&per_page=200',
     expect.any(Object),
   );
+});
+
+test('getJSON returns empty array for realtime 503 responses', async () => {
+  vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    new Response('', {
+      status: 503,
+      statusText: 'Service Unavailable',
+    }),
+  );
+
+  const data = await getJSON('https://gtfs.transitnownash.org/realtime/vehicle_positions.json');
+  expect(data).toEqual([]);
+  expect(getIsRealtimeDataAvailable()).toEqual(false);
+});
+
+test('getJSON marks realtime as available again after successful response', async () => {
+  vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+    new Response('', {
+      status: 503,
+      statusText: 'Service Unavailable',
+    }),
+  ).mockResolvedValueOnce(
+    new Response(JSON.stringify([]), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }),
+  );
+
+  await getJSON('https://gtfs.transitnownash.org/realtime/trip_updates.json');
+  expect(getIsRealtimeDataAvailable()).toEqual(false);
+
+  await getJSON('https://gtfs.transitnownash.org/realtime/trip_updates.json');
+  expect(getIsRealtimeDataAvailable()).toEqual(true);
+});
+
+test('getJSON throws for non-realtime 503 responses', async () => {
+  vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    new Response('', {
+      status: 503,
+      statusText: 'Service Unavailable',
+    }),
+  );
+
+  await expect(getJSON('https://gtfs.transitnownash.org/routes.json')).rejects.toMatchObject({
+    name: 'HttpError',
+    code: 'HTTP_503',
+  });
+});
+
+test('getJSON emits realtime status change events on outage and recovery', async () => {
+  const handler = vi.fn();
+  window.addEventListener(REALTIME_DATA_STATUS_CHANGE_EVENT, handler);
+
+  vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+    new Response('', {
+      status: 503,
+      statusText: 'Service Unavailable',
+    }),
+  ).mockResolvedValueOnce(
+    new Response(JSON.stringify([]), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }),
+  );
+
+  await getJSON('https://gtfs.transitnownash.org/realtime/alerts.json');
+  await getJSON('https://gtfs.transitnownash.org/realtime/alerts.json');
+
+  expect(handler).toHaveBeenCalledTimes(2);
+  expect(handler.mock.calls[0][0].detail.isRealtimeAvailable).toEqual(false);
+  expect(handler.mock.calls[1][0].detail.isRealtimeAvailable).toEqual(true);
+
+  window.removeEventListener(REALTIME_DATA_STATUS_CHANGE_EVENT, handler);
+});
+
+test('getJSON does not emit realtime status change event for non-realtime endpoint failure', async () => {
+  const handler = vi.fn();
+  window.addEventListener(REALTIME_DATA_STATUS_CHANGE_EVENT, handler);
+
+  vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    new Response('', {
+      status: 503,
+      statusText: 'Service Unavailable',
+    }),
+  );
+
+  await expect(getJSON('https://gtfs.transitnownash.org/routes.json')).rejects.toMatchObject({
+    name: 'HttpError',
+    code: 'HTTP_503',
+  });
+
+  expect(handler).not.toHaveBeenCalled();
+  window.removeEventListener(REALTIME_DATA_STATUS_CHANGE_EVENT, handler);
 });
 
 test('test renderUnixTimestamp', () => {

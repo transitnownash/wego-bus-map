@@ -1,5 +1,8 @@
 import React from 'react';
 
+export const REALTIME_DATA_STATUS_CHANGE_EVENT = 'realtime-data-status-change';
+const realtimeEndpointStatus = new Map();
+
 function buildRequestUrl(url, params) {
   if (!params) {
     return url;
@@ -13,6 +16,63 @@ function buildRequestUrl(url, params) {
   });
 
   return requestUrl.toString();
+}
+
+function isRealtimeUrl(url) {
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+    return parsedUrl.pathname.includes('/realtime/');
+  } catch (_error) {
+    return String(url).includes('/realtime/');
+  }
+}
+
+function toRealtimePath(url) {
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+    return parsedUrl.pathname;
+  } catch (_error) {
+    return String(url);
+  }
+}
+
+function emitRealtimeStatusChange() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  window.dispatchEvent(new CustomEvent(REALTIME_DATA_STATUS_CHANGE_EVENT, {
+    detail: {
+      isRealtimeAvailable: getIsRealtimeDataAvailable(),
+    },
+  }));
+}
+
+function setRealtimeEndpointStatus(url, isAvailable) {
+  if (!isRealtimeUrl(url)) {
+    return;
+  }
+
+  const endpoint = toRealtimePath(url);
+  const previousStatus = realtimeEndpointStatus.get(endpoint);
+  if (previousStatus === isAvailable) {
+    return;
+  }
+
+  realtimeEndpointStatus.set(endpoint, isAvailable);
+  emitRealtimeStatusChange();
+}
+
+export function getIsRealtimeDataAvailable() {
+  for (const isAvailable of realtimeEndpointStatus.values()) {
+    if (!isAvailable) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function resetRealtimeStatusForTests() {
+  realtimeEndpointStatus.clear();
 }
 
 // Wrapper for fetch
@@ -35,6 +95,16 @@ export async function getJSON(url, options = {}) {
       },
       signal: controller.signal,
     });
+
+    // Realtime provider outages can return 503; degrade gracefully with empty data.
+    if (response.status === 503 && isRealtimeUrl(url)) {
+      setRealtimeEndpointStatus(url, false);
+      return [];
+    }
+
+    if (response.ok && isRealtimeUrl(url)) {
+      setRealtimeEndpointStatus(url, true);
+    }
 
     if (!response.ok) {
       const error = new Error(`${response.status} ${response.statusText}`);

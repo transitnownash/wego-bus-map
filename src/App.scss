@@ -8,6 +8,12 @@
   color: #000;
 }
 
+.realtime-status-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+}
+
 // Shared among multiple components
 .stop-name {
   text-align: center;
