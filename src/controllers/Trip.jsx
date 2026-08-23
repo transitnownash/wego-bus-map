@@ -210,7 +210,7 @@ function Trip() {
                 {trip.trip_gid}
                 {trip.scheduled_today === false && (
                   <OverlayTrigger placement='top' overlay={<Tooltip>This trip is not scheduled to run today</Tooltip>}>
-                    <span className="badge bg-secondary text-white ms-1">
+                    <span className="badge bg-danger text-white ms-1">
                       <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Not Running Today
                     </span>
                   </OverlayTrigger>
@@ -291,7 +291,9 @@ function Trip() {
           </tbody>
         </table>
 
-        <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
+        {trip.scheduled_today !== false && (
+          <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
+        )}
 
         <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={allAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]} showHorizontal></AlertList>
