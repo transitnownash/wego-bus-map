@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import MockDate from 'mockdate';
 import TripTableRow from './TripTableRow';
 
 const mockTrip = {
@@ -23,6 +24,36 @@ const mockRoute = {
 };
 
 describe('TripTableRow', () => {
+  afterEach(() => {
+    MockDate.reset();
+  });
+
+  test('does not apply tr-active-trip styling when isScheduleDateToday is false', () => {
+    MockDate.set('Fri Jul 22 2022 10:30:00 GMT-0500');
+    const { container } = render(
+      <table>
+        <tbody>
+          <TripTableRow trip={mockTrip} route={mockRoute} tripUpdate={{}} hidePastTrips={false} isScheduleDateToday={false} />
+        </tbody>
+      </table>,
+    );
+    const row = container.querySelector('tr');
+    expect(row.className).toBe('');
+  });
+
+  test('does not apply tr-past-trip styling when isScheduleDateToday is false', () => {
+    MockDate.set('Fri Jul 22 2022 12:00:00 GMT-0500');
+    const { container } = render(
+      <table>
+        <tbody>
+          <TripTableRow trip={mockTrip} route={mockRoute} tripUpdate={{}} hidePastTrips={false} isScheduleDateToday={false} />
+        </tbody>
+      </table>,
+    );
+    const row = container.querySelector('tr');
+    expect(row.className).toBe('');
+  });
+
   test('renders without crashing', () => {
     const { container } = render(
       <table>

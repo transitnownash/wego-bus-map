@@ -25,6 +25,17 @@ test('renders TripTable', () => {
   expect(container).toMatchSnapshot();
 });
 
+test('does not show hide-past-trips toggle or filter trips when scheduleDate is not today', () => {
+  MockDate.set('Fri Jul 22 2022 12:10:00 GMT-0500');
+  render(
+    <TripTable routeTrips={routeTripsFixture.data} route={routeFixture} scheduleDate="2022-07-01" />,
+  );
+
+  expect(screen.queryByRole('checkbox', { name: /Hide past trips/i })).not.toBeInTheDocument();
+  expect(screen.getByText('266924')).toBeInTheDocument();
+  expect(screen.getByText('11:26 AM')).toBeInTheDocument();
+});
+
 test('renders TripTable with past trips', async () => {
   MockDate.set('Sun Jul 24 2022 12:10:00 GMT-0500');
   const user = userEvent.setup();
