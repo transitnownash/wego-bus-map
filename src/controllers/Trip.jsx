@@ -208,6 +208,13 @@ function Trip() {
               <th className="text-nowrap align-middle" style={{ width: '130px' }}><FontAwesomeIcon icon={faMap} fixedWidth={true}></FontAwesomeIcon> Trip</th>
               <td>
                 {trip.trip_gid}
+                {trip.scheduled_today === false && (
+                  <OverlayTrigger placement='top' overlay={<Tooltip>This trip is not scheduled to run today</Tooltip>}>
+                    <span className="badge bg-danger text-white ms-1">
+                      <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> Not Running Today
+                    </span>
+                  </OverlayTrigger>
+                )}
                 {tripScheduleStatus === 'canceled' && (
                   <OverlayTrigger placement='top' overlay={<Tooltip>This trip has been canceled</Tooltip>}>
                     <span className="badge bg-danger text-white ms-1">
@@ -229,7 +236,7 @@ function Trip() {
                     </span>
                   </OverlayTrigger>
                 )}
-                {tripScheduleStatus === 'no-data' && (
+                {tripScheduleStatus === 'no-data' && trip.scheduled_today !== false && (
                   <OverlayTrigger placement='top' overlay={<Tooltip>No real-time data for this trip</Tooltip>}>
                     <span className="badge bg-secondary text-white ms-1">
                       <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth={true} /> No Data
@@ -284,7 +291,9 @@ function Trip() {
           </tbody>
         </table>
 
-        <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
+        {trip.scheduled_today !== false && (
+          <TripProgressBar trip={trip} tripUpdates={filteredTripUpdates}></TripProgressBar>
+        )}
 
         <TransitMap vehicleMarkers={filteredVehicleMarkers} routes={[route]} agencies={agencies} routeShapes={[trip.shape]} routeStops={trip.stop_times} alerts={allAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]} zoom={13}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]} showHorizontal></AlertList>

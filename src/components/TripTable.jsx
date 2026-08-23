@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
 import TripTableRow from './TripTableRow';
 import TripTableRowEmpty from './TripTableRowEmpty';
 import HidePastTripsToggle from './HidePastTripsToggle';
@@ -10,6 +11,8 @@ function TripTable({
   routeTrips, route, tripUpdates, scheduleDate, handleDateFieldChange, isLoadingTripDate,
 }) {
   const [hidePastTrips, setHidePastTrips] = useState(true);
+  const isScheduleDateToday = !scheduleDate || scheduleDate === dayjs().format('YYYY-MM-DD');
+  const effectiveHidePastTrips = isScheduleDateToday && hidePastTrips;
 
   if (routeTrips.length === 0) {
     return (
@@ -38,7 +41,9 @@ function TripTable({
     <>
       <div className="d-flex align-items-center mb-2">
         <div className="flex-grow-1">
-          <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange} />
+          {isScheduleDateToday && (
+            <HidePastTripsToggle hidePastTrips={hidePastTrips} onChange={handleCheckboxChange} />
+          )}
         </div>
         <div>
           {typeof handleDateFieldChange === 'function' && (
@@ -62,7 +67,7 @@ function TripTable({
             <tbody>
               {routeTrips.filter((t) => t.direction_id === '1').map((item, _index) => {
                 const tripUpdate = tripUpdates.find((i) => item.trip_gid === i.trip_update.trip.trip_id) || {};
-                return (<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={hidePastTrips} tripUpdate={tripUpdate}></TripTableRow>);
+                return (<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={effectiveHidePastTrips} isScheduleDateToday={isScheduleDateToday} tripUpdate={tripUpdate}></TripTableRow>);
               })}
               {routeTrips.filter((t) => t.direction_id === '1').length === 0
                 && (<TripTableRowEmpty/>)
@@ -85,7 +90,7 @@ function TripTable({
             <tbody>
               {routeTrips.filter((t) => t.direction_id !== '1').map((item, _index) => {
                 const tripUpdate = tripUpdates.find((i) => item.trip_gid === i.trip_update.trip.trip_id) || {};
-                return (<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={hidePastTrips} tripUpdate={tripUpdate}></TripTableRow>);
+                return (<TripTableRow key={item.id} trip={item} route={route} hidePastTrips={effectiveHidePastTrips} isScheduleDateToday={isScheduleDateToday} tripUpdate={tripUpdate}></TripTableRow>);
               })}
               {routeTrips.filter((t) => t.direction_id !== '1').length === 0 && (
                 <TripTableRowEmpty />

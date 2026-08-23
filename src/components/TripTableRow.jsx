@@ -14,7 +14,7 @@ import Headsign from './Headsign';
 import './TripTableRow.scss';
 
 function TripTableRow({
-  trip, route, tripUpdate, hidePastTrips,
+  trip, route, tripUpdate, hidePastTrips, isScheduleDateToday,
 }) {
   const bikes_allowed_icon = (trip.bikes_allowed !== '1')
     ? (<span className="text-danger"><FontAwesomeIcon icon={faBan} fixedWidth={true}></FontAwesomeIcon></span>)
@@ -60,7 +60,7 @@ function TripTableRow({
   scheduleStatus = getTripScheduleStatus(tripUpdate, trip.stop_times.length);
 
   let rowClasses = '';
-  const isActive = trip.start_time && trip.end_time && isTimeRangeIncludesNow(trip.start_time, trip.end_time);
+  const isActive = isScheduleDateToday && trip.start_time && trip.end_time && isTimeRangeIncludesNow(trip.start_time, trip.end_time);
   const hasFutureEnd = isStopTimeUpdateLaterThanNow(lastStopTime, updateEnd);
   const hasFutureStart = trip.start_time ? isTimeLaterThanNow(trip.start_time) : false;
 
@@ -70,7 +70,9 @@ function TripTableRow({
     if (hidePastTrips) {
       return;
     }
-    rowClasses = 'tr-past-trip';
+    if (isScheduleDateToday) {
+      rowClasses = 'tr-past-trip';
+    }
   }
 
   return (
@@ -141,6 +143,7 @@ TripTableRow.propTypes = {
   route: PropTypes.object.isRequired,
   tripUpdate: PropTypes.object,
   hidePastTrips: PropTypes.bool,
+  isScheduleDateToday: PropTypes.bool,
 };
 
 TripTableRow.defaultProps = {
@@ -148,6 +151,7 @@ TripTableRow.defaultProps = {
   route: {},
   tripUpdate: {},
   hidePastTrips: false,
+  isScheduleDateToday: true,
 };
 
 export default TripTableRow;
