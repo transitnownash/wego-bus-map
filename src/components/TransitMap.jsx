@@ -19,6 +19,8 @@ import LocateButton from './LocateButton';
 import countyBorders from '../lib/davidson_county_borders.json';
 import RetailLocationMarker from './RetailLocationMarker';
 
+const CARTO_API_KEY = import.meta.env.VITE_CARTO_API_KEY;
+
 // Fix paths for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -109,8 +111,7 @@ function TransitMap({
     <MapContainer ref={map} className="map-container" center={center} zoom={zoom} scrollWheelZoom={true} maxBounds={regionMaxBounds} doubleClickZoom={false}>
       <TileLayer
         attribution='&copy; <a href="http://www.openstreetmap.org/copyright" target="blank">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions" target="blank">CartoDB</a>; <a href="http://www.wegotransit.com" target="blank">WeGo</a>'
-        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
-        subdomains='abcd'
+        url={`https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`}
         minZoom={10}
         maxZoom={19}
         className='map-tiles'

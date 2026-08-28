@@ -8,6 +8,8 @@ Implementation of the General Transit Feed Specification (GTFS) Realtime feed fo
 
 Requires a [separate application](https://github.com/transitnownash/gtfs-rails-api) to be up and running for the static data components (route, shapes, trips, etc.) to work properly. Configure the endpoint as `GTFS_BASE_URL` in your environment.
 
+The basemap tiles require a free [CARTO Basemaps API key](https://carto.com/basemaps/apikey/). Set it as `VITE_CARTO_API_KEY` in your environment (e.g. `.env.local`).
+
 ## Development
 
 Start the application with the default endpoint.
