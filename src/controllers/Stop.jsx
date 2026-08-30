@@ -152,7 +152,7 @@ function Stops() {
       return;
     }
     a.alert.informed_entity.forEach((e) => {
-      if (e.stop_id === stop.stop_code) {
+      if (e.stop_id === stop.stop_gid) {
         stopAlerts.push(a);
       }
     });
@@ -163,7 +163,7 @@ function Stops() {
   tripUpdates.forEach((tu) => {
     if (tu.trip_update.stop_time_update) {
       tu.trip_update.stop_time_update.forEach((u) => {
-        if (u.stop_id === stop.stop_code) {
+        if (u.stop_id === stop.stop_gid) {
           stopTripUpdates.push(tu);
         }
       });
@@ -304,7 +304,7 @@ function Stops() {
                       const stopTimeTripUpdate = stopTripUpdates.filter((s) => s.trip_update.trip?.trip_id === item.trip_gid);
                       if (stopTimeTripUpdate.length > 0) {
                         stopTimeTripUpdate[0].trip_update.stop_time_update.map((stu) => {
-                          if (stu.stop_id === stop.stop_code) {
+                          if (stu.stop_id === stop.stop_gid) {
                             stopTimeUpdate = stu;
                           }
                         });

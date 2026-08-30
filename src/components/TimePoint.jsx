@@ -44,13 +44,15 @@ function TimePoint({ scheduleData, updateData = {} }) {
   }
 
   // Grab the relevant pieces for the scheduled time
-  let scheduleTime = formatTripTime(scheduleData.departure_time || scheduleData.arrival_time);
+  // (departure preferred, matching updateTime's preference, so on-time comparisons are apples-to-apples)
+  const scheduleTime = formatTripTime(scheduleData.departure_time || scheduleData.arrival_time);
   const isNextDay = /^2[4-9]:/.test(scheduleData.departure_time || scheduleData.arrival_time);
 
   // Handle case where departure and arrival time are mismatched
+  let scheduleDisplayTime = scheduleTime;
   let scheduleDepartNote = '';
   if (scheduleData.arrival_time && scheduleData.departure_time && scheduleData.arrival_time !== scheduleData.departure_time) {
-    scheduleTime = formatTripTime(scheduleData.arrival_time);
+    scheduleDisplayTime = formatTripTime(scheduleData.arrival_time);
     scheduleDepartNote = (<> (Departs {formatTripTime(scheduleData.departure_time)})</>);
   }
 
@@ -65,7 +67,7 @@ function TimePoint({ scheduleData, updateData = {} }) {
         <div className="small">
           <strike className="text-muted" title="Scheduled Time">
             {renderNextDayIcon(isNextDay)}
-            {scheduleTime}
+            {scheduleDisplayTime}
             {scheduleDepartNote}
           </strike>
         </div>
@@ -78,7 +80,7 @@ function TimePoint({ scheduleData, updateData = {} }) {
     return (
       <div className="time-point" title="Scheduled Time">
         {renderNextDayIcon(isNextDay)}
-        {scheduleTime}{scheduleDepartNote}
+        {scheduleDisplayTime}{scheduleDepartNote}
       </div>
     );
   }
@@ -96,7 +98,7 @@ function TimePoint({ scheduleData, updateData = {} }) {
         <div className="small">
           <strike className="text-muted" title="Scheduled Time">
             {renderNextDayIcon(isNextDay)}
-            {scheduleTime}
+            {scheduleDisplayTime}
             {scheduleDepartNote}
           </strike>
         </div>
