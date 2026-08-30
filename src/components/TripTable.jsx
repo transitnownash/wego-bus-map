@@ -8,7 +8,7 @@ import TimePointLegend from './TimePointLegend';
 import DateSelector from './DateSelector';
 
 function TripTable({
-  routeTrips, route, tripUpdates, scheduleDate, handleDateFieldChange, isLoadingTripDate,
+  routeTrips, route, tripUpdates = [], scheduleDate, handleDateFieldChange, isLoadingTripDate = false,
 }) {
   const [hidePastTrips, setHidePastTrips] = useState(true);
   const isScheduleDateToday = !scheduleDate || scheduleDate === dayjs().format('YYYY-MM-DD');
@@ -111,11 +111,6 @@ TripTable.propTypes = {
   scheduleDate: PropTypes.any,
   handleDateFieldChange: PropTypes.any,
   isLoadingTripDate: PropTypes.bool,
-};
-
-TripTable.defaultProps = {
-  tripUpdates: [],
-  isLoadingTripDate: false,
 };
 
 export default TripTable;

@@ -8,7 +8,7 @@ test('renders DataFetchError', () => {
   vi.spyOn(console, 'error').mockImplementation(() => {});
 
   render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <DataFetchError error={{ name: 'Error', message: 'An error occurred!' }} />
     </Router>,
   );

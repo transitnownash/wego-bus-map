@@ -5,7 +5,7 @@ import RouteLegend from './RouteLegend';
 
 test('renders RouteLegend', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <RouteLegend />
     </Router>,
   );

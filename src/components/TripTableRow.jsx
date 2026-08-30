@@ -14,7 +14,7 @@ import Headsign from './Headsign';
 import './TripTableRow.scss';
 
 function TripTableRow({
-  trip, route, tripUpdate, hidePastTrips, isScheduleDateToday,
+  trip = {}, route = {}, tripUpdate = {}, hidePastTrips = false, isScheduleDateToday = true,
 }) {
   const bikes_allowed_icon = (trip.bikes_allowed !== '1')
     ? (<span className="text-danger"><FontAwesomeIcon icon={faBan} fixedWidth={true}></FontAwesomeIcon></span>)
@@ -144,14 +144,6 @@ TripTableRow.propTypes = {
   tripUpdate: PropTypes.object,
   hidePastTrips: PropTypes.bool,
   isScheduleDateToday: PropTypes.bool,
-};
-
-TripTableRow.defaultProps = {
-  trip: {},
-  route: {},
-  tripUpdate: {},
-  hidePastTrips: false,
-  isScheduleDateToday: true,
 };
 
 export default TripTableRow;

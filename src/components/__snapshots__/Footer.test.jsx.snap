@@ -13,6 +13,7 @@ exports[`renders Footer 1`] = `
       >
         <a
           class="nav-link"
+          data-discover="true"
           href="/"
         >
           Map
@@ -26,6 +27,7 @@ exports[`renders Footer 1`] = `
       >
         <a
           class="nav-link"
+          data-discover="true"
           href="/about"
         >
           About
@@ -36,6 +38,7 @@ exports[`renders Footer 1`] = `
       >
         <a
           class="nav-link"
+          data-discover="true"
           href="/routes"
         >
           Routes
@@ -46,6 +49,7 @@ exports[`renders Footer 1`] = `
       >
         <a
           class="nav-link"
+          data-discover="true"
           href="/bcycle"
         >
           BCycle

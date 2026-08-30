@@ -15,21 +15,21 @@
     "@opentelemetry/resources": "^2.10.0",
     "@opentelemetry/sdk-trace-web": "^2.10.0",
     "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/react": "^16.3.2",
+    "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.6",
     "bootstrap": "^5.3.8",
     "dayjs": "^1.11.23",
     "install": "^0.13.0",
     "leaflet": "^1.9.4",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.10.2",
-    "react-cookie": "^7.1.4",
-    "react-dom": "^18.2.0",
-    "react-leaflet": "^4.2.1",
+    "react": "^19.2.8",
+    "react-bootstrap": "^2.10.10",
+    "react-cookie": "^8.1.2",
+    "react-dom": "^19.2.8",
+    "react-leaflet": "^5.0.0",
     "react-leaflet-drift-marker": "^4.0.0",
-    "react-router-dom": "^6.30.4",
-    "sass": "^1.72.0",
-    "web-vitals": "^3.5.2"
+    "react-router-dom": "^7.18.3",
+    "sass": "^1.103.1",
+    "web-vitals": "^6.2.1"
   },
   "scripts": {
     "start": "vite",
@@ -44,18 +44,19 @@
     "prepare": "husky || true"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@testing-library/dom": "^10.4.1",
-    "@vitejs/plugin-react": "^6.1.0",
+    "@vitejs/plugin-react": "^6.1.1",
     "@vitest/coverage-v8": "^4.1.11",
     "@vitest/ui": "^4.1.11",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-react": "^7.34.1",
-    "husky": "^9.0.11",
-    "jsdom": "^29.1.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.11.0",
+    "husky": "^9.1.7",
+    "jsdom": "^30.0.1",
     "mockdate": "^3.0.5",
-    "vite": "^8.0.16",
-    "vitest": "^4.1.5"
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
   },
   "volta": {
     "node": "24.15.0"

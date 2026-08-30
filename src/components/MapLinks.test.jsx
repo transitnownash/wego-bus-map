@@ -5,7 +5,7 @@ import MapLinks from './MapLinks';
 
 test('renders MapLinks', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <MapLinks />
     </Router>,
   );

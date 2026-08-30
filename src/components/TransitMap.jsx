@@ -30,7 +30,19 @@ L.Icon.Default.mergeOptions({
 });
 
 function TransitMap({
-  routes, agencies, vehicleMarkers, routeShapes, routeStops, alerts, tripUpdates, map, bCycleStations, retailLocations, mapControls, center, zoom,
+  routes = [],
+  agencies = [],
+  vehicleMarkers = [],
+  routeShapes = [],
+  routeStops = [],
+  alerts = [],
+  tripUpdates = [],
+  map,
+  bCycleStations = [],
+  retailLocations = [],
+  mapControls = {},
+  center = [36.166512, -86.781581],
+  zoom = 12,
 }) {
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback((val) => {
@@ -229,21 +241,6 @@ TransitMap.propTypes = {
   mapControls: PropTypes.object,
   center: PropTypes.any,
   zoom: PropTypes.number,
-};
-
-TransitMap.defaultProps = {
-  routes: [],
-  agencies: [],
-  vehicleMarkers: [],
-  routeShapes: [],
-  routeStops: [],
-  alerts: [],
-  tripUpdates: [],
-  bCycleStations: [],
-  retailLocations: [],
-  mapControls: {},
-  center: [36.166512, -86.781581],
-  zoom: 12,
 };
 
 export default TransitMap;

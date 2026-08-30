@@ -26,7 +26,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <BrowserRouter>
         <RealtimeDataStatusBanner />
         <Routes>
           <Route index={true} path="/" element={<Main />} />

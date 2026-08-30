@@ -7,7 +7,7 @@ import routeFixture from '../fixtures/routes-4.json';
 
 test('renders TransitRouteHeader', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <TransitRouteHeader route={routeFixture} />
     </Router>,
   );
@@ -18,7 +18,7 @@ test('renders TransitRouteHeader', () => {
 
 test('renders TransitRouteHeader', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <TransitRouteHeader route={routeFixture} />
     </Router>,
   );
@@ -30,7 +30,7 @@ test('renders TransitRouteHeader', () => {
 
 test('renders TransitRouteHeader with icon', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <TransitRouteHeader route={routeFixture} showRouteType={true} />
     </Router>,
   );
@@ -43,7 +43,7 @@ test('renders TransitRouteHeader with icon', () => {
 test('renders TransitRouteHeader with invalid route.', () => {
   const route = {};
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <TransitRouteHeader route={route} />
     </Router>,
   );

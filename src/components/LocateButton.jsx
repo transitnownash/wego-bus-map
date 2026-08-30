@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function LocateButton({ buttonAction }) {
+function LocateButton({ buttonAction = () => { console.error('No buttonAction set!'); } }) {
   if (!navigator.geolocation) {
     return null;
   }
@@ -14,10 +14,6 @@ function LocateButton({ buttonAction }) {
 
 LocateButton.propTypes = {
   buttonAction: PropTypes.func,
-};
-
-LocateButton.defaultProps = {
-  buttonAction: () => { console.error('No buttonAction set!'); },
 };
 
 export default LocateButton;

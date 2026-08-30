@@ -7,7 +7,7 @@ import alertsFixture from '../fixtures/alerts.json';
 
 test('renders AlertButton', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <AlertButton alerts={alertsFixture} buttonAction={() => undefined} />
     </Router>,
   );
@@ -18,7 +18,7 @@ test('renders AlertButton', () => {
 
 test('does not render AlertButton when no alerts', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <AlertButton alerts={[]} buttonAction={() => undefined} />
     </Router>,
   );

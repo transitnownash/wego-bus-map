@@ -36,7 +36,7 @@ const stopTime = {
 
 test('renders StopTimeTableRow', () => {
   render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <MemoryRouter>
       <table>
         <tbody>
           <StopTimeTableRow stopTime={stopTime} />
@@ -53,7 +53,7 @@ test('shows skipped badge for stop-level skipped status', () => {
     schedule_relationship: 'Skipped',
   };
   render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <MemoryRouter>
       <table>
         <tbody>
           <StopTimeTableRow stopTime={stopTime} stopTimeUpdate={stopTimeUpdate} />

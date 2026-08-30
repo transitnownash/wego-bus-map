@@ -6,7 +6,7 @@ import stopFixture from '../fixtures/stop-10AHERNN.json';
 
 test('renders StopCode', () => {
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <StopCode stop={stopFixture} />
     </Router>,
   );

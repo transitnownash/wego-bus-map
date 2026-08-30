@@ -9,7 +9,7 @@ import routesFixture from '../fixtures/routes.json';
 describe('AlertList', () => {
   test('renders AlertList with existing fixtures', () => {
     const { container } = render(
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <Router>
         <AlertList alerts={alertsFixture} routes={routesFixture.data} />
       </Router>,
     );
@@ -46,7 +46,7 @@ describe('AlertList', () => {
     ];
 
     render(
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <Router>
         <AlertList alerts={multiEntityAlert} routes={routes} />
       </Router>,
     );
@@ -79,7 +79,7 @@ describe('AlertList', () => {
     ];
 
     render(
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <Router>
         <AlertList alerts={alert} routes={routes} />
       </Router>,
     );
@@ -111,7 +111,7 @@ describe('AlertList', () => {
     ];
 
     render(
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <Router>
         <AlertList alerts={alert} routes={routes} />
       </Router>,
     );
@@ -139,7 +139,7 @@ describe('AlertList', () => {
     ];
 
     render(
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <Router>
         <AlertList alerts={alert} routes={[]} />
       </Router>,
     );

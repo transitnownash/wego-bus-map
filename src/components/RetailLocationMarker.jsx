@@ -15,7 +15,7 @@ import retailLocationFullServiceIcon from '../resources/retail-full-service.svg'
 import retailLocationReloadOnlyIcon from '../resources/retail-reload-only.svg';
 
 function RetailLocationMarker({
-  retailLocation,
+  retailLocation = {},
 }) {
   const retailLocationMarkerOptions = {
     iconUrl: retailLocation.can_buy_media ? retailLocationFullServiceIcon : retailLocationReloadOnlyIcon,
@@ -77,10 +77,6 @@ function RetailLocationMarker({
 
 RetailLocationMarker.propTypes = {
   retailLocation: PropTypes.object.isRequired,
-};
-
-RetailLocationMarker.defaultProps = {
-  retailLocation: {},
 };
 
 export default RetailLocationMarker;

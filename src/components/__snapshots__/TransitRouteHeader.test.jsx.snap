@@ -10,6 +10,7 @@ exports[`renders TransitRouteHeader 1`] = `
       class="flex-grow-1 align-bottom"
     >
       <a
+        data-discover="true"
         href="/routes/4"
       >
         <span
@@ -36,6 +37,7 @@ exports[`renders TransitRouteHeader 2`] = `
       class="flex-grow-1 align-bottom"
     >
       <a
+        data-discover="true"
         href="/routes/4"
       >
         <span
@@ -71,6 +73,7 @@ exports[`renders TransitRouteHeader with icon 1`] = `
       class="flex-grow-1 align-bottom"
     >
       <a
+        data-discover="true"
         href="/routes/4"
       >
         <span

@@ -10,7 +10,7 @@ import busIcon from '../resources/bus.svg';
 import trainIcon from '../resources/train.svg';
 import './TransitRouteHeader.scss';
 
-function TransitRouteHeader({ route, alerts, showRouteType }) {
+function TransitRouteHeader({ route, alerts = [], showRouteType = false }) {
   const [alertModalShow, setAlertModalShow] = useState(false);
 
   if (typeof route !== 'object' || !route.route_gid) {
@@ -65,11 +65,6 @@ TransitRouteHeader.propTypes = {
   route: PropTypes.object.isRequired,
   alerts: PropTypes.array,
   showRouteType: PropTypes.bool,
-};
-
-TransitRouteHeader.defaultProps = {
-  alerts: [],
-  showRouteType: false,
 };
 
 export default TransitRouteHeader;

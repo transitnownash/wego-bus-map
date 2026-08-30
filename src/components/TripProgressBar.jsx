@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
 import { formatDistanceTraveled, isTimeLaterThanNow } from '../util';
 
-function TripProgressBar({ trip, tripUpdates }) {
+function TripProgressBar({ trip, tripUpdates = [] }) {
   // Guard against missing or empty stop_times
   if (!trip.stop_times || !Array.isArray(trip.stop_times) || trip.stop_times.length === 0) {
     return null;
@@ -73,10 +73,6 @@ function TripProgressBar({ trip, tripUpdates }) {
 TripProgressBar.propTypes = {
   trip: PropTypes.object.isRequired,
   tripUpdates: PropTypes.any,
-};
-
-TripProgressBar.defaultProps = {
-  tripUpdates: [],
 };
 
 export default TripProgressBar;

@@ -1,26 +1,26 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-
-const routerFuture = {
-  v7_startTransition: true,
-  v7_relativeSplatPath: true,
-};
+import { CookiesProvider } from 'react-cookie';
 
 export function renderWithRouter(ui, { route = '/' } = {}) {
   return render(
-    <MemoryRouter initialEntries={[route]} future={routerFuture}>
-      {ui}
-    </MemoryRouter>,
+    <CookiesProvider>
+      <MemoryRouter initialEntries={[route]}>
+        {ui}
+      </MemoryRouter>
+    </CookiesProvider>,
   );
 }
 
 export function renderWithRoute(ui, { route, path }) {
   return render(
-    <MemoryRouter initialEntries={[route]} future={routerFuture}>
-      <Routes>
-        <Route path={path} element={ui} />
-      </Routes>
-    </MemoryRouter>,
+    <CookiesProvider>
+      <MemoryRouter initialEntries={[route]}>
+        <Routes>
+          <Route path={path} element={ui} />
+        </Routes>
+      </MemoryRouter>
+    </CookiesProvider>,
   );
 }

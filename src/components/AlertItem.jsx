@@ -6,7 +6,14 @@ import './AlertItem.scss';
 import { Link } from 'react-router-dom';
 import StopCode from './StopCode.jsx';
 
-function AlertItem({ alert, route }) {
+function AlertItem({
+  alert,
+  route = {
+    route_color: '#999',
+    route_long_name: 'Route Unavailable',
+    route_short_name: '00',
+  },
+}) {
   const alertStyle = {
     borderColor: (route.route_color) ? `#${route.route_color}` : '#eee',
     backgroundColor: (route.route_color) ? `#${route.route_color}` : '#eee',
@@ -61,14 +68,6 @@ function AlertItem({ alert, route }) {
 AlertItem.propTypes = {
   alert: PropTypes.object.isRequired,
   route: PropTypes.object,
-};
-
-AlertItem.defaultProps = {
-  route: {
-    route_color: '#999',
-    route_long_name: 'Route Unavailable',
-    route_short_name: '00',
-  },
 };
 
 export default AlertItem;

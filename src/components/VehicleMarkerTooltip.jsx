@@ -9,7 +9,7 @@ import L from 'leaflet';
 import { renderBearing, renderSpeed, renderUnixTimestamp } from '../util';
 import TransitRouteHeader from './TransitRouteHeader';
 
-function VehicleMarkerTooltip({ vehiclePositionData, route, alerts }) {
+function VehicleMarkerTooltip({ vehiclePositionData, route, alerts = [] }) {
   if (L.Browser.mobile) {
     return;
   }
@@ -59,10 +59,6 @@ VehicleMarkerTooltip.propTypes = {
   vehiclePositionData: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   alerts: PropTypes.array,
-};
-
-VehicleMarkerTooltip.defaultProps = {
-  alerts: [],
 };
 
 export default VehicleMarkerTooltip;

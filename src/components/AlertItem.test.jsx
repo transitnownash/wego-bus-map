@@ -9,7 +9,7 @@ import routesFixture from '../fixtures/routes.json';
 test('renders AlertItem', () => {
   const route = routesFixture.data.find((i) => i.route_gid === alertsFixture[0].alert.informed_entity[0].route_id);
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <AlertItem alert={alertsFixture[0].alert} route={route} />
     </Router>,
   );
@@ -21,7 +21,7 @@ test('renders AlertItem', () => {
 test('renders AlertItem with informed stops', () => {
   const route = routesFixture.data.find((i) => i.route_gid === alertsFixture[3].alert.informed_entity[0].route_id);
   const { container } = render(
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router>
       <AlertItem alert={alertsFixture[3].alert} route={route} />
     </Router>,
   );

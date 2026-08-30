@@ -17,7 +17,7 @@ import { getJSON } from '../util';
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 
 function VehicleMarker({
-  vehiclePositionData, route, agency, tripUpdate, shapeSetter, stopSetter, alerts,
+  vehiclePositionData, route, agency, tripUpdate = {}, shapeSetter, stopSetter, alerts = [],
 }) {
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
@@ -90,11 +90,6 @@ VehicleMarker.propTypes = {
   stopSetter: PropTypes.func.isRequired,
   tripUpdate: PropTypes.object,
   alerts: PropTypes.array,
-};
-
-VehicleMarker.defaultProps = {
-  tripUpdate: {},
-  alerts: [],
 };
 
 export default VehicleMarker;

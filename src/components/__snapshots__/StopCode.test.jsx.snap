@@ -6,6 +6,7 @@ exports[`renders StopCode 1`] = `
     class="stop-code badge bg-white text-black border border-secondary"
   >
     <a
+      data-discover="true"
       href="/stops/10AHERNN"
     >
       10AHERNN

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import AlertItem from './AlertItem';
 import dayjs from 'dayjs';
 
-function AlertList({ alerts, routes, showHorizontal }) {
+function AlertList({ alerts = [], routes = [], showHorizontal = false }) {
   const [hideFuture, setHideFuture] = useState(false);
 
   const handleHideFutureAlertsOnChange = (event) => {
@@ -65,12 +65,6 @@ AlertList.propTypes = {
   alerts: PropTypes.array.isRequired,
   routes: PropTypes.array,
   showHorizontal: PropTypes.bool
-};
-
-AlertList.defaultProps = {
-  alerts: [],
-  routes: [],
-  showHorizontal: false,
 };
 
 export default AlertList;

@@ -5,7 +5,7 @@ import { faRoute, faInfoCircle, faBicycle } from '@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../resources/logo.svg';
 
-function TitleBar({ hide }) {
+function TitleBar({ hide = false }) {
   if (hide) {
     return;
   }
@@ -27,10 +27,6 @@ function TitleBar({ hide }) {
 
 TitleBar.propTypes = {
   hide: PropTypes.bool,
-};
-
-TitleBar.defaultProps = {
-  hide: false,
 };
 
 export default TitleBar;

@@ -43,8 +43,4 @@ RouteLegend.propTypes = {
   selectedRouteTypes: PropTypes.array,
 };
 
-RouteLegend.defaultProps = {
-  selectedRouteTypes: [],
-};
-
 export default RouteLegend;

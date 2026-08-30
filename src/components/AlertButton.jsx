@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function AlertButton({ alerts, buttonAction }) {
+function AlertButton({ alerts = [], buttonAction }) {
   if (alerts.length > 0) {
     return (
       <button className="btn btn-sm btn-primary bg-dark" onClick={buttonAction}>
@@ -17,10 +17,6 @@ function AlertButton({ alerts, buttonAction }) {
 AlertButton.propTypes = {
   alerts: PropTypes.array.isRequired,
   buttonAction: PropTypes.func.isRequired,
-};
-
-AlertButton.defaultProps = {
-  alerts: [],
 };
 
 export default AlertButton;

@@ -9,7 +9,7 @@ import TimePoint from './TimePoint';
 import { formatDistanceTraveled, getStopScheduleStatus } from '../util';
 import StopCode from './StopCode';
 
-function StopTimeTableRow({ stopTime, stopTimeUpdate }) {
+function StopTimeTableRow({ stopTime, stopTimeUpdate = {} }) {
   const stopStatus = getStopScheduleStatus(stopTimeUpdate);
 
   return (
@@ -57,10 +57,6 @@ function StopTimeTableRow({ stopTime, stopTimeUpdate }) {
 StopTimeTableRow.propTypes = {
   stopTime: PropTypes.object.isRequired,
   stopTimeUpdate: PropTypes.any,
-};
-
-StopTimeTableRow.defaultProps = {
-  stopTimeUpdate: {},
 };
 
 export default StopTimeTableRow;

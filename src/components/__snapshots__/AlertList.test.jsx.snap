@@ -18,6 +18,7 @@ exports[`AlertList > renders AlertList with existing fixtures 1`] = `
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/3"
               >
                 3
@@ -65,6 +66,7 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/CXIWTBRG"
                   >
                     CXIWTBRG
@@ -103,6 +105,7 @@ Stops between WHITE BRIDGE PIKE & BURGESS AVE NB and WHITE BRIDGE PIKE & CHARLOT
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/14"
               >
                 14
@@ -147,6 +150,7 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/WHIDICSN"
                   >
                     WHIDICSN
@@ -185,6 +189,7 @@ Stops between BRICK CHURCH PIKE & FERN AVE NB and N DICKERSON PIKE & CLEVELAND S
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/19"
               >
                 19
@@ -231,6 +236,7 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/17AJACNN"
                   >
                     17AJACNN
@@ -277,6 +283,7 @@ Stops between HERMAN ST & 17TH AVE N WB and ALBION ST & DR D B TODD JR BLVD WB w
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/19"
               >
                 19
@@ -322,6 +329,7 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/JAC17AEN"
                   >
                     JAC17AEN
@@ -368,6 +376,7 @@ Stops between ALBION ST & DR DB TODD BLVD EB and HERMAN ST & 16TH AVE N EB will 
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/22"
               >
                 22
@@ -413,6 +422,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/FAICLAEN"
                   >
                     FAICLAEN
@@ -426,6 +436,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/CLAFAISF"
                   >
                     CLAFAISF
@@ -439,6 +450,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/CLAWHASN"
                   >
                     CLAWHASN
@@ -475,6 +487,7 @@ Stops between TIMOTHY DR & FAIRVIEW DR SB and CLARKSVILLE PIKE & ABERNATHY RD SB
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/75"
               >
                 75
@@ -517,6 +530,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/20ABRONF"
                   >
                     20ABRONF
@@ -530,6 +544,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/20AWESNN"
                   >
                     20AWESNN
@@ -543,6 +558,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/21AGRANN"
                   >
                     21AGRANN
@@ -556,6 +572,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
                   class="stop-code badge bg-white text-black border border-secondary"
                 >
                   <a
+                    data-discover="true"
                     href="/stops/20ACHUNN"
                   >
                     20ACHUNN
@@ -592,6 +609,7 @@ Stops between 21ST AVE S & GRAND AVE NB and 20TH AVE N & CHURCH ST NB will not b
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/79"
               >
                 79
@@ -651,6 +669,7 @@ R-Dickerson to regular route.
           >
             <strong>
               <a
+                data-discover="true"
                 href="/routes/79"
               >
                 79

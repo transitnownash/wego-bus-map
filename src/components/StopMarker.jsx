@@ -18,7 +18,7 @@ import './StopMarker.scss';
 import StopCode from './StopCode';
 
 function StopMarker({
-  stop, stopTime, stopUpdate, stopAlerts,
+  stop, stopTime = {}, stopUpdate = {}, stopAlerts = [],
 }) {
   const stopMarkerIconOptions = {
     iconUrl: stopIconImage,
@@ -107,12 +107,6 @@ StopMarker.propTypes = {
   stopTime: PropTypes.object,
   stopUpdate: PropTypes.object,
   stopAlerts: PropTypes.array,
-};
-
-StopMarker.defaultProps = {
-  stopTime: {},
-  stopUpdate: {},
-  stopAlerts: [],
 };
 
 export default StopMarker;

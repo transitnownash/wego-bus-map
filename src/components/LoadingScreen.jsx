@@ -5,7 +5,7 @@ import './LoadingScreen.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-function LoadingScreen({ hideTitleBar }) {
+function LoadingScreen({ hideTitleBar = false }) {
   return (
     <div>
       <TitleBar hide={hideTitleBar}></TitleBar>
@@ -20,10 +20,6 @@ function LoadingScreen({ hideTitleBar }) {
 
 LoadingScreen.propTypes = {
   hideTitleBar: PropTypes.bool,
-};
-
-LoadingScreen.defaultProps = {
-  hideTitleBar: false,
 };
 
 export default LoadingScreen;

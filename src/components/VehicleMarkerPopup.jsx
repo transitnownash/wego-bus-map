@@ -18,7 +18,7 @@ import TripProgressBar from './TripProgressBar.jsx';
 import Headsign from './Headsign.jsx';
 
 function VehicleMarkerPopup({
-  vehiclePositionData, trip, route, agency, tripUpdate, alerts,
+  vehiclePositionData, trip, route, agency, tripUpdate = {}, alerts = [],
 }) {
   let isTripTabActive = false;
 
@@ -138,11 +138,6 @@ VehicleMarkerPopup.propTypes = {
   agency: PropTypes.object.isRequired,
   tripUpdate: PropTypes.object,
   alerts: PropTypes.array,
-};
-
-VehicleMarkerPopup.defaultProps = {
-  tripUpdate: {},
-  alerts: [],
 };
 
 export default VehicleMarkerPopup;

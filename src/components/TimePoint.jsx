@@ -6,7 +6,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { formatStopTimeUpdate } from '../util';
 import './TimePoint.scss';
 
-function TimePoint({ scheduleData, updateData }) {
+function TimePoint({ scheduleData, updateData = {} }) {
   function formatTripTime(time) {
     const date = new Date();
     const [hour, minute, second] = time.split(':');
@@ -113,10 +113,6 @@ function TimePoint({ scheduleData, updateData }) {
 TimePoint.propTypes = {
   scheduleData: PropTypes.object.isRequired,
   updateData: PropTypes.object,
-};
-
-TimePoint.defaultProps = {
-  updateData: {},
 };
 
 export default TimePoint;
