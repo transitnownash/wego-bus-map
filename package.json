@@ -59,6 +59,11 @@
     "vitest": "^4.1.11"
   },
   "volta": {
-    "node": "24.15.0"
+    "node": "24.20.0"
+  },
+  "allowScripts": {
+    "protobufjs@7.6.5": true,
+    "fsevents@2.3.3": true,
+    "@parcel/watcher@2.6.0": true
   }
 }

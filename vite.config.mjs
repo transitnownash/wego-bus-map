@@ -8,6 +8,14 @@ export default defineConfig({
     outDir: 'build',
     sourcemap: true,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+        silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function'],
+      },
+    },
+  },
   server: {
     port: Number(process.env.PORT) || 3001,
     open: true,
