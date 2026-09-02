@@ -21,6 +21,7 @@ import TimePointLegend from '../components/TimePointLegend';
 import StopCode from '../components/StopCode';
 import DateSelector from '../components/DateSelector';
 import Headsign from '../components/Headsign';
+import NextDeparturesTable from '../components/NextDeparturesTable';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
@@ -230,6 +231,7 @@ function Stops() {
           <StopAccessibilityInformation stop={stop}></StopAccessibilityInformation>
         </div>
         <div className="text-center my-2"><a href={`https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=${stop.stop_lat}%2C${stop.stop_lon}`} className="btn btn-secondary btn-sm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faDirections} fixedWidth={true} /> Directions</a></div>
+        <NextDeparturesTable stopCode={params.stop_code} stopGid={stop.stop_gid} tripUpdates={tripUpdates} vehiclePositions={vehiclePositions}></NextDeparturesTable>
         {stop.child_stops.length > 0 && (
           <div className="card mb-3 small">
             <div className="card-header"><strong>Station Stops</strong></div>
