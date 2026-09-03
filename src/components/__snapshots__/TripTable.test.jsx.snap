@@ -2583,7 +2583,7 @@ exports[`renders TripTable 1`] = `
         class="list-inline-item mb-2"
       >
         <strong
-          class="text-primary px-1 border"
+          class="text-dark px-1 border"
         >
           0:00 AM
         </strong>
@@ -6605,7 +6605,7 @@ exports[`renders TripTable with past trips 1`] = `
         class="list-inline-item mb-2"
       >
         <strong
-          class="text-primary px-1 border"
+          class="text-dark px-1 border"
         >
           0:00 AM
         </strong>
