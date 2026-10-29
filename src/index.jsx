@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './otel';
+import './faro';
 
 import './lib/color-mode';
 
