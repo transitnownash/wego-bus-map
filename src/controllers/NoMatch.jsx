@@ -19,7 +19,7 @@ function NoMatch() {
         span.setStatus({ code: 2, message: '404 Not Found' });
         span.end();
       });
-    } catch (e) {
+    } catch (_e) {
       // fail silently if telemetry is not available
     }
   }, []);

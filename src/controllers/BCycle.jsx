@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import L from 'leaflet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,6 +10,7 @@ import { getJSON, renderUnixTimestamp } from '../util';
 import DataFetchError from '../components/DataFetchError';
 import TitleBar from '../components/TitleBar';
 import Footer from '../components/Footer';
+import usePolling from '../hooks/usePolling';
 
 const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville';
 const REFRESH_GBFS_TTL = 60 * 1000;
@@ -36,21 +37,21 @@ function BCycle() {
       .then((s) => setBCycleStationStatus(s.data.stations))
       .then(() => setBCycleStationsStatusLoaded(true))
       .catch((error) => setDataFetchError(error));
+  }, []);
 
-    // Refresh BCycle station status at a set interval
-    const refreshBCycleStatus = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GBFS_BASE_URL}/station_status.json`)
-        .then((s) => setBCycleStationStatus(s.data.stations));
-    }, REFRESH_GBFS_TTL);
+  usePolling(() => getJSON(`${GBFS_BASE_URL}/station_status.json`)
+    .then((s) => setBCycleStationStatus(s.data.stations)), REFRESH_GBFS_TTL, isUIReady);
 
-    // Run on unmount
-    return () => {
-      clearInterval(refreshBCycleStatus);
-    };
-  }, [isUIReady]);
+  // Combine BCycle data into one hash, dropping stations with no status
+  const stationsWithStatus = useMemo(() => {
+    if (bCycleStations.length === 0 || bCycleStationsStatus.length === 0) {
+      return bCycleStations;
+    }
+    const statusById = new Map(bCycleStationsStatus.map((s) => [s.station_id, s]));
+    return bCycleStations
+      .map((station) => ({ ...station, status: statusById.get(station.station_id) }))
+      .filter((station) => station.status);
+  }, [bCycleStations, bCycleStationsStatus]);
 
   if (dataFetchError) {
     return (<DataFetchError error={dataFetchError}></DataFetchError>);
@@ -60,39 +61,28 @@ function BCycle() {
     return (<LoadingScreen />);
   }
 
-  // Combine BCycle data into one hash
-  if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
-    bCycleStations.forEach((station, index) => {
-      bCycleStations[index].status = bCycleStationsStatus.find((s) => station.station_id === s.station_id);
-      // Remove if no status available
-      if (!bCycleStations[index].status) {
-        delete bCycleStations[index];
-      }
-    });
-  }
-
   // Calculate system stats
   const initialValue = 0;
-  const totalStations = bCycleStations.reduce(
+  const totalStations = stationsWithStatus.reduce(
     (previousValue, currentValue) => previousValue + (currentValue.status.is_installed),
     initialValue,
   );
-  const bikesAvailable = bCycleStations.reduce(
+  const bikesAvailable = stationsWithStatus.reduce(
     (previousValue, currentValue) => previousValue + (currentValue.status.is_renting ? currentValue.status.num_bikes_available : 0),
     initialValue,
   );
-  const docksAvailable = bCycleStations.reduce(
+  const docksAvailable = stationsWithStatus.reduce(
     (previousValue, currentValue) => previousValue + (currentValue.status.is_returning ? currentValue.status.num_docks_available : 0),
     initialValue,
   );
-  const offlineStations = bCycleStations.reduce(
+  const offlineStations = stationsWithStatus.reduce(
     (previousValue, currentValue) => previousValue + (currentValue.status.is_renting == 0 || currentValue.status.is_returning == 0 ? 1 : 0),
     initialValue,
   );
 
   // Set the map to center on the available stations
   const allPoints = [];
-  bCycleStations.map((s) => allPoints.push([s.lat, s.lon]));
+  stationsWithStatus.map((s) => allPoints.push([s.lat, s.lon]));
   const getStationBounds = L.latLngBounds(allPoints);
   const center = getStationBounds.getCenter();
 
@@ -105,7 +95,7 @@ function BCycle() {
     <div>
       <TitleBar />
       <div className="container">
-        <TransitMap map={map} bCycleStations={bCycleStations} center={center}></TransitMap>
+        <TransitMap map={map} stationsWithStatus={stationsWithStatus} center={center}></TransitMap>
         <div className="row my-5">
           <div className="col-sm-3 text-center">
             <div>
@@ -133,7 +123,7 @@ function BCycle() {
           </div>
         </div>
         <div className="row">
-          {bCycleStations.map((station) => {
+          {stationsWithStatus.map((station) => {
             // Ignore if stations doesn't have status, or if it isn't "installed"
             if (typeof station.status === 'undefined' || !station.status.is_installed) {
               return;

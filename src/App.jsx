@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './controllers/Main';
-import About from './controllers/About';
-import TransitRoutes from './controllers/TransitRoutes';
-import TransitRoute from './controllers/TransitRoute';
-import Trip from './controllers/Trip';
-import Stops from './controllers/Stops';
-import Stop from './controllers/Stop';
-import NoMatch from './controllers/NoMatch';
 import ErrorBoundary from './components/ErrorBoundary';
-import BCycle from './controllers/BCycle';
+import LoadingScreen from './components/LoadingScreen';
 import RealtimeDataStatusBanner from './components/RealtimeDataStatusBanner';
 import './resources/bootstrap-with-mixins.scss';
 import './App.scss';
+
+const Main = lazy(() => import('./controllers/Main'));
+const About = lazy(() => import('./controllers/About'));
+const TransitRoutes = lazy(() => import('./controllers/TransitRoutes'));
+const TransitRoute = lazy(() => import('./controllers/TransitRoute'));
+const Trip = lazy(() => import('./controllers/Trip'));
+const Stops = lazy(() => import('./controllers/Stops'));
+const Stop = lazy(() => import('./controllers/Stop'));
+const NoMatch = lazy(() => import('./controllers/NoMatch'));
+const BCycle = lazy(() => import('./controllers/BCycle'));
 
 function App() {
   React.useEffect(() => {
@@ -28,17 +30,19 @@ function App() {
     <ErrorBoundary>
       <BrowserRouter>
         <RealtimeDataStatusBanner />
-        <Routes>
-          <Route index={true} path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/routes" element={<TransitRoutes />} />
-          <Route path="/routes/:route_id" element={<TransitRoute />} />
-          <Route path="/trips/:trip_id" element={<Trip />} />
-          <Route path="/stops" element={<Stops />} />
-          <Route path="/stops/:stop_code" element={<Stop />} />
-          <Route path="/bcycle" element={<BCycle />} />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            <Route index={true} path="/" element={<Main />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/routes" element={<TransitRoutes />} />
+            <Route path="/routes/:route_id" element={<TransitRoute />} />
+            <Route path="/trips/:trip_id" element={<Trip />} />
+            <Route path="/stops" element={<Stops />} />
+            <Route path="/stops/:stop_code" element={<Stop />} />
+            <Route path="/bcycle" element={<BCycle />} />
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </ErrorBoundary>
   );

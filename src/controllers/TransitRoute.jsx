@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import L from 'leaflet';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -13,11 +13,19 @@ import { getJSON, formatShapePoints } from '../util';
 import AlertList from '../components/AlertList';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
+import usePolling from '../hooks/usePolling';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 10 * 1000;
 const REFRESH_ALERTS_TTL = 120 * 1000;
 const REFRESH_TRIP_UPDATES_TTL = 120 * 1000;
+
+// Leave shapes on map when clicked
+const KEEP_SHAPES_ON_CLICK = {
+  click: (_e) => {
+    // noop
+  },
+};
 
 function TransitRoute() {
   const [route, setRoute] = useState({});
@@ -90,40 +98,36 @@ function TransitRoute() {
       .then((data) => setVehicleMarkers(data))
       .then(() => setVehiclePositionLoaded(true))
       .catch((error) => setDataFetchError(error));
+  }, [params.route_id]);
 
-    // Refresh position data at set interval
-    const refreshPositionsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
-        .then((data) => setVehicleMarkers(data));
-    }, REFRESH_VEHICLE_POSITIONS_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
+    .then((data) => setVehicleMarkers(data)), REFRESH_VEHICLE_POSITIONS_TTL, isUIReady);
 
-    // Refresh alerts data at set interval
-    const refreshAlertsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
-        .then((data) => setAlerts(data));
-    }, REFRESH_ALERTS_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
+    .then((data) => setAlerts(data)), REFRESH_ALERTS_TTL, isUIReady);
 
-    const refreshTripUpdatesInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
-        .then((data) => setTripUpdates(data));
-    }, REFRESH_TRIP_UPDATES_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
+    .then((data) => setTripUpdates(data)), REFRESH_TRIP_UPDATES_TTL, isUIReady);
 
-    // Run on unmount
-    return () => {
-      clearInterval(refreshPositionsInterval);
-      clearInterval(refreshAlertsInterval);
-      clearInterval(refreshTripUpdatesInterval);
-    };
-  }, [params.route_id, isUIReady]);
+  // Add route color to shapes
+  const coloredRouteShapes = useMemo(() => routeShapes.map((s) => ({
+    ...s,
+    route_color: route.route_color,
+    shapeEventHandlers: KEEP_SHAPES_ON_CLICK,
+  })), [routeShapes, route.route_color]);
+
+  // Bounds of every point on the route, for centering the map
+  const routeBounds = useMemo(() => {
+    const allPoints = routeShapes.flatMap((item) => item.points);
+    return allPoints.length > 0 ? L.latLngBounds(formatShapePoints(allPoints)) : null;
+  }, [routeShapes]);
+
+  useEffect(() => {
+    if (map.current && routeBounds && !isMapCentered) {
+      map.current.fitBounds(routeBounds, { padding: [25, 25] });
+      setIsMapCentered(true);
+    }
+  }, [routeBounds, isMapCentered]);
 
   if (dataFetchError) {
     return (<DataFetchError error={dataFetchError}></DataFetchError>);
@@ -182,37 +186,14 @@ function TransitRoute() {
   const mapStops = [];
   routeStops.map((s) => mapStops.push({ id: s.id, stop: s }));
 
-  // Leave shapes on map when clicked
-  const shapeEventHandlers = {
-    click: (_e) => {
-      // noop
-    },
-  };
-
-  // Add route color to shapes
-  routeShapes.map((s) => {
-    s.route_color = route.route_color;
-    s.shapeEventHandlers = shapeEventHandlers;
-  });
-
-  // Set the map to center on the trip route
-  const allPoints = [];
-  routeShapes.map((item) => {
-    item.points.map((point) => allPoints.push(point));
-  });
-  const getPolyLineBounds = L.latLngBounds(formatShapePoints(allPoints));
-  const center = getPolyLineBounds.getCenter();
-  if (map.current && isMapCentered == false) {
-    map.current.fitBounds(getPolyLineBounds, { padding: [25, 25] });
-    setIsMapCentered(true);
-  }
+  const center = routeBounds.getCenter();
 
   return (
     <div>
       <TitleBar />
       <div className="container transit-route">
         <TransitRouteHeader route={route} alerts={routeAlerts} showRouteType={true} />
-        <TransitMap vehicleMarkers={filteredVehiclePositions} routes={[route]} agencies={agencies} routeShapes={routeShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
+        <TransitMap vehicleMarkers={filteredVehiclePositions} routes={[route]} agencies={agencies} routeShapes={coloredRouteShapes} routeStops={mapStops} alerts={routeAlerts} tripUpdates={tripUpdates} map={map} center={[center.lat, center.lng]}></TransitMap>
         <AlertList alerts={routeAlerts} routes={[route]} showHorizontal></AlertList>
         <TripTable route={route} routeTrips={routeTrips} tripUpdates={tripUpdates} scheduleDate={scheduleDate} handleDateFieldChange={handleDateFieldChange} isLoadingTripDate={isLoadingTripDate}></TripTable>
       </div>

@@ -26,6 +26,7 @@ import DataFetchError from '../components/DataFetchError';
 import TimePointLegend from '../components/TimePointLegend';
 import TimePoint from '../components/TimePoint';
 import Headsign from '../components/Headsign';
+import usePolling from '../hooks/usePolling';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7 * 1000;
@@ -101,30 +102,13 @@ function Trip() {
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdateLoaded(true))
       .catch((error) => setDataFetchError(error));
+  }, [params.trip_id, pathname]);
 
-    // Refresh position data at set interval
-    const refreshPositionsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
-        .then((data) => setVehicleMarkers(data));
-    }, REFRESH_VEHICLE_POSITIONS_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
+    .then((data) => setVehicleMarkers(data)), REFRESH_VEHICLE_POSITIONS_TTL, isUIReady);
 
-    const refreshTripUpdatesInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
-        .then((data) => setTripUpdates(data));
-    }, REFRESH_TRIP_UPDATES_TTL);
-
-    // Run on unmount
-    return () => {
-      clearInterval(refreshPositionsInterval);
-      clearInterval(refreshTripUpdatesInterval);
-    };
-  }, [params.trip_id, pathname, isUIReady]);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
+    .then((data) => setTripUpdates(data)), REFRESH_TRIP_UPDATES_TTL, isUIReady);
 
   if (dataFetchError) {
     return (<DataFetchError error={dataFetchError}></DataFetchError>);

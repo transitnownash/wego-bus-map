@@ -16,6 +16,7 @@ import StopAccessibilityInformation from './StopAccessibilityInformation';
 import { isStopTimeUpdateLaterThanNow } from '../util';
 import './StopMarker.scss';
 import StopCode from './StopCode';
+import cachedIcon from '../lib/iconCache';
 
 function StopMarker({
   stop, stopTime = {}, stopUpdate = {}, stopAlerts = [],
@@ -37,8 +38,7 @@ function StopMarker({
     stopMarkerIconOptions.iconSize = [24, 24];
   }
 
-  const stopMarkerIcon = L.Icon.extend({ options: stopMarkerIconOptions });
-  const icon = new stopMarkerIcon();
+  const icon = cachedIcon(stopMarkerIconOptions);
 
   const content = (
     <div style={{ minWidth: '300px', maxWidth: '500px', overflow: 'hidden' }}>

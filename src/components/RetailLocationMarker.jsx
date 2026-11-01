@@ -13,6 +13,7 @@ import {
 } from 'react-leaflet';
 import retailLocationFullServiceIcon from '../resources/retail-full-service.svg';
 import retailLocationReloadOnlyIcon from '../resources/retail-reload-only.svg';
+import cachedIcon from '../lib/iconCache';
 
 function RetailLocationMarker({
   retailLocation = {},
@@ -25,8 +26,7 @@ function RetailLocationMarker({
 
   const headerColor = retailLocation.can_buy_media ? 'purple' : '#444444';
 
-  const retailLocationMarkerIcon = L.Icon.extend({ options: retailLocationMarkerOptions });
-  const icon = new retailLocationMarkerIcon();
+  const icon = cachedIcon(retailLocationMarkerOptions);
 
   const content = (
     <div style={{ minWidth: '300px', maxWidth: '500px', overflow: 'hidden' }}>

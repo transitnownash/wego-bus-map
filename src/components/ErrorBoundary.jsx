@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component {
         span.setStatus({ code: 2, message: error.message }); // 2 = ERROR
         span.end();
       });
-    } catch (e) {
+    } catch (_e) {
       // fail silently if telemetry is not available
     }
   }

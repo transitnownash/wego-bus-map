@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import DataFetchError from '../components/DataFetchError';
 import TransitRouteHeader from '../components/TransitRouteHeader';
 import RouteLegend from '../components/RouteLegend';
+import usePolling from '../hooks/usePolling';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const REFRESH_ALERTS_TTL = 60 * 1000;
@@ -30,19 +31,10 @@ function TransitRoutes() {
       .then((data) => setAlerts(data))
       .then(() => setAlertLoaded(true))
       .catch((error) => setDataFetchError(error));
+  }, []);
 
-    const refreshAlertsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
-        .then((data) => setAlerts(data));
-    }, REFRESH_ALERTS_TTL);
-
-    return () => {
-      clearInterval(refreshAlertsInterval);
-    };
-  }, [isUIReady]);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
+    .then((data) => setAlerts(data)), REFRESH_ALERTS_TTL, isUIReady);
 
   if (!isUIReady) {
     return (<LoadingScreen />);
@@ -52,7 +44,7 @@ function TransitRoutes() {
     return (<DataFetchError error={dataFetchError} />);
   }
 
-  const sortedRoutes = routes.sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10));
+  const sortedRoutes = [...routes].sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10));
 
   return (
     <div>

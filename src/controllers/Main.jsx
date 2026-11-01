@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import TransitMap from '../components/TransitMap';
 import MapLinks from '../components/MapLinks';
 import LocateButton from '../components/LocateButton';
@@ -7,6 +7,7 @@ import AlertModal from '../components/AlertModal';
 import AlertButton from '../components/AlertButton';
 import { getJSON } from '../util';
 import DataFetchError from '../components/DataFetchError';
+import usePolling from '../hooks/usePolling';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const GBFS_BASE_URL = 'https://gbfs.bcycle.com/bcycle_nashville';
@@ -116,53 +117,33 @@ function Main() {
       .then((r) => normalizeRetailLocations(r))
       .then((r) => setRetailLocationsData(r))
       .catch((error) => setDataFetchError(error));
+  }, []);
 
-    // Refresh position data at set interval
-    const refreshPositionsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
-        .then((data) => setVehicleMarkers(data));
-    }, REFRESH_VEHICLE_POSITIONS_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
+    .then((data) => setVehicleMarkers(data)), REFRESH_VEHICLE_POSITIONS_TTL, isUIReady);
 
-    // Refresh alerts at a set interval
-    const refreshAlertsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
-        .then((data) => setAlerts(data))
-        .catch((error) => setDataFetchError(error));
-    }, REFRESH_ALERTS_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
+    .then((data) => setAlerts(data))
+    .catch((error) => setDataFetchError(error)), REFRESH_ALERTS_TTL, isUIReady);
 
-    // Refresh trip updates at a set interval
-    const refreshTripUpdatesInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
-        .then((data) => setTripUpdates(data))
-        .catch((error) => setDataFetchError(error));
-    }, REFRESH_TRIP_UPDATES_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
+    .then((data) => setTripUpdates(data))
+    .catch((error) => setDataFetchError(error)), REFRESH_TRIP_UPDATES_TTL, isUIReady);
 
-    // Refresh BCycle station status at a set interval
-    const refreshBCycleStatus = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GBFS_BASE_URL}/station_status.json`)
-        .then((s) => setBCycleStationStatusData(s.data.stations));
-    }, REFRESH_GBFS_TTL);
+  usePolling(() => getJSON(`${GBFS_BASE_URL}/station_status.json`)
+    .then((s) => setBCycleStationStatusData(s.data.stations)), REFRESH_GBFS_TTL, isUIReady);
 
-    // Run on unmount
-    return () => {
-      clearInterval(refreshPositionsInterval);
-      clearInterval(refreshAlertsInterval);
-      clearInterval(refreshTripUpdatesInterval);
-      clearInterval(refreshBCycleStatus);
-    };
-  }, [isUIReady]);
+  // Remove invalid alerts (no informed entity)
+  const allAlerts = useMemo(() => alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined'), [alerts]);
+
+  // Combine BCycle data into one hash
+  const bCycleStationsWithStatus = useMemo(() => {
+    if (bCycleStations.length === 0 || bCycleStationsStatus.length === 0) {
+      return bCycleStations;
+    }
+    const statusById = new Map(bCycleStationsStatus.map((s) => [s.station_id, s]));
+    return bCycleStations.map((station) => ({ ...station, status: statusById.get(station.station_id) }));
+  }, [bCycleStations, bCycleStationsStatus]);
 
   if (dataFetchError) {
     return (<DataFetchError error={dataFetchError}></DataFetchError>);
@@ -173,16 +154,6 @@ function Main() {
       map.current.locate();
     }
   };
-
-  // Remove invalid alerts (no informed entity)
-  const allAlerts = alerts.filter((a) => typeof a.alert.informed_entity !== 'undefined');
-
-  // Combine BCycle data into one hash
-  if (bCycleStations.length > 0 && bCycleStationsStatus.length > 0) {
-    bCycleStations.forEach((station, index) => {
-      bCycleStations[index].status = bCycleStationsStatus.find((s) => station.station_id === s.station_id);
-    });
-  }
 
   const mapControls = {
     topRight: (
@@ -203,7 +174,7 @@ function Main() {
       <LoadingScreen hideTitleBar={true}></LoadingScreen>
     ) : (
       <div className="main">
-        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={allAlerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStations} retailLocations={retailLocations} mapControls={mapControls}></TransitMap>
+        <TransitMap routes={routes} agencies={agencies} vehicleMarkers={vehicleMarkers} shapes={[]} alerts={allAlerts} tripUpdates={tripUpdates} map={map} bCycleStations={bCycleStationsWithStatus} retailLocations={retailLocations} mapControls={mapControls}></TransitMap>
         <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
       </div>
     )
