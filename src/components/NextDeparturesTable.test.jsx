@@ -1,14 +1,20 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { afterEach, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, expect, test, vi } from 'vitest';
 import NextDeparturesTable from './NextDeparturesTable';
 
+// Pin the clock to midday so offsets from now never cross midnight
+beforeEach(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(new Date(2026, 0, 15, 12, 0, 0));
+});
+
 afterEach(() => {
+  vi.useRealTimers();
   vi.restoreAllMocks();
 });
 
-// Build a HH:MM:SS time offset from now, so ETA text stays "in the future" regardless of when the test runs
 function timeMinutesFromNow(minutes) {
   const date = new Date(Date.now() + minutes * 60000);
   return date.toTimeString().slice(0, 8);
@@ -55,7 +61,7 @@ function buildFixture() {
 
 // First trip is running 5 minutes late per the realtime trip_updates feed;
 // second trip has no matching stop_time_update, so it should show no delay status.
-const tripUpdatesFixture = [
+const buildTripUpdatesFixture = () => [
   {
     trip_update: {
       trip: { trip_id: '385815' },
@@ -84,7 +90,7 @@ test('renders next departures table', async () => {
       <NextDeparturesTable
         stopCode="10AHERNN"
         stopGid="10AHERNN"
-        tripUpdates={tripUpdatesFixture}
+        tripUpdates={buildTripUpdatesFixture()}
         vehiclePositions={vehiclePositionsFixture}
       />
     </MemoryRouter>,
