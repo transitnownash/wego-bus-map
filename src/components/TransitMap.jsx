@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, {
+  useState, useCallback, useEffect, useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
 import {
   MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup, GeoJSON,
@@ -8,7 +10,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
-import VehicleMarker from './VehicleMarker';
+import VehicleMarker, { isVehiclePositionStale } from './VehicleMarker';
 import 'leaflet/dist/leaflet.css';
 import './TransitMap.scss';
 import StopMarker from './StopMarker';
@@ -16,10 +18,46 @@ import { formatShapePoints } from '../util';
 import LocationMarker from './LocationMarker';
 import BCycleMarker from './BCycleMarker';
 import LocateButton from './LocateButton';
-import countyBorders from '../lib/davidson_county_borders.json';
 import RetailLocationMarker from './RetailLocationMarker';
 
 const CARTO_API_KEY = import.meta.env.VITE_CARTO_API_KEY;
+const EMPTY_OBJECT = {};
+const EMPTY_ARRAY = [];
+
+const regionMaxBounds = [
+  [36.725005, -87.579122], // northwest
+  [35.486335, -86.097066], // southeast
+];
+
+const countyBorderStyle = {
+  fillColor: 'transparent', opacity: 0.5, color: 'gray', dashArray: 4,
+};
+
+// Map of key -> first item with that key, matching Array#find semantics
+function indexFirst(items, keysOf) {
+  const index = new Map();
+  items.forEach((item) => {
+    keysOf(item).forEach((key) => {
+      if (!index.has(key)) {
+        index.set(key, item);
+      }
+    });
+  });
+  return index;
+}
+
+function groupBy(items, keysOf) {
+  const groups = new Map();
+  items.forEach((item) => {
+    keysOf(item).forEach((key) => {
+      if (!groups.has(key)) {
+        groups.set(key, []);
+      }
+      groups.get(key).push(item);
+    });
+  });
+  return groups;
+}
 
 // Fix paths for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -54,45 +92,24 @@ function TransitMap({
     setStops(val);
   }, [setStops]);
 
-  const getRouteDataById = function (routeId) {
-    const routeData = routes.find((r) => r.route_gid === routeId || r.route_short_name === routeId);
-    if (!routeData) {
-      return {};
-    }
-    return routeData;
-  };
+  const routesById = useMemo(() => indexFirst(routes, (r) => [r.route_gid, r.route_short_name]), [routes]);
+  const agenciesById = useMemo(() => indexFirst(agencies, (a) => [a.agency_gid]), [agencies]);
+  const tripUpdatesByTripId = useMemo(() => indexFirst(tripUpdates, (i) => [i.trip_update.trip.trip_id]), [tripUpdates]);
+  const alertsByRouteId = useMemo(() => groupBy(alerts, (a) => [a.alert.informed_entity?.[0]?.route_id]), [alerts]);
+  // One entry per matching informed entity, so an alert can repeat for a stop
+  const alertsByStopId = useMemo(() => groupBy(alerts, (a) => (a.alert.informed_entity || []).map((e) => e.stop_id)), [alerts]);
 
-  const getAgencyDataById = function (agencyId) {
-    const agencyData = agencies.find((a) => a.agency_gid === agencyId);
-    if (!agencyData) {
-      return {};
-    }
-    return agencyData;
-  };
-
-  const getRouteAlertsById = function (routeId) {
-    return alerts.filter((a) => a.alert.informed_entity[0].route_id === routeId);
-  };
-
-  const getStopAlertsById = function (stopCode) {
-    const stopAlerts = [];
-    alerts.forEach((a) => {
-      a.alert.informed_entity.forEach((e) => {
-        if (e.stop_id === stopCode) {
-          stopAlerts.push(a);
-        }
-      });
-    });
-    return stopAlerts;
-  };
-
-  const getTripUpdateById = (tripId) => tripUpdates.find((i) => tripId === i.trip_update.trip.trip_id);
+  const getRouteDataById = (routeId) => routesById.get(routeId) || EMPTY_OBJECT;
+  const getAgencyDataById = (agencyId) => agenciesById.get(agencyId) || EMPTY_OBJECT;
+  const getRouteAlertsById = (routeId) => alertsByRouteId.get(routeId) || EMPTY_ARRAY;
+  const getStopAlertsById = (stopCode) => alertsByStopId.get(stopCode) || EMPTY_ARRAY;
+  const getTripUpdateById = (tripId) => tripUpdatesByTripId.get(tripId);
 
   const getStopUpdateByTripAndId = function (tripId, stopCode) {
     let stopUpdate = {};
-    const trip = tripUpdates.find((item) => tripId === item.trip_update.trip.trip_id);
+    const trip = tripUpdatesByTripId.get(tripId);
     if (trip) {
-      trip.trip_update.stop_time_update.map((stu) => {
+      trip.trip_update.stop_time_update.forEach((stu) => {
         if (stu.stop_id === stopCode) {
           stopUpdate = stu;
         }
@@ -101,17 +118,31 @@ function TransitMap({
     return stopUpdate;
   };
 
-  const regionMaxBounds = [
-    [36.725005, -87.579122], // northwest
-    [35.486335, -86.097066], // southeast
-  ];
+  // ~400 KB of GeoJSON, so keep it out of the main bundle
+  const [countyBorders, setCountyBorders] = useState(null);
+  useEffect(() => {
+    let isMounted = true;
+    import('../lib/davidson_county_borders.json').then((module) => {
+      if (isMounted) {
+        setCountyBorders(module.default);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-  const shapeEventHandlers = {
+  const shapeEventHandlers = useMemo(() => ({
     click: (_e) => {
       setShapes([]);
       setStops([]);
     },
-  };
+  }), []);
+
+  const shapePositions = useMemo(
+    () => shapes.map((item) => ({ item, positions: formatShapePoints(item.points) })),
+    [shapes],
+  );
 
   const locateUserOnMap = function (map) {
     if (typeof map.current !== 'undefined' && map.current) {
@@ -139,7 +170,7 @@ function TransitMap({
                   const agency = getAgencyDataById(route ? route.agency_gid : {});
                   const tripUpdate = getTripUpdateById(item.vehicle.trip.trip_id);
                   return (
-                    <VehicleMarker key={`${item.id}-${index}`} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts}></VehicleMarker>
+                    <VehicleMarker key={item.id ?? index} vehiclePositionData={item} route={route} agency={agency} tripUpdate={tripUpdate} shapeSetter={doSetShapes} stopSetter={doSetStops} alerts={routeAlerts} isStale={isVehiclePositionStale(item)}></VehicleMarker>
                   );
                 })}
               </LayerGroup>
@@ -148,7 +179,7 @@ function TransitMap({
               <LayerGroup>
                 {vehicleMarkers.filter((i) => !i.vehicle.trip).map((item, index) => {
                   return (
-                    <VehicleMarker key={`${item.id}-${index}`}  vehiclePositionData={item} agency={{}} shapeSetter={doSetShapes} stopSetter={doSetStops} route={{}}></VehicleMarker>
+                    <VehicleMarker key={item.id ?? index} vehiclePositionData={item} agency={EMPTY_OBJECT} shapeSetter={doSetShapes} stopSetter={doSetStops} route={EMPTY_OBJECT} isStale={isVehiclePositionStale(item)}></VehicleMarker>
                   );
                 })}
               </LayerGroup>
@@ -158,10 +189,10 @@ function TransitMap({
         {shapes.length > 0
           && <LayersControl.Overlay checked={true} name="Routes">
             <LayerGroup>
-              {shapes.map((item, _index) => (
+              {shapePositions.map(({ item, positions }) => (
                   <FeatureGroup key={item.shape_gid} eventHandlers={item.shapeEventHandlers ?? shapeEventHandlers}>
-                    <Polyline weight={12} positions={formatShapePoints(item.points)} color='#ffffff'></Polyline>
-                    <Polyline weight={8} positions={formatShapePoints(item.points)} color={`#${item.route_color}`}></Polyline>
+                    <Polyline weight={12} positions={positions} color='#ffffff'></Polyline>
+                    <Polyline weight={8} positions={positions} color={`#${item.route_color}`}></Polyline>
                   </FeatureGroup>
               ))}
             </LayerGroup>
@@ -202,9 +233,11 @@ function TransitMap({
         }
 
         <LayersControl.Overlay checked={true} name="City Border">
-          <GeoJSON data={countyBorders} style={{
-            fillColor: 'transparent', opacity: 0.5, color: 'gray', dashArray: 4,
-          }}></GeoJSON>
+          {countyBorders ? (
+            <GeoJSON data={countyBorders} style={countyBorderStyle}></GeoJSON>
+          ) : (
+            <LayerGroup></LayerGroup>
+          )}
         </LayersControl.Overlay>
 
         {(typeof mapControls.topRight !== 'undefined')

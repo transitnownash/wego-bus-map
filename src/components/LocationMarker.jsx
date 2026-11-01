@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   Marker, Popup, Circle, useMapEvents,
 } from 'react-leaflet';
-import L from 'leaflet';
 import userLocationIcon from '../resources/user-location.svg';
 import { getJSON } from '../util';
 import StopMarker from './StopMarker';
+import cachedIcon from '../lib/iconCache';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const SEARCH_DISTANCE_IN_METERS = 1609;
@@ -23,15 +23,12 @@ function LocationMarker() {
       .then((s) => setStops(s.data));
   }, [position]);
 
-  const LocationMarkerIcon = L.Icon.extend({
-    options: {
-      iconUrl: userLocationIcon,
-      iconSize: [32, 32],
-      popupAnchor: [0, -14],
-      shadowUrl: null,
-    },
+  const icon = cachedIcon({
+    iconUrl: userLocationIcon,
+    iconSize: [32, 32],
+    popupAnchor: [0, -14],
+    shadowUrl: null,
   });
-  const icon = new LocationMarkerIcon();
 
   const map = useMapEvents({
     locationfound(e) {

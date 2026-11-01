@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, {
+  memo, useEffect, useMemo, useRef, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import ReactLeafletDriftMarker from 'react-leaflet-drift-marker';
-import L from 'leaflet';
 import VehicleMarkerPopup from './VehicleMarkerPopup';
 import '../lib/leaflet-rotated-marker';
 import busMarkerImage from '../resources/bus.svg';
@@ -13,11 +14,16 @@ import trainMarkerImageShadow from '../resources/train-shadow.svg';
 import './VehicleMarker.scss';
 import VehicleMarkerTooltip from './VehicleMarkerTooltip';
 import { getJSON } from '../util';
+import cachedIcon from '../lib/iconCache';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 
+export function isVehiclePositionStale(vehiclePositionData) {
+  return (Date.now() / 1000) - vehiclePositionData.vehicle.timestamp > 120;
+}
+
 function VehicleMarker({
-  vehiclePositionData, route, agency, tripUpdate = {}, shapeSetter, stopSetter, alerts = [],
+  vehiclePositionData, route, agency, tripUpdate = {}, shapeSetter, stopSetter, alerts = [], isStale,
 }) {
   const [trip, setTripData] = useState({});
   const marker = useRef(null);
@@ -41,14 +47,10 @@ function VehicleMarker({
       iconOptions.shadowUrl = trainMarkerImageShadow;
     }
   }
-  const markerIcon = L.Icon.extend({ options: iconOptions });
-  const icon = new markerIcon();
+  const icon = cachedIcon(iconOptions);
 
   // Fade stale icons a bit
-  let opacity = 1.0;
-  if ((Date.now() / 1000) - vehiclePositionData.vehicle.timestamp > 120) {
-    opacity = 0.25;
-  }
+  const opacity = (isStale ?? isVehiclePositionStale(vehiclePositionData)) ? 0.25 : 1.0;
 
   // Handle click on marker
   const showTripDetails = function () {
@@ -67,15 +69,27 @@ function VehicleMarker({
       .then((data) => setTripData(data));
   };
 
+  // Stable handler so react-leaflet doesn't rebind the click listener on every render
+  const showTripDetailsRef = useRef(showTripDetails);
+  useEffect(() => {
+    showTripDetailsRef.current = showTripDetails;
+  });
+  const eventHandlers = useMemo(() => ({ click: () => showTripDetailsRef.current() }), []);
+
+  // Drift marker animates whenever the position array changes identity, so only
+  // hand it a new one when the vehicle actually moved
+  const { latitude, longitude, bearing } = vehiclePositionData.vehicle.position;
+  const position = useMemo(() => [latitude, longitude], [latitude, longitude]);
+
   // Rotate the shadow if bearing is set
-  if (marker.current) {
-    if (typeof vehiclePositionData.vehicle.position.bearing === 'number') {
-      marker.current.setRotationShadowAngle(vehiclePositionData.vehicle.position.bearing);
+  useEffect(() => {
+    if (marker.current && typeof bearing === 'number') {
+      marker.current.setRotationShadowAngle(bearing);
     }
-  }
+  }, [bearing]);
 
   return (
-    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={{ click: showTripDetails }} position={[vehiclePositionData.vehicle.position.latitude, vehiclePositionData.vehicle.position.longitude]} icon={icon} rotationShadowAngle={vehiclePositionData.vehicle.position.bearing} opacity={opacity} zIndexOffset={100}>
+    <ReactLeafletDriftMarker ref={marker} duration={1000} eventHandlers={eventHandlers} position={position} icon={icon} rotationShadowAngle={vehiclePositionData.vehicle.position.bearing} opacity={opacity} zIndexOffset={100}>
       <VehicleMarkerPopup vehiclePositionData={vehiclePositionData} route={route} agency={agency} trip={trip} tripUpdate={tripUpdate} alerts={alerts}></VehicleMarkerPopup>
       <VehicleMarkerTooltip vehiclePositionData={vehiclePositionData} route={route} alerts={alerts}></VehicleMarkerTooltip>
     </ReactLeafletDriftMarker>
@@ -90,6 +104,17 @@ VehicleMarker.propTypes = {
   stopSetter: PropTypes.func.isRequired,
   tripUpdate: PropTypes.object,
   alerts: PropTypes.array,
+  isStale: PropTypes.bool,
 };
 
-export default VehicleMarker;
+// Polls hand back fresh objects for every vehicle, so compare position data by value
+function arePropsEqual(prev, next) {
+  return Object.keys(next).every((key) => {
+    if (key === 'vehiclePositionData') {
+      return prev[key] === next[key] || JSON.stringify(prev[key]) === JSON.stringify(next[key]);
+    }
+    return prev[key] === next[key];
+  });
+}
+
+export default memo(VehicleMarker, arePropsEqual);

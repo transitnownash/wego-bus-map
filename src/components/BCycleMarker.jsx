@@ -9,6 +9,13 @@ import {
 import { renderUnixTimestamp } from '../util';
 import bCycleIconImage from '../resources/bcycle.svg';
 import './BCycleMarker.scss';
+import cachedIcon from '../lib/iconCache';
+
+const BCYCLE_ICON_OPTIONS = {
+  iconUrl: bCycleIconImage,
+  iconSize: [24, 24],
+  shadowUrl: null,
+};
 
 function BCycleMarker({ station }) {
   // Ignore if stations doesn't have status, or if it isn't "installed"
@@ -32,14 +39,7 @@ function BCycleMarker({ station }) {
     );
   }
 
-  const bCycleMarkerIcon = L.Icon.extend({
-    options: {
-      iconUrl: bCycleIconImage,
-      iconSize: [24, 24],
-      shadowUrl: null,
-    },
-  });
-  const bCycleIcon = new bCycleMarkerIcon();
+  const bCycleIcon = cachedIcon(BCYCLE_ICON_OPTIONS);
 
   // Shared between popup and tooltip
   function renderStationHeader() {

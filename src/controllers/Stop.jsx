@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -22,11 +22,37 @@ import StopCode from '../components/StopCode';
 import DateSelector from '../components/DateSelector';
 import Headsign from '../components/Headsign';
 import NextDeparturesTable from '../components/NextDeparturesTable';
+import usePolling from '../hooks/usePolling';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const REFRESH_VEHICLE_POSITIONS_TTL = 7000;
 const REFRESH_ALERTS_TTL = 60 * 1000;
 const REFRESH_TRIP_UPDATES_TTL = 60 * 1000;
+const TRIPS_PER_PAGE = 2000;
+
+function stopTimeAtStop(trip) {
+  return trip.stop_times[0].arrival_time ? trip.stop_times[0].arrival_time : trip.stop_times[0].departure_time;
+}
+
+function compareStrings(a, b) {
+  if (a === b) {
+    return 0;
+  }
+  return a > b ? 1 : -1;
+}
+
+// Alerts keyed by the route of their first informed entity
+function groupAlertsByFirstRoute(alerts) {
+  const byRoute = new Map();
+  alerts.forEach((a) => {
+    const routeId = a.alert.informed_entity && a.alert.informed_entity[0].route_id;
+    if (!byRoute.has(routeId)) {
+      byRoute.set(routeId, []);
+    }
+    byRoute.get(routeId).push(a);
+  });
+  return byRoute;
+}
 
 function Stops() {
   const [stop, setStop] = useState([]);
@@ -67,7 +93,7 @@ function Stops() {
       .then(() => setStopLoaded(true))
       .catch((error) => setDataFetchError(error));
 
-    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/trips.json`, { params: { date: scheduleDate, per_page: 2000 } })
+    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/trips.json`, { params: { date: scheduleDate, per_page: TRIPS_PER_PAGE } })
       .then((t) => setTrips(t.data))
       .then(() => setTripsLoaded(true))
       .catch((error) => setDataFetchError(error));
@@ -96,38 +122,53 @@ function Stops() {
       .then((data) => setTripUpdates(data))
       .then(() => setTripUpdatesLoaded(true))
       .catch((error) => setDataFetchError(error));
+  }, [params.stop_code]);
 
-    const refreshPositionsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
+    .then((data) => setVehiclePositions(data)), REFRESH_VEHICLE_POSITIONS_TTL, isUIReady);
+
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
+    .then((data) => setAlerts(data)), REFRESH_ALERTS_TTL, isUIReady);
+
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
+    .then((data) => setTripUpdates(data)), REFRESH_TRIP_UPDATES_TTL, isUIReady);
+
+  // Sort trips by time at stop
+  const sortedTrips = useMemo(() => [...trips].sort((a, b) => {
+    const aTime = stopTimeAtStop(a);
+    const bTime = stopTimeAtStop(b);
+    if (aTime === bTime) {
+      return parseInt(a.route_gid, 10) - parseInt(b.route_gid, 10);
+    }
+    return compareStrings(aTime, bTime);
+  }), [trips]);
+
+  const sortedRoutes = useMemo(
+    () => [...routes].sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10)),
+    [routes],
+  );
+
+  const sortedChildStops = useMemo(
+    () => [...(stop.child_stops || [])].sort((a, b) => compareStrings(a.stop_code, b.stop_code)),
+    [stop.child_stops],
+  );
+
+  const routesById = useMemo(() => new Map(routes.map((r) => [r.route_gid, r])), [routes]);
+  const alertsByRoute = useMemo(() => groupAlertsByFirstRoute(alerts), [alerts]);
+
+  // Trip updates that touch this stop, keyed by trip
+  const stopTripUpdatesByTrip = useMemo(() => {
+    const byTrip = new Map();
+    tripUpdates.forEach((tu) => {
+      if (tu.trip_update.stop_time_update?.some((u) => u.stop_id === stop.stop_gid)) {
+        const tripId = tu.trip_update.trip?.trip_id;
+        if (!byTrip.has(tripId)) {
+          byTrip.set(tripId, tu);
+        }
       }
-      getJSON(`${GTFS_BASE_URL}/realtime/vehicle_positions.json`)
-        .then((data) => setVehiclePositions(data));
-    }, REFRESH_VEHICLE_POSITIONS_TTL);
-
-    const refreshAlertsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
-        .then((data) => setAlerts(data));
-    }, REFRESH_ALERTS_TTL);
-
-    const refreshTripUpdatesInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/trip_updates.json`)
-        .then((data) => setTripUpdates(data));
-    }, REFRESH_TRIP_UPDATES_TTL);
-
-    // Run on unmount
-    return () => {
-      clearInterval(refreshPositionsInterval);
-      clearInterval(refreshAlertsInterval);
-      clearInterval(refreshTripUpdatesInterval);
-    };
-  }, [isUIReady, params.stop_code]);
+    });
+    return byTrip;
+  }, [tripUpdates, stop.stop_gid]);
 
   if (dataFetchError) {
     return (<DataFetchError error={dataFetchError}></DataFetchError>);
@@ -138,13 +179,8 @@ function Stops() {
   }
 
   // Filter vehicle positions to relevant trips
-  const filteredVehiclePositions = [];
-  const tripsAtStop = trips.map((t) => t.trip_gid);
-  vehiclePositions.filter((v) => v.vehicle.trip).forEach((vp) => {
-    if (tripsAtStop.includes(vp.vehicle.trip.trip_id)) {
-      filteredVehiclePositions.push(vp);
-    }
-  });
+  const tripsAtStop = new Set(trips.map((t) => t.trip_gid));
+  const filteredVehiclePositions = vehiclePositions.filter((v) => v.vehicle.trip && tripsAtStop.has(v.vehicle.trip.trip_id));
 
   // Filter alerts to single stop
   const stopAlerts = [];
@@ -159,36 +195,8 @@ function Stops() {
     });
   });
 
-  // Filter trip updates to a single stop
-  const stopTripUpdates = [];
-  tripUpdates.forEach((tu) => {
-    if (tu.trip_update.stop_time_update) {
-      tu.trip_update.stop_time_update.forEach((u) => {
-        if (u.stop_id === stop.stop_gid) {
-          stopTripUpdates.push(tu);
-        }
-      });
-    }
-  });
-
-  // Sort trips by time at stop
-  trips.sort((a, b) => {
-    const aTime = a.stop_times[0].arrival_time ? a.stop_times[0].arrival_time : a.stop_times[0].departure_time;
-    const bTime = b.stop_times[0].arrival_time ? b.stop_times[0].arrival_time : b.stop_times[0].departure_time;
-    if (aTime === bTime) {
-      return parseInt(a.route_gid, 10) - parseInt(b.route_gid, 10);
-    }
-    return aTime > bTime;
-  });
-
-  // Assign current stop to be rendered
-  const stops = [stop];
-
-  // If a parent station, sort and render additional stops
-  if (stop.child_stops.length > 0) {
-    stop.child_stops.sort((a, b) => a.stop_code > b.stop_code);
-    stop.child_stops.map((item) => stops.push(item));
-  }
+  // Assign current stop to be rendered, plus any child stops of a parent station
+  const stops = [stop, ...sortedChildStops];
 
   // Nest stops inside an object with unique IDs for React keys
   const routeStops = stops.map((item) => {
@@ -208,7 +216,7 @@ function Stops() {
       path: '/', maxAge: 90, sameSite: 'none', secure: true,
     });
     setScheduleDate(event.target.value);
-    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/trips.json`, { params: { date: event.target.value, per_page: 500 } })
+    getJSON(`${GTFS_BASE_URL}/stops/${params.stop_code}/trips.json`, { params: { date: event.target.value, per_page: TRIPS_PER_PAGE } })
       .then((st) => setTrips(st.data))
       .then(() => setIsLoadingTripDate(false));
   };
@@ -245,7 +253,7 @@ function Stops() {
                   </tr>
                 </thead>
                 <tbody>
-                  {stop.child_stops.map((item) => (
+                  {sortedChildStops.map((item) => (
                       <tr key={`child-${item.id}`}>
                         <td><Link to={`/stops/${item.stop_code}`}><span className='stop-code badge bg-white text-black border border-secondary'>{item.stop_code}</span></Link></td>
                         <td><Link to={`/stops/${item.stop_code}`}>{item.stop_name}</Link></td>
@@ -260,8 +268,8 @@ function Stops() {
         {routes.length > 0 && (
           <>
             <div className="row mb-2">
-              {routes.sort((a, b) => parseInt(a.route_short_name, 10) - parseInt(b.route_short_name, 10)).map((item) => {
-                const routeAlerts = alerts.filter((a) => a.alert.informed_entity && a.alert.informed_entity[0].route_id === item.route_gid);
+              {sortedRoutes.map((item) => {
+                const routeAlerts = alertsByRoute.get(item.route_gid) || [];
                 return (
                   <div key={item.id} className="col-md-4">
                     <TransitRouteHeader route={item} alerts={routeAlerts} showRouteType={true}></TransitRouteHeader>
@@ -296,21 +304,19 @@ function Stops() {
                   </tr>
                 </thead>
                 <tbody>
-                  {trips.map((item, _index) => {
+                  {sortedTrips.map((item, _index) => {
                     const key = `${item.route_gid}-${item.trip_gid}`;
-                    const route = routes.find((r) => r.route_gid === item.route_gid);
-                    const routeAlerts = alerts.filter((a) => a.alert.informed_entity && a.alert.informed_entity[0].route_id === item.route_gid);
+                    const route = routesById.get(item.route_gid);
+                    const routeAlerts = alertsByRoute.get(item.route_gid) || [];
                     // Find stop time update relevant to this trip and this stop
                     let stopTimeUpdate = {};
-                    if (stopTripUpdates.length > 0) {
-                      const stopTimeTripUpdate = stopTripUpdates.filter((s) => s.trip_update.trip?.trip_id === item.trip_gid);
-                      if (stopTimeTripUpdate.length > 0) {
-                        stopTimeTripUpdate[0].trip_update.stop_time_update.map((stu) => {
-                          if (stu.stop_id === stop.stop_gid) {
-                            stopTimeUpdate = stu;
-                          }
-                        });
-                      }
+                    const stopTimeTripUpdate = stopTripUpdatesByTrip.get(item.trip_gid);
+                    if (stopTimeTripUpdate) {
+                      stopTimeTripUpdate.trip_update.stop_time_update.forEach((stu) => {
+                        if (stu.stop_id === stop.stop_gid) {
+                          stopTimeUpdate = stu;
+                        }
+                      });
                     }
 
                     let cellClasses = '';

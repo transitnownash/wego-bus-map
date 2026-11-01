@@ -32,3 +32,17 @@ test('renders Main', async () => {
     expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument();
   });
 });
+
+test('fetches each endpoint once on load', async () => {
+  const { getJSON } = await import('../util');
+  getJSON.mockClear();
+  renderWithRouter(<Main />, { route: '/' });
+
+  await waitFor(() => {
+    expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument();
+  });
+
+  const urls = getJSON.mock.calls.map(([url]) => url);
+  expect(urls).toHaveLength(8);
+  expect(new Set(urls).size).toBe(urls.length);
+});

@@ -7,6 +7,19 @@ export default defineConfig({
   build: {
     outDir: 'build',
     sourcemap: true,
+    rolldownOptions: {
+      output: {
+        // Long-lived vendor chunks stay cached across app deploys
+        codeSplitting: {
+          groups: [
+            { name: 'leaflet', test: /node_modules[\\/](leaflet|react-leaflet|@react-leaflet|react-leaflet-drift-marker)[\\/]/ },
+            { name: 'react', test: /node_modules[\\/](react|react-dom|scheduler|react-router|react-router-dom)[\\/]/ },
+            { name: 'bootstrap', test: /node_modules[\\/](react-bootstrap|@restart|@popperjs|@react-aria|dom-helpers)[\\/]/ },
+            { name: 'faro', test: /node_modules[\\/](@grafana|@opentelemetry)[\\/]/ },
+          ],
+        },
+      },
+    },
   },
   css: {
     preprocessorOptions: {

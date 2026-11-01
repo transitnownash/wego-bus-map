@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import LoadingScreen from '../components/LoadingScreen';
 import { getJSON } from '../util';
 import DataFetchError from '../components/DataFetchError';
@@ -7,9 +7,17 @@ import MapLinks from '../components/MapLinks';
 import TransitMap from '../components/TransitMap';
 import AlertButton from '../components/AlertButton';
 import AlertModal from '../components/AlertModal';
+import usePolling from '../hooks/usePolling';
 
 const GTFS_BASE_URL = import.meta.env.VITE_GTFS_BASE_URL;
 const REFRESH_ALERTS_TTL = 60 * 1000;
+
+// Leave shapes on map when clicked
+const KEEP_SHAPES_ON_CLICK = {
+  click: (_e) => {
+    // noop
+  },
+};
 
 function Stops() {
   const [alerts, setAlerts] = useState([]);
@@ -47,22 +55,18 @@ function Stops() {
       .then((data) => setAlerts(data))
       .then(() => setAlertsLoaded(true))
       .catch((error) => setDataFetchError(error));
+  }, []);
 
-    // Refresh alerts data at set interval
-    const refreshAlertsInterval = setInterval(() => {
-      if (!isUIReady) {
-        return;
-      }
-      getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
-        .then((data) => setAlerts(data))
-        .catch((error) => setDataFetchError(error));
-    }, REFRESH_ALERTS_TTL);
+  usePolling(() => getJSON(`${GTFS_BASE_URL}/realtime/alerts.json`)
+    .then((data) => setAlerts(data))
+    .catch((error) => setDataFetchError(error)), REFRESH_ALERTS_TTL, isUIReady);
 
-    // Run on unmount
-    return () => {
-      clearInterval(refreshAlertsInterval);
-    };
-  }, [isUIReady]);
+  const routeStops = useMemo(() => stops.map((item) => ({ id: item.id, stop: item })), [stops]);
+  const coloredRouteShapes = useMemo(() => routeShapes.map((s) => ({
+    ...s,
+    route_color: '753cbe', // default purple
+    shapeEventHandlers: KEEP_SHAPES_ON_CLICK,
+  })), [routeShapes]);
 
   if (dataFetchError) {
     return (<DataFetchError error={dataFetchError}></DataFetchError>);
@@ -95,22 +99,9 @@ function Stops() {
     }
   };
 
-  // Leave shapes on map when clicked
-  const shapeEventHandlers = {
-    onClick: (_e) => {
-      // noop
-    },
-  };
-
-  const routeStops = stops.map((item) => ({ id: item.id, stop: item }));
-  routeShapes.map((s) => {
-    s.route_color = '753cbe'; // default purple
-    s.shapeEventHandlers = shapeEventHandlers;
-  });
-
   return (
     <div className="stops">
-      <TransitMap map={map} routeStops={routeStops} routeShapes={routeShapes} alerts={allAlerts} mapControls={mapControls}></TransitMap>
+      <TransitMap map={map} routeStops={routeStops} routeShapes={coloredRouteShapes} alerts={allAlerts} mapControls={mapControls}></TransitMap>
       <AlertModal alerts={allAlerts} show={alertModalShow} onHide={() => setAlertModalShow(false)} routes={routes}></AlertModal>
     </div>
   );
