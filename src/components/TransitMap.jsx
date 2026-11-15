@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import {
-  MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup, GeoJSON,
+  MapContainer, TileLayer, LayersControl, LayerGroup, Polyline, FeatureGroup, GeoJSON, Tooltip,
   // CircleMarker, Tooltip, Popup,
 } from 'react-leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -81,6 +81,7 @@ function TransitMap({
   mapControls = {},
   center = [36.166512, -86.781581],
   zoom = 12,
+  shapeWeight = 8,
 }) {
   const [shapes, setShapes] = useState(routeShapes);
   const doSetShapes = useCallback((val) => {
@@ -191,8 +192,9 @@ function TransitMap({
             <LayerGroup>
               {shapePositions.map(({ item, positions }) => (
                   <FeatureGroup key={item.shape_gid} eventHandlers={item.shapeEventHandlers ?? shapeEventHandlers}>
-                    <Polyline weight={12} positions={positions} color='#ffffff'></Polyline>
-                    <Polyline weight={8} positions={positions} color={`#${item.route_color}`}></Polyline>
+                    <Polyline weight={shapeWeight + 4} positions={positions} color='#ffffff'></Polyline>
+                    <Polyline weight={shapeWeight} positions={positions} color={`#${item.route_color}`}></Polyline>
+                    {item.tooltip && <Tooltip sticky>{item.tooltip}</Tooltip>}
                   </FeatureGroup>
               ))}
             </LayerGroup>
@@ -234,7 +236,7 @@ function TransitMap({
 
         <LayersControl.Overlay checked={true} name="City Border">
           {countyBorders ? (
-            <GeoJSON data={countyBorders} style={countyBorderStyle}></GeoJSON>
+            <GeoJSON data={countyBorders} style={countyBorderStyle} interactive={false}></GeoJSON>
           ) : (
             <LayerGroup></LayerGroup>
           )}
@@ -274,6 +276,7 @@ TransitMap.propTypes = {
   mapControls: PropTypes.object,
   center: PropTypes.any,
   zoom: PropTypes.number,
+  shapeWeight: PropTypes.number,
 };
 
 export default TransitMap;
