@@ -95,7 +95,7 @@ function BCycle() {
     <div>
       <TitleBar />
       <div className="container">
-        <TransitMap map={map} stationsWithStatus={stationsWithStatus} center={center}></TransitMap>
+        <TransitMap map={map} bCycleStations={stationsWithStatus} center={center}></TransitMap>
         <div className="row my-5">
           <div className="col-sm-3 text-center">
             <div>
